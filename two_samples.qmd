@@ -7,6 +7,7 @@ library(fontawesome)
 
 library(rstatix)
 library(PupillometryR)
+library(gtsummary)
 
 library(here)
 library(tidyverse)
@@ -100,6 +101,9 @@ B.  The data in both groups have similar **variance** (also named as homogeneity
 
 The distributions can be explored visually with appropriate plots. Additionally, summary statistics and significance tests to check for normality (e.g., Shapiro-Wilk test) can be used.
 
+ 
+
+**Graphs**
 
 We can visualize the distribution of HDRS for the two groups:
 
@@ -108,6 +112,7 @@ We can visualize the distribution of HDRS for the two groups:
 #| label: fig-violin_plot1
 #| fig-cap: Rain cloud plot.
 
+set.seed(123)
 ggplot(depression, aes(x=intervention, y=HDRS)) + 
   geom_flat_violin(aes(fill = intervention), scale = "count") +
   geom_boxplot(width = 0.14, outlier.shape = NA, alpha = 0.5) +
@@ -122,6 +127,9 @@ ggplot(depression, aes(x=intervention, y=HDRS)) +
 
 The above figure shows that the data are close to symmetry and the assumption of a normal distribution is reasonable.
 
+ 
+
+**Summary statistics**
 
 The HDRS summary statistics for each group are:
 
@@ -157,3 +165,121 @@ depression %>%
   ungroup()
 ```
 
+ 
+
+**Normality test**
+
+::: callout-important
+# Remember: Hypothesis testing for Shapiro-Wilk test for normality
+
+$H_{0}$: the data came from a normally distributed population.
+
+$H_{1}$: the data tested are not normally distributed.
+
+-   If p − value \< 0.05, reject the null hypothesis, $H_{0}$.
+-   If p − value ≥ 0.05, do not reject the null hypothesis, $H_{0}$.
+:::
+
+The *Shapiro-Wilk* test for normality for each group is:
+
+```{r}
+depression %>%
+  group_by(intervention) %>%
+  shapiro_test(HDRS) %>% 
+  ungroup()
+```
+
+
+The tests of normality suggest that the data for the `HDRS` in both groups are normally distributed (p=0.67 >0.05 and p=0.61 >0.05, respectively).
+
+ 
+
+**B. Levene's test for equality of variances**
+
+::: callout-important
+# Remember: Hypothesis testing for Levene's test for equality of variances
+
+$H_{0}$: the variances of HDRs in two groups are equal
+
+$H_{1}$: the variances of HDRs in two groups are not equal
+
+-   If p − value \< 0.05, reject the null hypothesis, $H_{0}$.
+-   If p − value ≥ 0.05, do not reject the null hypothesis, $H_{0}$.
+:::
+
+The *Levene's test* for equality of variances is:
+
+```{r}
+depression %>% 
+  levene_test(HDRS ~ intervention)
+```
+
+
+Since the p-value = 0.676 >0.05, the null hypothesis that the variances of HDRs in two groups are equal is not rejected.
+
+
+## Run the t-test
+
+We will perform a pooled variance t-test (Student's t-test) to test the null hypothesis that the mean HDRS score is the same for both groups (paroxetine and placebo).
+
+
+::: {.callout-tip  #exercise-joins}
+## Student's t-test
+
+::: {.panel-tabset}
+
+## Base R
+
+```{r}
+t.test(HDRS ~ intervention, var.equal = T, data=depression)
+```
+
+
+## rstatix
+
+```{r}
+depression %>% 
+    t_test(HDRS ~ intervention, var.equal = T, detailed = T)
+```
+
+:::
+
+:::
+
+The p-value = 0.16 is greater than 0.05. There is **no evidence** of a significant difference in mean HDRS between the two groups (failed to reject $H_0$). The difference between means (20.33 - 21.49) equals to -1.16 units of the HDRS and note that the 95% confidence interval of the difference in means (-2.78 to 0.47) **includes** the hypothesized null value of 0. Based on these results, there is not evidence that paroxetine is effective as a treatment for bipolar depression.
+
+Note that the paroxetine group (n= 33) has 33-1=32  degrees of freedom and the placebo sample (n= 43) has 43-1=42 df, so we have 32 + 42=74 df in total. Another way of thinking of this is that the complete sample size is 76, and we have estimated two parameters from the data (the two means), so we have 76-2 = 74 df.
+
+The Student t-test for two independent samples does not have any restrictions on $n_1$ and $n_2$ ---**they can be equal or unequal**. However, equal samples are preferred because when a total of 2n subjects are available, their equal division among the groups maximizes the power to detect a specified difference.
+
+
+::: callout-important
+# Remember
+
+If the variance is different between the two groups then the degrees of freedom and the t-value associated with a two-sample t-test are calculated differently. In this case, we have to write **var.equal = F** (or write nothing because this is the default) in the function so the Welch-Satterthwaite approximation is applied to the degrees of freedom.
+
+:::
+
+ 
+
+**Present the results in a summary table**
+
+```{r}
+#| echo: false
+
+gt_sum1 <- depression %>% 
+  tbl_summary(
+    by = intervention, 
+    statistic = HDRS ~ "{mean} ({sd})", 
+    digits = list(everything() ~ 1),
+    label = list(HDRS ~ "HDRS score"), 
+    missing = c("no")) %>% 
+  add_p(test = HDRS ~ "t.test", purrr::partial(style_pvalue, digits = 2),
+        test.args = all_tests("t.test") ~ list(var.equal = TRUE)) %>% 
+  add_overall() %>%
+  as_gt() 
+
+gt_sum1
+```
+
+Hence, there is not evidence that HDRS score is significantly different in paroxetine group, mean (sd) 20.3 (3.7), as compared to placebo group, 21.5 (3.4), (mean difference= -1.16 units, 95\% CI = -2.78 to 0.47, p = 0.16 >0.05).
