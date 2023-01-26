@@ -1,4 +1,159 @@
-# Compare two samples {#sec-two_samples}
+# Two-sample t-test (Student's t-test) {#sec-two_samples}
 
-## Independent Vs Dependent samples
+```{r}
+#| include: false
+
+library(fontawesome)
+
+library(rstatix)
+library(PupillometryR)
+
+library(here)
+library(tidyverse)
+
+
+```
+
+
+When we have finished this Chapter, we should be able to:
+
+::: {.callout-caution icon="false"}
+## Learning objectives
+
+-   Applying hypothesis testing
+-   Compare two independent samples
+-   Interpret the results
+:::
+
+
+Two sample t-test (Student's t-test) can be used if we have two independent (unrelated) groups (e.g., males-females, treatment-non treatment) and one quantitative variable of interest.
+
+
+## Research question
+
+In an experiment designed to test the effectiveness of paroxetine for treating bipolar depression, the participants were randomly assigned into two groups (paroxetine Vs placebo). The researchers used the Hamilton Depression Rating Scale (HDRS) to measure the depression state of the participants and wanted to find out if the HDRS score is different in paroxetine group as compared to placebo group at the end of the experiment. The significance level $\alpha$ was set to 0.05.
+
+**Note:** A score of 0--7 in HDRS is generally accepted to be within the normal range, while a score of 20 or higher indicates at least moderate severity.
+
+
+## Hypothesis Testsing
+
+::: {.callout-note icon="false"}
+## Null hypothesis and alternative hypothesis
+
+-   $H_0$: the means of HDRS in the two groups are equal ($\mu_{1} = \mu_{2}$)
+-   $H_1$: the means of HDRS in the two groups are not equal ($\mu_{1} \neq \mu_{2}$)
+:::
+
+
+## Preraring the data
+
+We import the data in R: 
+```{r}
+library(readxl)
+depression <- read_excel(here("data", "depression.xlsx"))
+```
+
+
+```{r}
+#| echo: false
+#| label: fig-depression
+#| fig-cap: Table with data from "depression" file.
+
+DT::datatable(
+  depression, extensions = 'Buttons', options = list(
+    dom = 'tip'
+  )
+)
+
+```
+
+
+We inspect the data and the type of variables:
+
+```{r}
+glimpse(depression)
+```
+
+
+The data set *depression* has 76 patients (rows) and includes two variables (columns). The numeric (`<dbl>`) `HDRS` variable and the character (`<chr>`) `intervention` variable which should be converted to a factor (`<fct>`) variable using the `factor()` function as follows:
+
+```{r}
+depression <- depression %>% 
+  mutate(intervention = factor(intervention))
+glimpse(depression)
+```
+
+
+
+## Assumptions
+
+::: {.callout-note icon="false"}
+## Check if the following assumptions are satisfied
+
+A.  The data are **normally** distributed in both groups
+B.  The data in both groups have similar **variance** (also named as homogeneity of variance or homoscedasticity)
+:::
+
+
+**A. Explore the descriptive characteristics of distribution for each group and check for normality**
+
+The distributions can be explored visually with appropriate plots. Additionally, summary statistics and significance tests to check for normality (e.g., Shapiro-Wilk test) can be used.
+
+
+We can visualize the distribution of HDRS for the two groups:
+
+```{r}
+#| warning: false
+#| label: fig-violin_plot1
+#| fig-cap: Rain cloud plot.
+
+ggplot(depression, aes(x=intervention, y=HDRS)) + 
+  geom_flat_violin(aes(fill = intervention), scale = "count") +
+  geom_boxplot(width = 0.14, outlier.shape = NA, alpha = 0.5) +
+  geom_point(position = position_jitter(width = 0.05), 
+             size = 1.2, alpha = 0.6) +
+  scale_fill_brewer(palette = "Spectral") +
+  theme_classic(base_size = 14) +
+  theme(legend.position="none",
+        axis.text = element_text(size = 14))
+```
+
+
+The above figure shows that the data are close to symmetry and the assumption of a normal distribution is reasonable.
+
+
+The HDRS summary statistics for each group are:
+
+```{r}
+HDRS_summary <- depression %>%
+  group_by(intervention) %>%
+  dplyr::summarise(
+    n = n(),
+    min = min(HDRS, na.rm = TRUE),
+    q1 = quantile(HDRS, 0.25, na.rm = TRUE),
+    median = quantile(HDRS, 0.5, na.rm = TRUE),
+    q3 = quantile(HDRS, 0.75, na.rm = TRUE),
+    max = max(HDRS, na.rm = TRUE),
+    mean = mean(HDRS, na.rm = TRUE),
+    sd = sd(HDRS, na.rm = TRUE),
+    skewness = EnvStats::skewness(HDRS, na.rm = TRUE),
+    kurtosis= EnvStats::kurtosis(HDRS, na.rm = TRUE)
+  ) %>%
+  ungroup()
+
+HDRS_summary
+```
+
+The means are close to medians (20.3 vs 21 and 21.5 vs 21). The skewness is approximately zero (symmetric distribution) and the (excess) kurtosis falls into the acceptable range of [-1, 1] indicating approximately normal distributions for both groups.
+
+Alternatively, we can download the `{dlookr}` package and use the `describe()` function:
+
+```{r}
+depression %>% 
+  group_by(intervention) %>% 
+  dlookr::describe(HDRS) %>% 
+  select(described_variables,  intervention, n, mean, sd, p25, p50, p75, skewness, kurtosis) %>% 
+  ungroup()
+```
 

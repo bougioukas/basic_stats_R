@@ -2,13 +2,13 @@ project:
   type: book
   output-dir: _book
 book:
-  title: "An Introduction to R"
+  title: "Basic Medical Statistics with R"
   subtitle: "1st Edition"
   author: 
     - "Konstantinos I. Bougioukas, PhD"
   date: "January 26, 2023"
   cover-image: images/cover.png
-  repo-url: https://github.com/bougioukas/introR
+  repo-url: https://github.com/bougioukas/basic_stats_R
   chapters:
     - index.qmd
     - two_samples.qmd
@@ -34,4 +34,5 @@ format:
     link-external-newwindow: true
     code-link: true
     number-depth: 2
+    code-overflow: scroll
 editor: visual
