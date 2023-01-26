@@ -1,0 +1,17 @@
+# Preface {.unnumbered}
+
+**This is a working draft.**
+
+
+This online textbook is based on notes from a series of lectures given for a few years at the Aristotle University of  Thessaloniki in the Laboratory of Hygiene, Social-Preventive Medicine & Medical Statistics.
+
+This textbook can be used as support material for lectures on R at any level from beginner to advanced. We have paid particular attention to the form of the book, which we think should aid understanding. It can also be used as a support for self-teaching.
+
+
+All sections of this textbook are reproducible as they were made using [Quarto](https://quarto.org/)^®^ which is an open-source scientific and technical publishing system built on [Pandoc](https://pandoc.org/).
+
+To learn more about Quarto books visit <https://quarto.org/docs/books>.
+
+## License
+
+This textbook is **free to use**, and is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivs 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) License.

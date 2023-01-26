@@ -1,0 +1,3 @@
+# Chi-sqaure test of independence {#sec-chi_square}
+
+## Independent Vs Dependent samples

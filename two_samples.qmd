@@ -1,0 +1,4 @@
+# Compare two samples {#sec-two_samples}
+
+## Independent Vs Dependent samples
+

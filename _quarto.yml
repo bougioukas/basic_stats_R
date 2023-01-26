@@ -1,0 +1,37 @@
+project:
+  type: book
+  output-dir: _book
+book:
+  title: "An Introduction to R"
+  subtitle: "1st Edition"
+  author: 
+    - "Konstantinos I. Bougioukas, PhD"
+  date: "January 26, 2023"
+  cover-image: images/cover.png
+  repo-url: https://github.com/bougioukas/introR
+  chapters:
+    - index.qmd
+    - two_samples.qmd
+    - paired_samples.qmd
+    - anova.qmd
+    - chi_square.qmd
+    - references.qmd
+    
+  page-footer: 
+    left: "Copyright 2022, Konstantinos I. Bougioukas" 
+
+bibliography: references.bib
+
+filters:
+  - lightbox
+lightbox: auto
+
+format:
+  html:
+    theme: cosmo
+    fontsize: 1.2em
+    linestretch: 1.8
+    link-external-newwindow: true
+    code-link: true
+    number-depth: 2
+editor: visual

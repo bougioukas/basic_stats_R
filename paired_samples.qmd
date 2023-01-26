@@ -1,0 +1,3 @@
+# Compare paired samples {#sec-paired_samples}
+
+## Independent Vs Dependent samples

@@ -1,0 +1,3 @@
+# Compare more than two samples {#sec-anova}
+
+## Independent Vs Dependent samples
