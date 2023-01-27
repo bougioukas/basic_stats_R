@@ -1,9 +1,9 @@
 # Two-sample t-test (Student's t-test) {#sec-two_samples}
 
+Two sample t-test (Student's t-test) can be used if we have two independent (unrelated) groups (e.g., males-females, treatment-non treatment) and one quantitative variable of interest.
+
 ```{r}
 #| include: false
-
-library(fontawesome)
 
 library(rstatix)
 library(PupillometryR)
@@ -11,10 +11,7 @@ library(gtsummary)
 
 library(here)
 library(tidyverse)
-
-
 ```
-
 
 When we have finished this Chapter, we should be able to:
 
@@ -26,18 +23,11 @@ When we have finished this Chapter, we should be able to:
 -   Interpret the results
 :::
 
-
-Two sample t-test (Student's t-test) can be used if we have two independent (unrelated) groups (e.g., males-females, treatment-non treatment) and one quantitative variable of interest.
-
-
-## Research question
+## Research question and Hypothesis Testing
 
 In an experiment designed to test the effectiveness of paroxetine for treating bipolar depression, the participants were randomly assigned into two groups (paroxetine Vs placebo). The researchers used the Hamilton Depression Rating Scale (HDRS) to measure the depression state of the participants and wanted to find out if the HDRS score is different in paroxetine group as compared to placebo group at the end of the experiment. The significance level $\alpha$ was set to 0.05.
 
 **Note:** A score of 0--7 in HDRS is generally accepted to be within the normal range, while a score of 20 or higher indicates at least moderate severity.
-
-
-## Hypothesis Testsing
 
 ::: {.callout-note icon="false"}
 ## Null hypothesis and alternative hypothesis
@@ -46,15 +36,29 @@ In an experiment designed to test the effectiveness of paroxetine for treating b
 -   $H_1$: the means of HDRS in the two groups are not equal ($\mu_{1} \neq \mu_{2}$)
 :::
 
+## Packages we need
+
+We need to load the following packages:
+
+```{r}
+#| eval: false
+
+library(rstatix)
+library(PupillometryR)
+library(gtsummary)
+
+library(here)
+library(tidyverse)
+```
 
 ## Preraring the data
 
-We import the data in R: 
+We import the data in R:
+
 ```{r}
 library(readxl)
 depression <- read_excel(here("data", "depression.xlsx"))
 ```
-
 
 ```{r}
 #| echo: false
@@ -69,13 +73,11 @@ DT::datatable(
 
 ```
 
-
 We inspect the data and the type of variables:
 
 ```{r}
 glimpse(depression)
 ```
-
 
 The data set *depression* has 76 patients (rows) and includes two variables (columns). The numeric (`<dbl>`) `HDRS` variable and the character (`<chr>`) `intervention` variable which should be converted to a factor (`<fct>`) variable using the `factor()` function as follows:
 
@@ -85,8 +87,6 @@ depression <- depression %>%
 glimpse(depression)
 ```
 
-
-
 ## Assumptions
 
 ::: {.callout-note icon="false"}
@@ -95,7 +95,6 @@ glimpse(depression)
 A.  The data are **normally** distributed in both groups
 B.  The data in both groups have similar **variance** (also named as homogeneity of variance or homoscedasticity)
 :::
-
 
 **A. Explore the descriptive characteristics of distribution for each group and check for normality**
 
@@ -124,7 +123,6 @@ ggplot(depression, aes(x=intervention, y=HDRS)) +
         axis.text = element_text(size = 14))
 ```
 
-
 The above figure shows that the data are close to symmetry and the assumption of a normal distribution is reasonable.
 
  
@@ -132,6 +130,12 @@ The above figure shows that the data are close to symmetry and the assumption of
 **Summary statistics**
 
 The HDRS summary statistics for each group are:
+
+::: {#exercise-joins .callout-tip}
+## Summary statistics
+
+::: panel-tabset
+## dplyr
 
 ```{r}
 HDRS_summary <- depression %>%
@@ -153,9 +157,7 @@ HDRS_summary <- depression %>%
 HDRS_summary
 ```
 
-The means are close to medians (20.3 vs 21 and 21.5 vs 21). The skewness is approximately zero (symmetric distribution) and the (excess) kurtosis falls into the acceptable range of [-1, 1] indicating approximately normal distributions for both groups.
-
-Alternatively, we can download the `{dlookr}` package and use the `describe()` function:
+## dlookr
 
 ```{r}
 depression %>% 
@@ -164,6 +166,10 @@ depression %>%
   select(described_variables,  intervention, n, mean, sd, p25, p50, p75, skewness, kurtosis) %>% 
   ungroup()
 ```
+:::
+:::
+
+The means are close to medians (20.3 vs 21 and 21.5 vs 21). The skewness is approximately zero (symmetric distribution) and the (excess) kurtosis falls into the acceptable range of \[-1, 1\] indicating approximately normal distributions for both groups.
 
  
 
@@ -189,8 +195,7 @@ depression %>%
   ungroup()
 ```
 
-
-The tests of normality suggest that the data for the `HDRS` in both groups are normally distributed (p=0.67 >0.05 and p=0.61 >0.05, respectively).
+The tests of normality suggest that the data for the `HDRS` in both groups are normally distributed (p=0.67 \>0.05 and p=0.61 \>0.05, respectively).
 
  
 
@@ -214,26 +219,21 @@ depression %>%
   levene_test(HDRS ~ intervention)
 ```
 
-
-Since the p-value = 0.676 >0.05, the null hypothesis that the variances of HDRs in two groups are equal is not rejected.
-
+Since the p-value = 0.676 \>0.05, the null hypothesis that the variances of HDRs in two groups are equal is not rejected.
 
 ## Run the t-test
 
 We will perform a pooled variance t-test (Student's t-test) to test the null hypothesis that the mean HDRS score is the same for both groups (paroxetine and placebo).
 
-
-::: {.callout-tip  #exercise-joins}
+::: {#exercise-joins .callout-tip}
 ## Student's t-test
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ## Base R
 
 ```{r}
 t.test(HDRS ~ intervention, var.equal = T, data=depression)
 ```
-
 
 ## rstatix
 
@@ -241,23 +241,19 @@ t.test(HDRS ~ intervention, var.equal = T, data=depression)
 depression %>% 
     t_test(HDRS ~ intervention, var.equal = T, detailed = T)
 ```
-
 :::
-
 :::
 
 The p-value = 0.16 is greater than 0.05. There is **no evidence** of a significant difference in mean HDRS between the two groups (failed to reject $H_0$). The difference between means (20.33 - 21.49) equals to -1.16 units of the HDRS and note that the 95% confidence interval of the difference in means (-2.78 to 0.47) **includes** the hypothesized null value of 0. Based on these results, there is not evidence that paroxetine is effective as a treatment for bipolar depression.
 
-Note that the paroxetine group (n= 33) has 33-1=32  degrees of freedom and the placebo sample (n= 43) has 43-1=42 df, so we have 32 + 42=74 df in total. Another way of thinking of this is that the complete sample size is 76, and we have estimated two parameters from the data (the two means), so we have 76-2 = 74 df.
+Note that the paroxetine group (n= 33) has 33-1=32 degrees of freedom and the placebo sample (n= 43) has 43-1=42 df, so we have 32 + 42=74 df in total. Another way of thinking of this is that the complete sample size is 76, and we have estimated two parameters from the data (the two means), so we have 76-2 = 74 df.
 
 The Student t-test for two independent samples does not have any restrictions on $n_1$ and $n_2$ ---**they can be equal or unequal**. However, equal samples are preferred because when a total of 2n subjects are available, their equal division among the groups maximizes the power to detect a specified difference.
-
 
 ::: callout-important
 # Remember
 
 If the variance is different between the two groups then the degrees of freedom and the t-value associated with a two-sample t-test are calculated differently. In this case, we have to write **var.equal = F** (or write nothing because this is the default) in the function so the Welch-Satterthwaite approximation is applied to the degrees of freedom.
-
 :::
 
  
@@ -265,7 +261,6 @@ If the variance is different between the two groups then the degrees of freedom 
 **Present the results in a summary table**
 
 ```{r}
-#| echo: false
 
 gt_sum1 <- depression %>% 
   tbl_summary(
@@ -282,4 +277,4 @@ gt_sum1 <- depression %>%
 gt_sum1
 ```
 
-Hence, there is not evidence that HDRS score is significantly different in paroxetine group, mean (sd) 20.3 (3.7), as compared to placebo group, 21.5 (3.4), (mean difference= -1.16 units, 95\% CI = -2.78 to 0.47, p = 0.16 >0.05).
+Hence, there is not evidence that HDRS score is significantly different in paroxetine group, mean (sd) 20.3 (3.7), as compared to placebo group, 21.5 (3.4), (mean difference= -1.16 units, 95% CI = -2.78 to 0.47, p = 0.16 \>0.05).
