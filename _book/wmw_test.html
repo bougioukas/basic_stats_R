@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.251">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Practical Statistics in Medicine with R - 1&nbsp; Two-sample t-test (Student’s t-test)</title>
+<title>Practical Statistics in Medicine with R - 2&nbsp; Wilcoxon-Mann-Whitney (Mann-Whitney U) test</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -90,7 +90,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./paired_samples.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./student_t_test.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -100,7 +100,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="site_libs/quarto-contrib/nutshell-1.0.0/nutshell.min.js"></script>
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -132,7 +131,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Two-sample t-test (Student’s t-test)</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Wilcoxon-Mann-Whitney (Mann-Whitney U) test</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -161,22 +160,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./two_samples.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Two-sample t-test (Student’s t-test)</span></a>
+  <a href="./student_t_test.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Two-sample t-test (Student’s t-test)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./paired_samples.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Compare paired samples</span></a>
+  <a href="./wmw_test.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Wilcoxon-Mann-Whitney (Mann-Whitney U) test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./anova.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Compare more than two samples</span></a>
+  <a href="./paired_samples.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Compare paired samples</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chi_square.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Chi-sqaure test of independence</span></a>
+  <a href="./anova.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Compare more than two samples</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chi_square.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Chi-sqaure test of independence</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -190,16 +194,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#research-question-and-hypothesis-testing" id="toc-research-question-and-hypothesis-testing" class="nav-link active" data-scroll-target="#research-question-and-hypothesis-testing"><span class="toc-section-number">1.1</span>  Research question and Hypothesis Testing</a></li>
-  <li><a href="#packages-we-need" id="toc-packages-we-need" class="nav-link" data-scroll-target="#packages-we-need"><span class="toc-section-number">1.2</span>  Packages we need</a></li>
-  <li><a href="#preraring-the-data" id="toc-preraring-the-data" class="nav-link" data-scroll-target="#preraring-the-data"><span class="toc-section-number">1.3</span>  Preraring the data</a></li>
-  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="toc-section-number">1.4</span>  Assumptions</a></li>
-  <li><a href="#run-the-t-test" id="toc-run-the-t-test" class="nav-link" data-scroll-target="#run-the-t-test"><span class="toc-section-number">1.5</span>  Run the t-test</a></li>
+<li><a href="#research-question-and-hypothesis-testing" id="toc-research-question-and-hypothesis-testing" class="nav-link active" data-scroll-target="#research-question-and-hypothesis-testing"><span class="toc-section-number">2.1</span>  Research question and Hypothesis Testing</a></li>
+  <li><a href="#packages-we-need" id="toc-packages-we-need" class="nav-link" data-scroll-target="#packages-we-need"><span class="toc-section-number">2.2</span>  Packages we need</a></li>
+  <li><a href="#preraring-the-data" id="toc-preraring-the-data" class="nav-link" data-scroll-target="#preraring-the-data"><span class="toc-section-number">2.3</span>  Preraring the data</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="toc-section-number">2.4</span>  Assumptions</a></li>
+  <li><a href="#run-the-wilcoxon-mann-whitney-test" id="toc-run-the-wilcoxon-mann-whitney-test" class="nav-link" data-scroll-target="#run-the-wilcoxon-mann-whitney-test"><span class="toc-section-number">2.5</span>  Run the Wilcoxon-Mann-Whitney test</a></li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-two_samples" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Two-sample t-test (Student’s t-test)</span></span></h1>
+<h1 class="title"><span id="sec-wmw" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Wilcoxon-Mann-Whitney (Mann-Whitney U) test</span></span></h1>
 </div>
 
 
@@ -211,7 +215,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><p>Two sample t-test (Student’s t-test) can be used if we have two independent (unrelated) groups (e.g., males-females, treatment-non treatment) and one quantitative variable of interest.</p>
+</header><p>The Wilcoxon-Mann-Whitney (WMW) test (sometimes called Mann-Whitney U test or Wilcoxon Rank Sum test) is used to compare two independent samples and is often considered the non-parametric alternative to the Student’s t-test when there is violation of normality or for small sample sizes. However, if the samples are very small (both smaller than four observations) then statistical significance is impossible.</p>
 <p>When we have finished this Chapter, we should be able to:</p>
 <div class="callout-caution callout callout-style-default no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -225,15 +229,14 @@ Learning objectives
 <div class="callout-body-container callout-body">
 <ul>
 <li>Applying hypothesis testing</li>
-<li>Compare two independent samples (Student’s t-test)</li>
+<li>Compare two independent samples applying Wilcoxon-Mann-Whitney test</li>
 <li>Interpret the results</li>
 </ul>
 </div>
 </div>
-<section id="research-question-and-hypothesis-testing" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="research-question-and-hypothesis-testing">
-<span class="header-section-number">1.1</span> Research question and Hypothesis Testing</h2>
-<p>In an experiment designed to test the effectiveness of paroxetine for treating bipolar depression, the participants were randomly assigned into two groups (paroxetine Vs placebo). The researchers used the Hamilton Depression Rating Scale (HDRS) to measure the depression state of the participants and wanted to find out if the HDRS score is different in paroxetine group as compared to placebo group at the end of the experiment. The significance level <span class="math inline">\(\alpha\)</span> was set to 0.05.</p>
-<p><strong>Note:</strong> A score of 0–7 in <a href="https://en.wikipedia.org/wiki/Hamilton_Rating_Scale_for_Depression">:HDRS</a> is generally accepted to be within the normal range, while a score of 20 or higher indicates at least moderate severity.</p>
+<section id="research-question-and-hypothesis-testing" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="research-question-and-hypothesis-testing">
+<span class="header-section-number">2.1</span> Research question and Hypothesis Testing</h2>
+<p>We consider the data in <em>thromboglobulin</em> dataset that contains the urinary <span class="math inline">\(\beta\)</span> thromboglobulin excretion (pg/ml) measured in 12 non-diabetic patients and 12 diabetic patients. The researchers used <span class="math inline">\(\alpha\)</span> = 0.05 significance level to test if the distribution of urinary <span class="math inline">\(\beta\)</span> thromboglobulin (b_TG) differs in the two groups.</p>
 <div class="callout-note callout callout-style-default no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -246,14 +249,15 @@ Null hypothesis and alternative hypothesis
 <div class="callout-body-container callout-body">
 <ul>
 <li>
-<span class="math inline">\(H_0\)</span>: the means of HDRS in the two groups are equal (<span class="math inline">\(\mu_{1} = \mu_{2}\)</span>)</li>
+<span class="math inline">\(H_0\)</span>: the distribution of urinary <span class="math inline">\(\beta\)</span> thromboglobulin is the same in the two groups</li>
 <li>
-<span class="math inline">\(H_1\)</span>: the means of HDRS in the two groups are not equal (<span class="math inline">\(\mu_{1} \neq \mu_{2}\)</span>)</li>
+<span class="math inline">\(H_1\)</span>: the distribution of urinary <span class="math inline">\(\beta\)</span> thromboglobulin is different in the two groups</li>
 </ul>
 </div>
 </div>
-</section><section id="packages-we-need" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="packages-we-need">
-<span class="header-section-number">1.2</span> Packages we need</h2>
+<p><strong>NOTE:</strong> The null hypothesis is that the observations from one group do not tend to have a higher or lower ranking than observations from the other group. This test <strong>does not</strong> test the medians of the data as is commonly thought, it tests the <strong>whole distribution</strong>. In practice, however, we use the medians to present the results. Statistical speaking, if the distributions of the two groups have <strong>similar shapes</strong>, the Wilcoxon-Mann-Whitney test can be used to determine whether there are differences in the <strong>medians</strong> between the two groups.</p>
+</section><section id="packages-we-need" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="packages-we-need">
+<span class="header-section-number">2.2</span> Packages we need</h2>
 <p>We need to load the following packages:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op">)</span></span>
@@ -263,44 +267,44 @@ Null hypothesis and alternative hypothesis
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="preraring-the-data" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="preraring-the-data">
-<span class="header-section-number">1.3</span> Preraring the data</h2>
-<p>We import the data in R:</p>
+</section><section id="preraring-the-data" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="preraring-the-data">
+<span class="header-section-number">2.3</span> Preraring the data</h2>
+<p>We import the data <em>thromboglobulin</em> in R:</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span>
-<span><span class="va">depression</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"depression.xlsx"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">tg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"thromboglobulin.xlsx"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div id="fig-depression" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><div id="htmlwidget-d7d1dc7300b597f6dcfe" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d7d1dc7300b597f6dcfe">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76"],["placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine"],[19,21,28,22,22,28,23,17,19,20,26,23,23,22,19,28,23,14,24,20,17,21,18,19,19,15,25,22,17,26,23,20,25,25,25,24,24,21,20,20,19,21,17,18,19,26,21,21,27,22,15,18,19,25,22,22,21,18,27,22,13,23,19,16,20,16,18,18,14,24,21,16,25,22,19,24]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>intervention<\/th>\n      <th>HDRS<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;1.1: Table with data from “depression” file.</figcaption><p></p>
+<figure class="figure"><div id="htmlwidget-07e3a4b32a672973494a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-07e3a4b32a672973494a">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],["non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic"],[4.1,6.3,7.8,8.5,8.9,10.4,11.5,12,13.8,17.6,24.3,37.2,27.5,28.1,26.1,23.8,25,29.8,33.9,37.7,31.3,43.2,28.7,46.2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>status<\/th>\n      <th>b_TG<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;2.1: Table with data from “depression” file.</figcaption><p></p>
 </figure>
 </div>
 </div>
 <p>We inspect the data and the type of variables:</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">depression</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">tg</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 76
+<pre><code>Rows: 24
 Columns: 2
-$ intervention &lt;chr&gt; "placebo", "placebo", "placebo", "placebo", "placebo", "p…
-$ HDRS         &lt;dbl&gt; 19, 21, 28, 22, 22, 28, 23, 17, 19, 20, 26, 23, 23, 22, 1…</code></pre>
+$ status &lt;chr&gt; "non-diabetic", "non-diabetic", "non-diabetic", "non-diabetic",…
+$ b_TG   &lt;dbl&gt; 4.1, 6.3, 7.8, 8.5, 8.9, 10.4, 11.5, 12.0, 13.8, 17.6, 24.3, 37…</code></pre>
 </div>
 </div>
-<p>The data set <em>depression</em> has 76 patients (rows) and includes two variables (columns). The numeric (<code>&lt;dbl&gt;</code>) <code>HDRS</code> variable and the character (<code>&lt;chr&gt;</code>) <code>intervention</code> variable which should be converted to a factor (<code>&lt;fct&gt;</code>) variable using the <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> function as follows:</p>
+<p>The data set <em>tg</em> has 24 patients (rows) and includes two variables (columns). The numeric (<code>&lt;dbl&gt;</code>) <code>b_TG</code> variable and the character (<code>&lt;chr&gt;</code>) <code>status</code> variable which should be converted to a factor (<code>&lt;fct&gt;</code>) variable using the <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> function as follows:</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">depression</span> <span class="op">&lt;-</span> <span class="va">depression</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>intervention <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">intervention</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">depression</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tg</span> <span class="op">&lt;-</span> <span class="va">tg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>status <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">status</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">tg</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 76
+<pre><code>Rows: 24
 Columns: 2
-$ intervention &lt;fct&gt; placebo, placebo, placebo, placebo, placebo, placebo, pla…
-$ HDRS         &lt;dbl&gt; 19, 21, 28, 22, 22, 28, 23, 17, 19, 20, 26, 23, 23, 22, 1…</code></pre>
+$ status &lt;fct&gt; non-diabetic, non-diabetic, non-diabetic, non-diabetic, non-dia…
+$ b_TG   &lt;dbl&gt; 4.1, 6.3, 7.8, 8.5, 8.9, 10.4, 11.5, 12.0, 13.8, 17.6, 24.3, 37…</code></pre>
 </div>
 </div>
-</section><section id="assumptions" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="assumptions">
-<span class="header-section-number">1.4</span> Assumptions</h2>
+</section><section id="assumptions" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="assumptions">
+<span class="header-section-number">2.4</span> Assumptions</h2>
 <div class="callout-note callout callout-style-default no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -321,11 +325,11 @@ Check if the following assumptions are satisfied
 <p>The distributions can be explored visually with appropriate plots. Additionally, summary statistics and significance tests to check for normality (e.g., Shapiro-Wilk test) can be used.</p>
 <p>&nbsp;</p>
 <p><strong>Graphs</strong></p>
-<p>We can visualize the distribution of HDRS for the two groups:</p>
+<p>We can visualize the distribution of <code>b_TG</code> for the two groups:</p>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">depression</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">intervention</span>, y<span class="op">=</span><span class="va">HDRS</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/PupillometryR/man/geom_flat_violin.html">geom_flat_violin</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">intervention</span><span class="op">)</span>, scale <span class="op">=</span> <span class="st">"count"</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">tg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">status</span>, y<span class="op">=</span><span class="va">b_TG</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/PupillometryR/man/geom_flat_violin.html">geom_flat_violin</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">status</span><span class="op">)</span>, scale <span class="op">=</span> <span class="st">"count"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.14</span>, outlier.shape <span class="op">=</span> <span class="cn">NA</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_jitter.html">position_jitter</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span>, </span>
 <span>             size <span class="op">=</span> <span class="fl">1.2</span>, alpha <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span> <span class="op">+</span></span>
@@ -334,17 +338,17 @@ Check if the following assumptions are satisfied
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"none"</span>, </span>
 <span>        axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">14</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-violin_plot1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="two_samples_files/figure-html/fig-violin_plot1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Rain cloud plot."><img src="two_samples_files/figure-html/fig-violin_plot1-1.png" class="img-fluid figure-img" width="672"></a></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;1.2: Rain cloud plot.</figcaption><p></p>
+<div id="fig-violin_plot2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><a href="wmw_test_files/figure-html/fig-violin_plot2-1.png" class="lightbox" title="Rain cloud plot." data-gallery="quarto-lightbox-gallery-1"><img src="wmw_test_files/figure-html/fig-violin_plot2-1.png" class="img-fluid figure-img" width="672"></a></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2.2: Rain cloud plot.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>The above figure shows that the data are close to symmetry and the assumption of a normal distribution is reasonable.</p>
+<p>The above figure shows that the data in both groups are positively skewed and they have similar shaped distributions.</p>
 <p>&nbsp;</p>
 <p><strong>Summary statistics</strong></p>
-<p>The HDRS summary statistics for each group are:</p>
+<p>The <code>g_TG</code> summary statistics for each group are:</p>
 <div id="exercise-joins" class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -363,48 +367,47 @@ Summary statistics by group
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">HDRS_summary</span> <span class="op">&lt;-</span> <span class="va">depression</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">intervention</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tg_summary</span> <span class="op">&lt;-</span> <span class="va">tg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">status</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
 <span>    n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">HDRS</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>    q1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">HDRS</span>, <span class="fl">0.25</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>    median <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">HDRS</span>, <span class="fl">0.5</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>    q3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">HDRS</span>, <span class="fl">0.75</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>    max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">HDRS</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>    mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">HDRS</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>    sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">HDRS</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>    skewness <span class="op">=</span> <span class="fu">EnvStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">HDRS</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>    kurtosis<span class="op">=</span> <span class="fu">EnvStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/kurtosis.html">kurtosis</a></span><span class="op">(</span><span class="va">HDRS</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>    min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">b_TG</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    q1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">b_TG</span>, <span class="fl">0.25</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    median <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">b_TG</span>, <span class="fl">0.5</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    q3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">b_TG</span>, <span class="fl">0.75</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">b_TG</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">b_TG</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">b_TG</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    skewness <span class="op">=</span> <span class="fu">EnvStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">b_TG</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    kurtosis<span class="op">=</span> <span class="fu">EnvStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/kurtosis.html">kurtosis</a></span><span class="op">(</span><span class="va">b_TG</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">HDRS_summary</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">tg_summary</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 11
-  intervention     n   min    q1 median    q3   max  mean    sd skewness kurto…¹
+  status           n   min    q1 median    q3   max  mean    sd skewness kurto…¹
   &lt;fct&gt;        &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-1 paroxetine      33    13    18     21    22    27  20.3  3.65  0.00167  -0.574
-2 placebo         43    14    19     21    24    28  21.5  3.41  0.0276   -0.403
+1 diabetic        12  23.8 27.2    29.2  34.8  46.2  31.8  7.17     1.05   0.107
+2 non-diabetic    12   4.1  8.32   11.0  14.8  37.2  13.5  9.19     1.81   3.47 
 # … with abbreviated variable name ¹​kurtosis</code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">depression</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">intervention</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu">dlookr</span><span class="fu">::</span><span class="fu"><a href="https://choonghyunryu.github.io/dlookr/reference/describe.data.frame.html">describe</a></span><span class="op">(</span><span class="va">HDRS</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">described_variables</span>,  <span class="va">intervention</span>, <span class="va">n</span>, <span class="va">mean</span>, <span class="va">sd</span>, <span class="va">p25</span>, <span class="va">p50</span>, <span class="va">p75</span>, <span class="va">skewness</span>, <span class="va">kurtosis</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">status</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">dlookr</span><span class="fu">::</span><span class="fu"><a href="https://choonghyunryu.github.io/dlookr/reference/describe.data.frame.html">describe</a></span><span class="op">(</span><span class="va">b_TG</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">described_variables</span>,  <span class="va">status</span>, <span class="va">n</span>, <span class="va">mean</span>, <span class="va">sd</span>, <span class="va">p25</span>, <span class="va">p50</span>, <span class="va">p75</span>, <span class="va">skewness</span>, <span class="va">kurtosis</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 10
-  described_variab…¹ inter…²     n  mean    sd   p25   p50   p75 skewn…³ kurto…⁴
-  &lt;chr&gt;              &lt;fct&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1 HDRS               paroxe…    33  20.3  3.65    18    21    22 0.00167  -0.574
-2 HDRS               placebo    43  21.5  3.41    19    21    24 0.0276   -0.403
-# … with abbreviated variable names ¹​described_variables, ²​intervention,
-#   ³​skewness, ⁴​kurtosis</code></pre>
+  described_variables status     n  mean    sd   p25   p50   p75 skewn…¹ kurto…²
+  &lt;chr&gt;               &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1 b_TG                diabe…    12  31.8  7.17 27.2   29.2  34.8    1.05   0.107
+2 b_TG                non-d…    12  13.5  9.19  8.32  11.0  14.8    1.81   3.47 
+# … with abbreviated variable names ¹​skewness, ²​kurtosis</code></pre>
 </div>
 </div>
 </div>
@@ -412,84 +415,35 @@ Summary statistics by group
 </div>
 </div>
 </div>
-<p>The means are close to medians (20.3 vs 21 and 21.5 vs 21). The skewness is approximately zero (symmetric distribution) and the (excess) kurtosis falls into the acceptable range of [-1, 1] indicating approximately normal distributions for both groups.</p>
+<p>The means are not very close to the medians (31.8 vs 29.2 and 13.5 vs 11.0). Moreover, both the skewness and the (excess) kurtosis for the non-diabetic group falls outside of the acceptable range of [-1, 1] indicating right-skewed and leptokurtic distribution.</p>
 <p>&nbsp;</p>
 <p><strong>Normality test</strong></p>
-<div class="callout-important callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Remember: Hypothesis testing for Shapiro-Wilk test for normality
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><span class="math inline">\(H_{0}\)</span>: the data came from a normally distributed population.</p>
-<p><span class="math inline">\(H_{1}\)</span>: the data tested are not normally distributed.</p>
-<ul>
-<li>If p − value &lt; 0.05, reject the null hypothesis, <span class="math inline">\(H_{0}\)</span>.</li>
-<li>If p − value ≥ 0.05, do not reject the null hypothesis, <span class="math inline">\(H_{0}\)</span>.</li>
-</ul>
-</div>
-</div>
 <p>The <em>Shapiro-Wilk</em> test for normality for each group is:</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">depression</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">intervention</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">HDRS</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">status</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">b_TG</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
-  intervention variable statistic     p
-  &lt;fct&gt;        &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;
-1 paroxetine   HDRS         0.976 0.670
-2 placebo      HDRS         0.979 0.614</code></pre>
+  status       variable statistic      p
+  &lt;fct&gt;        &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;
+1 diabetic     b_TG         0.886 0.105 
+2 non-diabetic b_TG         0.817 0.0148</code></pre>
 </div>
 </div>
-<p>The tests of normality suggest that the data for the <code>HDRS</code> in both groups are normally distributed (p=0.67 &gt;0.05 and p=0.61 &gt;0.05, respectively).</p>
+<p>We can see that the data for the non-diabetic group is not normally distributed (p=0.015 &lt;0.05) according to the Shapiro-Wilk test.</p>
 <p>&nbsp;</p>
-<p><strong>B. Levene’s test for equality of variances</strong></p>
-<div class="callout-important callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Remember: Hypothesis testing for Levene’s test for equality of variances
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><span class="math inline">\(H_{0}\)</span>: the variances of HDRs in two groups are equal</p>
-<p><span class="math inline">\(H_{1}\)</span>: the variances of HDRs in two groups are not equal</p>
-<ul>
-<li>If p − value &lt; 0.05, reject the null hypothesis, <span class="math inline">\(H_{0}\)</span>.</li>
-<li>If p − value ≥ 0.05, do not reject the null hypothesis, <span class="math inline">\(H_{0}\)</span>.</li>
-</ul>
-</div>
-</div>
-<p>The <em>Levene’s test</em> for equality of variances is:</p>
-<div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">depression</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/levene_test.html">levene_test</a></span><span class="op">(</span><span class="va">HDRS</span> <span class="op">~</span> <span class="va">intervention</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 4
-    df1   df2 statistic     p
-  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
-1     1    74     0.176 0.676</code></pre>
-</div>
-</div>
-<p>Since the p-value = 0.676 &gt;0.05, the null hypothesis that the variances of HDRs in two groups are equal is not rejected.</p>
-</section><section id="run-the-t-test" class="level2" data-number="1.5"><h2 data-number="1.5" class="anchored" data-anchor-id="run-the-t-test">
-<span class="header-section-number">1.5</span> Run the t-test</h2>
-<p>We will perform a pooled variance t-test (Student’s t-test) to test the null hypothesis that the mean HDRS score is the same for both groups (paroxetine and placebo).</p>
+</section><section id="run-the-wilcoxon-mann-whitney-test" class="level2" data-number="2.5"><h2 data-number="2.5" class="anchored" data-anchor-id="run-the-wilcoxon-mann-whitney-test">
+<span class="header-section-number">2.5</span> Run the Wilcoxon-Mann-Whitney test</h2>
+<p>The difference in medians between the two groups can be tested using a rank test such as Wilcoxon-Mann-Whitney (WMW):</p>
 <div id="exercise-joins" class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Student’s t-test
+Wilcoxon-Mann-Whitney test
 </div>
 </div>
 <div id="exercise-joins" class="callout-body-container callout-body">
@@ -501,33 +455,33 @@ Student’s t-test
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">HDRS</span> <span class="op">~</span> <span class="va">intervention</span>, var.equal <span class="op">=</span> <span class="cn">T</span>, data<span class="op">=</span><span class="va">depression</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">b_TG</span> <span class="op">~</span> <span class="va">status</span>, conf.int <span class="op">=</span> <span class="cn">T</span>, data <span class="op">=</span> <span class="va">tg</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Two Sample t-test
+    Wilcoxon rank sum exact test
 
-data:  HDRS by intervention
-t = -1.4185, df = 74, p-value = 0.1602
-alternative hypothesis: true difference in means between group paroxetine and group placebo is not equal to 0
+data:  b_TG by status
+W = 134, p-value = 0.0001028
+alternative hypothesis: true location shift is not equal to 0
 95 percent confidence interval:
- -2.777498  0.467420
+ 13.7 24.0
 sample estimates:
-mean in group paroxetine    mean in group placebo 
-                20.33333                 21.48837 </code></pre>
+difference in location 
+                 18.95 </code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <div class="cell">
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">depression</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op">(</span><span class="va">HDRS</span> <span class="op">~</span> <span class="va">intervention</span>, var.equal <span class="op">=</span> <span class="cn">T</span>, detailed <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">wilcox_test</a></span><span class="op">(</span><span class="va">b_TG</span> <span class="op">~</span> <span class="va">status</span>, detailed <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 15
-  estimate estimate1 estim…¹ .y.   group1 group2    n1    n2 stati…²     p    df
-*    &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1    -1.16      20.3    21.5 HDRS  parox… place…    33    43   -1.42  0.16    74
-# … with 4 more variables: conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, method &lt;chr&gt;,
-#   alternative &lt;chr&gt;, and abbreviated variable names ¹​estimate2, ²​statistic</code></pre>
+<pre><code># A tibble: 1 × 12
+  estim…¹ .y.   group1 group2    n1    n2 stati…²       p conf.…³ conf.…⁴ method
+*   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; 
+1    19.0 b_TG  diabe… non-d…    12    12     134 1.03e-4    13.7      24 Wilco…
+# … with 1 more variable: alternative &lt;chr&gt;, and abbreviated variable names
+#   ¹​estimate, ²​statistic, ³​conf.low, ⁴​conf.high</code></pre>
 </div>
 </div>
 </div>
@@ -535,38 +489,23 @@ mean in group paroxetine    mean in group placebo
 </div>
 </div>
 </div>
-<p>The p-value = 0.16 is greater than 0.05. There is <strong>no evidence</strong> of a significant difference in mean HDRS between the two groups (failed to reject <span class="math inline">\(H_0\)</span>). The difference between means (20.33 - 21.49) equals to -1.16 units of the HDRS and note that the 95% confidence interval of the difference in means (-2.78 to 0.47) <strong>includes</strong> the hypothesized null value of 0. Based on these results, there is not evidence that paroxetine is effective as a treatment for bipolar depression.</p>
-<p>Note that the paroxetine group (n=33) has df (degrees of freedom) = 33-1 = 32 and the placebo sample (n= 43) has df = 43-1 = 42 , so we have df = 32 + 42 = 74 in total. Another way of thinking of this is that the complete sample size is 76, and we have estimated two parameters from the data (the two means), so we have df = 76-2 = 74 .</p>
-<p>The Student t-test for two independent samples does not have any restrictions on <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> —<strong>they can be equal or unequal</strong>. However, equal samples are preferred because when a total of 2n subjects are available, their equal division among the groups maximizes the power to detect a specified difference.</p>
-<div class="callout-important callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Remember
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>If the variance is different between the two groups then the degrees of freedom and the t-value associated with a two-sample t-test are calculated differently. In this case, we have to write <strong>var.equal = F</strong> (or write nothing because this is the default) in the function so the Welch-Satterthwaite approximation is applied to the degrees of freedom.</p>
-</div>
-</div>
+<p>Based on the p &lt;0.001, we reject the null hypothesis, the result (difference in medians = 18.95, 95% CI: 13.7 to 24) is significant.</p>
 <p>&nbsp;</p>
 <p><strong>Present the results in a summary table</strong></p>
+<p>The median (or another percentile) can be used as a summary measure. The choice is guided by the shape of the distributions.</p>
 <div class="cell">
-<details><summary>Show the code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">gt_sum1</span> <span class="op">&lt;-</span> <span class="va">depression</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">gt_sum2</span> <span class="op">&lt;-</span> <span class="va">tg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span></span>
-<span>    by <span class="op">=</span> <span class="va">intervention</span>, </span>
-<span>    statistic <span class="op">=</span> <span class="va">HDRS</span> <span class="op">~</span> <span class="st">"{mean} ({sd})"</span>, </span>
+<span>    by <span class="op">=</span> <span class="va">status</span>, </span>
+<span>    statistic <span class="op">=</span> <span class="va">b_TG</span> <span class="op">~</span> <span class="st">"{median} ({p25}, {p75})"</span>, </span>
 <span>    digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span>,</span>
-<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">HDRS</span> <span class="op">~</span> <span class="st">"HDRS score"</span><span class="op">)</span>, </span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">b_TG</span> <span class="op">~</span> <span class="st">"b_TG \n(pg/ml)"</span><span class="op">)</span>, </span>
 <span>    missing <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"no"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_p.html">add_p</a></span><span class="op">(</span>test <span class="op">=</span> <span class="va">HDRS</span> <span class="op">~</span> <span class="st">"t.test"</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/partial.html">partial</a></span><span class="op">(</span><span class="va">style_pvalue</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
-<span>        test.args <span class="op">=</span> <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/select_helpers.html">all_tests</a></span><span class="op">(</span><span class="st">"t.test"</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_p.html">add_p</a></span><span class="op">(</span>test <span class="op">=</span> <span class="va">b_TG</span> <span class="op">~</span> <span class="st">"wilcox.test"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_overall.html">add_overall</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/as_gt.html">as_gt</a></span><span class="op">(</span><span class="op">)</span> </span>
 <span></span>
-<span><span class="va">gt_sum1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">gt_sum2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 
 <div id="sncjrvketn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -983,41 +922,42 @@ Remember
 <table class="gt_table">
 <thead class="gt_col_headings"><tr>
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="<strong>Characteristic</strong>"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>Overall</strong>, N = 76<sup class=&quot;gt_footnote_marks&quot;>1</sup>">
-<strong>Overall</strong>, N = 76<sup class="gt_footnote_marks">1</sup>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>Overall</strong>, N = 24<sup class=&quot;gt_footnote_marks&quot;>1</sup>">
+<strong>Overall</strong>, N = 24<sup class="gt_footnote_marks">1</sup>
 </th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>paroxetine</strong>, N = 33<sup class=&quot;gt_footnote_marks&quot;>1</sup>">
-<strong>paroxetine</strong>, N = 33<sup class="gt_footnote_marks">1</sup>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>diabetic</strong>, N = 12<sup class=&quot;gt_footnote_marks&quot;>1</sup>">
+<strong>diabetic</strong>, N = 12<sup class="gt_footnote_marks">1</sup>
 </th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>placebo</strong>, N = 43<sup class=&quot;gt_footnote_marks&quot;>1</sup>">
-<strong>placebo</strong>, N = 43<sup class="gt_footnote_marks">1</sup>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>non-diabetic</strong>, N = 12<sup class=&quot;gt_footnote_marks&quot;>1</sup>">
+<strong>non-diabetic</strong>, N = 12<sup class="gt_footnote_marks">1</sup>
 </th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>p-value</strong><sup class=&quot;gt_footnote_marks&quot;>2</sup>">
 <strong>p-value</strong><sup class="gt_footnote_marks">2</sup>
 </th>
     </tr></thead>
 <tbody class="gt_table_body"><tr>
-<td headers="label" class="gt_row gt_left">HDRS score</td>
-<td headers="stat_0" class="gt_row gt_center">21.0 (3.5)</td>
-<td headers="stat_1" class="gt_row gt_center">20.3 (3.7)</td>
-<td headers="stat_2" class="gt_row gt_center">21.5 (3.4)</td>
-<td headers="p.value" class="gt_row gt_center">0.16</td>
+<td headers="label" class="gt_row gt_left">b_TG 
+(pg/ml)</td>
+<td headers="stat_0" class="gt_row gt_center">24.6 (11.2, 30.2)</td>
+<td headers="stat_1" class="gt_row gt_center">29.2 (27.1, 34.8)</td>
+<td headers="stat_2" class="gt_row gt_center">10.9 (8.3, 14.8)</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td>
 </tr></tbody>
 <tfoot class="gt_footnotes">
 <tr>
 <td class="gt_footnote" colspan="5">
-<sup class="gt_footnote_marks">1</sup> Mean (SD)</td>
+<sup class="gt_footnote_marks">1</sup> Median (IQR)</td>
     </tr>
 <tr>
 <td class="gt_footnote" colspan="5">
-<sup class="gt_footnote_marks">2</sup> Two Sample t-test</td>
+<sup class="gt_footnote_marks">2</sup> Wilcoxon rank sum exact test</td>
     </tr>
 </tfoot>
 </table>
 </div>
 </div>
 </div>
-<p>Hence, there is not evidence that HDRS score is significantly different in paroxetine group, mean (sd) 20.3 (3.7), as compared to placebo group, 21.5 (3.4), (mean difference= -1.16 units, 95% CI = -2.78 to 0.47, p = 0.16 &gt;0.05).</p>
+<p>Hence, the urinary <span class="math inline">\(\beta\)</span> thromboglobulin excretion is significantly higher in diabetic group, median = 29.2 (IQR: 27.1, 34.8) pg/ml, as compared to non-diabetic group, 10.9 (8.3, 14.8) pg/ml, (p &lt;0.001).</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -1132,13 +1072,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="./student_t_test.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Two-sample t-test (Student’s t-test)</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./paired_samples.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Compare paired samples</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Compare paired samples</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1146,7 +1086,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","loop":true,"descPosition":"bottom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":true,"closeEffect":"zoom"});</script>
 
 
 </body></html>

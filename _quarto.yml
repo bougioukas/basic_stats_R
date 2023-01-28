@@ -11,7 +11,8 @@ book:
   repo-url: https://github.com/bougioukas/basic_stats_R
   chapters:
     - index.qmd
-    - two_samples.qmd
+    - student_t_test.qmd
+    - wmw_test.qmd
     - paired_samples.qmd
     - anova.qmd
     - chi_square.qmd
@@ -23,7 +24,6 @@ book:
 bibliography: references.bib
 
 filters:
-  - nutshell
   - lightbox
 lightbox: auto
 

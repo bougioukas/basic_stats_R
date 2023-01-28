@@ -1,0 +1,242 @@
+# Wilcoxon-Mann-Whitney (Mann-Whitney U) test {#sec-wmw}
+
+The Wilcoxon-Mann-Whitney (WMW) test (sometimes called Mann-Whitney U test or Wilcoxon Rank Sum test) is used to compare two independent samples and is often considered the non-parametric alternative to the Student's t-test when there is violation of normality or for small sample sizes. However, if the samples are very small (both smaller than four observations) then statistical significance is impossible.
+
+```{r}
+#| include: false
+
+library(rstatix)
+library(PupillometryR)
+library(gtsummary)
+
+library(here)
+library(tidyverse)
+```
+
+When we have finished this Chapter, we should be able to:
+
+::: {.callout-caution icon="false"}
+## Learning objectives
+
+-   Applying hypothesis testing
+-   Compare two independent samples applying Wilcoxon-Mann-Whitney test
+-   Interpret the results
+:::
+
+## Research question and Hypothesis Testing
+
+We consider the data in *thromboglobulin* dataset that contains the urinary $\beta$ thromboglobulin excretion (pg/ml) measured in 12 non-diabetic patients and 12 diabetic patients. The researchers used $\alpha$ = 0.05 significance level to test if the distribution of urinary $\beta$ thromboglobulin (b_TG) differs in the two groups.
+
+::: {.callout-note icon="false"}
+## Null hypothesis and alternative hypothesis
+
+-   $H_0$: the distribution of urinary $\beta$ thromboglobulin is the same in the two groups
+-   $H_1$: the distribution of urinary $\beta$ thromboglobulin is different in the two groups
+:::
+
+**NOTE:** The null hypothesis is that the observations from one group do not tend to have a higher or lower ranking than observations from the other group. This test **does not** test the medians of the data as is commonly thought, it tests the **whole distribution**. In practice, however, we use the medians to present the results. Statistical speaking, if the distributions of the two groups have **similar shapes**, the Wilcoxon-Mann-Whitney test can be used to determine whether there are differences in the **medians** between the two groups.
+
+## Packages we need
+
+We need to load the following packages:
+
+```{r}
+#| eval: false
+
+library(rstatix)
+library(PupillometryR)
+library(gtsummary)
+
+library(here)
+library(tidyverse)
+```
+
+## Preraring the data
+
+We import the data *thromboglobulin* in R:
+
+```{r}
+library(readxl)
+tg <- read_excel(here("data", "thromboglobulin.xlsx"))
+```
+
+```{r}
+#| echo: false
+#| label: fig-depression
+#| fig-cap: Table with data from "depression" file.
+
+DT::datatable(
+  tg, extensions = 'Buttons', options = list(
+    dom = 'tip'
+  )
+)
+
+```
+
+We inspect the data and the type of variables:
+
+```{r}
+glimpse(tg)
+```
+
+The data set *tg* has 24 patients (rows) and includes two variables (columns). The numeric (`<dbl>`) `b_TG` variable and the character (`<chr>`) `status` variable which should be converted to a factor (`<fct>`) variable using the `factor()` function as follows:
+
+```{r}
+tg <- tg %>% 
+  mutate(status = factor(status))
+glimpse(tg)
+```
+
+## Assumptions
+
+::: {.callout-note icon="false"}
+## Check if the following assumptions are satisfied
+
+A.  The data are **normally** distributed in both groups
+B.  The data in both groups have similar **variance** (also named as homogeneity of variance or homoscedasticity)
+:::
+
+**A. Explore the descriptive characteristics of distribution for each group and check for normality**
+
+The distributions can be explored visually with appropriate plots. Additionally, summary statistics and significance tests to check for normality (e.g., Shapiro-Wilk test) can be used.
+
+ 
+
+**Graphs**
+
+We can visualize the distribution of `b_TG` for the two groups:
+
+```{r}
+#| warning: false
+#| label: fig-violin_plot2
+#| fig-cap: Rain cloud plot.
+
+set.seed(123)
+ggplot(tg, aes(x=status, y=b_TG)) + 
+  geom_flat_violin(aes(fill = status), scale = "count") +
+  geom_boxplot(width = 0.14, outlier.shape = NA, alpha = 0.5) +
+  geom_point(position = position_jitter(width = 0.05), 
+             size = 1.2, alpha = 0.6) +
+  ggsci::scale_fill_jco() +
+  theme_classic(base_size = 14) +
+  theme(legend.position="none", 
+        axis.text = element_text(size = 14))
+```
+
+The above figure shows that the data in both groups are positively skewed and they have similar shaped distributions.
+
+ 
+
+**Summary statistics**
+
+The `g_TG` summary statistics for each group are:
+
+::: {#exercise-joins .callout-tip}
+## Summary statistics by group
+
+::: panel-tabset
+## dplyr
+
+```{r}
+
+tg_summary <- tg %>%
+  group_by(status) %>%
+  dplyr::summarise(
+    n = n(),
+    min = min(b_TG, na.rm = TRUE),
+    q1 = quantile(b_TG, 0.25, na.rm = TRUE),
+    median = quantile(b_TG, 0.5, na.rm = TRUE),
+    q3 = quantile(b_TG, 0.75, na.rm = TRUE),
+    max = max(b_TG, na.rm = TRUE),
+    mean = mean(b_TG, na.rm = TRUE),
+    sd = sd(b_TG, na.rm = TRUE),
+    skewness = EnvStats::skewness(b_TG, na.rm = TRUE),
+    kurtosis= EnvStats::kurtosis(b_TG, na.rm = TRUE)
+  ) %>%
+  ungroup()
+
+tg_summary
+
+```
+
+## dlookr
+
+```{r}
+tg %>% 
+  group_by(status) %>% 
+  dlookr::describe(b_TG) %>% 
+  select(described_variables,  status, n, mean, sd, p25, p50, p75, skewness, kurtosis) %>% 
+  ungroup()
+```
+:::
+:::
+
+The means are not very close to the medians (31.8 vs 29.2 and 13.5 vs 11.0). Moreover, both the skewness and the (excess) kurtosis for the non-diabetic group falls outside of the acceptable range of \[-1, 1\] indicating right-skewed and leptokurtic distribution.
+
+ 
+
+**Normality test**
+
+The *Shapiro-Wilk* test for normality for each group is:
+
+```{r}
+tg %>%
+  group_by(status) %>%
+  shapiro_test(b_TG) %>% 
+  ungroup()
+```
+
+We can see that the data for the non-diabetic group is not normally distributed (p=0.015 \<0.05) according to the Shapiro-Wilk test.
+
+ 
+
+## Run the Wilcoxon-Mann-Whitney test
+
+The difference in medians between the two groups can be tested using a rank test such as Wilcoxon-Mann-Whitney (WMW):
+
+::: {#exercise-joins .callout-tip}
+## Wilcoxon-Mann-Whitney test
+
+::: panel-tabset
+## Base R
+
+```{r}
+wilcox.test(b_TG ~ status, conf.int = T, data = tg)
+```
+
+## rstatix
+
+```{r}
+tg %>%
+  wilcox_test(b_TG ~ status, detailed = T)
+```
+:::
+:::
+
+Based on the p \<0.001, we reject the null hypothesis, the result (difference in medians = 18.95, 95% CI: 13.7 to 24) is significant.
+
+ 
+
+**Present the results in a summary table**
+
+The median (or another percentile) can be used as a summary measure. The choice is guided by the shape of the distributions.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+gt_sum2 <- tg %>% 
+  tbl_summary(
+    by = status, 
+    statistic = b_TG ~ "{median} ({p25}, {p75})", 
+    digits = list(everything() ~ 1),
+    label = list(b_TG ~ "b_TG \n(pg/ml)"), 
+    missing = c("no")) %>% 
+  add_p(test = b_TG ~ "wilcox.test") %>% 
+  add_overall() %>%
+  as_gt() 
+
+gt_sum2
+```
+
+Hence, the urinary $\beta$ thromboglobulin excretion is significantly higher in diabetic group, median = 29.2 (IQR: 27.1, 34.8) pg/ml, as compared to non-diabetic group, 10.9 (8.3, 14.8) pg/ml, (p \<0.001).
