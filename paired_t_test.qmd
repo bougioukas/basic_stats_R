@@ -1,0 +1,271 @@
+# Paired t-test {#sec-paired_t_test}
+
+A paired t-test is used to estimate whether the means of two related measurements are significantly different from one another.
+
+Examples of paired study designs are:
+
+1.  measurements collected **before and after** an intervention in an experimental study
+2.  twins, husbands and wives, brothers and sisters, pairs of eyes
+3.  **matched** cases and controls
+4.  a **cross-over trial** in which each patient has two measurements on the variable, one while taking active treatment and one while taking placebo
+
+```{r}
+#| include: false
+
+library(rstatix)
+library(PupillometryR)
+library(gtsummary)
+
+library(here)
+library(tidyverse)
+```
+
+
+When we have finished this Chapter, we should be able to:
+
+::: {.callout-caution icon="false"}
+## Learning objectives
+
+-   Applying hypothesis testing
+-   Compare two independent samples applying paired t-test
+-   Interpret the results
+:::
+
+
+## Research question
+
+The dataset *weight* contains the birth and discharge weight of 25 newborns. We might ask if the **mean difference** of the weight in birth and in discharge equals to zero or not. If the **differences** between the pairs of measurements are normally distributed, a paired t-test is the most appropriate statistical test.
+
+::: {.callout-note icon="false"}
+## Null hypothesis and alternative hypothesis
+
+-   $H_0$: the mean difference of weight equals to zero ($\mu_{d} = 0$)
+-   $H_1$: the mean difference of weight does not equal to zero ($\mu_{d} \neq 0$)
+:::
+
+## Packages we need
+
+We need to load the following packages:
+
+```{r}
+#| eval: false
+
+library(rstatix)
+library(PupillometryR)
+library(gtsummary)
+
+library(here)
+library(tidyverse)
+```
+
+
+## Preraring the data
+
+We import the data *weight* in R:
+
+```{r}
+library(readxl)
+weight <- read_excel(here("data", "weight.xlsx"))
+```
+
+We calculate the differences using the `mutate()` function:
+
+```{r}
+weight <- weight %>%
+  mutate(dif_weight = birth_weight - discharge_weight)
+```
+
+
+```{r}
+#| echo: false
+#| label: fig-weight
+#| fig-cap: Table with data from "weight" file.
+
+DT::datatable(
+  weight, extensions = 'Buttons', options = list(
+    dom = 'tip'
+  )
+)
+
+```
+
+
+We inspect the data:
+
+```{r}
+glimpse(weight) 
+```
+
+
+
+## Assumptions
+
+::: {.callout-note icon="false"}
+## Check if the following assumption is satisfied
+
+The differences are **normally** distributed.
+:::
+
+
+## Explore the characteristics of distribution of differences
+
+The distribution of the differences can be explored with appropriate plots and summary statistics. 
+
+
+**Visualization of the distribution of differences**
+
+We can explore the data visually for symmetry with a density plot (a smoothed version of the histogram):
+
+```{r}
+#| warning: false
+#| label: fig-hist1
+#| fig-cap: Density plot of the weight differences.
+
+weight %>%
+  ggplot(aes(x = dif_weight)) +
+  geom_density(fill = "#76B7B2", color="black", alpha = 0.2) +
+  geom_vline(aes(xintercept=mean(dif_weight)),
+             color="blue", linetype="dashed", size=1.4) +
+  geom_vline(aes(xintercept=median(dif_weight)),
+             color="red", linetype="dashed", size=1.2) +
+  labs(x = "Weight difference") +
+  theme_minimal() +
+  theme(plot.title.position = "plot")
+```
+
+The above figure shows that the data are following an approximately symmetrical distribution. Note that the arethmetic mean (blue vertical dashed line) is very close to the median (red vertical dashed line) of the data.
+
+
+
+**Summary statistics**
+
+Summary statistics can also be inspected for the variables.
+
+::: {#exercise-joins .callout-tip}
+## Summary statistics
+
+::: panel-tabset
+## dplyr
+
+We can utilize the new `across()` function to obtain the results across the three variables simultaneously:
+
+```{r}
+
+summary_weight <- weight %>%
+  dplyr::summarise(across(
+    .cols = c(dif_weight, birth_weight, discharge_weight), 
+    .fns = list(
+    N = ~n(),
+    Min = min,
+    Q1 = ~quantile(., 0.25),
+    median = median,
+    Q3 = ~quantile(., 0.75),
+    Max = max,
+    Mean = mean,
+    Sd = sd,
+    Skewness = EnvStats::skewness,
+    Kurtosis= EnvStats::kurtosis
+    ), na.rm = TRUE,
+    .names = "{col}_{fn}")
+    )
+
+# present the results
+summary_weight <- summary_weight %>% 
+  mutate(across(everything(), round, 2)) %>%   # round to 3 decimal places
+  pivot_longer(1:30, names_to = "Stats", values_to = "Values")  # long format
+
+summary_weight
+```
+
+## dlookr
+
+```{r}
+weight %>% 
+  dlookr::describe(dif_weight, birth_weight, discharge_weight) %>% 
+  select(described_variables, n, mean, sd, p25, p50, p75, skewness, kurtosis) %>% 
+  ungroup()
+```
+:::
+:::
+
+As it was previously mentioned, the mean of the differences (39.64) is close to median (40). Moreover, both the skewness and the kurtosis are approximately zero indicating a symmetric and mesokurtic distribution for the weight differences.
+
+
+**Normality test**
+
+Additionally, we can check the statistical test for normality of the differences.
+
+```{r}
+ weight %>%
+    shapiro_test(dif_weight)
+```
+
+The Shapiro-Wilk test suggests that the weight differences are normally distributed (p=0.74 \> 0.05).
+
+
+
+## Run the paired t-test
+
+We will perform a paired t-test to test the null hypothesis that the mean differences of weight equals to zero.
+
+
+::: {#exercise-joins .callout-tip}
+## Paired t-test
+
+
+
+::: panel-tabset
+## Base R (1st way)
+Our data are in a wide format. However, we are going to use only the `dif_weight` variable, inside the `t.test()`:
+
+```{r}
+t.test(weight$dif_weight)
+```
+
+
+## Base R (2nd way)
+
+```{r}
+t.test(weight$birth_weight, weight$discharge_weight, paired = T)
+```
+
+## rstatix
+
+```{r}
+weight %>% 
+  t_test(dif_weight ~ 1, detailed = T)
+```
+
+:::
+:::
+
+
+## Present the results in a summary table
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+#| 
+tb1 <- weight %>% 
+  mutate(id = row_number()) %>% 
+  select(-dif_weight) %>% 
+  pivot_longer(!id, names_to = "group", values_to = "weights")
+
+gt_sum3 <- tb1 %>% 
+tbl_summary(by = group, include = -id,
+            label = list(weights ~ "weights (grams)"),
+            statistic =  weights ~ "{mean} ({sd})") %>%
+  #add_difference(test = weights ~ "paired.t.test", group = id) %>%
+  add_p(test = weights ~ "paired.t.test", group = id) %>% 
+  #modify_spanning_header(all_stat_cols() ~ "**Weight**") %>% 
+  as_gt()
+  
+gt_sum3 
+
+```
+
+
+There was a significant reduction in weight (39.6 g) after the discharge (p-value \<0.001 that is lower than 0.05; reject $H_0$). Note that the 95% confidence interval (26.3 to 52.9) doesn't include the null hypothesized value of 0. However, is this reduction of clinical importance?
+
+
+

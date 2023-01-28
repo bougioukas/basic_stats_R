@@ -89,5 +89,61 @@
     "title": "2  Wilcoxon-Mann-Whitney (Mann-Whitney U) test",
     "section": "\n2.5 Run the Wilcoxon-Mann-Whitney test",
     "text": "2.5 Run the Wilcoxon-Mann-Whitney test\nThe difference in medians between the two groups can be tested using a rank test such as Wilcoxon-Mann-Whitney (WMW):\n\n\n\n\n\n\nWilcoxon-Mann-Whitney test\n\n\n\n\n\nBase R\nrstatix\n\n\n\n\nwilcox.test(b_TG ~ status, conf.int = T, data = tg)\n\n\n    Wilcoxon rank sum exact test\n\ndata:  b_TG by status\nW = 134, p-value = 0.0001028\nalternative hypothesis: true location shift is not equal to 0\n95 percent confidence interval:\n 13.7 24.0\nsample estimates:\ndifference in location \n                 18.95 \n\n\n\n\n\ntg %>%\n  wilcox_test(b_TG ~ status, detailed = T)\n\n# A tibble: 1 × 12\n  estim…¹ .y.   group1 group2    n1    n2 stati…²       p conf.…³ conf.…⁴ method\n*   <dbl> <chr> <chr>  <chr>  <int> <int>   <dbl>   <dbl>   <dbl>   <dbl> <chr> \n1    19.0 b_TG  diabe… non-d…    12    12     134 1.03e-4    13.7      24 Wilco…\n# … with 1 more variable: alternative <chr>, and abbreviated variable names\n#   ¹​estimate, ²​statistic, ³​conf.low, ⁴​conf.high\n\n\n\n\n\n\n\nBased on the p <0.001, we reject the null hypothesis, the result (difference in medians = 18.95, 95% CI: 13.7 to 24) is significant.\n \nPresent the results in a summary table\nThe median (or another percentile) can be used as a summary measure. The choice is guided by the shape of the distributions.\n\nShow the codegt_sum2 <- tg %>% \n  tbl_summary(\n    by = status, \n    statistic = b_TG ~ \"{median} ({p25}, {p75})\", \n    digits = list(everything() ~ 1),\n    label = list(b_TG ~ \"b_TG \\n(pg/ml)\"), \n    missing = c(\"no\")) %>% \n  add_p(test = b_TG ~ \"wilcox.test\") %>% \n  add_overall() %>%\n  as_gt() \n\ngt_sum2\n\n\n\n\n\n\nCharacteristic\n      \nOverall, N = 241\n\n      \ndiabetic, N = 121\n\n      \nnon-diabetic, N = 121\n\n      \np-value2\n\n    \n\nb_TG \n(pg/ml)\n24.6 (11.2, 30.2)\n29.2 (27.1, 34.8)\n10.9 (8.3, 14.8)\n<0.001\n\n\n\n\n1 Median (IQR)\n    \n\n\n2 Wilcoxon rank sum exact test\n    \n\n\n\n\n\nHence, the urinary \\(\\beta\\) thromboglobulin excretion is significantly higher in diabetic group, median = 29.2 (IQR: 27.1, 34.8) pg/ml, as compared to non-diabetic group, 10.9 (8.3, 14.8) pg/ml, (p <0.001)."
+  },
+  {
+    "objectID": "paired_t_test.html",
+    "href": "paired_t_test.html",
+    "title": "3  Paired t-test",
+    "section": "",
+    "text": "A paired t-test is used to estimate whether the means of two related measurements are significantly different from one another.\nExamples of paired study designs are:\nWhen we have finished this Chapter, we should be able to:"
+  },
+  {
+    "objectID": "paired_t_test.html#research-question",
+    "href": "paired_t_test.html#research-question",
+    "title": "3  Paired t-test",
+    "section": "\n3.1 Research question",
+    "text": "3.1 Research question\nThe dataset weight contains the birth and discharge weight of 25 newborns. We might ask if the mean difference of the weight in birth and in discharge equals to zero or not. If the differences between the pairs of measurements are normally distributed, a paired t-test is the most appropriate statistical test.\n\n\n\n\n\n\nNull hypothesis and alternative hypothesis\n\n\n\n\n\n\\(H_0\\): the mean difference of weight equals to zero (\\(\\mu_{d} = 0\\))\n\n\\(H_1\\): the mean difference of weight does not equal to zero (\\(\\mu_{d} \\neq 0\\))"
+  },
+  {
+    "objectID": "paired_t_test.html#packages-we-need",
+    "href": "paired_t_test.html#packages-we-need",
+    "title": "3  Paired t-test",
+    "section": "\n3.2 Packages we need",
+    "text": "3.2 Packages we need\nWe need to load the following packages:\n\nlibrary(rstatix)\nlibrary(PupillometryR)\nlibrary(gtsummary)\n\nlibrary(here)\nlibrary(tidyverse)"
+  },
+  {
+    "objectID": "paired_t_test.html#preraring-the-data",
+    "href": "paired_t_test.html#preraring-the-data",
+    "title": "3  Paired t-test",
+    "section": "\n3.3 Preraring the data",
+    "text": "3.3 Preraring the data\nWe import the data weight in R:\n\nlibrary(readxl)\nweight <- read_excel(here(\"data\", \"weight.xlsx\"))\n\nWe calculate the differences using the mutate() function:\n\nweight <- weight %>%\n  mutate(dif_weight = birth_weight - discharge_weight)\n\n\n\n\nFigure 3.1: Table with data from “weight” file.\n\n\n\nWe inspect the data:\n\nglimpse(weight) \n\nRows: 25\nColumns: 3\n$ birth_weight     <dbl> 3250, 2680, 2960, 3420, 3210, 2740, 3250, 3170, 2970,…\n$ discharge_weight <dbl> 3220, 2640, 2940, 3350, 3140, 2730, 3220, 3150, 2890,…\n$ dif_weight       <dbl> 30, 40, 20, 70, 70, 10, 30, 20, 80, 103, 84, 42, -15,…"
+  },
+  {
+    "objectID": "paired_t_test.html#assumptions",
+    "href": "paired_t_test.html#assumptions",
+    "title": "3  Paired t-test",
+    "section": "\n3.4 Assumptions",
+    "text": "3.4 Assumptions\n\n\n\n\n\n\nCheck if the following assumption is satisfied\n\n\n\nThe differences are normally distributed."
+  },
+  {
+    "objectID": "paired_t_test.html#explore-the-characteristics-of-distribution-of-differences",
+    "href": "paired_t_test.html#explore-the-characteristics-of-distribution-of-differences",
+    "title": "3  Paired t-test",
+    "section": "\n3.5 Explore the characteristics of distribution of differences",
+    "text": "3.5 Explore the characteristics of distribution of differences\nThe distribution of the differences can be explored with appropriate plots and summary statistics.\nVisualization of the distribution of differences\nWe can explore the data visually for symmetry with a density plot (a smoothed version of the histogram):\n\nweight %>%\n  ggplot(aes(x = dif_weight)) +\n  geom_density(fill = \"#76B7B2\", color=\"black\", alpha = 0.2) +\n  geom_vline(aes(xintercept=mean(dif_weight)),\n             color=\"blue\", linetype=\"dashed\", size=1.4) +\n  geom_vline(aes(xintercept=median(dif_weight)),\n             color=\"red\", linetype=\"dashed\", size=1.2) +\n  labs(x = \"Weight difference\") +\n  theme_minimal() +\n  theme(plot.title.position = \"plot\")\n\n\n\nFigure 3.2: Density plot of the weight differences.\n\n\n\n\nThe above figure shows that the data are following an approximately symmetrical distribution. Note that the arethmetic mean (blue vertical dashed line) is very close to the median (red vertical dashed line) of the data.\nSummary statistics\nSummary statistics can also be inspected for the variables.\n\n\n\n\n\n\nSummary statistics\n\n\n\n\n\ndplyr\ndlookr\n\n\n\nWe can utilize the new across() function to obtain the results across the three variables simultaneously:\n\nsummary_weight <- weight %>%\n  dplyr::summarise(across(\n    .cols = c(dif_weight, birth_weight, discharge_weight), \n    .fns = list(\n    N = ~n(),\n    Min = min,\n    Q1 = ~quantile(., 0.25),\n    median = median,\n    Q3 = ~quantile(., 0.75),\n    Max = max,\n    Mean = mean,\n    Sd = sd,\n    Skewness = EnvStats::skewness,\n    Kurtosis= EnvStats::kurtosis\n    ), na.rm = TRUE,\n    .names = \"{col}_{fn}\")\n    )\n\n# present the results\nsummary_weight <- summary_weight %>% \n  mutate(across(everything(), round, 2)) %>%   # round to 3 decimal places\n  pivot_longer(1:30, names_to = \"Stats\", values_to = \"Values\")  # long format\n\nsummary_weight\n\n# A tibble: 30 × 2\n   Stats               Values\n   <chr>                <dbl>\n 1 dif_weight_N         25   \n 2 dif_weight_Min      -30   \n 3 dif_weight_Q1        20   \n 4 dif_weight_median    40   \n 5 dif_weight_Q3        70   \n 6 dif_weight_Max      103   \n 7 dif_weight_Mean      39.6 \n 8 dif_weight_Sd        32.3 \n 9 dif_weight_Skewness  -0.16\n10 dif_weight_Kurtosis  -0.08\n# … with 20 more rows\n\n\n\n\n\nweight %>% \n  dlookr::describe(dif_weight, birth_weight, discharge_weight) %>% \n  select(described_variables, n, mean, sd, p25, p50, p75, skewness, kurtosis) %>% \n  ungroup()\n\n# A tibble: 3 × 9\n  described_variables     n   mean    sd   p25   p50   p75 skewness kurtosis\n  <chr>               <int>  <dbl> <dbl> <dbl> <dbl> <dbl>    <dbl>    <dbl>\n1 dif_weight             25   39.6  32.3    20    40    70   -0.157  -0.0752\n2 birth_weight           25 3076.  248.   2960  3150  3210   -0.291  -0.935 \n3 discharge_weight       25 3036.  248.   2880  3100  3220   -0.219  -1.02  \n\n\n\n\n\n\n\nAs it was previously mentioned, the mean of the differences (39.64) is close to median (40). Moreover, both the skewness and the kurtosis are approximately zero indicating a symmetric and mesokurtic distribution for the weight differences.\nNormality test\nAdditionally, we can check the statistical test for normality of the differences.\n\n weight %>%\n    shapiro_test(dif_weight)\n\n# A tibble: 1 × 3\n  variable   statistic     p\n  <chr>          <dbl> <dbl>\n1 dif_weight     0.974 0.742\n\n\nThe Shapiro-Wilk test suggests that the weight differences are normally distributed (p=0.74 > 0.05)."
+  },
+  {
+    "objectID": "paired_t_test.html#run-the-paired-t-test",
+    "href": "paired_t_test.html#run-the-paired-t-test",
+    "title": "3  Paired t-test",
+    "section": "\n3.6 Run the paired t-test",
+    "text": "3.6 Run the paired t-test\nWe will perform a paired t-test to test the null hypothesis that the mean differences of weight equals to zero.\n\n\n\n\n\n\nPaired t-test\n\n\n\n\n\nBase R (1st way)\nBase R (2nd way)\nrstatix\n\n\n\nOur data are in a wide format. However, we are going to use only the dif_weight variable, inside the t.test():\n\nt.test(weight$dif_weight)\n\n\n    One Sample t-test\n\ndata:  weight$dif_weight\nt = 6.1428, df = 24, p-value = 2.401e-06\nalternative hypothesis: true mean is not equal to 0\n95 percent confidence interval:\n 26.32139 52.95861\nsample estimates:\nmean of x \n    39.64 \n\n\n\n\n\nt.test(weight$birth_weight, weight$discharge_weight, paired = T)\n\n\n    Paired t-test\n\ndata:  weight$birth_weight and weight$discharge_weight\nt = 6.1428, df = 24, p-value = 2.401e-06\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n 26.32139 52.95861\nsample estimates:\nmean difference \n          39.64 \n\n\n\n\n\nweight %>% \n  t_test(dif_weight ~ 1, detailed = T)\n\n# A tibble: 1 × 12\n  estimate .y.   group1 group2     n stati…¹      p    df conf.…² conf.…³ method\n*    <dbl> <chr> <chr>  <chr>  <int>   <dbl>  <dbl> <dbl>   <dbl>   <dbl> <chr> \n1     39.6 dif_… 1      null …    25    6.14 2.4e-6    24    26.3    53.0 T-test\n# … with 1 more variable: alternative <chr>, and abbreviated variable names\n#   ¹​statistic, ²​conf.low, ³​conf.high"
+  },
+  {
+    "objectID": "paired_t_test.html#present-the-results-in-a-summary-table",
+    "href": "paired_t_test.html#present-the-results-in-a-summary-table",
+    "title": "3  Paired t-test",
+    "section": "\n3.7 Present the results in a summary table",
+    "text": "3.7 Present the results in a summary table\n\nShow the codetb1 <- weight %>% \n  mutate(id = row_number()) %>% \n  select(-dif_weight) %>% \n  pivot_longer(!id, names_to = \"group\", values_to = \"weights\")\n\ngt_sum3 <- tb1 %>% \ntbl_summary(by = group, include = -id,\n            label = list(weights ~ \"weights (grams)\"),\n            statistic =  weights ~ \"{mean} ({sd})\") %>%\n  #add_difference(test = weights ~ \"paired.t.test\", group = id) %>%\n  add_p(test = weights ~ \"paired.t.test\", group = id) %>% \n  #modify_spanning_header(all_stat_cols() ~ \"**Weight**\") %>% \n  as_gt()\n  \ngt_sum3 \n\n\n\n\n\n\nCharacteristic\n      \nbirth_weight, N = 251\n\n      \ndischarge_weight, N = 251\n\n      \np-value2\n\n    \n\nweights (grams)\n3,076 (248)\n3,036 (248)\n<0.001\n\n\n\n\n1 Mean (SD)\n    \n\n\n2 Paired t-test\n    \n\n\n\n\n\nThere was a significant reduction in weight (39.6 g) after the discharge (p-value <0.001 that is lower than 0.05; reject \\(H_0\\)). Note that the 95% confidence interval (26.3 to 52.9) doesn’t include the null hypothesized value of 0. However, is this reduction of clinical importance?"
   }
 ]

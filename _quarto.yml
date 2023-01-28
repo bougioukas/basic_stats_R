@@ -13,7 +13,8 @@ book:
     - index.qmd
     - student_t_test.qmd
     - wmw_test.qmd
-    - paired_samples.qmd
+    - paired_t_test.qmd
+    - wilcoxon_test.qmd
     - anova.qmd
     - chi_square.qmd
     - references.qmd
