@@ -19,7 +19,7 @@ When we have finished this Chapter, we should be able to:
 ## Learning objectives
 
 -   Applying hypothesis testing
--   Compare two independent samples
+-   Compare two independent samples (Student's t-test)
 -   Interpret the results
 :::
 
@@ -27,7 +27,11 @@ When we have finished this Chapter, we should be able to:
 
 In an experiment designed to test the effectiveness of paroxetine for treating bipolar depression, the participants were randomly assigned into two groups (paroxetine Vs placebo). The researchers used the Hamilton Depression Rating Scale (HDRS) to measure the depression state of the participants and wanted to find out if the HDRS score is different in paroxetine group as compared to placebo group at the end of the experiment. The significance level $\alpha$ was set to 0.05.
 
-**Note:** A score of 0--7 in HDRS is generally accepted to be within the normal range, while a score of 20 or higher indicates at least moderate severity.
+**Note:** A score of 0--7 in [:HDRS](https://en.wikipedia.org/wiki/Hamilton_Rating_Scale_for_Depression) is generally accepted to be within the normal range, while a score of 20 or higher indicates at least moderate severity.
+
+
+
+
 
 ::: {.callout-note icon="false"}
 ## Null hypothesis and alternative hypothesis
@@ -117,9 +121,9 @@ ggplot(depression, aes(x=intervention, y=HDRS)) +
   geom_boxplot(width = 0.14, outlier.shape = NA, alpha = 0.5) +
   geom_point(position = position_jitter(width = 0.05), 
              size = 1.2, alpha = 0.6) +
-  scale_fill_brewer(palette = "Spectral") +
+  ggsci::scale_fill_jco() +
   theme_classic(base_size = 14) +
-  theme(legend.position="none",
+  theme(legend.position="none", 
         axis.text = element_text(size = 14))
 ```
 
@@ -132,7 +136,7 @@ The above figure shows that the data are close to symmetry and the assumption of
 The HDRS summary statistics for each group are:
 
 ::: {#exercise-joins .callout-tip}
-## Summary statistics
+## Summary statistics by group
 
 ::: panel-tabset
 ## dplyr
@@ -246,7 +250,7 @@ depression %>%
 
 The p-value = 0.16 is greater than 0.05. There is **no evidence** of a significant difference in mean HDRS between the two groups (failed to reject $H_0$). The difference between means (20.33 - 21.49) equals to -1.16 units of the HDRS and note that the 95% confidence interval of the difference in means (-2.78 to 0.47) **includes** the hypothesized null value of 0. Based on these results, there is not evidence that paroxetine is effective as a treatment for bipolar depression.
 
-Note that the paroxetine group (n= 33) has 33-1=32 degrees of freedom and the placebo sample (n= 43) has 43-1=42 df, so we have 32 + 42=74 df in total. Another way of thinking of this is that the complete sample size is 76, and we have estimated two parameters from the data (the two means), so we have 76-2 = 74 df.
+Note that the paroxetine group (n=33) has df (degrees of freedom) = 33-1 = 32  and the placebo sample (n= 43) has df = 43-1 = 42 , so we have df = 32 + 42 = 74  in total. Another way of thinking of this is that the complete sample size is 76, and we have estimated two parameters from the data (the two means), so we have df = 76-2 = 74 .
 
 The Student t-test for two independent samples does not have any restrictions on $n_1$ and $n_2$ ---**they can be equal or unequal**. However, equal samples are preferred because when a total of 2n subjects are available, their equal division among the groups maximizes the power to detect a specified difference.
 
@@ -261,6 +265,8 @@ If the variance is different between the two groups then the degrees of freedom 
 **Present the results in a summary table**
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 
 gt_sum1 <- depression %>% 
   tbl_summary(

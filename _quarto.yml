@@ -23,6 +23,7 @@ book:
 bibliography: references.bib
 
 filters:
+  - nutshell
   - lightbox
 lightbox: auto
 
