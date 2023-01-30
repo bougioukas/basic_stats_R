@@ -6,6 +6,7 @@ The Wilcoxon-Mann-Whitney (WMW) test (sometimes called Mann-Whitney U test or Wi
 #| include: false
 
 library(rstatix)
+library(exactRankTests)
 library(PupillometryR)
 library(gtsummary)
 
@@ -93,7 +94,7 @@ The distributions can be explored visually with appropriate plots. Additionally,
 
  
 
-**Graphs**
+**Graph**
 
 We can visualize the distribution of `b_TG` for the two groups:
 
@@ -193,6 +194,16 @@ The difference in medians between the two groups can be tested using a rank test
 
 ```{r}
 wilcox.test(b_TG ~ status, conf.int = T, data = tg)
+```
+
+**Historical Note:** As you can see, in R the Mann-Whitney statistic (symbolized as W) is calculated with the `wilcox.test()` function and it is called Wilcoxon rank-sum test. What is the reason for this? Henry Mann and Donald Whitney (1947) reported in their article that the test was first proposed by Frank Wilcoxon (1945) and they gave their version for the test. So the right would be to call this test Wilcoxon-Mann-Whitney (WMW) test.
+
+## exactRankTests
+
+Although a small number of ties should not have a serious impact on our results, in case of ties we can use the `wilcox.exact()` function from the package {exactRankTests}:
+
+```{r}
+wilcox.exact(b_TG ~ status, conf.int = T, data = tg)
 ```
 
 ## rstatix

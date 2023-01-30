@@ -13,13 +13,11 @@ Examples of paired study designs are:
 #| include: false
 
 library(rstatix)
-library(PupillometryR)
 library(gtsummary)
 
 library(here)
 library(tidyverse)
 ```
-
 
 When we have finished this Chapter, we should be able to:
 
@@ -27,10 +25,9 @@ When we have finished this Chapter, we should be able to:
 ## Learning objectives
 
 -   Applying hypothesis testing
--   Compare two independent samples applying paired t-test
+-   Compare two dependent (related) samples applying paired t-test
 -   Interpret the results
 :::
-
 
 ## Research question
 
@@ -51,13 +48,11 @@ We need to load the following packages:
 #| eval: false
 
 library(rstatix)
-library(PupillometryR)
 library(gtsummary)
 
 library(here)
 library(tidyverse)
 ```
-
 
 ## Preraring the data
 
@@ -75,7 +70,6 @@ weight <- weight %>%
   mutate(dif_weight = birth_weight - discharge_weight)
 ```
 
-
 ```{r}
 #| echo: false
 #| label: fig-weight
@@ -89,14 +83,11 @@ DT::datatable(
 
 ```
 
-
 We inspect the data:
 
 ```{r}
 glimpse(weight) 
 ```
-
-
 
 ## Assumptions
 
@@ -106,15 +97,14 @@ glimpse(weight)
 The differences are **normally** distributed.
 :::
 
-
 ## Explore the characteristics of distribution of differences
 
-The distribution of the differences can be explored with appropriate plots and summary statistics. 
+The distribution of the differences can be explored with appropriate plots and summary statistics.
 
 
-**Visualization of the distribution of differences**
+**Graph**
 
-We can explore the data visually for symmetry with a density plot (a smoothed version of the histogram):
+We can explore the distribution of differences visually for symmetry with a density plot (a smoothed version of the histogram):
 
 ```{r}
 #| warning: false
@@ -139,7 +129,7 @@ The above figure shows that the data are following an approximately symmetrical 
 
 **Summary statistics**
 
-Summary statistics can also be inspected for the variables.
+Summary statistics can also be calculated for the variables.
 
 ::: {#exercise-joins .callout-tip}
 ## Summary statistics
@@ -190,7 +180,6 @@ weight %>%
 
 As it was previously mentioned, the mean of the differences (39.64) is close to median (40). Moreover, both the skewness and the kurtosis are approximately zero indicating a symmetric and mesokurtic distribution for the weight differences.
 
-
 **Normality test**
 
 Additionally, we can check the statistical test for normality of the differences.
@@ -202,26 +191,21 @@ Additionally, we can check the statistical test for normality of the differences
 
 The Shapiro-Wilk test suggests that the weight differences are normally distributed (p=0.74 \> 0.05).
 
-
-
 ## Run the paired t-test
 
 We will perform a paired t-test to test the null hypothesis that the mean differences of weight equals to zero.
 
-
 ::: {#exercise-joins .callout-tip}
 ## Paired t-test
 
-
-
 ::: panel-tabset
 ## Base R (1st way)
+
 Our data are in a wide format. However, we are going to use only the `dif_weight` variable, inside the `t.test()`:
 
 ```{r}
 t.test(weight$dif_weight)
 ```
-
 
 ## Base R (2nd way)
 
@@ -235,10 +219,8 @@ t.test(weight$birth_weight, weight$discharge_weight, paired = T)
 weight %>% 
   t_test(dif_weight ~ 1, detailed = T)
 ```
-
 :::
 :::
-
 
 ## Present the results in a summary table
 
@@ -264,8 +246,4 @@ gt_sum3
 
 ```
 
-
 There was a significant reduction in weight (39.6 g) after the discharge (p-value \<0.001 that is lower than 0.05; reject $H_0$). Note that the 95% confidence interval (26.3 to 52.9) doesn't include the null hypothesized value of 0. However, is this reduction of clinical importance?
-
-
-
