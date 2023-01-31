@@ -1,0 +1,45 @@
+# Fisher's exact test {#sec-fisher_exact}
+
+If we want to see whether there's an association between two categorical variables and the assumption for the **expected frequencies** in the contingency table is **not fulfilled**, an alternative test to the chi-square test can be used. 
+
+Fisher came up with a method for computing the exact probability of the chi-square statistic that is accurate when sample sizes are small. This method is called **Fisher’s exact test** even though it’s not so much a test as a way of computing the exact probability of the chi-square statistic. This procedure is normally used on `2×2` contingency tables and with small samples. However, it can be used on larger contingency tables and with large samples, but in this case it becomes computationally intensive.
+
+
+```{r}
+#| include: false
+
+library(rstatix)
+library(ggsci)
+
+library(patchwork)
+library(here)
+library(tidyverse)
+```
+
+When we have finished this Chapter, we should be able to:
+
+::: {.callout-caution icon="false"}
+## Learning objectives
+
+-   Applying hypothesis testing
+-   Investigate the association between two categorical variables using the Fisher's exact test
+-   Interpret the results
+:::
+
+## Research question and Hypothesis Testing
+
+We consider the data in *hemophilia* dataset. In a survey there are two treatment regimens studied for controlling bleeding in 25 patients with hemophilia undergoing surgery. We want to investigate if there is an association between the treatment regimen (treatment A or B) and the bleeding complications (no or yes). The null hypothesis ($H_0$) is that the bleeding complications are independent from the treatment regimen, while the alternative ($H_1$) is that are dependent.
+
+
+::: {.callout-note icon="false"}
+## Null hypothesis and alternative hypothesis
+
+-   $H_0$: There is no association between the two categorical variables (they are independent)
+-   $H_1$: There is association between the two categorical variables (they are dependent)
+:::
+
+**NOTE:** In practice, the null hypothesis of independence, for our particular question, is no difference in the proportion of patients  with ulcerated  compared with non-ulcerated tumors ($p_{ulcerated} = p_{non-ucerated}$).
+
+
+
+

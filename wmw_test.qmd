@@ -163,7 +163,7 @@ tg %>%
 :::
 :::
 
-The means are not very close to the medians (31.8 vs 29.2 and 13.5 vs 11.0). Moreover, both the skewness and the (excess) kurtosis for the non-diabetic group falls outside of the acceptable range of \[-1, 1\] indicating right-skewed and leptokurtic distribution.
+The means are not very close to the medians (31.8 vs 29.2 and 13.5 vs 11.0). Moreover, both the skewness (1.81) and the (excess) kurtosis (3.47) for the non-diabetic group falls outside of the acceptable range of \[-1, 1\] indicating right-skewed and leptokurtic distribution.
 
  
 

@@ -16,7 +16,10 @@ book:
     - paired_t_test.qmd
     - wilcoxon_test.qmd
     - anova.qmd
+    - kruskal_wallis.qmd
     - chi_square.qmd
+    - fisher_exact.qmd
+    - mcnemar.qmd
     - references.qmd
     
   page-footer: 

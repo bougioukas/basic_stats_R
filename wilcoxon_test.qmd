@@ -1,8 +1,6 @@
 # Wilcoxon Signed-Rank test {#sec-wilcoxon_test}
 
-Wilcoxon Signed-Rank test (Wilcoxon test) is a non-parametric test that can be conducted to compare paired samples when the differences are not normally distributed. It is based on the signs of the differences and the magnitude of the rank of the differences between pairs of measurements, rather than the actual values. The null hypothesis is that there is no tendency for values under each paired variable to be higher or lower.
-It is often thought of as a test for small samples. However, if the sample is smaller than 6, then statistical significance is impossible.
-
+Wilcoxon Signed-Rank test (Wilcoxon test) is a non-parametric test that can be conducted to compare paired samples when the differences are not normally distributed. It is based on the signs of the differences and the magnitude of the rank of the differences between pairs of measurements, rather than the actual values. The null hypothesis is that there is no tendency for values under each paired variable to be higher or lower. It is often thought of as a test for small samples. However, if the sample is smaller than 6, then statistical significance is impossible.
 
 ```{r}
 #| include: false
@@ -25,23 +23,19 @@ When we have finished this Chapter, we should be able to:
 -   Interpret the results
 :::
 
-
-
 ## Research question
 
 The dataset *eyes* contains thickness of the cornea (in microns) in patients with one eye affected by glaucoma; the other eye is unaffected. We investigate if there is evidence for difference in corneal thickness in affected and unaffected eyes.
 
-
 ::: {.callout-note icon="false"}
 ## Null hypothesis and alternative hypothesis
 
--   $H_0$: The distribution of the differences in thickness of the cornea is symmetrical about zero 
+-   $H_0$: The distribution of the differences in thickness of the cornea is symmetrical about zero
 
 -   $H_1$: The distribution of the differences in thickness of the cornea is not symmetrical about zero
 :::
 
 **NOTE:** If we are testing the null hypothesis that the **median** of the paired rank differences is zero, then the paired rank differences must all come from a symmetrical distribution. Note that we do not have to assume that the distributions of the original populations are symmetrical - two very positively skewed distributions that differ only by location will produce a set of paired rank differences that are symmetrical.
-
 
 ## Packages we need
 
@@ -57,7 +51,6 @@ library(here)
 library(tidyverse)
 ```
 
-
 ## Preraring the data
 
 We import the data *eyes* in R:
@@ -67,14 +60,12 @@ library(readxl)
 eyes <- read_excel(here("data", "eyes.xlsx"))
 ```
 
-
 We calculate the differences using the function `mutate()`:
 
 ```{r}
 eyes <- eyes %>%
   mutate(dif_thickness = affected_eye - unaffected_eye)
 ```
-
 
 ```{r}
 #| echo: false
@@ -89,26 +80,25 @@ DT::datatable(
 
 ```
 
-
 We inspect the data:
 
 ```{r}
 glimpse(eyes) 
 ```
 
-
-
 ## Explore the characteristics of distribution of differences
 
-The distributions of differences can be explored with appropriate plots and summary statistics. 
-
-
+The distributions of differences can be explored with appropriate plots and summary statistics.
 
 **Graph**
 
 We can explore the data visually for symmetry with a density plot.
 
-```{r, fig.width=4.5, fig.height=3.0, fig.align="center"}
+```{r}
+#| warning: false
+#| label: fig-hist2
+#| fig-cap: Density plot of the thickness differences.
+
 eyes %>%
   ggplot(aes(x = dif_thickness)) +
   geom_density(fill = "#76B7B2", color="black", alpha = 0.2) +
@@ -121,8 +111,6 @@ eyes %>%
   theme(plot.title.position = "plot")
 ```
 
-
-
 **Summary statistics**
 
 Summary statistics can also be calculated for the variables.
@@ -134,7 +122,6 @@ Summary statistics can also be calculated for the variables.
 ## dplyr
 
 We can utilize the `across()` function to obtain the results across the three variables simultaneously:
-
 
 ```{r}
 summary_eyes <- eyes %>%
@@ -175,14 +162,9 @@ eyes %>%
 :::
 :::
 
-
 The differences seems to come from a population with a symmetrical distribution and the skewness is close to zero (0.03). However, the (excess) kurtosis equals to -1.37 (platykurtic) and the sample size is small. Therefore, the data may not follow the normal distribution.
 
-
-
-**Normality test**
-We can use Shapiro-Wilk test to check for normality of the differences. However, here, normality test is not helpful because of the small sample (the test is under-powered).
-
+**Normality test** We can use Shapiro-Wilk test to check for normality of the differences. However, here, normality test is not helpful because of the small sample (the test is under-powered).
 
 ```{r}
  eyes %>%
@@ -190,9 +172,6 @@ We can use Shapiro-Wilk test to check for normality of the differences. However,
 ```
 
 The Shapiro-Wilk test suggests that the weight differences are normally distributed (p=0.65 \> 0.05).
-
-
-
 
 ## Run the Wilcoxon Signed-Rank test
 
@@ -210,7 +189,6 @@ The differences between the two measurements can be tested using a rank test suc
 wilcox.test(eyes$dif_thickness)
 ```
 
-
 ## Base R (2nd way)
 
 ```{r}
@@ -219,21 +197,16 @@ wilcox.test(eyes$dif_thickness)
 wilcox.test(eyes$affected_eye, eyes$unaffected_eye, paired = TRUE)
 ```
 
-
 ## rstatix
 
 ```{r}
  eyes %>%
      wilcox_test(dif_thickness ~ 1)
 ```
-
 :::
 :::
-
 
 The result is not significant (p = 0.31 \> 0.05). However, we can't be certain that there is not difference in corneal thickness in affected and unaffected eyes because the sample size is very small.
-
-
 
 ## Present the results in a summary table
 
@@ -255,6 +228,5 @@ tbl_summary(by = groups, include = -id,
   
 gt_sum4 
 ```
-
 
 There is not evidence from this small study with patients of glaucoma that the thickness of the cornea in affected eyes, median = 459 $\mu{m}$ (IQR: 436.5, 478.5) $\mu{m}$, differs from unaffected eyes 470 $\mu{m}$ (442, 479.5) (p=0.30 \>0.05).

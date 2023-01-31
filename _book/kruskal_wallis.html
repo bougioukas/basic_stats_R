@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.251">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Practical Statistics in Medicine with R - 5&nbsp; One-way ANOVA test</title>
+<title>Practical Statistics in Medicine with R - 6&nbsp; Kruskal-Wallis test</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -89,8 +89,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./kruskal_wallis.html" rel="next">
-<link href="./wilcoxon_test.html" rel="prev">
+<link href="./chi_square.html" rel="next">
+<link href="./anova.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -131,7 +131,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">One-way ANOVA test</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Kruskal-Wallis test</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -180,12 +180,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./anova.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">One-way ANOVA test</span></a>
+  <a href="./anova.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">One-way ANOVA test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./kruskal_wallis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Kruskal-Wallis test</span></a>
+  <a href="./kruskal_wallis.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Kruskal-Wallis test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -214,18 +214,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#research-question-and-hypothesis-testing" id="toc-research-question-and-hypothesis-testing" class="nav-link active" data-scroll-target="#research-question-and-hypothesis-testing"><span class="toc-section-number">5.1</span>  Research question and Hypothesis Testing</a></li>
-  <li><a href="#packages-we-need" id="toc-packages-we-need" class="nav-link" data-scroll-target="#packages-we-need"><span class="toc-section-number">5.2</span>  Packages we need</a></li>
-  <li><a href="#preraring-the-data" id="toc-preraring-the-data" class="nav-link" data-scroll-target="#preraring-the-data"><span class="toc-section-number">5.3</span>  Preraring the data</a></li>
-  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="toc-section-number">5.4</span>  Assumptions</a></li>
-  <li><a href="#run-the-one-way-anova-test" id="toc-run-the-one-way-anova-test" class="nav-link" data-scroll-target="#run-the-one-way-anova-test"><span class="toc-section-number">5.5</span>  Run the one-way ANOVA test</a></li>
-  <li><a href="#post-hoc-tests" id="toc-post-hoc-tests" class="nav-link" data-scroll-target="#post-hoc-tests"><span class="toc-section-number">5.6</span>  Post-hoc tests</a></li>
-  <li><a href="#welch-one-way-anova" id="toc-welch-one-way-anova" class="nav-link" data-scroll-target="#welch-one-way-anova"><span class="toc-section-number">5.7</span>  Welch one-way ANOVA</a></li>
+<li><a href="#research-question-and-hypothesis-testing" id="toc-research-question-and-hypothesis-testing" class="nav-link active" data-scroll-target="#research-question-and-hypothesis-testing"><span class="toc-section-number">6.1</span>  Research question and Hypothesis Testing</a></li>
+  <li><a href="#packages-we-need" id="toc-packages-we-need" class="nav-link" data-scroll-target="#packages-we-need"><span class="toc-section-number">6.2</span>  Packages we need</a></li>
+  <li><a href="#preraring-the-data" id="toc-preraring-the-data" class="nav-link" data-scroll-target="#preraring-the-data"><span class="toc-section-number">6.3</span>  Preraring the data</a></li>
+  <li><a href="#explore-the-characteristics-of-distribution-for-each-group-and-check-for-normality" id="toc-explore-the-characteristics-of-distribution-for-each-group-and-check-for-normality" class="nav-link" data-scroll-target="#explore-the-characteristics-of-distribution-for-each-group-and-check-for-normality"><span class="toc-section-number">6.4</span>  Explore the characteristics of distribution for each group and check for normality</a></li>
+  <li><a href="#run-the-kruskal-wallis-test" id="toc-run-the-kruskal-wallis-test" class="nav-link" data-scroll-target="#run-the-kruskal-wallis-test"><span class="toc-section-number">6.5</span>  Run the Kruskal-Wallis test</a></li>
+  <li><a href="#post-hoc-tests" id="toc-post-hoc-tests" class="nav-link" data-scroll-target="#post-hoc-tests"><span class="toc-section-number">6.6</span>  Post-hoc tests</a></li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-anova" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">One-way ANOVA test</span></span></h1>
+<h1 class="title"><span id="sec-kruskal_wallis" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Kruskal-Wallis test</span></span></h1>
 </div>
 
 
@@ -237,9 +236,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><p>One-way analysis of variance, usually referred to as <strong>one-way ANOVA</strong>, is a statistical test used when we want to compare several means. We may think of it as an extension of Student’s t-test to the case of more than two samples.</p>
-<p>Although, this test can detect a difference between several groups it does not inform about which groups are different from the others. At first sight we might clarify the question by comparing all groups in pairs with multiple t-tests. However, that procedure may lead us to the wrong conclusions (known as multiple comparisons problem). Why is this procedure inappropriate? Quite simply, because we would be wrongly testing the null hypothesis. Each comparison one conducts increases the likelihood of committing at least one Type I error within a set of comparisons (<strong>Famillywise Type I error rate</strong>).</p>
-<p>This is the reason why, after an ANOVA test concluding on a difference between group means, we should not just compare all possible pairs of groups with t-tests. Instead we perform statistical tests that take into account the number of planned comparisons (<strong>post hoc tests</strong>).</p>
+</header><p>The Kruskal-Wallis test is a rank-based non-parametric alternative to the one-way ANOVA and an extension of the Wilcoxon-Mann-Whitney test to allow the comparison of more than two independent groups. It’s usually recommended when the assumptions of one-way ANOVA test are not met (non-normal distributions) or with small samples.</p>
 <p>When we have finished this Chapter, we should be able to:</p>
 <div class="callout-caution callout callout-style-default no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -253,15 +250,15 @@ Learning objectives
 <div class="callout-body-container callout-body">
 <ul>
 <li>Applying hypothesis testing</li>
-<li>Compare more than two independent samples applying ANOVA</li>
+<li>Compare more than two independent samples applying Kruskal-Wallis test</li>
 <li>Perform post-hoc tests</li>
 <li>Interpret the results</li>
 </ul>
 </div>
 </div>
-<section id="research-question-and-hypothesis-testing" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="research-question-and-hypothesis-testing">
-<span class="header-section-number">5.1</span> Research question and Hypothesis Testing</h2>
-<p>We consider the data in <em>dataDWL</em> dataset. In this example we explore the variations between weight loss according to four different types of diet. The question that may be asked is: does the average weight loss differ according to the diet?</p>
+<section id="research-question-and-hypothesis-testing" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="research-question-and-hypothesis-testing">
+<span class="header-section-number">6.1</span> Research question and Hypothesis Testing</h2>
+<p>We consider the data in <em>dataVO2</em> dataset. We wish to compare the VO2max in three different sports (runners, rowers, and triathletes).</p>
 <div class="callout-note callout callout-style-default no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -274,14 +271,15 @@ Null hypothesis and alternative hypothesis
 <div class="callout-body-container callout-body">
 <ul>
 <li>
-<span class="math inline">\(H_0\)</span>: all group means are equal (the means of weight loss in the four diets are equal; <span class="math inline">\(\mu_{1} = \mu_{2} = \mu_{3} = \mu_{4}\)</span>)</li>
+<span class="math inline">\(H_0\)</span>: the distribution of VO2max is the same in all groups (the medians of VO2max in the three sports are the same)</li>
 <li>
-<span class="math inline">\(H_1\)</span>: at least one group mean differs from the others (there is at least one diet with mean weight loss different from the others)</li>
+<span class="math inline">\(H_1\)</span>: there is at least one group with VO2max distribution different from the others (there is at least one sport with median VO2max different from the others)</li>
 </ul>
 </div>
 </div>
-</section><section id="packages-we-need" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="packages-we-need">
-<span class="header-section-number">5.2</span> Packages we need</h2>
+<p><strong>NOTE:</strong> The Kruskal-Wallis test should be regarded as a test of dominance between distributions comparing the mean ranks. The null hypothesis is that the observations from one group do not tend to have a higher or lower ranking than observations from the other groups. This test <strong>does not</strong> test the medians of the data as is commonly thought, it tests the <strong>whole distribution</strong>. However, if the distributions of the two groups have <strong>similar shapes</strong>, the Kruskal-Wallis test can be used to determine whether there are differences in the medians in the two groups. In practice, we use the medians to present the results.</p>
+</section><section id="packages-we-need" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="packages-we-need">
+<span class="header-section-number">6.2</span> Packages we need</h2>
 <p>We need to load the following packages:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op">)</span></span>
@@ -291,68 +289,52 @@ Null hypothesis and alternative hypothesis
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="preraring-the-data" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="preraring-the-data">
-<span class="header-section-number">5.3</span> Preraring the data</h2>
-<p>We import the data <em>dataDWL</em> in R:</p>
+</section><section id="preraring-the-data" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="preraring-the-data">
+<span class="header-section-number">6.3</span> Preraring the data</h2>
+<p>We import the data <em>dataVO2</em> in R:</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span>
-<span><span class="va">dataDWL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"dataDWL.xlsx"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">dataVO2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"dataVO2.xlsx"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div id="fig-dataDWL" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><div id="htmlwidget-2e75520c7b8674b7889c" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2e75520c7b8674b7889c">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60"],[9.9,9.6,8,4.9,10.2,9,9.8,10.8,6.2,8.3,12.9,11.8,5.5,9.3,11.5,9.5,3.8,11.5,9.2,4.5,8.9,5.2,8.2,7.5,12.7,10,10,11.7,8.2,12.7,10.8,10.2,14.4,8.7,12.2,12.9,13,15.1,14.5,13,12.5,10.8,10.5,12.2,10.9,13.2,9.5,10.6,9.9,9.5,10.5,11.8,5.8,10,11.6,11.8,7.1,9.4,13.7,13.7],["A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>WeightLoss<\/th>\n      <th>Diet<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-center","targets":"_all"},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;5.1: Table with data from “dataDWL” file.</figcaption><p></p>
+<div id="fig-dataVO2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><div id="htmlwidget-4af684fbad6b62677100" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4af684fbad6b62677100">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"],["runners","runners","runners","runners","runners","runners","runners","runners","runners","runners","rowers","rowers","rowers","rowers","rowers","rowers","rowers","rowers","rowers","rowers","triathletes","triathletes","triathletes","triathletes","triathletes","triathletes","triathletes","triathletes","triathletes","triathletes"],[73.8,79.9,75.5,72.5,82.2,78.3,77.9,76.5,72.3,80.2,71.1,67.9,67.1,73.8,74.7,74.4,69.9,67.1,67.8,69.2,76.6,63.9,64.3,72.6,67.8,63.2,65.8,63.4,65,67]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>sport<\/th>\n      <th>VO2max<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-center","targets":"_all"},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;6.1: Table with data from “dataVO2” file.</figcaption><p></p>
 </figure>
 </div>
 </div>
 <p>We inspect the data and the type of variables:</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">dataDWL</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">dataVO2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 60
+<pre><code>Rows: 30
 Columns: 2
-$ WeightLoss &lt;dbl&gt; 9.9, 9.6, 8.0, 4.9, 10.2, 9.0, 9.8, 10.8, 6.2, 8.3, 12.9, 1…
-$ Diet       &lt;chr&gt; "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A",…</code></pre>
+$ sport  &lt;chr&gt; "runners", "runners", "runners", "runners", "runners", "runners…
+$ VO2max &lt;dbl&gt; 73.8, 79.9, 75.5, 72.5, 82.2, 78.3, 77.9, 76.5, 72.3, 80.2, 71.…</code></pre>
 </div>
 </div>
-<p>The dataset <em>dataDWL</em> has 60 participants and includes two variables. The numeric (<code>&lt;dbl&gt;</code>) <code>WeightLoss</code> variable and the character (<code>&lt;chr&gt;</code>) <code>Diet</code> variable (with levels “A”, “B”, “C” and “D”) which should be converted to a factor variable using the <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> function as follows:</p>
+<p>The dataset <em>dataVO2</em> has 30 participants and two variables. The numeric <code>VO2max</code> variable and the <code>sport</code> variable (with levels “roweres”, “runners”, and “triathletes”) which should be converted to a factor variable using the <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> function as follows:</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dataDWL</span> <span class="op">&lt;-</span> <span class="va">dataDWL</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Diet <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Diet</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">dataDWL</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dataVO2</span> <span class="op">&lt;-</span> <span class="va">dataVO2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>sport <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">sport</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">dataVO2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 60
+<pre><code>Rows: 30
 Columns: 2
-$ WeightLoss &lt;dbl&gt; 9.9, 9.6, 8.0, 4.9, 10.2, 9.0, 9.8, 10.8, 6.2, 8.3, 12.9, 1…
-$ Diet       &lt;fct&gt; A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, B, B, B, B, B,…</code></pre>
+$ sport  &lt;fct&gt; runners, runners, runners, runners, runners, runners, runners, …
+$ VO2max &lt;dbl&gt; 73.8, 79.9, 75.5, 72.5, 82.2, 78.3, 77.9, 76.5, 72.3, 80.2, 71.…</code></pre>
 </div>
 </div>
-</section><section id="assumptions" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="assumptions">
-<span class="header-section-number">5.4</span> Assumptions</h2>
-<div class="callout-note callout callout-style-default no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Check if the following assumptions are satisfied
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="A">
-<li>The data are <strong>normally</strong> distributed in all groups</li>
-<li>The data in all groups have similar <strong>variance</strong> (also named as homogeneity of variance or homoscedasticity)</li>
-</ol>
-</div>
-</div>
-<p><strong>A. Explore the characteristics of distribution for each group and check for normality</strong></p>
+</section><section id="explore-the-characteristics-of-distribution-for-each-group-and-check-for-normality" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="explore-the-characteristics-of-distribution-for-each-group-and-check-for-normality">
+<span class="header-section-number">6.4</span> Explore the characteristics of distribution for each group and check for normality</h2>
 <p>The distributions can be explored visually with appropriate plots. Additionally, summary statistics and significance tests to check for normality (e.g., Shapiro-Wilk test) can be used.</p>
-<p><strong>Graphs</strong></p>
-<p>We can visualize the distribution of <code>WeightLoss</code> for the four <code>Diet</code> groups:</p>
+<p><strong>Graph</strong></p>
+<p>We can visualize the distribution of <code>VO2max</code> for the three sport groups:</p>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dataDWL</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Diet</span>, y<span class="op">=</span><span class="va">WeightLoss</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/PupillometryR/man/geom_flat_violin.html">geom_flat_violin</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">Diet</span><span class="op">)</span>, scale <span class="op">=</span> <span class="st">"count"</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dataVO2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">sport</span>, y<span class="op">=</span><span class="va">VO2max</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/PupillometryR/man/geom_flat_violin.html">geom_flat_violin</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">sport</span><span class="op">)</span>, scale <span class="op">=</span> <span class="st">"count"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.14</span>, outlier.shape <span class="op">=</span> <span class="cn">NA</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_jitter.html">position_jitter</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span>, </span>
 <span>             size <span class="op">=</span> <span class="fl">1.2</span>, alpha <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span> <span class="op">+</span></span>
@@ -361,16 +343,16 @@ Check if the following assumptions are satisfied
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"none"</span>, </span>
 <span>        axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">14</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-violin_plot3" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="anova_files/figure-html/fig-violin_plot3-1.png" class="lightbox" title="Rain cloud plot." data-gallery="quarto-lightbox-gallery-1"><img src="anova_files/figure-html/fig-violin_plot3-1.png" class="img-fluid figure-img" width="672"></a></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5.2: Rain cloud plot.</figcaption><p></p>
+<div id="fig-violin_plot5" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><a href="kruskal_wallis_files/figure-html/fig-violin_plot5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Rain cloud plot."><img src="kruskal_wallis_files/figure-html/fig-violin_plot5-1.png" class="img-fluid figure-img" width="672"></a></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6.2: Rain cloud plot.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>The above figure shows that the data are close to symmetry and the assumption of a normal distribution is reasonable. Additionally, we can observe that the largest weight loss seems to have been achieved by the participants in <em>C</em> diet.</p>
+<p>The above figure shows that the data in triathletes group have some outliers. Additionally, we can observe that the runners group seems to have the largest VO2max.</p>
 <p><strong>Summary statistics</strong></p>
-<p>The <code>WeightLoss</code> summary statistics for each diet group are:</p>
+<p>The <code>VO2max</code> summary statistics for each sport group are:</p>
 <div id="exercise-joins" class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -389,49 +371,47 @@ Summary statistics by group
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">DWL_summary</span> <span class="op">&lt;-</span> <span class="va">dataDWL</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Diet</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">VO2_summary</span> <span class="op">&lt;-</span> <span class="va">dataVO2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sport</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
 <span>    n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">WeightLoss</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>    q1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">WeightLoss</span>, <span class="fl">0.25</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>    median <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">WeightLoss</span>, <span class="fl">0.5</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>    q3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">WeightLoss</span>, <span class="fl">0.75</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>    max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">WeightLoss</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>    mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">WeightLoss</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>    sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">WeightLoss</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>    skewness <span class="op">=</span> <span class="fu">EnvStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">WeightLoss</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>    kurtosis<span class="op">=</span> <span class="fu">EnvStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/kurtosis.html">kurtosis</a></span><span class="op">(</span><span class="va">WeightLoss</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>    min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">VO2max</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    q1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">VO2max</span>, <span class="fl">0.25</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    median <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">VO2max</span>, <span class="fl">0.5</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    q3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">VO2max</span>, <span class="fl">0.75</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">VO2max</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">VO2max</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">VO2max</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    skewness <span class="op">=</span> <span class="fu">EnvStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">VO2max</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    kurtosis<span class="op">=</span> <span class="fu">EnvStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/kurtosis.html">kurtosis</a></span><span class="op">(</span><span class="va">VO2max</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">DWL_summary</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">VO2_summary</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 11
-  Diet      n   min    q1 median    q3   max  mean    sd skewness kurtosis
-  &lt;fct&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1 A        15   4.9  8.15    9.6  10.5  12.9  9.18  2.30  -0.471    -0.302
-2 B        15   3.8  7.85    9.2  10.8  12.7  8.91  2.78  -0.467    -0.515
-3 C        15   8.7 10.8    12.2  13    15.1 12.1   1.79  -0.0451   -0.530
-4 D        15   5.8  9.5    10.5  11.8  13.7 10.5   2.23  -0.475     0.229</code></pre>
+<pre><code># A tibble: 3 × 11
+  sport           n   min    q1 median    q3   max  mean    sd skewness kurtosis
+  &lt;fct&gt;       &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 rowers         10  67.1  67.8   69.6  73.1  74.7  70.3  3.04  0.502      -1.53
+2 runners        10  72.3  74.2   77.2  79.5  82.2  76.9  3.39 -0.00950    -1.16
+3 triathletes    10  63.2  64     65.4  67.6  76.6  67.0  4.40  1.51        1.60</code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dataDWL</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Diet</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu">dlookr</span><span class="fu">::</span><span class="fu"><a href="https://choonghyunryu.github.io/dlookr/reference/describe.data.frame.html">describe</a></span><span class="op">(</span><span class="va">WeightLoss</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">described_variables</span>,  <span class="va">Diet</span>, <span class="va">n</span>, <span class="va">mean</span>, <span class="va">sd</span>, <span class="va">p25</span>, <span class="va">p50</span>, <span class="va">p75</span>, <span class="va">skewness</span>, <span class="va">kurtosis</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dataVO2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sport</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">dlookr</span><span class="fu">::</span><span class="fu"><a href="https://choonghyunryu.github.io/dlookr/reference/describe.data.frame.html">describe</a></span><span class="op">(</span><span class="va">VO2max</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">described_variables</span>,  <span class="va">sport</span>, <span class="va">n</span>, <span class="va">mean</span>, <span class="va">sd</span>, <span class="va">p25</span>, <span class="va">p50</span>, <span class="va">p75</span>, <span class="va">skewness</span>, <span class="va">kurtosis</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 10
-  described_variables Diet      n  mean    sd   p25   p50   p75 skewness kurto…¹
+<pre><code># A tibble: 3 × 10
+  described_variables sport     n  mean    sd   p25   p50   p75 skewness kurto…¹
   &lt;chr&gt;               &lt;fct&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-1 WeightLoss          A        15  9.18  2.30  8.15   9.6  10.5  -0.471   -0.302
-2 WeightLoss          B        15  8.91  2.78  7.85   9.2  10.8  -0.467   -0.515
-3 WeightLoss          C        15 12.1   1.79 10.8   12.2  13    -0.0451  -0.530
-4 WeightLoss          D        15 10.5   2.23  9.5   10.5  11.8  -0.475    0.229
+1 VO2max              rowe…    10  70.3  3.04  67.8  69.6  73.1  0.502     -1.53
+2 VO2max              runn…    10  76.9  3.39  74.2  77.2  79.5 -0.00950   -1.16
+3 VO2max              tria…    10  67.0  4.40  64    65.4  67.6  1.51       1.60
 # … with abbreviated variable name ¹​kurtosis</code></pre>
 </div>
 </div>
@@ -440,49 +420,35 @@ Summary statistics by group
 </div>
 </div>
 </div>
-<p>The means are close to medians and the standard deviations are also similar. Moreover, both skewness and (excess) kurtosis falls into the acceptable range of [-1, 1] indicating approximately normal distributions for all diet groups.</p>
-<p>&nbsp;</p>
+<p>The sample size is relative small (10 observations in each group). Moreover, the skewness (1.5) and the (excess) kurtosis (1.6) for the triathletes fall outside of the acceptable range of [-1, 1] indicating right-skewed and leptokurtic distribution.</p>
 <p><strong>Normality test</strong></p>
-<p>The <em>Shapiro-Wilk</em> test for normality for each diet group is:</p>
+<p>The <em>Shapiro-Wilk</em> test for normality for each sport group is:</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dataDWL</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Diet</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">WeightLoss</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dataVO2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sport</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">VO2max</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 4
-  Diet  variable   statistic     p
-  &lt;fct&gt; &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;
-1 A     WeightLoss     0.958 0.662
-2 B     WeightLoss     0.941 0.390
-3 C     WeightLoss     0.964 0.768
-4 D     WeightLoss     0.944 0.435</code></pre>
+<pre><code># A tibble: 3 × 4
+  sport       variable statistic      p
+  &lt;fct&gt;       &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;
+1 rowers      VO2max       0.865 0.0872
+2 runners     VO2max       0.954 0.712 
+3 triathletes VO2max       0.816 0.0229</code></pre>
 </div>
 </div>
-<p>The tests of normality suggest that the data for the <code>WeightLoss</code> in all groups are normally distributed (p &gt; 0.05).</p>
-<p><strong>B. Levene’s test for equality of variances</strong></p>
-<p>The <em>Levene’s test</em> for equality of variances is:</p>
-<div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dataDWL</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/levene_test.html">levene_test</a></span><span class="op">(</span><span class="va">WeightLoss</span> <span class="op">~</span> <span class="va">Diet</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 4
-    df1   df2 statistic     p
-  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
-1     3    56     0.600 0.617</code></pre>
-</div>
-</div>
-<p>Since the p = 0.617 &gt; 0.05, the null hypothesis (<span class="math inline">\(H_{0}\)</span>: the variances of WeighLoss in four diet groups are equal) can not be rejected.</p>
-</section><section id="run-the-one-way-anova-test" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="run-the-one-way-anova-test">
-<span class="header-section-number">5.5</span> Run the one-way ANOVA test</h2>
-<p>Now, we will perform an one-way ANOVA (with equal variances: Fisher’s classic ANOVA) to test the null hypothesis that the mean weight loss is the same for all the diet groups.</p>
+<p>We can see that the data for the triathletes is not normally distributed (p=0.023 &lt;0.05) according to the Shapiro-Wilk test.</p>
+<p>By considering all of the information together (small samples, graphs, normality test) the overall decision is against of normality.</p>
+</section><section id="run-the-kruskal-wallis-test" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="run-the-kruskal-wallis-test">
+<span class="header-section-number">6.5</span> Run the Kruskal-Wallis test</h2>
+<p>Now, we will perform a Kruskal-Wallis test to compare the VO2max in three sports.</p>
 <div id="exercise-joins" class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-One-way ANOVA test
+Kruskal-Wallis test
 </div>
 </div>
 <div id="exercise-joins" class="callout-body-container callout-body">
@@ -494,29 +460,25 @@ One-way ANOVA test
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Compute the analysis of variance</span></span>
-<span><span class="va">anova_one_way</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">WeightLoss</span> <span class="op">~</span> <span class="va">Diet</span>, data <span class="op">=</span> <span class="va">dataDWL</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Summary of the analysis</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">anova_one_way</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/kruskal.test.html">kruskal.test</a></span><span class="op">(</span><span class="va">VO2max</span> <span class="op">~</span> <span class="va">sport</span>, data <span class="op">=</span> <span class="va">dataVO2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            Df Sum Sq Mean Sq F value  Pr(&gt;F)   
-Diet         3  97.33   32.44   6.118 0.00113 **
-Residuals   56 296.99    5.30                   
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<pre><code>
+    Kruskal-Wallis rank sum test
+
+data:  VO2max by sport
+Kruskal-Wallis chi-squared = 16.351, df = 2, p-value = 0.0002815</code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <div class="cell">
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dataDWL</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/anova_test.html">anova_test</a></span><span class="op">(</span><span class="va">WeightLoss</span> <span class="op">~</span> <span class="va">Diet</span>, detailed <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dataVO2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/kruskal_test.html">kruskal_test</a></span><span class="op">(</span><span class="va">VO2max</span> <span class="op">~</span> <span class="va">sport</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ANOVA Table (type II tests)
-
-  Effect   SSn     SSd DFn DFd     F     p p&lt;.05   ges
-1   Diet 97.33 296.987   3  56 6.118 0.001     * 0.247</code></pre>
+<pre><code># A tibble: 1 × 6
+  .y.        n statistic    df        p method        
+* &lt;chr&gt;  &lt;int&gt;     &lt;dbl&gt; &lt;int&gt;    &lt;dbl&gt; &lt;chr&gt;         
+1 VO2max    30      16.4     2 0.000281 Kruskal-Wallis</code></pre>
 </div>
 </div>
 </div>
@@ -524,25 +486,22 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </div>
-<p>The statistic F=6.118 indicates the obtained F-statistic = (variation between sample means <span class="math inline">\(/\)</span> variation within the samples). Note that we are comparing to an F-distribution (F-test). The degrees of freedom in the numerator (DFn) and the denominator (DFd) are 3 and 56, respectively (numarator: variation between sample means; denominator: variation within the samples).</p>
-<p>The p=0.001 is lower than 0.05. There is at least one diet with mean weight loss which is different from the others means.</p>
-<p>From ANOVA table provided by the {rstatix} we can also calculate the generalized effect size (ges). The <code>ges</code> is the proportion of variability explained by the factor <code>Diet</code> (SSn) to total variability of the dependent variable (SSn + SSd), so:</p>
-<p><span class="math display">\[\ ges= 97.33 / (97.33 + 296.987) = 97.33 / 394.317 = 0.247\]</span> A <code>ges</code> of 0.247 (24.7%) means that 24.7% of the change in the weight loss can be accounted for the diet conditions.</p>
+<p>The p-value (&lt;0.001) is lower than 0.05. There is at least one sport in which the VO2max is different from the others.</p>
 <p>&nbsp;</p>
 <p><strong>Present the results in a summary table</strong></p>
 <p>A summary table can also be presented:</p>
 <div class="cell">
-<details><summary>Show the code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">gt_sum4</span> <span class="op">&lt;-</span> <span class="va">dataDWL</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">gt_sum10</span> <span class="op">&lt;-</span> <span class="va">dataVO2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span></span>
-<span>    by <span class="op">=</span> <span class="va">Diet</span>, </span>
-<span>    statistic <span class="op">=</span> <span class="va">WeightLoss</span> <span class="op">~</span> <span class="st">"{mean} ({sd})"</span>, </span>
+<span>    by <span class="op">=</span> <span class="va">sport</span>, </span>
+<span>    statistic <span class="op">=</span> <span class="va">VO2max</span> <span class="op">~</span> <span class="st">"{median} ({p25}, {p75})"</span>, </span>
 <span>    digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span>,</span>
-<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">WeightLoss</span> <span class="op">~</span> <span class="st">"Weight Loss (kg)"</span><span class="op">)</span>, </span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">VO2max</span> <span class="op">~</span> <span class="st">"VO2max (mL/kg/min)"</span><span class="op">)</span>, </span>
 <span>    missing <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"no"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_p.html">add_p</a></span><span class="op">(</span>test <span class="op">=</span> <span class="va">WeightLoss</span> <span class="op">~</span> <span class="st">"aov"</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/partial.html">partial</a></span><span class="op">(</span><span class="va">style_pvalue</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_p.html">add_p</a></span><span class="op">(</span>test <span class="op">=</span> <span class="va">VO2max</span> <span class="op">~</span> <span class="st">"kruskal.test"</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/partial.html">partial</a></span><span class="op">(</span><span class="va">style_pvalue</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/as_gt.html">as_gt</a></span><span class="op">(</span><span class="op">)</span> </span>
 <span></span>
-<span><span class="va">gt_sum4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">gt_sum10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 
 <div id="sncjrvketn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -959,47 +918,43 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <table class="gt_table">
 <thead class="gt_col_headings"><tr>
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="<strong>Characteristic</strong>"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>A</strong>, N = 15<sup class=&quot;gt_footnote_marks&quot;>1</sup>">
-<strong>A</strong>, N = 15<sup class="gt_footnote_marks">1</sup>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>rowers</strong>, N = 10<sup class=&quot;gt_footnote_marks&quot;>1</sup>">
+<strong>rowers</strong>, N = 10<sup class="gt_footnote_marks">1</sup>
 </th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>B</strong>, N = 15<sup class=&quot;gt_footnote_marks&quot;>1</sup>">
-<strong>B</strong>, N = 15<sup class="gt_footnote_marks">1</sup>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>runners</strong>, N = 10<sup class=&quot;gt_footnote_marks&quot;>1</sup>">
+<strong>runners</strong>, N = 10<sup class="gt_footnote_marks">1</sup>
 </th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>C</strong>, N = 15<sup class=&quot;gt_footnote_marks&quot;>1</sup>">
-<strong>C</strong>, N = 15<sup class="gt_footnote_marks">1</sup>
-</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>D</strong>, N = 15<sup class=&quot;gt_footnote_marks&quot;>1</sup>">
-<strong>D</strong>, N = 15<sup class="gt_footnote_marks">1</sup>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>triathletes</strong>, N = 10<sup class=&quot;gt_footnote_marks&quot;>1</sup>">
+<strong>triathletes</strong>, N = 10<sup class="gt_footnote_marks">1</sup>
 </th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>p-value</strong><sup class=&quot;gt_footnote_marks&quot;>2</sup>">
 <strong>p-value</strong><sup class="gt_footnote_marks">2</sup>
 </th>
     </tr></thead>
 <tbody class="gt_table_body"><tr>
-<td headers="label" class="gt_row gt_left">Weight Loss (kg)</td>
-<td headers="stat_1" class="gt_row gt_center">9.2 (2.3)</td>
-<td headers="stat_2" class="gt_row gt_center">8.9 (2.8)</td>
-<td headers="stat_3" class="gt_row gt_center">12.1 (1.8)</td>
-<td headers="stat_4" class="gt_row gt_center">10.5 (2.2)</td>
-<td headers="p.value" class="gt_row gt_center">0.001</td>
+<td headers="label" class="gt_row gt_left">VO2max (mL/kg/min)</td>
+<td headers="stat_1" class="gt_row gt_center">69.6 (67.8, 73.1)</td>
+<td headers="stat_2" class="gt_row gt_center">77.2 (74.2, 79.5)</td>
+<td headers="stat_3" class="gt_row gt_center">65.4 (64.0, 67.6)</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td>
 </tr></tbody>
 <tfoot class="gt_footnotes">
 <tr>
-<td class="gt_footnote" colspan="6">
-<sup class="gt_footnote_marks">1</sup> Mean (SD)</td>
+<td class="gt_footnote" colspan="5">
+<sup class="gt_footnote_marks">1</sup> Median (IQR)</td>
     </tr>
 <tr>
-<td class="gt_footnote" colspan="6">
-<sup class="gt_footnote_marks">2</sup> One-way ANOVA</td>
+<td class="gt_footnote" colspan="5">
+<sup class="gt_footnote_marks">2</sup> Kruskal-Wallis rank sum test</td>
     </tr>
 </tfoot>
 </table>
 </div>
 </div>
 </div>
-</section><section id="post-hoc-tests" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="post-hoc-tests">
-<span class="header-section-number">5.6</span> Post-hoc tests</h2>
-<p>A significant one-way ANOVA is generally followed up by post-hoc tests to perform multiple pairwise comparisons between groups:</p>
+</section><section id="post-hoc-tests" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="post-hoc-tests">
+<span class="header-section-number">6.6</span> Post-hoc tests</h2>
+<p>A significant WMW is generally followed up by post-hoc tests to perform multiple pairwise comparisons between groups:</p>
 <div id="exercise-joins" class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1012,102 +967,53 @@ Post-hoc tests
 <div id="exercise-joins" class="callout-body-container callout-body">
 <div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Tukey test</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Bonferroni</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Dunn’s approach</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">WMW with Bonferroni</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
-<p>It is appropriate to use this test when one desires all the possible comparisons between a large set of means (e.g., 6 or more means) and the variances are supposed to be equal.</p>
 <div class="cell">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Pairwise comparisons</span></span>
-<span><span class="va">pwc_Tukey</span> <span class="op">&lt;-</span> <span class="va">dataDWL</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/tukey_hsd.html">tukey_hsd</a></span><span class="op">(</span><span class="va">WeightLoss</span> <span class="op">~</span> <span class="va">Diet</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Pairwise comparisons</span></span>
+<span><span class="va">pwc_Dunn</span> <span class="op">&lt;-</span> <span class="va">dataVO2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test</a></span><span class="op">(</span><span class="va">VO2max</span> <span class="op">~</span> <span class="va">sport</span>, p.adjust.method <span class="op">=</span> <span class="st">"bonferroni"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">pwc_Tukey</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">pwc_Dunn</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 9
-  term  group1 group2 null.value estimate conf.low conf.high   p.adj p.adj.sig…¹
-* &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      
-1 Diet  A      B               0   -0.273   -2.50      1.95  0.988   ns         
-2 Diet  A      C               0    2.93     0.707     5.16  0.00513 **         
-3 Diet  A      D               0    1.36    -0.867     3.59  0.377   ns         
-4 Diet  B      C               0    3.21     0.980     5.43  0.0019  **         
-5 Diet  B      D               0    1.63    -0.593     3.86  0.222   ns         
-6 Diet  C      D               0   -1.57    -3.80      0.653 0.252   ns         
+<pre><code># A tibble: 3 × 9
+  .y.    group1  group2         n1    n2 statistic         p    p.adj p.adj.si…¹
+* &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;     
+1 VO2max rowers  runners        10    10      2.43 0.0152    0.0457   *         
+2 VO2max rowers  triathletes    10    10     -1.59 0.112     0.337    ns        
+3 VO2max runners triathletes    10    10     -4.01 0.0000596 0.000179 ***       
 # … with abbreviated variable name ¹​p.adj.signif</code></pre>
 </div>
 </div>
-<p>The output contains the following columns of interest:</p>
-<ul>
-<li>estimate: estimate of the difference between means of the two groups</li>
-<li>conf.low, conf.high: the lower and the upper end point of the confidence interval at 95% (default)</li>
-<li>p.adj: p-value after adjustment for the multiple comparisons.</li>
-</ul>
 </div>
 <div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
-<p>Alternatively, we can perform pairwise comparisons using pairwise t-test with the assumption of equal variances (<code>pool.sd = TRUE</code>) and calculate the adjusted p-values using Bonferroni correction:</p>
+<p>Alternatively, we can perform pairwise comparisons using pairwise WMW’s test and calculate the adjusted p-values using Bonferroni correction:</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pwc_Bonferroni</span> <span class="op">&lt;-</span> <span class="va">dataDWL</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">pairwise_t_test</a></span><span class="op">(</span></span>
-<span>    <span class="va">WeightLoss</span> <span class="op">~</span> <span class="va">Diet</span>, pool.sd <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>    p.adjust.method <span class="op">=</span> <span class="st">"bonferroni"</span></span>
-<span>    <span class="op">)</span></span>
-<span><span class="va">pwc_Bonferroni</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 9
-  .y.        group1 group2    n1    n2        p p.signif   p.adj p.adj.signif
-* &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;    &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;       
-1 WeightLoss A      B         15    15 0.746    ns       1       ns          
-2 WeightLoss A      C         15    15 0.000954 ***      0.00572 **          
-3 WeightLoss B      C         15    15 0.000344 ***      0.00206 **          
-4 WeightLoss A      D         15    15 0.111    ns       0.669   ns          
-5 WeightLoss B      D         15    15 0.0571   ns       0.343   ns          
-6 WeightLoss C      D         15    15 0.0666   ns       0.399   ns          </code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<p>Pairwise comparisons were carried out using the method of Tukey (or Bonferroni) and the adjusted p-values were calculated.</p>
-<p>The results in Tukey post hoc table show that the weight loss from diet C seems to be significantly larger than diet A (mean difference = 2.91 kg, 95%CI [0.71, 5.16], p=0.005 &lt;0.05) and diet B (mean difference = 3.21 kg, 95%CI [0.98, 5.43], p=0.002 &lt;0.05).</p>
-</section><section id="welch-one-way-anova" class="level2" data-number="5.7"><h2 data-number="5.7" class="anchored" data-anchor-id="welch-one-way-anova">
-<span class="header-section-number">5.7</span> Welch one-way ANOVA</h2>
-<p>If the variance is different between the groups (unequal variances) then the degrees of freedom associated with the ANOVA test are calculated differently (Welch one-way ANOVA).</p>
-<div class="cell">
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Welch one-way ANOVA test (not assuming equal variance)</span></span>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Pairwise comparisons</span></span>
 <span></span>
-<span><span class="va">dataDWL</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/welch_anova_test.html">welch_anova_test</a></span><span class="op">(</span><span class="va">WeightLoss</span> <span class="op">~</span> <span class="va">Diet</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 7
-  .y.            n statistic   DFn   DFd        p method     
-* &lt;chr&gt;      &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;      
-1 WeightLoss    60      7.02     3  30.8 0.000989 Welch ANOVA</code></pre>
-</div>
-</div>
-<p>In this case, the <em>Games-Howell post hoc test</em> (or pairwise t-tests with no assumption of equal variances with Bonferroni correction) can be used to compare all possible combinations of group differences.</p>
-<p><strong>Games-Howell post hoc test</strong></p>
-<div class="cell">
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Pairwise comparisons (Games-Howell)</span></span>
+<span><span class="va">pwc_BW</span> <span class="op">&lt;-</span> <span class="va">dataVO2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">pairwise_wilcox_test</a></span><span class="op">(</span><span class="va">VO2max</span> <span class="op">~</span> <span class="va">sport</span>, p.adjust.method <span class="op">=</span> <span class="st">"bonferroni"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">pwc_GH</span> <span class="op">&lt;-</span> <span class="va">dataDWL</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/games_howell_test.html">games_howell_test</a></span><span class="op">(</span><span class="va">WeightLoss</span> <span class="op">~</span> <span class="va">Diet</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">pwc_GH</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">pwc_BW</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 8
-  .y.        group1 group2 estimate conf.low conf.high p.adj p.adj.signif
-* &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       
-1 WeightLoss A      B        -0.273   -2.82      2.28  0.991 ns          
-2 WeightLoss A      C         2.93     0.872     4.99  0.003 **          
-3 WeightLoss A      D         1.36    -0.898     3.62  0.371 ns          
-4 WeightLoss B      C         3.21     0.849     5.56  0.005 **          
-5 WeightLoss B      D         1.63    -0.889     4.16  0.308 ns          
-6 WeightLoss C      D        -1.57    -3.60      0.452 0.17  ns          </code></pre>
+<pre><code># A tibble: 3 × 9
+  .y.    group1  group2         n1    n2 statistic        p p.adj p.adj.signif
+* &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       
+1 VO2max rowers  runners        10    10       8.5 0.002    0.006 **          
+2 VO2max rowers  triathletes    10    10      80.5 0.023    0.07  ns          
+3 VO2max runners triathletes    10    10      93   0.000487 0.001 **          </code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Dunn’s pairwise comparisons were carried out using the method of Bonferroni and adjusting the p-values were calculated.</p>
+<p>The runners’ VO2max (median= 77.2, IQR=[74.2, 79.5] mL/kg/min) seems to differ significantly (larger based on the medians) from rowers (69.6 [67.8, 73.1] mL/kg/min, p=0.046 &lt;0.05) and triathletes (65.4 [64.0, 67.6] mL/kg/min, p &lt;0.001).</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -1222,13 +1128,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./wilcoxon_test.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Wilcoxon Signed-Rank test</span></span>
+      <a href="./anova.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">One-way ANOVA test</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./kruskal_wallis.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Kruskal-Wallis test</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./chi_square.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Chi-sqaure test of independence</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1236,7 +1142,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":true,"openEffect":"zoom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":true,"openEffect":"zoom"});</script>
 
 
 </body></html>

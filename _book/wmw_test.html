@@ -185,7 +185,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chi_square.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Chi-sqaure test of independence</span></a>
+  <a href="./kruskal_wallis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Kruskal-Wallis test</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chi_square.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Chi-sqaure test of independence</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fisher_exact.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fisher’s exact test</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mcnemar.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Chi-sqaure test of independence</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -281,8 +296,8 @@ Null hypothesis and alternative hypothesis
 </div>
 <div class="cell">
 <div id="fig-depression" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><div id="htmlwidget-e92b49db7f62ae67b364" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e92b49db7f62ae67b364">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],["non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic"],[4.1,6.3,7.8,8.5,8.9,10.4,11.5,12,13.8,17.6,24.3,37.2,27.5,28.1,26.1,23.8,25,29.8,33.9,37.7,31.3,43.2,28.7,46.2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>status<\/th>\n      <th>b_TG<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;2.1: Table with data from “depression” file.</figcaption><p></p>
+<figure class="figure"><div id="htmlwidget-8037f8554b1eb44a5724" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8037f8554b1eb44a5724">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],["non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic"],[4.1,6.3,7.8,8.5,8.9,10.4,11.5,12,13.8,17.6,24.3,37.2,27.5,28.1,26.1,23.8,25,29.8,33.9,37.7,31.3,43.2,28.7,46.2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>status<\/th>\n      <th>b_TG<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;2.1: Table with data from “depression” file.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -403,7 +418,7 @@ Summary statistics by group
 </div>
 </div>
 </div>
-<p>The means are not very close to the medians (31.8 vs 29.2 and 13.5 vs 11.0). Moreover, both the skewness and the (excess) kurtosis for the non-diabetic group falls outside of the acceptable range of [-1, 1] indicating right-skewed and leptokurtic distribution.</p>
+<p>The means are not very close to the medians (31.8 vs 29.2 and 13.5 vs 11.0). Moreover, both the skewness (1.81) and the (excess) kurtosis (3.47) for the non-diabetic group falls outside of the acceptable range of [-1, 1] indicating right-skewed and leptokurtic distribution.</p>
 <p>&nbsp;</p>
 <p><strong>Normality test</strong></p>
 <p>The <em>Shapiro-Wilk</em> test for normality for each group is:</p>
@@ -1095,7 +1110,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":true,"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","loop":true,"openEffect":"zoom"});</script>
 
 
 </body></html>

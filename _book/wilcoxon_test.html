@@ -185,7 +185,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chi_square.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Chi-sqaure test of independence</span></a>
+  <a href="./kruskal_wallis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Kruskal-Wallis test</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chi_square.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Chi-sqaure test of independence</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fisher_exact.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fisher’s exact test</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mcnemar.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Chi-sqaure test of independence</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -284,8 +299,8 @@ Null hypothesis and alternative hypothesis
 </div>
 <div class="cell">
 <div id="fig-weight" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><div id="htmlwidget-1c1255c70045d3b6ab96" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1c1255c70045d3b6ab96">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8"],[1,2,3,4,5,6,7,8],[488,478,480,426,440,410,458,460],[484,478,492,444,436,398,464,476],[4,0,-12,-18,4,12,-6,-16]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>affected_eye<\/th>\n      <th>unaffected_eye<\/th>\n      <th>dif_thickness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;4.1: Table with data from “weight” file.</figcaption><p></p>
+<figure class="figure"><div id="htmlwidget-1ce89e5f875c3bce0de2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1ce89e5f875c3bce0de2">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8"],[1,2,3,4,5,6,7,8],[488,478,480,426,440,410,458,460],[484,478,492,444,436,398,464,476],[4,0,-12,-18,4,12,-6,-16]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>affected_eye<\/th>\n      <th>unaffected_eye<\/th>\n      <th>dif_thickness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;4.1: Table with data from “weight” file.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -306,7 +321,7 @@ $ dif_thickness  &lt;dbl&gt; 4, 0, -12, -18, 4, 12, -6, -16</code></pre>
 <p>The distributions of differences can be explored with appropriate plots and summary statistics.</p>
 <p><strong>Graph</strong></p>
 <p>We can explore the data visually for symmetry with a density plot.</p>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eyes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">dif_thickness</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"#76B7B2"</span>, color<span class="op">=</span><span class="st">"black"</span>, alpha <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span></span>
@@ -317,13 +332,10 @@ $ dif_thickness  &lt;dbl&gt; 4, 0, -12, -18, 4, 12, -6, -16</code></pre>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Differences of thickness (micron)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.title.position <span class="op">=</span> <span class="st">"plot"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-ℹ Please use `linewidth` instead.</code></pre>
-</div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><a href="wilcoxon_test_files/figure-html/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="wilcoxon_test_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="432"></a></p>
+<div id="fig-hist2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><a href="wilcoxon_test_files/figure-html/fig-hist2-1.png" class="lightbox" title="Density plot of the thickness differences." data-gallery="quarto-lightbox-gallery-1"><img src="wilcoxon_test_files/figure-html/fig-hist2-1.png" class="img-fluid figure-img" width="672"></a></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.2: Density plot of the thickness differences.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -349,7 +361,7 @@ Summary statistics
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>We can utilize the <code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code> function to obtain the results across the three variables simultaneously:</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">summary_eyes</span> <span class="op">&lt;-</span> <span class="va">eyes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">summary_eyes</span> <span class="op">&lt;-</span> <span class="va">eyes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span></span>
 <span>    .cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">dif_thickness</span>, <span class="va">affected_eye</span>, <span class="va">unaffected_eye</span><span class="op">)</span>, </span>
 <span>    .fns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
@@ -393,7 +405,7 @@ Summary statistics
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eyes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eyes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">dlookr</span><span class="fu">::</span><span class="fu"><a href="https://choonghyunryu.github.io/dlookr/reference/describe.data.frame.html">describe</a></span><span class="op">(</span><span class="va">dif_thickness</span>, <span class="va">affected_eye</span>, <span class="va">unaffected_eye</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">described_variables</span>, <span class="va">n</span>, <span class="va">mean</span>, <span class="va">sd</span>, <span class="va">p25</span>, <span class="va">p50</span>, <span class="va">p75</span>, <span class="va">skewness</span>, <span class="va">kurtosis</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -414,7 +426,7 @@ Summary statistics
 <p>The differences seems to come from a population with a symmetrical distribution and the skewness is close to zero (0.03). However, the (excess) kurtosis equals to -1.37 (platykurtic) and the sample size is small. Therefore, the data may not follow the normal distribution.</p>
 <p><strong>Normality test</strong> We can use Shapiro-Wilk test to check for normality of the differences. However, here, normality test is not helpful because of the small sample (the test is under-powered).</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span> <span class="va">eyes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span> <span class="va">eyes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">dif_thickness</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
@@ -446,7 +458,7 @@ Wilcoxon Signed-Rank test
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">eyes</span><span class="op">$</span><span class="va">dif_thickness</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">eyes</span><span class="op">$</span><span class="va">dif_thickness</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon signed rank test with continuity correction
@@ -459,7 +471,7 @@ alternative hypothesis: true location is not equal to 0</code></pre>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">eyes</span><span class="op">$</span><span class="va">affected_eye</span>, <span class="va">eyes</span><span class="op">$</span><span class="va">unaffected_eye</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">eyes</span><span class="op">$</span><span class="va">affected_eye</span>, <span class="va">eyes</span><span class="op">$</span><span class="va">unaffected_eye</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon signed rank test with continuity correction
@@ -472,7 +484,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 <div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
 <div class="cell">
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span> <span class="va">eyes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span> <span class="va">eyes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>     <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">wilcox_test</a></span><span class="op">(</span><span class="va">dif_thickness</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 6
@@ -490,7 +502,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </section><section id="present-the-results-in-a-summary-table" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="present-the-results-in-a-summary-table">
 <span class="header-section-number">4.6</span> Present the results in a summary table</h2>
 <div class="cell">
-<details><summary>Show the code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tb2</span> <span class="op">&lt;-</span> <span class="va">eyes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tb2</span> <span class="op">&lt;-</span> <span class="va">eyes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">dif_thickness</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="op">!</span><span class="va">id</span>, names_to <span class="op">=</span> <span class="st">"groups"</span>, values_to <span class="op">=</span> <span class="st">"thickness"</span><span class="op">)</span></span>
 <span></span>
@@ -504,12 +516,12 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <span><span class="va">gt_sum4</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 
-<div id="svhaftwlwg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ihoncskpwf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#svhaftwlwg) .gt_table {
+:where(#ihoncskpwf) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -534,7 +546,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-left-color: #D3D3D3;
 }
 
-:where(#svhaftwlwg) .gt_heading {
+:where(#ihoncskpwf) .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -546,12 +558,12 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-right-color: #D3D3D3;
 }
 
-:where(#svhaftwlwg) .gt_caption {
+:where(#ihoncskpwf) .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-:where(#svhaftwlwg) .gt_title {
+:where(#ihoncskpwf) .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -563,7 +575,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-bottom-width: 0;
 }
 
-:where(#svhaftwlwg) .gt_subtitle {
+:where(#ihoncskpwf) .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -575,13 +587,13 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-top-width: 0;
 }
 
-:where(#svhaftwlwg) .gt_bottom_border {
+:where(#ihoncskpwf) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#svhaftwlwg) .gt_col_headings {
+:where(#ihoncskpwf) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -596,7 +608,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-right-color: #D3D3D3;
 }
 
-:where(#svhaftwlwg) .gt_col_heading {
+:where(#ihoncskpwf) .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -616,7 +628,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   overflow-x: hidden;
 }
 
-:where(#svhaftwlwg) .gt_column_spanner_outer {
+:where(#ihoncskpwf) .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -628,15 +640,15 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 4px;
 }
 
-:where(#svhaftwlwg) .gt_column_spanner_outer:first-child {
+:where(#ihoncskpwf) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#svhaftwlwg) .gt_column_spanner_outer:last-child {
+:where(#ihoncskpwf) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#svhaftwlwg) .gt_column_spanner {
+:where(#ihoncskpwf) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -648,7 +660,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   width: 100%;
 }
 
-:where(#svhaftwlwg) .gt_group_heading {
+:where(#ihoncskpwf) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -674,7 +686,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   text-align: left;
 }
 
-:where(#svhaftwlwg) .gt_empty_group_heading {
+:where(#ihoncskpwf) .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -689,15 +701,15 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   vertical-align: middle;
 }
 
-:where(#svhaftwlwg) .gt_from_md > :first-child {
+:where(#ihoncskpwf) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#svhaftwlwg) .gt_from_md > :last-child {
+:where(#ihoncskpwf) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#svhaftwlwg) .gt_row {
+:where(#ihoncskpwf) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -716,7 +728,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   overflow-x: hidden;
 }
 
-:where(#svhaftwlwg) .gt_stub {
+:where(#ihoncskpwf) .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -729,7 +741,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-:where(#svhaftwlwg) .gt_stub_row_group {
+:where(#ihoncskpwf) .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -743,11 +755,11 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   vertical-align: top;
 }
 
-:where(#svhaftwlwg) .gt_row_group_first td {
+:where(#ihoncskpwf) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#svhaftwlwg) .gt_summary_row {
+:where(#ihoncskpwf) .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -757,16 +769,16 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-:where(#svhaftwlwg) .gt_first_summary_row {
+:where(#ihoncskpwf) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#svhaftwlwg) .gt_first_summary_row.thick {
+:where(#ihoncskpwf) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#svhaftwlwg) .gt_last_summary_row {
+:where(#ihoncskpwf) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -776,7 +788,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-:where(#svhaftwlwg) .gt_grand_summary_row {
+:where(#ihoncskpwf) .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -786,7 +798,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-:where(#svhaftwlwg) .gt_first_grand_summary_row {
+:where(#ihoncskpwf) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -796,11 +808,11 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-top-color: #D3D3D3;
 }
 
-:where(#svhaftwlwg) .gt_striped {
+:where(#ihoncskpwf) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#svhaftwlwg) .gt_table_body {
+:where(#ihoncskpwf) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -809,7 +821,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-:where(#svhaftwlwg) .gt_footnotes {
+:where(#ihoncskpwf) .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -823,7 +835,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-right-color: #D3D3D3;
 }
 
-:where(#svhaftwlwg) .gt_footnote {
+:where(#ihoncskpwf) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -832,7 +844,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-:where(#svhaftwlwg) .gt_sourcenotes {
+:where(#ihoncskpwf) .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -846,7 +858,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-right-color: #D3D3D3;
 }
 
-:where(#svhaftwlwg) .gt_sourcenote {
+:where(#ihoncskpwf) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -854,64 +866,64 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-:where(#svhaftwlwg) .gt_left {
+:where(#ihoncskpwf) .gt_left {
   text-align: left;
 }
 
-:where(#svhaftwlwg) .gt_center {
+:where(#ihoncskpwf) .gt_center {
   text-align: center;
 }
 
-:where(#svhaftwlwg) .gt_right {
+:where(#ihoncskpwf) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#svhaftwlwg) .gt_font_normal {
+:where(#ihoncskpwf) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#svhaftwlwg) .gt_font_bold {
+:where(#ihoncskpwf) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#svhaftwlwg) .gt_font_italic {
+:where(#ihoncskpwf) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#svhaftwlwg) .gt_super {
+:where(#ihoncskpwf) .gt_super {
   font-size: 65%;
 }
 
-:where(#svhaftwlwg) .gt_footnote_marks {
+:where(#ihoncskpwf) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#svhaftwlwg) .gt_asterisk {
+:where(#ihoncskpwf) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#svhaftwlwg) .gt_indent_1 {
+:where(#ihoncskpwf) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#svhaftwlwg) .gt_indent_2 {
+:where(#ihoncskpwf) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#svhaftwlwg) .gt_indent_3 {
+:where(#ihoncskpwf) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#svhaftwlwg) .gt_indent_4 {
+:where(#ihoncskpwf) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#svhaftwlwg) .gt_indent_5 {
+:where(#ihoncskpwf) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1077,7 +1089,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":true,"descPosition":"bottom","openEffect":"zoom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","loop":true,"selector":".lightbox","descPosition":"bottom"});</script>
 
 
 </body></html>
