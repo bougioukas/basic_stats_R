@@ -1,9 +1,8 @@
 # Fisher's exact test {#sec-fisher_exact}
 
-If we want to see whether there's an association between two categorical variables and the assumption for the **expected frequencies** in the contingency table is **not fulfilled**, an alternative test to the chi-square test can be used. 
+If we want to see whether there's an association between two categorical variables and the assumption for the **expected frequencies** in the contingency table is **not fulfilled**, an alternative test to the chi-square test can be used.
 
-Fisher came up with a method for computing the exact probability of the chi-square statistic that is accurate when sample sizes are small. This method is called **Fisher’s exact test** even though it’s not so much a test as a way of computing the exact probability of the chi-square statistic. This procedure is normally used on `2×2` contingency tables and with small samples. However, it can be used on larger contingency tables and with large samples, but in this case it becomes computationally intensive.
-
+Fisher came up with a method for computing the exact probability of the chi-square statistic that is accurate when sample sizes are small. This method is called **Fisher's exact test** even though it's not so much a test as a way of computing the exact probability of the chi-square statistic. This procedure is normally used on `2×2` contingency tables and with small samples. However, it can be used on larger contingency tables and with large samples, but in this case it becomes computationally intensive.
 
 ```{r}
 #| include: false
@@ -28,8 +27,7 @@ When we have finished this Chapter, we should be able to:
 
 ## Research question and Hypothesis Testing
 
-We consider the data in *hemophilia* dataset. In a survey there are two treatment regimens studied for controlling bleeding in 25 patients with hemophilia undergoing surgery. We want to investigate if there is an association between the treatment regimen (treatment A or B) and the bleeding complications (no or yes). The null hypothesis ($H_0$) is that the bleeding complications are independent from the treatment regimen, while the alternative ($H_1$) is that are dependent.
-
+We consider the data in *hemophilia* dataset. In a survey there are two treatment regimens studied for controlling bleeding in 28 patients with hemophilia undergoing surgery. We want to investigate if there is an association between the treatment regimen (treatment A or B) and the bleeding complications (no or yes). The null hypothesis ($H_0$) is that the bleeding complications are independent from the treatment regimen, while the alternative ($H_1$) is that are dependent.
 
 ::: {.callout-note icon="false"}
 ## Null hypothesis and alternative hypothesis
@@ -38,7 +36,190 @@ We consider the data in *hemophilia* dataset. In a survey there are two treatmen
 -   $H_1$: There is association between the two categorical variables (they are dependent)
 :::
 
-**NOTE:** In practice, the null hypothesis of independence, for our particular question, is no difference in the proportion of patients  with ulcerated  compared with non-ulcerated tumors ($p_{ulcerated} = p_{non-ucerated}$).
+**NOTE:** In practice, the null hypothesis of independence, for our particular question, is no difference in the proportion of patients with bleeding complications compared with patients with no bleeding complications ($p_{bleeding} = p_{no bleeding}$).
+
+## Packages we need
+
+We need to load the following packages:
+
+```{r}
+#| eval: false
+
+library(rstatix)
+
+
+library(patchwork)
+library(here)
+library(tidyverse)
+```
+
+
+## Preraring the data
+
+We import the data *meldata* in R:
+
+```{r}
+library(readxl)
+hemophilia <- read_excel(here("data", "hemophilia.xlsx"))
+```
+
+
+```{r}
+#| echo: false
+#| label: fig-meldata
+#| fig-cap: Table with data from "meldata" file.
+
+DT::datatable(
+  hemophilia, extensions = 'Buttons', options = list(
+    dom = 'tip'
+  )
+)
+
+```
+
+We inspect the data and the type of variables:
+
+```{r}
+glimpse(hemophilia)
+```
+
+
+The dataset *hemophilia* has 28 patients (rows) and includes 2 variables (columns), the character (`<chr>`) variable named `treatment`  and the character (`<chr>`) variable named `bleeding`. Both of them should be converted to factor (`<fct>`) variables using the `convert_as_factor()` function as follows:
+
+```{r}
+hemophilia <- hemophilia %>%
+  convert_as_factor(treatment, bleeding)
+
+glimpse(hemophilia)
+```
+
+
+## Plot the data
+
+We count the number of patients with bleeding in the two regimens. It is useful to plot this as counts but also as percentages and compare them.
+
+
+```{r}
+#| warning: false
+#| label: fig-barplot2
+#| fig-cap: Bar plot.
+
+p3 <- hemophilia %>%
+  ggplot(aes(x = treatment, fill = bleeding)) +
+  geom_bar(width = 0.7) +
+  scale_fill_jama() +
+  theme_bw(base_size = 14) +
+  theme(legend.position = "bottom")
+
+
+p4 <- hemophilia %>%
+  ggplot(aes(x = treatment, fill = bleeding)) +
+  geom_bar(position = "fill", width = 0.7) +
+  scale_y_continuous(labels=scales::percent) +
+  scale_fill_jama() +
+  ylab("Percentage") +
+  theme_bw(base_size = 14) +
+  theme(legend.position = "bottom") 
+
+p3 + p4 + 
+  plot_layout(guides = "collect") & theme(legend.position = 'bottom')
+```
+
+The above bar plots with counts show graphically that the number of patients who had bleeding complications was similar in the two regimens. Note that the number of patients included in the study is small (n=28).
+
+
+## Contigency table and Expected frequencies
+
+First, we will create a contingency *2x2* table (two categorical variables with exactly two levels each) with the frequencies using the Base R.
+
+```{r}
+tb2 <- table(hemophilia$treatment, hemophilia$bleeding)
+tb2
+```
+
+
+Next, we will also create a more informative table with row percentages and marginal totals.
+
+::: {#exercise-joins .callout-tip}
+## Table with row percentages and marginal totals
+
+::: panel-tabset
+## finalfit
+
+Using the function `summary_factorlist()` which is included in `{finalfit}` package for obtaining row percentages and marginal totals:
+
+```{r}
+row_tb2 <- hemophilia %>%
+  finalfit::summary_factorlist(dependent = "bleeding", add_dependent_label = T,
+                     explanatory = "treatment", add_col_totals = T,
+                     include_col_totals_percent = F,
+                     column = FALSE, total_col = TRUE)
+
+knitr::kable(row_tb2) 
+```
+
+## modelsummary
+
+The contingency table using the `datasummary_crosstab()` from the `{modelsummary}` package:
+
+```{r}
+modelsummary::datasummary_crosstab(treatment ~ bleeding, data = hemophilia)
+```
+:::
+:::
+
+From the row frequencies, there is not actually difference, as we noted in the plot we made above.
+
+
+Now, we will calculate the **expected frequencies** for each cell using the `expected()` function from `{epitools}` package:
+
+```{r}
+epitools::expected(tb2)
+```
+In the above table there are 2 cells (50%) with expected counts less than 5 (specifically 2.67 and 2.32), so the Chi-square test is not the appropriate one. In this case the Fisher’s exact test should be used instead.
+
+
+## Run Fisher's exact test
+
+Finally, we run the Fisher's exact test:
+
+::: {#exercise-joins .callout-tip}
+## Fisher's exact test
+
+::: panel-tabset
+## Base R
+
+```{r}
+fisher.test(tb2)
+```
+
+## rstatix
+
+```{r}
+fisher_test(tb2)
+```
+:::
+:::
+
+
+The p = 0.64 is higher than 0.05. There is absence of evidence for an association between the treatment regimens and bleeding complications (failed to reject $H_0$).
+
+
+
+
+## Having only the counts
+
+When we read an article which reports a chi-square or a fisher exact analysis we will see only the counts in a table without having the raw data of the categorical variables. In this instance, we can create the table using the `matrix()` function and run the tests. For our example of hemophilia we have the following table:
+
+```{r}
+dat <- c(13, 10, 2, 3)
+mx <- matrix(dat, nrow = 2, dimnames = list(c("A", "B"), c("no", "yes")))
+mx
+```
+
+
+
+
 
 
 

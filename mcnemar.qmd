@@ -1,3 +1,206 @@
-# Chi-sqaure test of independence {#sec-chi_square}
+# McNemar's test {#sec-mcnemar}
 
-## Independent Vs Dependent samples
+The McNemar's test (also known as the paired or matched chi-square) is used to determine if there are differences on a dichotomous dependent variable between two related groups. It can be considered to be similar to the paired-samples t-test, but for a dichotomous rather than a continuous dependent variable. The McNemar's test is used to analyze pretest-posttest study designs (observing categorical outcomes more than once in the same patient), as well as being commonly employed in analyzing matched pairs and case-control studies.
+
+
+```{r}
+#| include: false
+
+library(rstatix)
+library(janitor)
+library(modelsummary)
+library(exact2x2)
+
+library(here)
+library(tidyverse)
+```
+
+
+When we have finished this Chapter, we should be able to:
+
+::: {.callout-caution icon="false"}
+## Learning objectives
+
+-   Applying hypothesis testing
+-   Investigate a change in proportion for paired data using the McNemar's test
+-   Interpret the results
+:::
+
+
+## Research question and Hypothesis Testing
+
+We consider the data in *asthma* dataset. The dataset contains data from a survey of 86 children with asthma who attended a camp to learn how to self-manage their asthmatic episodes. The children were asked whether they knew (yes or not) how to manage their asthmatic episodes appropriately at both the start and completion of the camp. 
+
+In other words, was a significant change in children's knowledge of asthma management between the beginning and completion of the health camp?
+
+
+::: {.callout-note icon="false"}
+## Null hypothesis and alternative hypothesis
+
+-   $H_0$: There was no change in children’s knowledge of asthma management between the beginning and completion of the health camp
+-   $H_1$: There was change in children’s knowledge of asthma management between the beginning and completion of the health camp
+:::
+
+## Packages we need
+
+We need to load the following packages:
+
+```{r}
+#| eval: false
+
+library(rstatix)
+library(janitor)
+library(modelsummary)
+library(exact2x2)
+
+library(here)
+library(tidyverse)
+```
+
+## Preraring the data
+
+We import the data *asthma* in R:
+
+```{r}
+library(readxl)
+asthma <- read_excel(here("data", "asthma.xlsx"))
+```
+
+
+```{r}
+#| echo: false
+#| label: fig-asthma
+#| fig-cap: Table with data from "asthma" file.
+
+DT::datatable(
+  asthma, extensions = 'Buttons', options = list(
+    dom = 'tip'
+  )
+)
+
+```
+
+
+We inspect the data and the type of variables:
+
+```{r}
+glimpse(asthma)
+```
+
+The dataset *asthma* includes 86 children with asthma (rows) and 2 columns, the character (`<chr>`) `know_begin` and the character (`<chr>`) `know_end`. Therefore, we consider the dichotomous dependent variable asthma knowledge (yes/no) between two time points, `know_begin` and `know_end`.
+
+
+Both measurements `know_begin` and `know_end` should be converted to factors (`<fct>`) using the `convert_as_factor()` function as follows:
+
+```{r}
+asthma <- asthma %>%
+  convert_as_factor(know_begin, know_end)
+
+glimpse(asthma)
+```
+
+
+
+## Contigency table
+
+
+We can obtain the cross-tabulation table of the two measurements for the children’s knowledge of asthma:
+
+```{r}
+tb3 <- table(know_begin = asthma$know_begin, know_end = asthma$know_end)
+tb3
+```
+
+
+::: {.callout-note icon="false"}
+## Caution!
+
+There is a basic difference between this table and the more common two-way table. In this case, the count represents the **number of pairs**, not the number of individuals.
+
+:::
+
+
+We want to compare the proportion of children’s knowledge of asthma management at the beginning with the proportion of children’s knowledge of asthma management at the end. We can create a more informative table using the functions from `{janitor}` package for obtaining total percentages and marginal totals.
+
+
+::: {#exercise-joins .callout-tip}
+## Table with total percentages and marginal totals
+
+::: panel-tabset
+## janitor
+We can create an informative table using the functions from `{janitor}` package for obtaining total percentages and marginal totals:
+
+```{r}
+total_tb2 <- asthma %>%
+  tabyl(know_begin, know_end) %>%
+  adorn_totals(c("row", "col")) %>%
+  adorn_percentages("all") %>%
+  adorn_pct_formatting(digits = 1) %>%
+  adorn_ns %>%
+  adorn_title
+
+knitr::kable(total_tb2) 
+```
+
+## modelsummary
+
+The contingency table using the `datasummary_crosstab()` from the `{modelsummary}` package:
+
+```{r}
+modelsummary::datasummary_crosstab(know_begin ~ know_end, 
+                     statistic = 1 ~ 1 + N + Percent(), 
+                     data = asthma)
+```
+
+:::
+:::
+
+
+The proportion of children who knew to manage asthma at the beginning is (6+24)/86= 30/86 = 0.349 or 34.9\%. The proportion of children who knew to mange asthma at the end is (29+24)/86 = 53/86 = 0.616 or 61.6\%. 
+
+
+
+::: {.callout-note icon="false"}
+## Assumption
+
+The basic assumption of the test is that the sum of the **discordant** cells should be larger than 25 (that is fulfilled in our example).
+
+:::
+
+
+
+## Run Fisher's exact test
+
+Finally, we run the McNemar's test:
+
+::: {#exercise-joins .callout-tip}
+## McNemar's test
+
+::: panel-tabset
+## Base R
+
+```{r}
+mcnemar.test(tb3)
+```
+
+## rstatix
+
+```{r}
+mcnemar_test(tb3)
+```
+
+:::
+:::
+
+The proportion of children who knew to manage asthma at the end (61.6\%) is significant larger compared with the proportion of children who knew to manage asthma at the beginning (34.9\%) (p-value <0.001).
+
+
+
+
+## Exact binomial test
+
+Exact binomial test for 2x2 table when the sum of the **discordant** cells are less than 25:
+
+```{r}
+mcnemar.exact(tb3)
+```

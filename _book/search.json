@@ -326,7 +326,7 @@
     "href": "chi_square.html#preraring-the-data",
     "title": "7  Chi-sqaure test of independence",
     "section": "\n7.3 Preraring the data",
-    "text": "7.3 Preraring the data\nWe import the data meldata in R:\n\nlibrary(readxl)\nmeldata <- read_excel(here(\"data\", \"meldata.xlsx\"))\n\n\n\n\nFigure 7.1: Table with data from “meldata” file.\n\n\n\nWe inspect the data and the type of variables:\n\nglimpse(meldata)\n\nRows: 205\nColumns: 7\n$ time      <dbl> 10, 30, 35, 99, 185, 204, 210, 232, 232, 279, 295, 355, 386,…\n$ status    <chr> \"Alive\", \"Alive\", \"Alive\", \"Alive\", \"Died\", \"Died\", \"Died\", …\n$ sex       <chr> \"Male\", \"Male\", \"Male\", \"Female\", \"Male\", \"Male\", \"Male\", \"F…\n$ age       <dbl> 76, 56, 41, 71, 52, 28, 77, 60, 49, 68, 53, 64, 68, 63, 14, …\n$ year      <dbl> 1972, 1968, 1977, 1968, 1965, 1971, 1972, 1974, 1968, 1971, …\n$ thickness <dbl> 6.76, 0.65, 1.34, 2.90, 12.08, 4.84, 5.16, 3.22, 12.88, 7.41…\n$ ulcer     <chr> \"Present\", \"Absent\", \"Absent\", \"Absent\", \"Present\", \"Present…\n\n\nThe data set meldata has 250 patients (rows) and includes seven variables (columns). We are intrested in the character (<chr>) ulcer variable and the character (<chr>) status variable which should be converted to factor (<fct>) variables using the convert_as_factor() function as follows:\n\nmeldata <- meldata %>%\n  convert_as_factor(status, ulcer)\n\nglimpse(meldata)\n\nRows: 205\nColumns: 7\n$ time      <dbl> 10, 30, 35, 99, 185, 204, 210, 232, 232, 279, 295, 355, 386,…\n$ status    <fct> Alive, Alive, Alive, Alive, Died, Died, Died, Alive, Died, D…\n$ sex       <chr> \"Male\", \"Male\", \"Male\", \"Female\", \"Male\", \"Male\", \"Male\", \"F…\n$ age       <dbl> 76, 56, 41, 71, 52, 28, 77, 60, 49, 68, 53, 64, 68, 63, 14, …\n$ year      <dbl> 1972, 1968, 1977, 1968, 1965, 1971, 1972, 1974, 1968, 1971, …\n$ thickness <dbl> 6.76, 0.65, 1.34, 2.90, 12.08, 4.84, 5.16, 3.22, 12.88, 7.41…\n$ ulcer     <fct> Present, Absent, Absent, Absent, Present, Present, Present, …"
+    "text": "7.3 Preraring the data\nWe import the data meldata in R:\n\nlibrary(readxl)\nmeldata <- read_excel(here(\"data\", \"meldata.xlsx\"))\n\n\n\n\nFigure 7.1: Table with data from “meldata” file.\n\n\n\nWe inspect the data and the type of variables:\n\nglimpse(meldata)\n\nRows: 205\nColumns: 7\n$ time      <dbl> 10, 30, 35, 99, 185, 204, 210, 232, 232, 279, 295, 355, 386,…\n$ status    <chr> \"Alive\", \"Alive\", \"Alive\", \"Alive\", \"Died\", \"Died\", \"Died\", …\n$ sex       <chr> \"Male\", \"Male\", \"Male\", \"Female\", \"Male\", \"Male\", \"Male\", \"F…\n$ age       <dbl> 76, 56, 41, 71, 52, 28, 77, 60, 49, 68, 53, 64, 68, 63, 14, …\n$ year      <dbl> 1972, 1968, 1977, 1968, 1965, 1971, 1972, 1974, 1968, 1971, …\n$ thickness <dbl> 6.76, 0.65, 1.34, 2.90, 12.08, 4.84, 5.16, 3.22, 12.88, 7.41…\n$ ulcer     <chr> \"Present\", \"Absent\", \"Absent\", \"Absent\", \"Present\", \"Present…\n\n\nThe data set meldata has 250 patients (rows) and includes seven variables (columns). We are interested in the character (<chr>) ulcer variable and the character (<chr>) status variable which should be converted to factor (<fct>) variables using the convert_as_factor() function as follows:\n\nmeldata <- meldata %>%\n  convert_as_factor(status, ulcer)\n\nglimpse(meldata)\n\nRows: 205\nColumns: 7\n$ time      <dbl> 10, 30, 35, 99, 185, 204, 210, 232, 232, 279, 295, 355, 386,…\n$ status    <fct> Alive, Alive, Alive, Alive, Died, Died, Died, Alive, Died, D…\n$ sex       <chr> \"Male\", \"Male\", \"Male\", \"Female\", \"Male\", \"Male\", \"Male\", \"F…\n$ age       <dbl> 76, 56, 41, 71, 52, 28, 77, 60, 49, 68, 53, 64, 68, 63, 14, …\n$ year      <dbl> 1972, 1968, 1977, 1968, 1965, 1971, 1972, 1974, 1968, 1971, …\n$ thickness <dbl> 6.76, 0.65, 1.34, 2.90, 12.08, 4.84, 5.16, 3.22, 12.88, 7.41…\n$ ulcer     <fct> Present, Absent, Absent, Absent, Present, Present, Present, …"
   },
   {
     "objectID": "chi_square.html#plot-the-data",
@@ -354,7 +354,7 @@
     "href": "chi_square.html#run-pearsons-chi-square-test",
     "title": "7  Chi-sqaure test of independence",
     "section": "\n7.7 Run Pearson’s chi-square test",
-    "text": "7.7 Run Pearson’s chi-square test\nFinally we run the chi-square test:\n\n\n\n\n\n\nchi-square test\n\n\n\n\n\nBase R\nrstatix\n\n\n\n\nchisq.test(tb1)\n\n\n    Pearson's Chi-squared test with Yates' continuity correction\n\ndata:  tb1\nX-squared = 23.631, df = 1, p-value = 1.167e-06\n\n\n\n\n\nchisq_test(tb1)\n\n# A tibble: 1 × 6\n      n statistic          p    df method          p.signif\n* <int>     <dbl>      <dbl> <int> <chr>           <chr>   \n1   205      23.6 0.00000117     1 Chi-square test ****    \n\n\n\n\n\n\n\nThere is evidence for an association between the ulcer and status (reject \\(H_0\\)). The proportion of patients with ulcerated tumors who died (45.6%) is significant larger compared with non-ulcerated tumors (13.9%) (p<0.001)."
+    "text": "7.7 Run Pearson’s chi-square test\nFinally, we run the chi-square test:\n\n\n\n\n\n\nchi-square test\n\n\n\n\n\nBase R\nrstatix\n\n\n\n\nchisq.test(tb1)\n\n\n    Pearson's Chi-squared test with Yates' continuity correction\n\ndata:  tb1\nX-squared = 23.631, df = 1, p-value = 1.167e-06\n\n\n\n\n\nchisq_test(tb1)\n\n# A tibble: 1 × 6\n      n statistic          p    df method          p.signif\n* <int>     <dbl>      <dbl> <int> <chr>           <chr>   \n1   205      23.6 0.00000117     1 Chi-square test ****    \n\n\n\n\n\n\n\nThere is evidence for an association between the ulcer and status (reject \\(H_0\\)). The proportion of patients with ulcerated tumors who died (45.6%) is significant larger compared with non-ulcerated tumors (13.9%) (p<0.001)."
   },
   {
     "objectID": "chi_square.html#risk-ratio-and-odds-ratio",
@@ -375,6 +375,97 @@
     "href": "fisher_exact.html#research-question-and-hypothesis-testing",
     "title": "8  Fisher’s exact test",
     "section": "\n8.1 Research question and Hypothesis Testing",
-    "text": "8.1 Research question and Hypothesis Testing\nWe consider the data in hemophilia dataset. In a survey there are two treatment regimens studied for controlling bleeding in 25 patients with hemophilia undergoing surgery. We want to investigate if there is an association between the treatment regimen (treatment A or B) and the bleeding complications (no or yes). The null hypothesis (\\(H_0\\)) is that the bleeding complications are independent from the treatment regimen, while the alternative (\\(H_1\\)) is that are dependent.\n\n\n\n\n\n\nNull hypothesis and alternative hypothesis\n\n\n\n\n\n\\(H_0\\): There is no association between the two categorical variables (they are independent)\n\n\\(H_1\\): There is association between the two categorical variables (they are dependent)\n\n\n\nNOTE: In practice, the null hypothesis of independence, for our particular question, is no difference in the proportion of patients with ulcerated compared with non-ulcerated tumors (\\(p_{ulcerated} = p_{non-ucerated}\\))."
+    "text": "8.1 Research question and Hypothesis Testing\nWe consider the data in hemophilia dataset. In a survey there are two treatment regimens studied for controlling bleeding in 28 patients with hemophilia undergoing surgery. We want to investigate if there is an association between the treatment regimen (treatment A or B) and the bleeding complications (no or yes). The null hypothesis (\\(H_0\\)) is that the bleeding complications are independent from the treatment regimen, while the alternative (\\(H_1\\)) is that are dependent.\n\n\n\n\n\n\nNull hypothesis and alternative hypothesis\n\n\n\n\n\n\\(H_0\\): There is no association between the two categorical variables (they are independent)\n\n\\(H_1\\): There is association between the two categorical variables (they are dependent)\n\n\n\nNOTE: In practice, the null hypothesis of independence, for our particular question, is no difference in the proportion of patients with bleeding complications compared with patients with no bleeding complications (\\(p_{bleeding} = p_{no bleeding}\\))."
+  },
+  {
+    "objectID": "fisher_exact.html#packages-we-need",
+    "href": "fisher_exact.html#packages-we-need",
+    "title": "8  Fisher’s exact test",
+    "section": "\n8.2 Packages we need",
+    "text": "8.2 Packages we need\nWe need to load the following packages:\n\nlibrary(rstatix)\n\n\nlibrary(patchwork)\nlibrary(here)\nlibrary(tidyverse)"
+  },
+  {
+    "objectID": "fisher_exact.html#preraring-the-data",
+    "href": "fisher_exact.html#preraring-the-data",
+    "title": "8  Fisher’s exact test",
+    "section": "\n8.3 Preraring the data",
+    "text": "8.3 Preraring the data\nWe import the data meldata in R:\n\nlibrary(readxl)\nhemophilia <- read_excel(here(\"data\", \"hemophilia.xlsx\"))\n\n\n\n\nFigure 8.1: Table with data from “meldata” file.\n\n\n\nWe inspect the data and the type of variables:\n\nglimpse(hemophilia)\n\nRows: 28\nColumns: 2\n$ treatment <chr> \"A\", \"A\", \"A\", \"B\", \"A\", \"B\", \"B\", \"A\", \"A\", \"A\", \"B\", \"A\", …\n$ bleeding  <chr> \"no\", \"no\", \"no\", \"yes\", \"no\", \"no\", \"no\", \"no\", \"yes\", \"no\"…\n\n\nThe dataset hemophilia has 28 patients (rows) and includes 2 variables (columns), the character (<chr>) variable named treatment and the character (<chr>) variable named bleeding. Both of them should be converted to factor (<fct>) variables using the convert_as_factor() function as follows:\n\nhemophilia <- hemophilia %>%\n  convert_as_factor(treatment, bleeding)\n\nglimpse(hemophilia)\n\nRows: 28\nColumns: 2\n$ treatment <fct> A, A, A, B, A, B, B, A, A, A, B, A, B, B, A, A, B, B, B, A, …\n$ bleeding  <fct> no, no, no, yes, no, no, no, no, yes, no, no, no, yes, no, n…"
+  },
+  {
+    "objectID": "fisher_exact.html#plot-the-data",
+    "href": "fisher_exact.html#plot-the-data",
+    "title": "8  Fisher’s exact test",
+    "section": "\n8.4 Plot the data",
+    "text": "8.4 Plot the data\nWe count the number of patients with bleeding in the two regimens. It is useful to plot this as counts but also as percentages and compare them.\n\np3 <- hemophilia %>%\n  ggplot(aes(x = treatment, fill = bleeding)) +\n  geom_bar(width = 0.7) +\n  scale_fill_jama() +\n  theme_bw(base_size = 14) +\n  theme(legend.position = \"bottom\")\n\n\np4 <- hemophilia %>%\n  ggplot(aes(x = treatment, fill = bleeding)) +\n  geom_bar(position = \"fill\", width = 0.7) +\n  scale_y_continuous(labels=scales::percent) +\n  scale_fill_jama() +\n  ylab(\"Percentage\") +\n  theme_bw(base_size = 14) +\n  theme(legend.position = \"bottom\") \n\np3 + p4 + \n  plot_layout(guides = \"collect\") & theme(legend.position = 'bottom')\n\n\n\nFigure 8.2: Bar plot.\n\n\n\n\nThe above bar plots with counts show graphically that the number of patients who had bleeding complications was similar in the two regimens. Note that the number of patients included in the study is small (n=28)."
+  },
+  {
+    "objectID": "fisher_exact.html#contigency-table-and-expected-frequencies",
+    "href": "fisher_exact.html#contigency-table-and-expected-frequencies",
+    "title": "8  Fisher’s exact test",
+    "section": "\n8.5 Contigency table and Expected frequencies",
+    "text": "8.5 Contigency table and Expected frequencies\nFirst, we will create a contingency 2x2 table (two categorical variables with exactly two levels each) with the frequencies using the Base R.\n\ntb2 <- table(hemophilia$treatment, hemophilia$bleeding)\ntb2\n\n   \n    no yes\n  A 13   2\n  B 10   3\n\n\nNext, we will also create a more informative table with row percentages and marginal totals.\n\n\n\n\n\n\nTable with row percentages and marginal totals\n\n\n\n\n\nfinalfit\nmodelsummary\n\n\n\nUsing the function summary_factorlist() which is included in finalfit package for obtaining row percentages and marginal totals:\n\nrow_tb2 <- hemophilia %>%\n  finalfit::summary_factorlist(dependent = \"bleeding\", add_dependent_label = T,\n                     explanatory = \"treatment\", add_col_totals = T,\n                     include_col_totals_percent = F,\n                     column = FALSE, total_col = TRUE)\n\nknitr::kable(row_tb2) \n\n\n\nDependent: bleeding\n\nno\nyes\nTotal\n\n\n\nTotal N\n\n23\n5\n28\n\n\ntreatment\nA\n13 (86.7)\n2 (13.3)\n15 (100)\n\n\n\nB\n10 (76.9)\n3 (23.1)\n13 (100)\n\n\n\n\n\n\n\nThe contingency table using the datasummary_crosstab() from the modelsummary package:\n\nmodelsummary::datasummary_crosstab(treatment ~ bleeding, data = hemophilia)\n\n\n\n\n treatment \n      \n    no \n    yes \n    All \n  \n\n\n A \n    N \n    13 \n    2 \n    15 \n  \n\n  \n    % row \n    86.7 \n    13.3 \n    100.0 \n  \n\n B \n    N \n    10 \n    3 \n    13 \n  \n\n  \n    % row \n    76.9 \n    23.1 \n    100.0 \n  \n\n All \n    N \n    23 \n    5 \n    28 \n  \n\n  \n    % row \n    82.1 \n    17.9 \n    100.0 \n  \n\n\n\n\n\n\n\n\n\nFrom the row frequencies, there is not actually difference, as we noted in the plot we made above.\nNow, we will calculate the expected frequencies for each cell using the expected() function from {epitools} package:\n\nepitools::expected(tb2)\n\n   \n          no      yes\n  A 12.32143 2.678571\n  B 10.67857 2.321429\n\n\nIn the above table there are 2 cells (50%) with expected counts less than 5 (specifically 2.67 and 2.32), so the Chi-square test is not the appropriate one. In this case the Fisher’s exact test should be used instead."
+  },
+  {
+    "objectID": "fisher_exact.html#run-fishers-exact-test",
+    "href": "fisher_exact.html#run-fishers-exact-test",
+    "title": "8  Fisher’s exact test",
+    "section": "\n8.6 Run Fisher’s exact test",
+    "text": "8.6 Run Fisher’s exact test\nFinally, we run the Fisher’s exact test:\n\n\n\n\n\n\nFisher’s exact test\n\n\n\n\n\nBase R\nrstatix\n\n\n\n\nfisher.test(tb2)\n\n\n    Fisher's Exact Test for Count Data\n\ndata:  tb2\np-value = 0.6389\nalternative hypothesis: true odds ratio is not equal to 1\n95 percent confidence interval:\n  0.1807204 26.9478788\nsample estimates:\nodds ratio \n   1.90363 \n\n\n\n\n\nfisher_test(tb2)\n\n# A tibble: 1 × 3\n      n     p p.signif\n* <int> <dbl> <chr>   \n1    28 0.639 ns      \n\n\n\n\n\n\n\nThe p = 0.64 is higher than 0.05. There is absence of evidence for an association between the treatment regimens and bleeding complications (failed to reject \\(H_0\\))."
+  },
+  {
+    "objectID": "fisher_exact.html#having-only-the-counts",
+    "href": "fisher_exact.html#having-only-the-counts",
+    "title": "8  Fisher’s exact test",
+    "section": "\n8.7 Having only the counts",
+    "text": "8.7 Having only the counts\nWhen we read an article which reports a chi-square or a fisher exact analysis we will see only the counts in a table without having the raw data of the categorical variables. In this instance, we can create the table using the matrix() function and run the tests. For our example of hemophilia we have the following table:\n\ndat <- c(13, 10, 2, 3)\nmx <- matrix(dat, nrow = 2, dimnames = list(c(\"A\", \"B\"), c(\"no\", \"yes\")))\nmx\n\n  no yes\nA 13   2\nB 10   3"
+  },
+  {
+    "objectID": "mcnemar.html",
+    "href": "mcnemar.html",
+    "title": "9  McNemar’s test",
+    "section": "",
+    "text": "The McNemar’s test (also known as the paired or matched chi-square) is used to determine if there are differences on a dichotomous dependent variable between two related groups. It can be considered to be similar to the paired-samples t-test, but for a dichotomous rather than a continuous dependent variable. The McNemar’s test is used to analyze pretest-posttest study designs (observing categorical outcomes more than once in the same patient), as well as being commonly employed in analyzing matched pairs and case-control studies.\nWhen we have finished this Chapter, we should be able to:"
+  },
+  {
+    "objectID": "mcnemar.html#research-question-and-hypothesis-testing",
+    "href": "mcnemar.html#research-question-and-hypothesis-testing",
+    "title": "9  McNemar’s test",
+    "section": "\n9.1 Research question and Hypothesis Testing",
+    "text": "9.1 Research question and Hypothesis Testing\nWe consider the data in asthma dataset. The dataset contains data from a survey of 86 children with asthma who attended a camp to learn how to self-manage their asthmatic episodes. The children were asked whether they knew (yes or not) how to manage their asthmatic episodes appropriately at both the start and completion of the camp.\nIn other words, was a significant change in children’s knowledge of asthma management between the beginning and completion of the health camp?\n\n\n\n\n\n\nNull hypothesis and alternative hypothesis\n\n\n\n\n\n\\(H_0\\): There was no change in children’s knowledge of asthma management between the beginning and completion of the health camp\n\n\\(H_1\\): There was change in children’s knowledge of asthma management between the beginning and completion of the health camp"
+  },
+  {
+    "objectID": "mcnemar.html#packages-we-need",
+    "href": "mcnemar.html#packages-we-need",
+    "title": "9  McNemar’s test",
+    "section": "\n9.2 Packages we need",
+    "text": "9.2 Packages we need\nWe need to load the following packages:\n\nlibrary(rstatix)\nlibrary(janitor)\nlibrary(modelsummary)\nlibrary(exact2x2)\n\nlibrary(here)\nlibrary(tidyverse)"
+  },
+  {
+    "objectID": "mcnemar.html#preraring-the-data",
+    "href": "mcnemar.html#preraring-the-data",
+    "title": "9  McNemar’s test",
+    "section": "\n9.3 Preraring the data",
+    "text": "9.3 Preraring the data\nWe import the data asthma in R:\n\nlibrary(readxl)\nasthma <- read_excel(here(\"data\", \"asthma.xlsx\"))\n\n\n\n\nFigure 9.1: Table with data from “asthma” file.\n\n\n\nWe inspect the data and the type of variables:\n\nglimpse(asthma)\n\nRows: 86\nColumns: 2\n$ know_begin <chr> \"yes\", \"no\", \"yes\", \"no\", \"no\", \"no\", \"yes\", \"no\", \"no\", \"y…\n$ know_end   <chr> \"yes\", \"no\", \"no\", \"no\", \"no\", \"no\", \"yes\", \"yes\", \"yes\", \"…\n\n\nThe dataset asthma includes 86 children with asthma (rows) and 2 columns, the character (<chr>) know_begin and the character (<chr>) know_end. Therefore, we consider the dichotomous dependent variable asthma knowledge (yes/no) between two time points, know_begin and know_end.\nBoth measurements know_begin and know_end should be converted to factors (<fct>) using the convert_as_factor() function as follows:\n\nasthma <- asthma %>%\n  convert_as_factor(know_begin, know_end)\n\nglimpse(asthma)\n\nRows: 86\nColumns: 2\n$ know_begin <fct> yes, no, yes, no, no, no, yes, no, no, yes, no, no, yes, ye…\n$ know_end   <fct> yes, no, no, no, no, no, yes, yes, yes, yes, yes, no, yes, …"
+  },
+  {
+    "objectID": "mcnemar.html#contigency-table",
+    "href": "mcnemar.html#contigency-table",
+    "title": "9  McNemar’s test",
+    "section": "\n9.4 Contigency table",
+    "text": "9.4 Contigency table\nWe can obtain the cross-tabulation table of the two measurements for the children’s knowledge of asthma:\n\ntb3 <- table(know_begin = asthma$know_begin, know_end = asthma$know_end)\ntb3\n\n          know_end\nknow_begin no yes\n       no  27  29\n       yes  6  24\n\n\n\n\n\n\n\n\nCaution!\n\n\n\nThere is a basic difference between this table and the more common two-way table. In this case, the count represents the number of pairs, not the number of individuals.\n\n\nWe want to compare the proportion of children’s knowledge of asthma management at the beginning with the proportion of children’s knowledge of asthma management at the end. We can create a more informative table using the functions from janitor package for obtaining total percentages and marginal totals.\n\n\n\n\n\n\nTable with total percentages and marginal totals\n\n\n\n\n\njanitor\nmodelsummary\n\n\n\nWe can create an informative table using the functions from janitor package for obtaining total percentages and marginal totals:\n\ntotal_tb2 <- asthma %>%\n  tabyl(know_begin, know_end) %>%\n  adorn_totals(c(\"row\", \"col\")) %>%\n  adorn_percentages(\"all\") %>%\n  adorn_pct_formatting(digits = 1) %>%\n  adorn_ns %>%\n  adorn_title\n\nknitr::kable(total_tb2) \n\n\n\n\nknow_end\n\n\n\n\n\nknow_begin\nno\nyes\nTotal\n\n\nno\n31.4% (27)\n33.7% (29)\n65.1% (56)\n\n\nyes\n7.0% (6)\n27.9% (24)\n34.9% (30)\n\n\nTotal\n38.4% (33)\n61.6% (53)\n100.0% (86)\n\n\n\n\n\n\n\nThe contingency table using the datasummary_crosstab() from the modelsummary package:\n\nmodelsummary::datasummary_crosstab(know_begin ~ know_end, \n                     statistic = 1 ~ 1 + N + Percent(), \n                     data = asthma)\n\n\n\n\n know_begin \n      \n    no \n    yes \n    All \n  \n\n\n no \n    N \n    27 \n    29 \n    56 \n  \n\n  \n    % \n    31.4 \n    33.7 \n    65.1 \n  \n\n yes \n    N \n    6 \n    24 \n    30 \n  \n\n  \n    % \n    7.0 \n    27.9 \n    34.9 \n  \n\n All \n    N \n    33 \n    53 \n    86 \n  \n\n  \n    % \n    38.4 \n    61.6 \n    100.0 \n  \n\n\n\n\n\n\n\n\n\nThe proportion of children who knew to manage asthma at the beginning is (6+24)/86= 30/86 = 0.349 or 34.9%. The proportion of children who knew to mange asthma at the end is (29+24)/86 = 53/86 = 0.616 or 61.6%.\n\n\n\n\n\n\nAssumption\n\n\n\nThe basic assumption of the test is that the sum of the discordant cells should be larger than 25 (that is fulfilled in our example)."
+  },
+  {
+    "objectID": "mcnemar.html#run-fishers-exact-test",
+    "href": "mcnemar.html#run-fishers-exact-test",
+    "title": "9  McNemar’s test",
+    "section": "\n9.5 Run Fisher’s exact test",
+    "text": "9.5 Run Fisher’s exact test\nFinally, we run the McNemar’s test:\n\n\n\n\n\n\nMcNemar’s test\n\n\n\n\n\nBase R\nrstatix\n\n\n\n\nmcnemar.test(tb3)\n\n\n    McNemar's Chi-squared test with continuity correction\n\ndata:  tb3\nMcNemar's chi-squared = 13.829, df = 1, p-value = 0.0002003\n\n\n\n\n\nmcnemar_test(tb3)\n\n# A tibble: 1 × 6\n      n statistic    df      p p.signif method      \n* <int>     <dbl> <dbl>  <dbl> <chr>    <chr>       \n1    86      13.8     1 0.0002 ***      McNemar test\n\n\n\n\n\n\n\nThe proportion of children who knew to manage asthma at the end (61.6%) is significant larger compared with the proportion of children who knew to manage asthma at the beginning (34.9%) (p-value <0.001)."
+  },
+  {
+    "objectID": "mcnemar.html#exact-binomial-test",
+    "href": "mcnemar.html#exact-binomial-test",
+    "title": "9  McNemar’s test",
+    "section": "\n9.6 Exact binomial test",
+    "text": "9.6 Exact binomial test\nExact binomial test for 2x2 table when the sum of the discordant cells are less than 25:\n\nmcnemar.exact(tb3)\n\n\n    Exact McNemar test (with central confidence intervals)\n\ndata:  tb3\nb = 29, c = 6, p-value = 0.0001168\nalternative hypothesis: true odds ratio is not equal to 1\n95 percent confidence interval:\n  1.971783 14.238838\nsample estimates:\nodds ratio \n  4.833333"
   }
 ]

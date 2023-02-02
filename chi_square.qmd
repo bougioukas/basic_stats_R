@@ -1,6 +1,6 @@
 # Chi-sqaure test of independence {#sec-chi_square}
 
-If we want to see whether there’s an association between two categorical variables we can use the Pearson’s chi-square test, often called chi-square test of independence. This is an extremely elegant statistic based on the simple idea of comparing the frequencies we observe in certain categories to the frequencies we might expect to get in those categories by chance. 
+If we want to see whether there's an association between two categorical variables we can use the Pearson's chi-square test, often called chi-square test of independence. This is an extremely elegant statistic based on the simple idea of comparing the frequencies we observe in certain categories to the frequencies we might expect to get in those categories by chance.
 
 ```{r}
 #| include: false
@@ -18,17 +18,14 @@ When we have finished this Chapter, we should be able to:
 ::: {.callout-caution icon="false"}
 ## Learning objectives
 
-- Applying hypothesis testing
-- Investigate the association between two categorical variables using the chi-square test
-- Interpret the results
-
+-   Applying hypothesis testing
+-   Investigate the association between two categorical variables using the chi-square test
+-   Interpret the results
 :::
-
-
 
 ## Research question and Hypothesis Testing
 
-We will use the “Survival from Malignant Melanoma” dataset named "meldata". The data consist of measurements made on patients with malignant melanoma, a type of skin cancer. Each patient had their tumor removed by surgery at the Department of Plastic Surgery, University Hospital of Odense, Denmark, between 1962 and 1977.
+We will use the "Survival from Malignant Melanoma" dataset named "meldata". The data consist of measurements made on patients with malignant melanoma, a type of skin cancer. Each patient had their tumor removed by surgery at the Department of Plastic Surgery, University Hospital of Odense, Denmark, between 1962 and 1977.
 
 Suppose we are interested in the association between tumor ulceration and death from melanoma.
 
@@ -39,9 +36,7 @@ Suppose we are interested in the association between tumor ulceration and death 
 -   $H_1$: There is association between the two categorical variables (they are dependent)
 :::
 
-**NOTE:** In practice, the null hypothesis of independence, for our particular question, is no difference in the proportion of patients with ulcerated tumors who die compared with non-ulcerated tumors ($p_{ulcerated} = p_{non-ucerated}$). 
-
-
+**NOTE:** In practice, the null hypothesis of independence, for our particular question, is no difference in the proportion of patients with ulcerated tumors who die compared with non-ulcerated tumors ($p_{ulcerated} = p_{non-ucerated}$).
 
 ## Packages we need
 
@@ -58,7 +53,6 @@ library(here)
 library(tidyverse)
 ```
 
-
 ## Preraring the data
 
 We import the data *meldata* in R:
@@ -68,7 +62,6 @@ library(readxl)
 meldata <- read_excel(here("data", "meldata.xlsx"))
 
 ```
-
 
 ```{r}
 #| echo: false
@@ -83,16 +76,13 @@ DT::datatable(
 
 ```
 
-
 We inspect the data and the type of variables:
 
 ```{r}
 glimpse(meldata)
 ```
 
-
-The data set *meldata* has 250 patients (rows) and includes seven variables (columns). We are intrested in the character (`<chr>`) `ulcer` variable and the character (`<chr>`) `status` variable which should be converted to factor (`<fct>`) variables using the `convert_as_factor()` function as follows:
-
+The data set *meldata* has 250 patients (rows) and includes seven variables (columns). We are interested in the character (`<chr>`) `ulcer` variable and the character (`<chr>`) `status` variable which should be converted to factor (`<fct>`) variables using the `convert_as_factor()` function as follows:
 
 ```{r}
 meldata <- meldata %>%
@@ -101,12 +91,9 @@ meldata <- meldata %>%
 glimpse(meldata)
 ```
 
-
-
 ## Plot the data
 
 We are interested in the association between tumor ulceration and death from melanoma. It is useful to plot the data as counts but also as percentages. It is percentages we are comparing, but we really want to know the absolute numbers as well.
-
 
 ```{r}
 #| warning: false
@@ -136,11 +123,9 @@ p1 + p2 +
 
 Just from the plot, death from melanoma in the ulcerated tumor group is around 40% and in the non-ulcerated group around 13%. The number of patients included in the study is not huge, however, this still looks like a real difference given its effect size.
 
-
 ## Contigency table and Expected frequencies
 
 First, we will create a contingency *2x2* table (two categorical variables with exactly two levels each) with the frequencies using the Base R.
-
 
 ```{r}
 tb1 <- table(meldata$ulcer, meldata$status)
@@ -167,7 +152,6 @@ row_tb1 <- meldata %>%
 knitr::kable(row_tb1) 
 ```
 
-
 ## modelsummary
 
 The contingency table using the `datasummary_crosstab()` from the `{modelsummary}` package:
@@ -175,23 +159,20 @@ The contingency table using the `datasummary_crosstab()` from the `{modelsummary
 ```{r}
 modelsummary::datasummary_crosstab(ulcer ~ status, data = meldata)
 ```
-
 :::
 :::
 
-From the raw frequencies, there seems to be a large difference, as we noted in the plot we made above. The proportion of patients with ulcerated tumors who die equals to 45.6\% compared with non-ulcerated tumors 13.9\%.
-
+From the raw frequencies, there seems to be a large difference, as we noted in the plot we made above. The proportion of patients with ulcerated tumors who die equals to 45.6% compared with non-ulcerated tumors 13.9%.
 
 ## Assumptions
 
 ::: {.callout-note icon="false"}
 ## Check if the following assumption is satisfied
 
-A commonly stated assumption of the chi-square test is the requirement to have an expected count of **at least 5 in each cell** of the `2x2` table. 
+A commonly stated assumption of the chi-square test is the requirement to have an expected count of **at least 5 in each cell** of the `2x2` table.
 
-For larger tables, all expected counts should be > 1 and no more than 20\% of all cells should have expected counts < 5.
+For larger tables, all expected counts should be \> 1 and no more than 20% of all cells should have expected counts \< 5.
 :::
-
 
 We can calculate the **expected frequencies** for each cell using the `expected()` function from `{epitools}` package:
 
@@ -201,11 +182,9 @@ epitools::expected(tb1)
 
 Here, as we observe the assumption is fulfilled.
 
+## Run Pearson's chi-square test
 
-
-## Run Pearson’s chi-square test
-
-Finally we run the chi-square test:
+Finally, we run the chi-square test:
 
 ::: {#exercise-joins .callout-tip}
 ## chi-square test
@@ -217,22 +196,17 @@ Finally we run the chi-square test:
 chisq.test(tb1)
 ```
 
-
 ## rstatix
 
 ```{r}
 chisq_test(tb1)
 ```
-
 :::
 :::
 
-
-There is evidence for an association between the ulcer and status (reject $H_0$). The proportion of patients with ulcerated tumors who died (45.6\%) is significant larger compared with non-ulcerated tumors (13.9\%) (p<0.001).
-
+There is evidence for an association between the ulcer and status (reject $H_0$). The proportion of patients with ulcerated tumors who died (45.6%) is significant larger compared with non-ulcerated tumors (13.9%) (p\<0.001).
 
 ## Risk Ratio and Odds ratio
-
 
 **Risk ratio**
 
@@ -243,46 +217,31 @@ epitools::table.margins(tb1)
 ```
 
 \vspace{14pt}
-we can calculate the risk ratio by hand:
-$$ Risk \ Ratio = \frac{\frac{41}{90}}{\frac{16}{115}} =\frac{0.4556}{0.1391} = 3.27$$
 
-The risk ratio with the 95\% CI using R:
+we can calculate the risk ratio by hand: $$ Risk \ Ratio = \frac{\frac{41}{90}}{\frac{16}{115}} =\frac{0.4556}{0.1391} = 3.27$$
+
+The risk ratio with the 95% CI using R:
 
 ```{r}
 epitools::riskratio(tb1)$measure
 ```
 
-
-The risk of dying is 3.27 (95\% CI: 1.97, 5.4) times higher for patients with ulcerated tumors compared to non-ulcerated tumors.
-
+The risk of dying is 3.27 (95% CI: 1.97, 5.4) times higher for patients with ulcerated tumors compared to non-ulcerated tumors.
 
 **Odds ratio**
 
-We can also calculate the odds ratio by hand:
-$$ Odds \ Ratio = \frac{\frac{41}{49}}{\frac{16}{99}} =\frac{0.837}{0.162} = 5.17$$
-The odds ratio with the 95\% CI using R:
+We can also calculate the odds ratio by hand: $$ Odds \ Ratio = \frac{\frac{41}{49}}{\frac{16}{99}} =\frac{0.837}{0.162} = 5.17$$ The odds ratio with the 95% CI using R:
 
 ```{r}
 epitools::oddsratio(tb1, method = "wald")$measure
 ```
 
+The odds of dying is 5.17 (95% CI: 2.65, 10.13) times higher for patients with ulcerated tumors compared to non-ulcerated tumors patients.
 
-The odds of dying is 5.17 (95\% CI: 2.65, 10.13) times higher for patients with ulcerated tumors compared to non-ulcerated tumors patients.
-
-
-Finnaly, we can also reverse the odds ratio:
-$$ \frac{1}{OR} = \frac{1}{5.17} = 0.193$$
+Finnaly, we can also reverse the odds ratio: $$ \frac{1}{OR} = \frac{1}{5.17} = 0.193$$
 
 ```{r}
 epitools::oddsratio(tb1, method = "wald", rev = "rows")$measure
 ```
 
-The non-ulcerated tumors patients has 0.193 (95\% CI: 0.098, 0.378) times the odds (of dying) of the ulcerated tumors. This means that the non-ulcerated tumors patients has (0.193 - 1= -0.807) 80.7% lower odds of dying than ulcerated tumors.
-
-
-
-
-
-
-
-
+The non-ulcerated tumors patients has 0.193 (95% CI: 0.098, 0.378) times the odds (of dying) of the ulcerated tumors. This means that the non-ulcerated tumors patients has (0.193 - 1= -0.807) 80.7% lower odds of dying than ulcerated tumors.

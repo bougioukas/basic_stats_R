@@ -200,7 +200,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./mcnemar.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Chi-sqaure test of independence</span></a>
+  <a href="./mcnemar.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">McNemar’s test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -299,8 +299,8 @@ Null hypothesis and alternative hypothesis
 </div>
 <div class="cell">
 <div id="fig-weight" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><div id="htmlwidget-1ce89e5f875c3bce0de2" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1ce89e5f875c3bce0de2">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8"],[1,2,3,4,5,6,7,8],[488,478,480,426,440,410,458,460],[484,478,492,444,436,398,464,476],[4,0,-12,-18,4,12,-6,-16]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>affected_eye<\/th>\n      <th>unaffected_eye<\/th>\n      <th>dif_thickness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;4.1: Table with data from “weight” file.</figcaption><p></p>
+<figure class="figure"><div id="htmlwidget-a648bf5efca6e747906e" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a648bf5efca6e747906e">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8"],[1,2,3,4,5,6,7,8],[488,478,480,426,440,410,458,460],[484,478,492,444,436,398,464,476],[4,0,-12,-18,4,12,-6,-16]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>affected_eye<\/th>\n      <th>unaffected_eye<\/th>\n      <th>dif_thickness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;4.1: Table with data from “weight” file.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -334,7 +334,7 @@ $ dif_thickness  &lt;dbl&gt; 4, 0, -12, -18, 4, 12, -6, -16</code></pre>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.title.position <span class="op">=</span> <span class="st">"plot"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-hist2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="wilcoxon_test_files/figure-html/fig-hist2-1.png" class="lightbox" title="Density plot of the thickness differences." data-gallery="quarto-lightbox-gallery-1"><img src="wilcoxon_test_files/figure-html/fig-hist2-1.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="wilcoxon_test_files/figure-html/fig-hist2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Density plot of the thickness differences."><img src="wilcoxon_test_files/figure-html/fig-hist2-1.png" class="img-fluid figure-img" width="672"></a></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;4.2: Density plot of the thickness differences.</figcaption><p></p>
 </figure>
 </div>
@@ -516,12 +516,12 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <span><span class="va">gt_sum4</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 
-<div id="ihoncskpwf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="gighhqokqq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#ihoncskpwf) .gt_table {
+:where(#gighhqokqq) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -546,7 +546,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-left-color: #D3D3D3;
 }
 
-:where(#ihoncskpwf) .gt_heading {
+:where(#gighhqokqq) .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -558,12 +558,12 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-right-color: #D3D3D3;
 }
 
-:where(#ihoncskpwf) .gt_caption {
+:where(#gighhqokqq) .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-:where(#ihoncskpwf) .gt_title {
+:where(#gighhqokqq) .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -575,7 +575,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-bottom-width: 0;
 }
 
-:where(#ihoncskpwf) .gt_subtitle {
+:where(#gighhqokqq) .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -587,13 +587,13 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-top-width: 0;
 }
 
-:where(#ihoncskpwf) .gt_bottom_border {
+:where(#gighhqokqq) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ihoncskpwf) .gt_col_headings {
+:where(#gighhqokqq) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -608,7 +608,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-right-color: #D3D3D3;
 }
 
-:where(#ihoncskpwf) .gt_col_heading {
+:where(#gighhqokqq) .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -628,7 +628,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   overflow-x: hidden;
 }
 
-:where(#ihoncskpwf) .gt_column_spanner_outer {
+:where(#gighhqokqq) .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -640,15 +640,15 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 4px;
 }
 
-:where(#ihoncskpwf) .gt_column_spanner_outer:first-child {
+:where(#gighhqokqq) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#ihoncskpwf) .gt_column_spanner_outer:last-child {
+:where(#gighhqokqq) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#ihoncskpwf) .gt_column_spanner {
+:where(#gighhqokqq) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -660,7 +660,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   width: 100%;
 }
 
-:where(#ihoncskpwf) .gt_group_heading {
+:where(#gighhqokqq) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -686,7 +686,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   text-align: left;
 }
 
-:where(#ihoncskpwf) .gt_empty_group_heading {
+:where(#gighhqokqq) .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -701,15 +701,15 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   vertical-align: middle;
 }
 
-:where(#ihoncskpwf) .gt_from_md > :first-child {
+:where(#gighhqokqq) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#ihoncskpwf) .gt_from_md > :last-child {
+:where(#gighhqokqq) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#ihoncskpwf) .gt_row {
+:where(#gighhqokqq) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -728,7 +728,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   overflow-x: hidden;
 }
 
-:where(#ihoncskpwf) .gt_stub {
+:where(#gighhqokqq) .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -741,7 +741,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-:where(#ihoncskpwf) .gt_stub_row_group {
+:where(#gighhqokqq) .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -755,11 +755,11 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   vertical-align: top;
 }
 
-:where(#ihoncskpwf) .gt_row_group_first td {
+:where(#gighhqokqq) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#ihoncskpwf) .gt_summary_row {
+:where(#gighhqokqq) .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -769,16 +769,16 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-:where(#ihoncskpwf) .gt_first_summary_row {
+:where(#gighhqokqq) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#ihoncskpwf) .gt_first_summary_row.thick {
+:where(#gighhqokqq) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#ihoncskpwf) .gt_last_summary_row {
+:where(#gighhqokqq) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -788,7 +788,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ihoncskpwf) .gt_grand_summary_row {
+:where(#gighhqokqq) .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -798,7 +798,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-:where(#ihoncskpwf) .gt_first_grand_summary_row {
+:where(#gighhqokqq) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -808,11 +808,11 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-top-color: #D3D3D3;
 }
 
-:where(#ihoncskpwf) .gt_striped {
+:where(#gighhqokqq) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#ihoncskpwf) .gt_table_body {
+:where(#gighhqokqq) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -821,7 +821,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ihoncskpwf) .gt_footnotes {
+:where(#gighhqokqq) .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -835,7 +835,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-right-color: #D3D3D3;
 }
 
-:where(#ihoncskpwf) .gt_footnote {
+:where(#gighhqokqq) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -844,7 +844,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-:where(#ihoncskpwf) .gt_sourcenotes {
+:where(#gighhqokqq) .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -858,7 +858,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-right-color: #D3D3D3;
 }
 
-:where(#ihoncskpwf) .gt_sourcenote {
+:where(#gighhqokqq) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -866,64 +866,64 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-:where(#ihoncskpwf) .gt_left {
+:where(#gighhqokqq) .gt_left {
   text-align: left;
 }
 
-:where(#ihoncskpwf) .gt_center {
+:where(#gighhqokqq) .gt_center {
   text-align: center;
 }
 
-:where(#ihoncskpwf) .gt_right {
+:where(#gighhqokqq) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#ihoncskpwf) .gt_font_normal {
+:where(#gighhqokqq) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#ihoncskpwf) .gt_font_bold {
+:where(#gighhqokqq) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#ihoncskpwf) .gt_font_italic {
+:where(#gighhqokqq) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#ihoncskpwf) .gt_super {
+:where(#gighhqokqq) .gt_super {
   font-size: 65%;
 }
 
-:where(#ihoncskpwf) .gt_footnote_marks {
+:where(#gighhqokqq) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#ihoncskpwf) .gt_asterisk {
+:where(#gighhqokqq) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#ihoncskpwf) .gt_indent_1 {
+:where(#gighhqokqq) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#ihoncskpwf) .gt_indent_2 {
+:where(#gighhqokqq) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#ihoncskpwf) .gt_indent_3 {
+:where(#gighhqokqq) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#ihoncskpwf) .gt_indent_4 {
+:where(#gighhqokqq) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#ihoncskpwf) .gt_indent_5 {
+:where(#gighhqokqq) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1089,7 +1089,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","loop":true,"selector":".lightbox","descPosition":"bottom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":true});</script>
 
 
 </body></html>
