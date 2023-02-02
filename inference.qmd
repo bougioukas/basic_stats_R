@@ -1,0 +1,97 @@
+# Foundations for statistical inference {#sec-inference}
+
+::: {.callout-caution icon="false"}
+## Learning objectives
+
+-   Understand the hypothesis testing
+-   Understand the type of errors
+-   Explore the factors influencing the Power of study
+:::
+
+## Hypothesis Testsing
+
+Hypothesis testing is a method of deciding whether the data are consistent with the null hypothesis. The calculation of the p-value is an important part of the procedure. Given a study with a single outcome measure and a statistical test, hypothesis testing can be summarized in five steps.
+
+::: {.callout-tip icon="false"}
+## Steps of Hypothesis Testsing
+
+**Step 1:** State the null hypothesis, $H_{0}$, and alternative hypothesis, $H_{1}$, based on the research question.
+
+> NOTE: We decide a non-directional $H_{1}$ (also known as two-sided hypothesis) whether we test for effects in both directions (most common), otherwise a directional (also known as one-sided) hypothesis.
+
+**Step 2:** Set the level of significance, α (usually 0.05).
+
+**Step 3:** Identify the appropriate test statistic and check the assumptions. Calculate the test statistic using the data.
+
+> NOTE: There are two types of statistical tests and they are described as parametric and non-parametric. The parametric tests (e.g., t-test, ANOVA), make certain assumptions about the distribution of the unknown parameter of interest and thus the test statistic is valid under these assumptions. For non-parametric tests (e.g., Mann-Whitney U test, Kruskal-Wallis test), there are no such assumptions. Most nonparametric tests use some way of ranking the measurements. Non-parametric tests are about 95% as powerful as parametric tests.
+
+**Step 4:** Decide whether or not the result is statistically significant.
+
+> The p-value is the **probability of obtaining the observed results, or something more extreme, if the null hypothesis is true**.
+
+Using the known distribution of the test statistic and according to the result of our statistical test, we calculate the corresponding p-value. Then we compare the p-value to the significance level α:
+
+-   If p − value \< α, reject the null hypothesis, $H_{0}$.
+-   If p − value ≥ α, do not reject the null hypothesis, $H_{0}$.
+
+The @tbl-p demonstrates how to interpret the strength of the evidence. However, always keep in mind the size of the study being considered.
+
+| p-value              | Interpretation                         |
+|----------------------|----------------------------------------|
+| $p \geq{0.10}$       | No evidence to reject $H_{0}$          |
+| $0.05\leq p < 0.10$  | Weak evidence to reject $H_{0}$        |
+| $0.01\leq p < 0.05$  | Evidence to reject $H_{0}$             |
+| $0.001\leq p < 0.01$ | Strong evidence to reject $H_{0}$      |
+| $p < 0.001$          | Very strong evidence to reject $H_{0}$ |
+
+: Strength of the evidence against $H_{0}$. {#tbl-p}
+
+**Step 5:** Interpret the results.
+:::
+
+
+## Type of Errors and Power of the test
+
+**A. Types of error in hypothesis testing**
+
+**Type I error:** we reject the null hypothesis when it is true (false positive), and conclude that there is an effect when, in reality, there is none. The maximum chance (probability) of making a Type I error is denoted by α (alpha). This is the significance level of the test; we reject the null hypothesis if our p-value is less than the significance level, i.e. if p \< a (@fig-type_errors).
+
+**Type II error:** we do not reject the null hypothesis when it is false (false negative), and conclude that there is no effect when one really exists. The chance of making a Type II error is denoted by β (beta); its compliment, (1 - β), is the power of the test. The power, therefore, is the probability of rejecting the null hypothesis when it is false; i.e. it is the chance (usually expressed as a percentage) of detecting, as statistically significant, a real treatment effect of a given size (@fig-type_errors).
+
+```{r}
+#| label: fig-type_errors
+#| fig-align: center
+#| out-width: "75%"
+#| echo: false
+#| fig-cap: Types of error in hypothesis testing.
+
+knitr::include_graphics(here::here("images", "type_errors.png"))
+```
+
+::: {.callout-tip icon="false"}
+## Factors Influencing Power
+
+**A. Effect Size: as effect size increases, power tends to increase**
+
+If we have too little power in a study, then we will not be able to detect clinically interesting differences or associations. **If we have too much power in a study, then tiny, arbitrary differences or associations could be detected as statistically significant, and that is not in the best interest of science**. So we want enough power for our test statistics to be significant when they encounter the smallest differences or weakest associations that have reached the threshold of being clinically noteworthy. The judgment about what is clinically noteworthy is not a statistical issue; it depends on the expertise of researchers within the applied area of study.
+
+For example, a difference in means is an example of an effect size. How is effect size related to power? Let's think about the effect of a low-dose aspirin on pain, compared with the effect of a prescription pain medication. Suppose a person is suffering from back pain. Which pill do you think will have a bigger effect on the person's pain? We would hope that the prescription pain medication would be more effective than aspirin, resulting in a bigger reduction in pain than aspirin would provide. Which pill's effect would be easier to detect? It should be easier to "see" the bigger effect, which came from the prescription pain medication. This is true in statistics, too. A larger effect size is easier for the test statistics to "see," leading to a greater probability of a statistically significant result. In other words, **as effect size increases, power tends to increase**. If researchers are interested in detecting a small effect size because it is clinically important, they will need more power.
+
+**B. Sample Size: as the sample size goes up, power generally goes up.**
+
+The factor that is most easily changed by researchers is sample size, and it has a huge effect on power. As $n$ goes up, power generally goes up.
+
+The most common question that researchers bring to a statistician is, "How many participants should I have in my study?" Sometimes researchers talk about calculating power, but in fact researchers calculate the sample size that will give them the amount of power that they want.
+
+**C. Standard deviation: as variability decreases, power tends to increase**
+
+A way to increase the statistical power would be to make the population standard deviation, σ, smaller, and that is not so easy to do. Generally speaking, variability can be reduced by controlling extraneous variables.
+
+For example, researchers exploring the glucosamine described the inclusion and exclusion criteria for participants. Among the inclusion criteria, the researchers accepted patients if they were 25 years or older, had nonspecific chronic back pain below the 12th rib for at least 6 months, and had a certain score or higher on a measure of self-reported low back pain. Participants were excluded if, among other things, they had certain diagnoses (pregnancy, spinal fracture, etc.) and prior use of glucosamine.
+
+If the researchers let any adult into the study, there would be much more extraneous variability. For example, if people with spinal fractures were admitted to the study, their experience of back pain probably would differ considerably from similar people who did not have spinal fractures. The inclusion and exclusion criteria defining the sample would reduce some of this extraneous variability, allowing the researchers a better chance of detecting any effect of glucosamine. Thus, the researchers would have a better chance of finding statistical significance, meaning that the power would be greater.
+
+**D. Significance Level α: as α goes up, power goes up.**
+
+It would be easier to find statistical significance with a larger significance level (e.g. α=0.1), compared with finding a significant result with a smaller α (e.g. α=0.05). All else being the same, as α goes up, power goes up. And as α goes down, like from 0.05 to 0.01, power goes down.
+:::

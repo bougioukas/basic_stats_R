@@ -112,8 +112,7 @@ tb3
 ```
 
 
-::: {.callout-note icon="false"}
-## Caution!
+::: callout-important
 
 There is a basic difference between this table and the more common two-way table. In this case, the count represents the **number of pairs**, not the number of individuals.
 

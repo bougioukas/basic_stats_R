@@ -11,6 +11,7 @@ book:
   repo-url: https://github.com/bougioukas/basic_stats_R
   chapters:
     - index.qmd
+    - inference.qmd
     - student_t_test.qmd
     - wmw_test.qmd
     - paired_t_test.qmd
