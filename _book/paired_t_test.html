@@ -322,8 +322,8 @@ Null hypothesis and alternative hypothesis
 </div>
 <div class="cell">
 <div id="fig-weight" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-75415ec0ff296aa779b0" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-75415ec0ff296aa779b0">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25"],[3250,2680,2960,3420,3210,2740,3250,3170,2970,3100,3087,2687,2860,3430,3210,3150,2680,2960,3440,3210,3150,2687,2960,3422,3210],[3220,2640,2940,3350,3140,2730,3220,3150,2890,2997,3003,2645,2875,3400,3220,3100,2660,2910,3400,3140,3115,2644,2880,3393,3240],[30,40,20,70,70,10,30,20,80,103,84,42,-15,30,-10,50,20,50,40,70,35,43,80,29,-30]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>birth_weight<\/th>\n      <th>discharge_weight<\/th>\n      <th>dif_weight<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;4.1: Table with data from “weight” file.</figcaption><p></p>
+<figure class="figure"><div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-fd5b348c1bd374945b6c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-fd5b348c1bd374945b6c">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25"],[3250,2680,2960,3420,3210,2740,3250,3170,2970,3100,3087,2687,2860,3430,3210,3150,2680,2960,3440,3210,3150,2687,2960,3422,3210],[3220,2640,2940,3350,3140,2730,3220,3150,2890,2997,3003,2645,2875,3400,3220,3100,2660,2910,3400,3140,3115,2644,2880,3393,3240],[30,40,20,70,70,10,30,20,80,103,84,42,-15,30,-10,50,20,50,40,70,35,43,80,29,-30]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>birth_weight<\/th>\n      <th>discharge_weight<\/th>\n      <th>dif_weight<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;4.1: Table with data from “weight” file.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -371,7 +371,7 @@ Check if the following assumption is satisfied
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.title.position <span class="op">=</span> <span class="st">"plot"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-hist1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="paired_t_test_files/figure-html/fig-hist1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Density plot of the weight differences."><img src="paired_t_test_files/figure-html/fig-hist1-1.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="paired_t_test_files/figure-html/fig-hist1-1.png" class="lightbox" title="Density plot of the weight differences." data-gallery="quarto-lightbox-gallery-1"><img src="paired_t_test_files/figure-html/fig-hist1-1.png" class="img-fluid figure-img" width="672"></a></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;4.2: Density plot of the weight differences.</figcaption><p></p>
 </figure>
 </div>
@@ -392,12 +392,12 @@ Summary statistics
 <div id="exercise-joins" class="callout-body-container callout-body">
 <div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">rstatix</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">dplyr</a></li>
 <li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">dlookr</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>We can utilize the <code>get_summary_stats</code> function to obtain the results across the three variables simultaneously:</p>
+<p>We can utilize the <code>across</code> function to obtain the results across the three variables simultaneously:</p>
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">summary_weight</span> <span class="op">&lt;-</span> <span class="va">weight</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span></span>
@@ -420,21 +420,9 @@ Summary statistics
 <span><span class="co"># present the results</span></span>
 <span><span class="va">summary_weight</span> <span class="op">&lt;-</span> <span class="va">summary_weight</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">round</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>   <span class="co"># round to 3 decimal places</span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>, names_to <span class="op">=</span> <span class="st">"Stats"</span>, values_to <span class="op">=</span> <span class="st">"Values"</span><span class="op">)</span>  <span class="co"># long format</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: There was 1 warning in `mutate()`.
-ℹ In argument: `across(everything(), round, 2)`.
-Caused by warning:
-! The `...` argument of `across()` is deprecated as of dplyr 1.1.0.
-Supply arguments directly to `.fns` through an anonymous function instead.
-
-  # Previously
-  across(a:b, mean, na.rm = TRUE)
-
-  # Now
-  across(a:b, \(x) mean(x, na.rm = TRUE))</code></pre>
-</div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">summary_weight</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>, names_to <span class="op">=</span> <span class="st">"Stats"</span>, values_to <span class="op">=</span> <span class="st">"Values"</span><span class="op">)</span>  <span class="co"># long format</span></span>
+<span></span>
+<span><span class="va">summary_weight</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 30 × 2
    Stats               Values
@@ -455,7 +443,7 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">weight</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">weight</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">dlookr</span><span class="fu">::</span><span class="fu"><a href="https://choonghyunryu.github.io/dlookr/reference/describe.data.frame.html">describe</a></span><span class="op">(</span><span class="va">dif_weight</span>, <span class="va">birth_weight</span>, <span class="va">discharge_weight</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">described_variables</span>, <span class="va">n</span>, <span class="va">mean</span>, <span class="va">sd</span>, <span class="va">p25</span>, <span class="va">p50</span>, <span class="va">p75</span>, <span class="va">skewness</span>, <span class="va">kurtosis</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -477,7 +465,7 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 <p><strong>Normality test</strong></p>
 <p>Additionally, we can check the statistical test for normality of the differences.</p>
 <div class="cell">
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span> <span class="va">weight</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span> <span class="va">weight</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">dif_weight</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
@@ -510,7 +498,7 @@ Paired t-test
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <p>Our data are in a wide format. However, we are going to use only the <code>dif_weight</code> variable, inside the <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">weight</span><span class="op">$</span><span class="va">dif_weight</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">weight</span><span class="op">$</span><span class="va">dif_weight</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One Sample t-test
@@ -528,7 +516,7 @@ mean of x
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <div class="cell">
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">weight</span><span class="op">$</span><span class="va">birth_weight</span>, <span class="va">weight</span><span class="op">$</span><span class="va">discharge_weight</span>, paired <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">weight</span><span class="op">$</span><span class="va">birth_weight</span>, <span class="va">weight</span><span class="op">$</span><span class="va">discharge_weight</span>, paired <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Paired t-test
@@ -546,7 +534,7 @@ mean difference
 </div>
 <div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
 <div class="cell">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">weight</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">weight</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op">(</span><span class="va">dif_weight</span> <span class="op">~</span> <span class="fl">1</span>, detailed <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 12
@@ -565,7 +553,7 @@ mean difference
 </section><section id="present-the-results-in-a-summary-table" class="level2" data-number="4.7"><h2 data-number="4.7" class="anchored" data-anchor-id="present-the-results-in-a-summary-table">
 <span class="header-section-number">4.7</span> Present the results in a summary table</h2>
 <div class="cell">
-<details><summary>Show the code</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tb1</span> <span class="op">&lt;-</span> <span class="va">weight</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tb1</span> <span class="op">&lt;-</span> <span class="va">weight</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html">row_number</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">dif_weight</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="op">!</span><span class="va">id</span>, names_to <span class="op">=</span> <span class="st">"group"</span>, values_to <span class="op">=</span> <span class="st">"weights"</span><span class="op">)</span></span>
@@ -582,12 +570,12 @@ mean difference
 <span><span class="va">gt_sum3</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 
-<div id="vbajkhzqpg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="umtuumgguw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#vbajkhzqpg) .gt_table {
+:where(#umtuumgguw) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -612,7 +600,7 @@ mean difference
   border-left-color: #D3D3D3;
 }
 
-:where(#vbajkhzqpg) .gt_heading {
+:where(#umtuumgguw) .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -624,12 +612,12 @@ mean difference
   border-right-color: #D3D3D3;
 }
 
-:where(#vbajkhzqpg) .gt_caption {
+:where(#umtuumgguw) .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-:where(#vbajkhzqpg) .gt_title {
+:where(#umtuumgguw) .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -641,7 +629,7 @@ mean difference
   border-bottom-width: 0;
 }
 
-:where(#vbajkhzqpg) .gt_subtitle {
+:where(#umtuumgguw) .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -653,13 +641,13 @@ mean difference
   border-top-width: 0;
 }
 
-:where(#vbajkhzqpg) .gt_bottom_border {
+:where(#umtuumgguw) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#vbajkhzqpg) .gt_col_headings {
+:where(#umtuumgguw) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -674,7 +662,7 @@ mean difference
   border-right-color: #D3D3D3;
 }
 
-:where(#vbajkhzqpg) .gt_col_heading {
+:where(#umtuumgguw) .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -694,7 +682,7 @@ mean difference
   overflow-x: hidden;
 }
 
-:where(#vbajkhzqpg) .gt_column_spanner_outer {
+:where(#umtuumgguw) .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -706,15 +694,15 @@ mean difference
   padding-right: 4px;
 }
 
-:where(#vbajkhzqpg) .gt_column_spanner_outer:first-child {
+:where(#umtuumgguw) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#vbajkhzqpg) .gt_column_spanner_outer:last-child {
+:where(#umtuumgguw) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#vbajkhzqpg) .gt_column_spanner {
+:where(#umtuumgguw) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -726,7 +714,7 @@ mean difference
   width: 100%;
 }
 
-:where(#vbajkhzqpg) .gt_group_heading {
+:where(#umtuumgguw) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -752,7 +740,7 @@ mean difference
   text-align: left;
 }
 
-:where(#vbajkhzqpg) .gt_empty_group_heading {
+:where(#umtuumgguw) .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -767,15 +755,15 @@ mean difference
   vertical-align: middle;
 }
 
-:where(#vbajkhzqpg) .gt_from_md > :first-child {
+:where(#umtuumgguw) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#vbajkhzqpg) .gt_from_md > :last-child {
+:where(#umtuumgguw) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#vbajkhzqpg) .gt_row {
+:where(#umtuumgguw) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -794,7 +782,7 @@ mean difference
   overflow-x: hidden;
 }
 
-:where(#vbajkhzqpg) .gt_stub {
+:where(#umtuumgguw) .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -807,7 +795,7 @@ mean difference
   padding-right: 5px;
 }
 
-:where(#vbajkhzqpg) .gt_stub_row_group {
+:where(#umtuumgguw) .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -821,11 +809,11 @@ mean difference
   vertical-align: top;
 }
 
-:where(#vbajkhzqpg) .gt_row_group_first td {
+:where(#umtuumgguw) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#vbajkhzqpg) .gt_summary_row {
+:where(#umtuumgguw) .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -835,16 +823,16 @@ mean difference
   padding-right: 5px;
 }
 
-:where(#vbajkhzqpg) .gt_first_summary_row {
+:where(#umtuumgguw) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#vbajkhzqpg) .gt_first_summary_row.thick {
+:where(#umtuumgguw) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#vbajkhzqpg) .gt_last_summary_row {
+:where(#umtuumgguw) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -854,7 +842,7 @@ mean difference
   border-bottom-color: #D3D3D3;
 }
 
-:where(#vbajkhzqpg) .gt_grand_summary_row {
+:where(#umtuumgguw) .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -864,7 +852,7 @@ mean difference
   padding-right: 5px;
 }
 
-:where(#vbajkhzqpg) .gt_first_grand_summary_row {
+:where(#umtuumgguw) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -874,11 +862,11 @@ mean difference
   border-top-color: #D3D3D3;
 }
 
-:where(#vbajkhzqpg) .gt_striped {
+:where(#umtuumgguw) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#vbajkhzqpg) .gt_table_body {
+:where(#umtuumgguw) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -887,7 +875,7 @@ mean difference
   border-bottom-color: #D3D3D3;
 }
 
-:where(#vbajkhzqpg) .gt_footnotes {
+:where(#umtuumgguw) .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -901,7 +889,7 @@ mean difference
   border-right-color: #D3D3D3;
 }
 
-:where(#vbajkhzqpg) .gt_footnote {
+:where(#umtuumgguw) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -910,7 +898,7 @@ mean difference
   padding-right: 5px;
 }
 
-:where(#vbajkhzqpg) .gt_sourcenotes {
+:where(#umtuumgguw) .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -924,7 +912,7 @@ mean difference
   border-right-color: #D3D3D3;
 }
 
-:where(#vbajkhzqpg) .gt_sourcenote {
+:where(#umtuumgguw) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -932,64 +920,64 @@ mean difference
   padding-right: 5px;
 }
 
-:where(#vbajkhzqpg) .gt_left {
+:where(#umtuumgguw) .gt_left {
   text-align: left;
 }
 
-:where(#vbajkhzqpg) .gt_center {
+:where(#umtuumgguw) .gt_center {
   text-align: center;
 }
 
-:where(#vbajkhzqpg) .gt_right {
+:where(#umtuumgguw) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#vbajkhzqpg) .gt_font_normal {
+:where(#umtuumgguw) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#vbajkhzqpg) .gt_font_bold {
+:where(#umtuumgguw) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#vbajkhzqpg) .gt_font_italic {
+:where(#umtuumgguw) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#vbajkhzqpg) .gt_super {
+:where(#umtuumgguw) .gt_super {
   font-size: 65%;
 }
 
-:where(#vbajkhzqpg) .gt_footnote_marks {
+:where(#umtuumgguw) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#vbajkhzqpg) .gt_asterisk {
+:where(#umtuumgguw) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#vbajkhzqpg) .gt_indent_1 {
+:where(#umtuumgguw) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#vbajkhzqpg) .gt_indent_2 {
+:where(#umtuumgguw) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#vbajkhzqpg) .gt_indent_3 {
+:where(#umtuumgguw) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#vbajkhzqpg) .gt_indent_4 {
+:where(#umtuumgguw) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#vbajkhzqpg) .gt_indent_5 {
+:where(#umtuumgguw) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1155,7 +1143,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","loop":true,"descPosition":"bottom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","loop":true});</script>
 
 
 </body></html>

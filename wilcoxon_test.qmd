@@ -124,6 +124,8 @@ Summary statistics can also be calculated for the variables.
 We can utilize the `across()` function to obtain the results across the three variables simultaneously:
 
 ```{r}
+#| warning: false
+
 summary_eyes <- eyes %>%
   dplyr::summarise(across(
     .cols = c(dif_thickness, affected_eye, unaffected_eye), 

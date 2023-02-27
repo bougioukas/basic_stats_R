@@ -132,11 +132,12 @@ Summary statistics can also be calculated for the variables.
 ## Summary statistics
 
 ::: panel-tabset
-## rstatix
+## dplyr
 
-We can utilize the `get_summary_stats` function to obtain the results across the three variables simultaneously:
+We can utilize the `across` function to obtain the results across the three variables simultaneously:
 
 ```{r}
+#| warning: false
 
 summary_weight <- weight %>%
   dplyr::summarise(across(
