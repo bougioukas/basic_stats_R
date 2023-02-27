@@ -128,17 +128,17 @@ summary_eyes <- eyes %>%
   dplyr::summarise(across(
     .cols = c(dif_thickness, affected_eye, unaffected_eye), 
     .fns = list(
-    N = ~n(),
-    Min = min,
-    Q1 = ~quantile(., 0.25),
-    median = median,
-    Q3 = ~quantile(., 0.75),
-    Max = max,
-    Mean = mean,
-    Sd = sd,
-    Skewness = EnvStats::skewness,
-    Kurtosis= EnvStats::kurtosis
-    ), na.rm = TRUE,
+    n = ~n(),
+      min = ~min(., na.rm = TRUE),
+      q1 = ~quantile(., 0.25, na.rm = TRUE),
+      median = ~quantile(., 0.5, na.rm = TRUE),
+      q3 = ~quantile(., 0.75, na.rm = TRUE),
+      max = ~max(., na.rm = TRUE),
+      mean = ~mean(., na.rm = TRUE),
+      sd = ~sd(., na.rm = TRUE),
+      skewness = ~EnvStats::skewness(., na.rm = TRUE),
+      kurtosis= ~EnvStats::kurtosis(., na.rm = TRUE)
+    ),
     .names = "{col}_{fn}")
     )
 

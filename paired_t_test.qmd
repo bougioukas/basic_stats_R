@@ -101,7 +101,6 @@ The differences are **normally** distributed.
 
 The distribution of the differences can be explored with appropriate plots and summary statistics.
 
-
 **Graph**
 
 We can explore the distribution of differences visually for symmetry with a density plot (a smoothed version of the histogram):
@@ -125,8 +124,6 @@ weight %>%
 
 The above figure shows that the data are following an approximately symmetrical distribution. Note that the arethmetic mean (blue vertical dashed line) is very close to the median (red vertical dashed line) of the data.
 
-
-
 **Summary statistics**
 
 Summary statistics can also be calculated for the variables.
@@ -135,9 +132,9 @@ Summary statistics can also be calculated for the variables.
 ## Summary statistics
 
 ::: panel-tabset
-## dplyr
+## rstatix
 
-We can utilize the new `across()` function to obtain the results across the three variables simultaneously:
+We can utilize the `get_summary_stats` function to obtain the results across the three variables simultaneously:
 
 ```{r}
 
@@ -145,17 +142,17 @@ summary_weight <- weight %>%
   dplyr::summarise(across(
     .cols = c(dif_weight, birth_weight, discharge_weight), 
     .fns = list(
-    N = ~n(),
-    Min = min,
-    Q1 = ~quantile(., 0.25),
-    median = median,
-    Q3 = ~quantile(., 0.75),
-    Max = max,
-    Mean = mean,
-    Sd = sd,
-    Skewness = EnvStats::skewness,
-    Kurtosis= EnvStats::kurtosis
-    ), na.rm = TRUE,
+    n = ~n(),
+      min = ~min(., na.rm = TRUE),
+      q1 = ~quantile(., 0.25, na.rm = TRUE),
+      median = ~quantile(., 0.5, na.rm = TRUE),
+      q3 = ~quantile(., 0.75, na.rm = TRUE),
+      max = ~max(., na.rm = TRUE),
+      mean = ~mean(., na.rm = TRUE),
+      sd = ~sd(., na.rm = TRUE),
+      skewness = ~EnvStats::skewness(., na.rm = TRUE),
+      kurtosis= ~EnvStats::kurtosis(., na.rm = TRUE)
+    ),
     .names = "{col}_{fn}")
     )
 
