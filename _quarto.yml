@@ -18,6 +18,7 @@ book:
     - wilcoxon_test.qmd
     - anova.qmd
     - kruskal_wallis.qmd
+    - correlation.qmd
     - chi_square.qmd
     - fisher_exact.qmd
     - mcnemar.qmd

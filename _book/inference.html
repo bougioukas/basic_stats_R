@@ -127,17 +127,22 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chi_square.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Chi-sqaure test of independence</span></a>
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Correlation</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./fisher_exact.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fisher’s exact test</span></a>
+  <a href="./chi_square.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Chi-sqaure test of independence</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./mcnemar.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">McNemar’s test</span></a>
+  <a href="./fisher_exact.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fisher’s exact test</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mcnemar.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">McNemar’s test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -217,7 +222,7 @@ Steps of Hypothesis Testsing
 <li>If p − value &lt; α, reject the null hypothesis, <span class="math inline">\(H_{0}\)</span>.</li>
 <li>If p − value ≥ α, do not reject the null hypothesis, <span class="math inline">\(H_{0}\)</span>.</li>
 </ul>
-<p>The <a href="#tbl-p">Table&nbsp;<span>1.1</span></a> demonstrates how to interpret the strength of the evidence. However, always keep in mind the size of the study being considered.</p>
+<p>The <a href="#tbl-p">Table&nbsp;<span class="quarto-unresolved-ref">tbl-p</span></a> demonstrates how to interpret the strength of the evidence. However, always keep in mind the size of the study being considered.</p>
 <div id="tbl-p" class="anchored">
 <table class="table">
 <caption>Table&nbsp;1.1: Strength of the evidence against <span class="math inline">\(H_{0}\)</span>.</caption>
@@ -260,8 +265,8 @@ Steps of Hypothesis Testsing
 </section><section id="type-of-errors-and-power-of-the-test" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="type-of-errors-and-power-of-the-test">
 <span class="header-section-number">1.2</span> Type of Errors and Power of the test</h2>
 <p><strong>A. Types of error in hypothesis testing</strong></p>
-<p><strong>Type I error:</strong> we reject the null hypothesis when it is true (false positive), and conclude that there is an effect when, in reality, there is none. The maximum chance (probability) of making a Type I error is denoted by α (alpha). This is the significance level of the test; we reject the null hypothesis if our p-value is less than the significance level, i.e.&nbsp;if p &lt; a (<a href="#fig-type_errors">Figure&nbsp;<span>1.1</span></a>).</p>
-<p><strong>Type II error:</strong> we do not reject the null hypothesis when it is false (false negative), and conclude that there is no effect when one really exists. The chance of making a Type II error is denoted by β (beta); its compliment, (1 - β), is the power of the test. The power, therefore, is the probability of rejecting the null hypothesis when it is false; i.e.&nbsp;it is the chance (usually expressed as a percentage) of detecting, as statistically significant, a real treatment effect of a given size (<a href="#fig-type_errors">Figure&nbsp;<span>1.1</span></a>).</p>
+<p><strong>Type I error:</strong> we reject the null hypothesis when it is true (false positive), and conclude that there is an effect when, in reality, there is none. The maximum chance (probability) of making a Type I error is denoted by α (alpha). This is the significance level of the test; we reject the null hypothesis if our p-value is less than the significance level, i.e.&nbsp;if p &lt; a (<a href="#fig-type_errors">Figure&nbsp;<span class="quarto-unresolved-ref">fig-type_errors</span></a>).</p>
+<p><strong>Type II error:</strong> we do not reject the null hypothesis when it is false (false negative), and conclude that there is no effect when one really exists. The chance of making a Type II error is denoted by β (beta); its compliment, (1 - β), is the power of the test. The power, therefore, is the probability of rejecting the null hypothesis when it is false; i.e.&nbsp;it is the chance (usually expressed as a percentage) of detecting, as statistically significant, a real treatment effect of a given size (<a href="#fig-type_errors">Figure&nbsp;<span class="quarto-unresolved-ref">fig-type_errors</span></a>).</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-type_errors" class="quarto-figure quarto-figure-center anchored">
@@ -423,7 +428,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","selector":".lightbox","loop":true,"closeEffect":"zoom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","loop":true,"selector":".lightbox"});</script>
 
 
 </body></html>
