@@ -8,7 +8,6 @@
 
 -   Coefficient $ξ$
 
-
 ```{r}
 #| include: false
 
@@ -30,11 +29,9 @@ When we have finished this Chapter, we should be able to:
 -   Discuss the possible meaning of correlation that we observe.
 :::
 
-
 ## Research question and Hypothesis Testing
 
-We consider the data in *Birthweight* dataset. Let’s say that we want to explore the association between weight (in Kg) and height (in cm) for a sample of 550 infants of 1 month age.
-
+We consider the data in *Birthweight* dataset. Let's say that we want to explore the association between weight (in Kg) and height (in cm) for a sample of 550 infants of 1 month age.
 
 ::: {.callout-note icon="false"}
 ## Null hypothesis and alternative hypothesis
@@ -42,8 +39,6 @@ We consider the data in *Birthweight* dataset. Let’s say that we want to explo
 -   $H_0$: There is no association between the two numeric variables (they are independent, $ρ = 0$)
 -   $H_1$: There is association between the two numeric variables (they are dependent, $ρ \neq 0$)
 :::
-
-
 
 ## Packages we need
 
@@ -90,14 +85,11 @@ glimpse(BirthWeight)
 
 The data set *BirthWeight* has 550 infants of 1 month age (rows) and includes seven variables (columns). Both the `weight` and `height` are numeric (`<dbl>`) variables.
 
-
 ## Plot the data
 
 A first step that is usually useful in studying the association between two numeric variables is to prepare a scatter plot of the data. The pattern made by the points plotted on the scatter plot usually suggests the basic nature and strength of the association between two variables.
 
-
 ```{r}
-#| echo: false
 #| warning: false
 #| label: fig-correlation0
 #| fig-cap: Scatter plot of the association between height and weight in 550 infants of 1 month age.
@@ -120,9 +112,7 @@ The points in the scatter plot seem to be scattered around an invisible line. Th
 
 Additionally, the marginal histograms show that the data are approximately normally distributed (we have a large sample so the graphs are reliable) for both weight and height.
 
-
 ## Correlation between two numeric variables
-
 
 **Correlation coefficients**
 
@@ -136,18 +126,16 @@ Note that the correlation between variables X and Y is equal to the correlation 
 ::: panel-tabset
 ## Pearson's r
 
-The Pearson’s correlation coefficient can be calculated for any dataset with two numeric variables. However, before we calculate the Pearson’s coefficient we should make sure that the following assumptions are met:
+The Pearson's correlation coefficient can be calculated for any dataset with two numeric variables. However, before we calculate the Pearson's coefficient we should make sure that the following assumptions are met:
 
-**Assumptions for Pearson's $r$ coefficient**
+**Assumptions for Pearson's** $r$ coefficient
 
 1.  The variables are observed on a **random sample** of individuals (each individual should have a pair of values).
 2.  There is a **linear association** between the two variables.
 3.  For a valid hypothesis testing and calculation of confidence intervals both variables should have an approximately **normal distribution**.
 4.  **Absence of outliers** in the data set.
 
-
-Pearson's $r$ coefficient is a dimensionless quantity that takes a value in the range -1 to +1. A positive value indicates that both variables increase (or decrease) together while a negative coefficient indicates that one variable decreases as the other variable increases and vice versa. 
-The stronger the correlation, the closer the correlation coefficient comes to ±1.
+Pearson's $r$ coefficient is a dimensionless quantity that takes a value in the range -1 to +1. A positive value indicates that both variables increase (or decrease) together while a negative coefficient indicates that one variable decreases as the other variable increases and vice versa. The stronger the correlation, the closer the correlation coefficient comes to ±1.
 
 ```{r}
 cor(BirthWeight$height, BirthWeight$weight)
@@ -157,63 +145,49 @@ cor(BirthWeight$height, BirthWeight$weight)
 
 The basic idea of Spearman's rank correlation is that the **ranks of X and Y** are obtained by first separately ordering their values from small to large and then computing the correlation between the two sets of ranks. The strength of correlation is denoted by the coefficient of rank correlation, named Spearman's rank correlation coefficient, $r_{s}$.
 
-
-**Assumptions for Spearman's $r_{s}$ coefficient**
+**Assumptions for Spearman's** $r_{s}$ coefficient
 
 1.  The variables are observed on a **random sample** of individuals (each individual should have a pair of values).
 2.  There is a **monotonic association** between the two variables. In a monotonic association, the variables tend to move in the same relative direction, but not necessarily at a constant rate. So all linear correlations are monotonic but the opposite is not always true, because we can have also monotonic non-linear associations.
 
-
-Spearman's $rho$ coefficient is dimensionless quantity that take value in the range -1 to +1. A positive correlation coefficient indicates that both variables increase (or decrease) in value together and a negative coefficient indicates that one variable decreases in value as the other variable increases and vice versa.
-The stronger the correlation, the closer the correlation coefficient comes to ±1.
+Spearman's $rho$ coefficient is dimensionless quantity that take value in the range -1 to +1. A positive correlation coefficient indicates that both variables increase (or decrease) in value together and a negative coefficient indicates that one variable decreases in value as the other variable increases and vice versa. The stronger the correlation, the closer the correlation coefficient comes to ±1.
 
 ```{r}
 cor(BirthWeight$height, BirthWeight$weight, method = "spearman")
 ```
 
-
-
 ## Kendall's $\tau$
 
-The Kendall's $\tau$ coefficient is the best alternative to Spearman's $rho$ correlation when the sample size is small and has many tied ranks.
-It is used to test the similarities in the ordering of data when it is ranked by quantities. Kendall’s correlation coefficient uses pairs of observations and determines the strength of association based on the patter on concordance and discordance between the pairs.
+The Kendall's $\tau$ coefficient is the best alternative to Spearman's $rho$ correlation when the sample size is small and has many tied ranks. It is used to test the similarities in the ordering of data when it is ranked by quantities. Kendall's correlation coefficient uses pairs of observations and determines the strength of association based on the patter on concordance and discordance between the pairs.
 
-
-**Assumptions for Kendall's $\tau$ coefficient**
+**Assumptions for Kendall's** $\tau$ coefficient
 
 1.  The variables are observed on a **random sample** of individuals (each individual should have a pair of values).
 2.  There is a **monotonic association** between the two variables. In a monotonic association, the variables tend to move in the same relative direction, but not necessarily at a constant rate. So all linear correlations are monotonic but the opposite is not always true, because we can have also monotonic non-linear associations.
 
-
-Kendall's $\tau$ coefficient is dimensionless quantity that takes value in the range -1 to +1. A positive correlation coefficient indicates that both variables increase (or decrease) in value together and a negative coefficient indicates that one variable decreases in value as the other variable increases and vice versa.
-The stronger the correlation, the closer the correlation coefficient comes to ±1.
+Kendall's $\tau$ coefficient is dimensionless quantity that takes value in the range -1 to +1. A positive correlation coefficient indicates that both variables increase (or decrease) in value together and a negative coefficient indicates that one variable decreases in value as the other variable increases and vice versa. The stronger the correlation, the closer the correlation coefficient comes to ±1.
 
 ```{r}
 cor(BirthWeight$height, BirthWeight$weight, method = "kendal")
 ```
 
+## Coefficient $ξ$
 
-##  Coefficient $ξ$
 The correlation coefficient $ξ$ converges to a limit which has an easy interpretation as a measure of dependence. The limit ranges from 0 to 1. It is 1 if and only if Y is a measurable function of X and 0 if and only if X and Y are independent. Thus, $ξ$ gives an actual measure of the **strength** of the association and it can be used for non-monotonic associations. However, for monotonic associations, it does not indicate the direction of the association.
 
-**Assumptions for Kendall's $\tau$ coefficient**
+**Assumptions for Kendall's** $\tau$ coefficient
 
-1. The variables are observed on a **random sample** of individuals (each individual should have a pair of values).
+1.  The variables are observed on a **random sample** of individuals (each individual should have a pair of values).
 
 ```{r}
 xicor(BirthWeight$height, BirthWeight$weight)
 ```
-
 :::
 :::
-
-
 
 **Correlation tests**
 
 A correlation test is used to test whether the correlation (denoted ρ) between two numeric variables is significantly different from 0 or not in the population.
-
-
 
 ::: {#exercise-joins .callout-tip}
 ## Hypothesis Testing for correlation coefficients
@@ -226,11 +200,9 @@ A correlation test is used to test whether the correlation (denoted ρ) between 
 -   $H_0$: There is no linear association between the two numeric variables (they are independent, $ρ = 0$)
 -   $H_1$: There is linear association between the two numeric variables (they are dependent, $ρ \neq 0$)
 
-
 ```{r}
 cor.test(BirthWeight$height, BirthWeight$weight) # the default method is "pearson"
 ```
-
 
 ## Spearman's rho test
 
@@ -239,12 +211,9 @@ cor.test(BirthWeight$height, BirthWeight$weight) # the default method is "pearso
 -   $H_0$: There is no monotonic association between the two numeric variables (they are independent)
 -   $H_1$: There is monotonic association between the two numeric variables (they are dependent)
 
-
 ```{r}
 cor.test(BirthWeight$height, BirthWeight$weight, method = "spearman")
 ```
-
-
 
 ## Kendal's $\tau$ test
 
@@ -253,26 +222,19 @@ cor.test(BirthWeight$height, BirthWeight$weight, method = "spearman")
 -   $H_0$: There is no monotonic association between the two numeric variables (they are independent)
 -   $H_1$: There is monotonic association between the two numeric variables (they are dependent)
 
-
 ```{r}
 cor.test(BirthWeight$height, BirthWeight$weight, method = "kendall")
 ```
 
-
-
-##  Coefficient $ξ$ test
+## Coefficient $ξ$ test
 
 **Null hypothesis and alternative hypothesis**
 
 -   $H_0$: There is not association between the two numeric variables (they are independent)
 -   $H_1$: There is association between the two numeric variables (they are dependent)
 
-
 ```{r}
 xicor(BirthWeight$height, BirthWeight$weight, pvalue = TRUE)
 ```
-
 :::
 :::
-
-
