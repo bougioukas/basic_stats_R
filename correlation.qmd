@@ -4,7 +4,7 @@
 
 -   Pearson's $r$
 
--   Spearman's $r_{s}$ and Kendall's tau
+-   Spearman's $r_{s}$ and Kendall's $\tau$
 
 -   Coefficient $ξ$
 
@@ -145,7 +145,7 @@ cor(BirthWeight$height, BirthWeight$weight)
 
 The basic idea of Spearman's rank correlation is that the **ranks of X and Y** are obtained by first separately ordering their values from small to large and then computing the correlation between the two sets of ranks. The strength of correlation is denoted by the coefficient of rank correlation, named Spearman's rank correlation coefficient, $r_{s}$.
 
-**Assumptions for Spearman's** $r_{s}$ coefficient
+**Assumptions for Spearman's $r_{s}$** coefficient
 
 1.  The variables are observed on a **random sample** of individuals (each individual should have a pair of values).
 2.  There is a **monotonic association** between the two variables. In a monotonic association, the variables tend to move in the same relative direction, but not necessarily at a constant rate. So all linear correlations are monotonic but the opposite is not always true, because we can have also monotonic non-linear associations.
@@ -160,7 +160,7 @@ cor(BirthWeight$height, BirthWeight$weight, method = "spearman")
 
 The Kendall's $\tau$ coefficient is the best alternative to Spearman's $rho$ correlation when the sample size is small and has many tied ranks. It is used to test the similarities in the ordering of data when it is ranked by quantities. Kendall's correlation coefficient uses pairs of observations and determines the strength of association based on the patter on concordance and discordance between the pairs.
 
-**Assumptions for Kendall's** $\tau$ coefficient
+**Assumptions for Kendall's $\tau$** coefficient
 
 1.  The variables are observed on a **random sample** of individuals (each individual should have a pair of values).
 2.  There is a **monotonic association** between the two variables. In a monotonic association, the variables tend to move in the same relative direction, but not necessarily at a constant rate. So all linear correlations are monotonic but the opposite is not always true, because we can have also monotonic non-linear associations.
@@ -175,7 +175,7 @@ cor(BirthWeight$height, BirthWeight$weight, method = "kendal")
 
 The correlation coefficient $ξ$ converges to a limit which has an easy interpretation as a measure of dependence. The limit ranges from 0 to 1. It is 1 if and only if Y is a measurable function of X and 0 if and only if X and Y are independent. Thus, $ξ$ gives an actual measure of the **strength** of the association and it can be used for non-monotonic associations. However, for monotonic associations, it does not indicate the direction of the association.
 
-**Assumptions for Kendall's** $\tau$ coefficient
+**Assumptions for $ξ$** coefficient
 
 1.  The variables are observed on a **random sample** of individuals (each individual should have a pair of values).
 
@@ -204,7 +204,7 @@ A correlation test is used to test whether the correlation (denoted ρ) between 
 cor.test(BirthWeight$height, BirthWeight$weight) # the default method is "pearson"
 ```
 
-## Spearman's rho test
+## Spearman's $r_{s}$ test
 
 **Null hypothesis and alternative hypothesis**
 

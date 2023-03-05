@@ -2,7 +2,7 @@
 
 This online textbook is based on my notes from a series of lectures given for a few years at the Aristotle University of Thessaloniki.
 
-This textbook can be used as support material for lectures on basic statistics using R at any level from beginner to advanced. I have paid particular attention to the form of the book, which I think should aid understanding the most common statistical tests using base R and tidyverse. It can also be used as a support for self-teaching.
+This textbook can be used as support material for lectures on basic statistics using R at any level from beginner to advanced. I have paid particular attention to the form of the book, which I think should aid understanding the most common statistical tests using base R and pipe-friendly functions, coherent with the 'tidyverse' design philosophy. It can also be used as a support for self-teaching.
 
 All sections of this textbook are reproducible as they were made using [Quarto](https://quarto.org/)^®^ which is an open-source scientific and technical publishing system built on [Pandoc](https://pandoc.org/).
 
