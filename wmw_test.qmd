@@ -57,6 +57,8 @@ library(tidyverse)
 We import the data *thromboglobulin* in R:
 
 ```{r}
+#| warning: false
+
 library(readxl)
 tg <- read_excel(here("data", "thromboglobulin.xlsx"))
 ```

@@ -59,6 +59,8 @@ library(tidyverse)
 We import the data *weight* in R:
 
 ```{r}
+#| warning: false
+
 library(readxl)
 weight <- read_excel(here("data", "weight.xlsx"))
 ```

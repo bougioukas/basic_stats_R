@@ -1,6 +1,6 @@
 # Kruskal-Wallis test {#sec-kruskal_wallis}
 
-The Kruskal-Wallis test is a rank-based non-parametric alternative to the one-way ANOVA and an extension of the Wilcoxon-Mann-Whitney test to allow the comparison of more than two independent groups. It’s usually recommended when the assumptions of one-way ANOVA test are not met (non-normal distributions) or with small samples.
+The Kruskal-Wallis test is a rank-based non-parametric alternative to the one-way ANOVA and an extension of the Wilcoxon-Mann-Whitney test to allow the comparison of more than two independent groups. It's usually recommended when the assumptions of one-way ANOVA test are not met (non-normal distributions) or with small samples.
 
 ```{r}
 #| include: false
@@ -13,7 +13,6 @@ library(here)
 library(tidyverse)
 ```
 
-
 When we have finished this Chapter, we should be able to:
 
 ::: {.callout-caution icon="false"}
@@ -25,22 +24,18 @@ When we have finished this Chapter, we should be able to:
 -   Interpret the results
 :::
 
-
 ## Research question and Hypothesis Testing
 
 We consider the data in *dataVO2* dataset. We wish to compare the VO2max in three different sports (runners, rowers, and triathletes).
 
-
 ::: {.callout-note icon="false"}
 ## Null hypothesis and alternative hypothesis
 
-- $H_0$: the distribution of VO2max is the same in all groups (the medians of VO2max in the three sports are the same)
-- $H_1$: there is at least one group with VO2max distribution different from the others (there is at least one sport with median VO2max different from the others) 
+-   $H_0$: the distribution of VO2max is the same in all groups (the medians of VO2max in the three sports are the same)
+-   $H_1$: there is at least one group with VO2max distribution different from the others (there is at least one sport with median VO2max different from the others)
 :::
 
-
 **NOTE:** The Kruskal-Wallis test should be regarded as a test of dominance between distributions comparing the mean ranks. The null hypothesis is that the observations from one group do not tend to have a higher or lower ranking than observations from the other groups. This test **does not** test the medians of the data as is commonly thought, it tests the **whole distribution**. However, if the distributions of the two groups have **similar shapes**, the Kruskal-Wallis test can be used to determine whether there are differences in the medians in the two groups. In practice, we use the medians to present the results.
-
 
 ## Packages we need
 
@@ -57,17 +52,17 @@ library(here)
 library(tidyverse)
 ```
 
-
 ## Preraring the data
 
 We import the data *dataVO2* in R:
 
 ```{r}
+#| warning: false
+
 library(readxl)
 dataVO2 <- read_excel(here("data", "dataVO2.xlsx"))
 
 ```
-
 
 ```{r}
 #| echo: false
@@ -98,11 +93,9 @@ dataVO2 <- dataVO2 %>%
 glimpse(dataVO2)
 ```
 
-
 ## Explore the characteristics of distribution for each group and check for normality
 
 The distributions can be explored visually with appropriate plots. Additionally, summary statistics and significance tests to check for normality (e.g., Shapiro-Wilk test) can be used.
-
 
 **Graph**
 
@@ -126,8 +119,6 @@ ggplot(dataVO2, aes(x=sport, y=VO2max)) +
 ```
 
 The above figure shows that the data in triathletes group have some outliers. Additionally, we can observe that the runners group seems to have the largest VO2max.
-
-
 
 **Summary statistics**
 
@@ -171,9 +162,7 @@ dataVO2 %>%
 :::
 :::
 
-
 The sample size is relative small (10 observations in each group). Moreover, the skewness (1.5) and the (excess) kurtosis (1.6) for the triathletes fall outside of the acceptable range of \[-1, 1\] indicating right-skewed and leptokurtic distribution.
-
 
 **Normality test**
 
@@ -186,17 +175,13 @@ dataVO2 %>%
   ungroup()
 ```
 
-
-We can see that the data for the triathletes is not normally distributed (p=0.023 <0.05) according to the Shapiro-Wilk test.
-
+We can see that the data for the triathletes is not normally distributed (p=0.023 \<0.05) according to the Shapiro-Wilk test.
 
 By considering all of the information together (small samples, graphs, normality test) the overall decision is against of normality.
-
 
 ## Run the Kruskal-Wallis test
 
 Now, we will perform a Kruskal-Wallis test to compare the VO2max in three sports.
-
 
 ::: {#exercise-joins .callout-tip}
 ## Kruskal-Wallis test
@@ -217,8 +202,7 @@ dataVO2 %>%
 :::
 :::
 
-The p-value (<0.001) is lower than 0.05. There is at least one sport in which the VO2max is different from the others.
-
+The p-value (\<0.001) is lower than 0.05. There is at least one sport in which the VO2max is different from the others.
 
  
 
@@ -243,12 +227,9 @@ gt_sum10 <- dataVO2 %>%
 gt_sum10
 ```
 
-
-
 ## Post-hoc tests
 
 A significant WMW is generally followed up by post-hoc tests to perform multiple pairwise comparisons between groups:
-
 
 ::: {#exercise-joins .callout-tip}
 ## Post-hoc tests
@@ -264,10 +245,9 @@ pwc_Dunn <- dataVO2 %>%
 pwc_Dunn 
 ```
 
-
 ## WMW with Bonferroni
 
-Alternatively, we can perform pairwise comparisons using pairwise WMW’s test and calculate the adjusted p-values using Bonferroni correction:
+Alternatively, we can perform pairwise comparisons using pairwise WMW's test and calculate the adjusted p-values using Bonferroni correction:
 
 ```{r}
 # Pairwise comparisons
@@ -280,20 +260,6 @@ pwc_BW
 :::
 :::
 
+Dunn's pairwise comparisons were carried out using the method of Bonferroni and adjusting the p-values were calculated.
 
-Dunn's pairwise comparisons were carried out using the method of Bonferroni and adjusting the p-values were calculated. 
-
-The runners' VO2max (median= 77.2, IQR=[74.2, 79.5] mL/kg/min) seems to differ significantly (larger based on the medians) from  rowers (69.6 [67.8, 73.1] mL/kg/min, p=0.046 <0.05) and triathletes (65.4 [64.0, 67.6] mL/kg/min, p <0.001).
-
-
-
-
-
-
-
-
-
-
-
-
-
+The runners' VO2max (median= 77.2, IQR=\[74.2, 79.5\] mL/kg/min) seems to differ significantly (larger based on the medians) from rowers (69.6 \[67.8, 73.1\] mL/kg/min, p=0.046 \<0.05) and triathletes (65.4 \[64.0, 67.6\] mL/kg/min, p \<0.001).

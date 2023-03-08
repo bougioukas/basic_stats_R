@@ -56,6 +56,8 @@ library(tidyverse)
 We import the data *eyes* in R:
 
 ```{r}
+#| warning: false
+
 library(readxl)
 eyes <- read_excel(here("data", "eyes.xlsx"))
 ```

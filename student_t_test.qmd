@@ -56,6 +56,8 @@ library(tidyverse)
 We import the data *depression* in R:
 
 ```{r}
+#| warning: false
+
 library(readxl)
 depression <- read_excel(here("data", "depression.xlsx"))
 ```
@@ -99,7 +101,6 @@ B.  The data in both groups have similar **variance** (also named as homogeneity
 **A. Explore the characteristics of distribution for each group and check for normality**
 
 The distributions can be explored visually with appropriate plots. Additionally, summary statistics and significance tests to check for normality (e.g., Shapiro-Wilk test) can be used.
-
 
 **Graphs**
 

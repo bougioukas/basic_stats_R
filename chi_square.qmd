@@ -58,6 +58,8 @@ library(tidyverse)
 We import the data *meldata* in R:
 
 ```{r}
+#| warning: false
+
 library(readxl)
 meldata <- read_excel(here("data", "meldata.xlsx"))
 

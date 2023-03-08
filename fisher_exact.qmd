@@ -53,16 +53,16 @@ library(here)
 library(tidyverse)
 ```
 
-
 ## Preraring the data
 
 We import the data *meldata* in R:
 
 ```{r}
+#| warning: false
+
 library(readxl)
 hemophilia <- read_excel(here("data", "hemophilia.xlsx"))
 ```
-
 
 ```{r}
 #| echo: false
@@ -83,8 +83,7 @@ We inspect the data and the type of variables:
 glimpse(hemophilia)
 ```
 
-
-The dataset *hemophilia* has 28 patients (rows) and includes 2 variables (columns), the character (`<chr>`) variable named `treatment`  and the character (`<chr>`) variable named `bleeding`. Both of them should be converted to factor (`<fct>`) variables using the `convert_as_factor()` function as follows:
+The dataset *hemophilia* has 28 patients (rows) and includes 2 variables (columns), the character (`<chr>`) variable named `treatment` and the character (`<chr>`) variable named `bleeding`. Both of them should be converted to factor (`<fct>`) variables using the `convert_as_factor()` function as follows:
 
 ```{r}
 hemophilia <- hemophilia %>%
@@ -93,11 +92,9 @@ hemophilia <- hemophilia %>%
 glimpse(hemophilia)
 ```
 
-
 ## Plot the data
 
 We count the number of patients with bleeding in the two regimens. It is useful to plot this as counts but also as percentages and compare them.
-
 
 ```{r}
 #| warning: false
@@ -127,7 +124,6 @@ p3 + p4 +
 
 The above bar plots with counts show graphically that the number of patients who had bleeding complications was similar in the two regimens. Note that the number of patients included in the study is small (n=28).
 
-
 ## Contigency table and Expected frequencies
 
 First, we will create a contingency *2x2* table (two categorical variables with exactly two levels each) with the frequencies using the Base R.
@@ -136,7 +132,6 @@ First, we will create a contingency *2x2* table (two categorical variables with 
 tb2 <- table(hemophilia$treatment, hemophilia$bleeding)
 tb2
 ```
-
 
 Next, we will also create a more informative table with row percentages and marginal totals.
 
@@ -170,14 +165,13 @@ modelsummary::datasummary_crosstab(treatment ~ bleeding, data = hemophilia)
 
 From the row frequencies, there is not actually difference, as we noted in the plot we made above.
 
-
 Now, we will calculate the **expected frequencies** for each cell using the `expected()` function from `{epitools}` package:
 
 ```{r}
 epitools::expected(tb2)
 ```
-In the above table there are 2 cells (50%) with expected counts less than 5 (specifically 2.67 and 2.32), so the Chi-square test is not the appropriate one. In this case the Fisher’s exact test should be used instead.
 
+In the above table there are 2 cells (50%) with expected counts less than 5 (specifically 2.67 and 2.32), so the Chi-square test is not the appropriate one. In this case the Fisher's exact test should be used instead.
 
 ## Run Fisher's exact test
 
@@ -201,11 +195,7 @@ fisher_test(tb2)
 :::
 :::
 
-
 The p = 0.64 is higher than 0.05. There is absence of evidence for an association between the treatment regimens and bleeding complications (failed to reject $H_0$).
-
-
-
 
 ## Having only the counts
 
@@ -216,11 +206,3 @@ dat <- c(13, 10, 2, 3)
 mx <- matrix(dat, nrow = 2, dimnames = list(c("A", "B"), c("no", "yes")))
 mx
 ```
-
-
-
-
-
-
-
-

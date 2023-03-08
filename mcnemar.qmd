@@ -58,6 +58,8 @@ library(tidyverse)
 We import the data *asthma* in R:
 
 ```{r}
+#| warning: false
+
 library(readxl)
 asthma <- read_excel(here("data", "asthma.xlsx"))
 ```
