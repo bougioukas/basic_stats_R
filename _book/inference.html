@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.251">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Practical Statistics in Medicine with R - 1&nbsp; Foundations for statistical inference</title>
+<title>Practical Statistics in Medicine with R - 2&nbsp; Foundations for statistical inference</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -27,7 +27,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./student_t_test.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./introduction.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -63,7 +63,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Foundations for statistical inference</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Foundations for statistical inference</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -92,57 +92,62 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./inference.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Foundations for statistical inference</span></a>
+  <a href="./introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./student_t_test.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Two-sample t-test (Student’s t-test)</span></a>
+  <a href="./inference.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Foundations for statistical inference</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./wmw_test.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Wilcoxon-Mann-Whitney (Mann-Whitney U) test</span></a>
+  <a href="./student_t_test.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Two-sample t-test (Student’s t-test)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./paired_t_test.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Paired t-test</span></a>
+  <a href="./wmw_test.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Wilcoxon-Mann-Whitney (Mann-Whitney U) test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./wilcoxon_test.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wilcoxon Signed-Rank test</span></a>
+  <a href="./paired_t_test.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Paired t-test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./anova.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">One-way ANOVA test</span></a>
+  <a href="./wilcoxon_test.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Wilcoxon Signed-Rank test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./kruskal_wallis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Kruskal-Wallis test</span></a>
+  <a href="./anova.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">One-way ANOVA test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./correlation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Correlation</span></a>
+  <a href="./kruskal_wallis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Kruskal-Wallis test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chi_square.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Chi-sqaure test of independence</span></a>
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Correlation</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./fisher_exact.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fisher’s exact test</span></a>
+  <a href="./chi_square.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Chi-sqaure test of independence</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./mcnemar.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">McNemar’s test</span></a>
+  <a href="./fisher_exact.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fisher’s exact test</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mcnemar.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">McNemar’s test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -156,13 +161,13 @@ ul.task-list li input[type="checkbox"] {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#hypothesis-testsing" id="toc-hypothesis-testsing" class="nav-link active" data-scroll-target="#hypothesis-testsing"><span class="toc-section-number">1.1</span>  Hypothesis Testsing</a></li>
-  <li><a href="#type-of-errors-in-hypothesis-testing" id="toc-type-of-errors-in-hypothesis-testing" class="nav-link" data-scroll-target="#type-of-errors-in-hypothesis-testing"><span class="toc-section-number">1.2</span>  Type of Errors in hypothesis testing</a></li>
+<li><a href="#hypothesis-testsing" id="toc-hypothesis-testsing" class="nav-link active" data-scroll-target="#hypothesis-testsing"><span class="toc-section-number">2.1</span>  Hypothesis Testsing</a></li>
+  <li><a href="#type-of-errors-in-hypothesis-testing" id="toc-type-of-errors-in-hypothesis-testing" class="nav-link" data-scroll-target="#type-of-errors-in-hypothesis-testing"><span class="toc-section-number">2.2</span>  Type of Errors in hypothesis testing</a></li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-inference" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Foundations for statistical inference</span></span></h1>
+<h1 class="title"><span id="sec-inference" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Foundations for statistical inference</span></span></h1>
 </div>
 
 
@@ -190,8 +195,8 @@ Learning objectives
 </ul>
 </div>
 </div>
-<section id="hypothesis-testsing" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="hypothesis-testsing">
-<span class="header-section-number">1.1</span> Hypothesis Testsing</h2>
+<section id="hypothesis-testsing" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="hypothesis-testsing">
+<span class="header-section-number">2.1</span> Hypothesis Testsing</h2>
 <p>Hypothesis testing is a method of deciding whether the data are consistent with the null hypothesis. The calculation of the p-value is an important part of the procedure. Given a study with a single outcome measure and a statistical test, hypothesis testing can be summarized in five steps.</p>
 <div class="callout-tip callout callout-style-default no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -221,10 +226,10 @@ Steps of Hypothesis Testsing
 <li>If p − value &lt; α, reject the null hypothesis, <span class="math inline">\(H_{0}\)</span>.</li>
 <li>If p − value ≥ α, do not reject the null hypothesis, <span class="math inline">\(H_{0}\)</span>.</li>
 </ul>
-<p>The <a href="#tbl-p">Table&nbsp;<span>1.1</span></a> demonstrates how to interpret the strength of the evidence. However, always keep in mind the size of the study being considered.</p>
+<p>The <a href="#tbl-p">Table&nbsp;<span>2.1</span></a> demonstrates how to interpret the strength of the evidence. However, always keep in mind the size of the study being considered.</p>
 <div id="tbl-p" class="anchored">
 <table class="table">
-<caption>Table&nbsp;1.1: Strength of the evidence against <span class="math inline">\(H_{0}\)</span>.</caption>
+<caption>Table&nbsp;2.1: Strength of the evidence against <span class="math inline">\(H_{0}\)</span>.</caption>
 <thead><tr class="header">
 <th>p-value</th>
 <th>Interpretation</th>
@@ -261,25 +266,25 @@ Steps of Hypothesis Testsing
 <p><strong>Step 5:</strong> Interpret the results.</p>
 </div>
 </div>
-</section><section id="type-of-errors-in-hypothesis-testing" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="type-of-errors-in-hypothesis-testing">
-<span class="header-section-number">1.2</span> Type of Errors in hypothesis testing</h2>
-<p><strong>Type I error:</strong> we reject the null hypothesis when it is true (false positive), and conclude that there is an effect when, in reality, there is none. The maximum chance (probability) of making a Type I error is denoted by α (alpha). This is the significance level of the test; we reject the null hypothesis if our p-value is less than the significance level, i.e.&nbsp;if p &lt; a (<a href="#fig-type_errors">Figure&nbsp;<span>1.1</span></a>).</p>
-<p><strong>Type II error:</strong> we do not reject the null hypothesis when it is false (false negative), and conclude that there is no effect when one really exists. The chance of making a Type II error is denoted by β (beta); its compliment, (1 - β), is the power of the test. The power, therefore, is the probability of rejecting the null hypothesis when it is false; i.e.&nbsp;it is the chance (usually expressed as a percentage) of detecting, as statistically significant, a real treatment effect of a given size (<a href="#fig-type_errors">Figure&nbsp;<span>1.1</span></a>). <a href="#tbl-power">Table&nbsp;<span>1.2</span></a> presents the main factors that can influence the power in a study.</p>
+</section><section id="type-of-errors-in-hypothesis-testing" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="type-of-errors-in-hypothesis-testing">
+<span class="header-section-number">2.2</span> Type of Errors in hypothesis testing</h2>
+<p><strong>Type I error:</strong> we reject the null hypothesis when it is true (false positive), and conclude that there is an effect when, in reality, there is none. The maximum chance (probability) of making a Type I error is denoted by α (alpha). This is the significance level of the test; we reject the null hypothesis if our p-value is less than the significance level, i.e.&nbsp;if p &lt; a (<a href="#fig-type_errors">Figure&nbsp;<span>2.1</span></a>).</p>
+<p><strong>Type II error:</strong> we do not reject the null hypothesis when it is false (false negative), and conclude that there is no effect when one really exists. The chance of making a Type II error is denoted by β (beta); its compliment, (1 - β), is the power of the test. The power, therefore, is the probability of rejecting the null hypothesis when it is false; i.e.&nbsp;it is the chance (usually expressed as a percentage) of detecting, as statistically significant, a real treatment effect of a given size (<a href="#fig-type_errors">Figure&nbsp;<span>2.1</span></a>). <a href="#tbl-power">Table&nbsp;<span>2.2</span></a> presents the main factors that can influence the power in a study.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-type_errors" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><a href="images/type_errors.png" class="lightbox" title="Types of error in hypothesis testing." data-gallery="quarto-lightbox-gallery-1"><img src="images/type_errors.png" class="img-fluid figure-img" style="width:75.0%"></a></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;1.1: Types of error in hypothesis testing.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2.1: Types of error in hypothesis testing.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 <div id="tbl-power" class="anchored">
 <table class="table">
-<caption>Table&nbsp;1.2: Factors Influencing Power.</caption>
+<caption>Table&nbsp;2.2: Factors Influencing Power.</caption>
 <colgroup>
-<col style="width: 33%">
-<col style="width: 66%">
+<col style="width: 34%">
+<col style="width: 65%">
 </colgroup>
 <thead><tr class="header">
 <th>Factor</th>
@@ -288,19 +293,19 @@ Steps of Hypothesis Testsing
 <tbody>
 <tr class="odd">
 <td><strong>Effect Size</strong></td>
-<td>As effect size increases, power tends to increase.</td>
+<td>As effect size increases, power tends to increase (a larger effect size is easier to be detected by the statistical test, leading to a greater probability of a statistically significant result).</td>
 </tr>
 <tr class="even">
 <td><strong>Sample Size</strong></td>
-<td>As the sample size goes up, power generally goes up.</td>
+<td>As the sample size goes up, power generally goes up (this factor is the most easily manipulated by researchers).</td>
 </tr>
 <tr class="odd">
 <td><strong>Standard deviation</strong></td>
-<td>As variability decreases, power tends to increase.</td>
+<td>As variability decreases, power tends to increase (variability can be reduced by controlling extraneous variables such as inclusion and exclusion criteria defining the sample in a study).</td>
 </tr>
 <tr class="even">
 <td><strong>Significance level α</strong></td>
-<td>As α goes up, power goes up.</td>
+<td>As α goes up, power goes up (it would be easier to find statistical significance with a larger significance level, e.g.&nbsp;α=0.1, compared with finding a significant result with a smaller α, e.g.&nbsp;α=0.05).</td>
 </tr>
 </tbody>
 </table>
@@ -419,13 +424,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="./introduction.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./student_t_test.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Two-sample t-test (Student’s t-test)</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Two-sample t-test (Student’s t-test)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -433,7 +438,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":true});</script>
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":true,"descPosition":"bottom","openEffect":"zoom"});</script>
 
 
 </body></html>

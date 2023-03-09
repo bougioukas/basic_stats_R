@@ -64,11 +64,11 @@ The @tbl-p demonstrates how to interpret the strength of the evidence. However, 
 knitr::include_graphics(here::here("images", "type_errors.png"))
 ```
 
-| Factor                   | Influence on study's power                           |
-|------------------------|------------------------------------------------|
-| **Effect Size**          | As effect size increases, power tends to increase.   |
-| **Sample Size**          | As the sample size goes up, power generally goes up. |
-| **Standard deviation**   | As variability decreases, power tends to increase.   |
-| **Significance level α** | As α goes up, power goes up.                         |
+| Factor                   | Influence on study's power                                                                                                                                                                                 |
+|-------------------------|------------------------------------------------|
+| **Effect Size**          | As effect size increases, power tends to increase (a larger effect size is easier to be detected by the statistical test, leading to a greater probability of a statistically significant result).         |
+| **Sample Size**          | As the sample size goes up, power generally goes up (this factor is the most easily manipulated by researchers).                                                                                           |
+| **Standard deviation**   | As variability decreases, power tends to increase (variability can be reduced by controlling extraneous variables such as inclusion and exclusion criteria defining the sample in a study).                |
+| **Significance level α** | As α goes up, power goes up (it would be easier to find statistical significance with a larger significance level, e.g. α=0.1, compared with finding a significant result with a smaller α, e.g. α=0.05).  |
 
 : Factors Influencing Power. {#tbl-power}

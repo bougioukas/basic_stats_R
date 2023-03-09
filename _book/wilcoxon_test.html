@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.251">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Practical Statistics in Medicine with R - 5&nbsp; Wilcoxon Signed-Rank test</title>
+<title>Practical Statistics in Medicine with R - 6&nbsp; Wilcoxon Signed-Rank test</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,7 +131,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wilcoxon Signed-Rank test</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Wilcoxon Signed-Rank test</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -160,57 +160,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./inference.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Foundations for statistical inference</span></a>
+  <a href="./introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./student_t_test.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Two-sample t-test (Student’s t-test)</span></a>
+  <a href="./inference.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Foundations for statistical inference</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./wmw_test.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Wilcoxon-Mann-Whitney (Mann-Whitney U) test</span></a>
+  <a href="./student_t_test.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Two-sample t-test (Student’s t-test)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./paired_t_test.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Paired t-test</span></a>
+  <a href="./wmw_test.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Wilcoxon-Mann-Whitney (Mann-Whitney U) test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./wilcoxon_test.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wilcoxon Signed-Rank test</span></a>
+  <a href="./paired_t_test.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Paired t-test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./anova.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">One-way ANOVA test</span></a>
+  <a href="./wilcoxon_test.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Wilcoxon Signed-Rank test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./kruskal_wallis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Kruskal-Wallis test</span></a>
+  <a href="./anova.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">One-way ANOVA test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./correlation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Correlation</span></a>
+  <a href="./kruskal_wallis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Kruskal-Wallis test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chi_square.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Chi-sqaure test of independence</span></a>
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Correlation</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./fisher_exact.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fisher’s exact test</span></a>
+  <a href="./chi_square.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Chi-sqaure test of independence</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./mcnemar.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">McNemar’s test</span></a>
+  <a href="./fisher_exact.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fisher’s exact test</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mcnemar.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">McNemar’s test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -224,17 +229,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#research-question" id="toc-research-question" class="nav-link active" data-scroll-target="#research-question"><span class="toc-section-number">5.1</span>  Research question</a></li>
-  <li><a href="#packages-we-need" id="toc-packages-we-need" class="nav-link" data-scroll-target="#packages-we-need"><span class="toc-section-number">5.2</span>  Packages we need</a></li>
-  <li><a href="#preraring-the-data" id="toc-preraring-the-data" class="nav-link" data-scroll-target="#preraring-the-data"><span class="toc-section-number">5.3</span>  Preraring the data</a></li>
-  <li><a href="#explore-the-characteristics-of-distribution-of-differences" id="toc-explore-the-characteristics-of-distribution-of-differences" class="nav-link" data-scroll-target="#explore-the-characteristics-of-distribution-of-differences"><span class="toc-section-number">5.4</span>  Explore the characteristics of distribution of differences</a></li>
-  <li><a href="#run-the-wilcoxon-signed-rank-test" id="toc-run-the-wilcoxon-signed-rank-test" class="nav-link" data-scroll-target="#run-the-wilcoxon-signed-rank-test"><span class="toc-section-number">5.5</span>  Run the Wilcoxon Signed-Rank test</a></li>
-  <li><a href="#present-the-results-in-a-summary-table" id="toc-present-the-results-in-a-summary-table" class="nav-link" data-scroll-target="#present-the-results-in-a-summary-table"><span class="toc-section-number">5.6</span>  Present the results in a summary table</a></li>
+<li><a href="#research-question" id="toc-research-question" class="nav-link active" data-scroll-target="#research-question"><span class="toc-section-number">6.1</span>  Research question</a></li>
+  <li><a href="#packages-we-need" id="toc-packages-we-need" class="nav-link" data-scroll-target="#packages-we-need"><span class="toc-section-number">6.2</span>  Packages we need</a></li>
+  <li><a href="#preraring-the-data" id="toc-preraring-the-data" class="nav-link" data-scroll-target="#preraring-the-data"><span class="toc-section-number">6.3</span>  Preraring the data</a></li>
+  <li><a href="#explore-the-characteristics-of-distribution-of-differences" id="toc-explore-the-characteristics-of-distribution-of-differences" class="nav-link" data-scroll-target="#explore-the-characteristics-of-distribution-of-differences"><span class="toc-section-number">6.4</span>  Explore the characteristics of distribution of differences</a></li>
+  <li><a href="#run-the-wilcoxon-signed-rank-test" id="toc-run-the-wilcoxon-signed-rank-test" class="nav-link" data-scroll-target="#run-the-wilcoxon-signed-rank-test"><span class="toc-section-number">6.5</span>  Run the Wilcoxon Signed-Rank test</a></li>
+  <li><a href="#present-the-results-in-a-summary-table" id="toc-present-the-results-in-a-summary-table" class="nav-link" data-scroll-target="#present-the-results-in-a-summary-table"><span class="toc-section-number">6.6</span>  Present the results in a summary table</a></li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-wilcoxon_test" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wilcoxon Signed-Rank test</span></span></h1>
+<h1 class="title"><span id="sec-wilcoxon_test" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Wilcoxon Signed-Rank test</span></span></h1>
 </div>
 
 
@@ -265,8 +270,8 @@ Learning objectives
 </ul>
 </div>
 </div>
-<section id="research-question" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="research-question">
-<span class="header-section-number">5.1</span> Research question</h2>
+<section id="research-question" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="research-question">
+<span class="header-section-number">6.1</span> Research question</h2>
 <p>The dataset <em>eyes</em> contains thickness of the cornea (in microns) in patients with one eye affected by glaucoma; the other eye is unaffected. We investigate if there is evidence for difference in corneal thickness in affected and unaffected eyes.</p>
 <div class="callout-note callout callout-style-default no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -285,8 +290,8 @@ Null hypothesis and alternative hypothesis
 </div>
 </div>
 <p><strong>NOTE:</strong> If we are testing the null hypothesis that the <strong>median</strong> of the paired rank differences is zero, then the paired rank differences must all come from a symmetrical distribution. Note that we do not have to assume that the distributions of the original populations are symmetrical - two very positively skewed distributions that differ only by location will produce a set of paired rank differences that are symmetrical.</p>
-</section><section id="packages-we-need" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="packages-we-need">
-<span class="header-section-number">5.2</span> Packages we need</h2>
+</section><section id="packages-we-need" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="packages-we-need">
+<span class="header-section-number">6.2</span> Packages we need</h2>
 <p>We need to load the following packages:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op">)</span></span>
@@ -295,8 +300,8 @@ Null hypothesis and alternative hypothesis
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="preraring-the-data" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="preraring-the-data">
-<span class="header-section-number">5.3</span> Preraring the data</h2>
+</section><section id="preraring-the-data" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="preraring-the-data">
+<span class="header-section-number">6.3</span> Preraring the data</h2>
 <p>We import the data <em>eyes</em> in R:</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span>
@@ -309,8 +314,8 @@ Null hypothesis and alternative hypothesis
 </div>
 <div class="cell">
 <div id="fig-weight" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-3ab5518b896082134ae4" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-3ab5518b896082134ae4">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8"],[1,2,3,4,5,6,7,8],[488,478,480,426,440,410,458,460],[484,478,492,444,436,398,464,476],[4,0,-12,-18,4,12,-6,-16]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>affected_eye<\/th>\n      <th>unaffected_eye<\/th>\n      <th>dif_thickness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;5.1: Table with data from “weight” file.</figcaption><p></p>
+<figure class="figure"><div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-33151b6cb3b9371b4360" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-33151b6cb3b9371b4360">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8"],[1,2,3,4,5,6,7,8],[488,478,480,426,440,410,458,460],[484,478,492,444,436,398,464,476],[4,0,-12,-18,4,12,-6,-16]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>affected_eye<\/th>\n      <th>unaffected_eye<\/th>\n      <th>dif_thickness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;6.1: Table with data from “weight” file.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -326,8 +331,8 @@ $ unaffected_eye &lt;dbl&gt; 484, 478, 492, 444, 436, 398, 464, 476
 $ dif_thickness  &lt;dbl&gt; 4, 0, -12, -18, 4, 12, -6, -16</code></pre>
 </div>
 </div>
-</section><section id="explore-the-characteristics-of-distribution-of-differences" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="explore-the-characteristics-of-distribution-of-differences">
-<span class="header-section-number">5.4</span> Explore the characteristics of distribution of differences</h2>
+</section><section id="explore-the-characteristics-of-distribution-of-differences" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="explore-the-characteristics-of-distribution-of-differences">
+<span class="header-section-number">6.4</span> Explore the characteristics of distribution of differences</h2>
 <p>The distributions of differences can be explored with appropriate plots and summary statistics.</p>
 <p><strong>Graph</strong></p>
 <p>We can explore the data visually for symmetry with a density plot.</p>
@@ -345,7 +350,7 @@ $ dif_thickness  &lt;dbl&gt; 4, 0, -12, -18, 4, 12, -6, -16</code></pre>
 <div class="cell-output-display">
 <div id="fig-hist2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><a href="wilcoxon_test_files/figure-html/fig-hist2-1.png" class="lightbox" title="Density plot of the thickness differences." data-gallery="quarto-lightbox-gallery-1"><img src="wilcoxon_test_files/figure-html/fig-hist2-1.png" class="img-fluid figure-img" width="672"></a></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5.2: Density plot of the thickness differences.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6.2: Density plot of the thickness differences.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -446,8 +451,8 @@ Summary statistics
 </div>
 </div>
 <p>The Shapiro-Wilk test suggests that the weight differences are normally distributed (p=0.65 &gt; 0.05).</p>
-</section><section id="run-the-wilcoxon-signed-rank-test" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="run-the-wilcoxon-signed-rank-test">
-<span class="header-section-number">5.5</span> Run the Wilcoxon Signed-Rank test</h2>
+</section><section id="run-the-wilcoxon-signed-rank-test" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="run-the-wilcoxon-signed-rank-test">
+<span class="header-section-number">6.5</span> Run the Wilcoxon Signed-Rank test</h2>
 <p>The differences between the two measurements can be tested using a rank test such as Wilcoxon Signed-Rank test.</p>
 <div id="exercise-joins" class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -509,8 +514,8 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
 <p>The result is not significant (p = 0.31 &gt; 0.05). However, we can’t be certain that there is not difference in corneal thickness in affected and unaffected eyes because the sample size is very small.</p>
-</section><section id="present-the-results-in-a-summary-table" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="present-the-results-in-a-summary-table">
-<span class="header-section-number">5.6</span> Present the results in a summary table</h2>
+</section><section id="present-the-results-in-a-summary-table" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="present-the-results-in-a-summary-table">
+<span class="header-section-number">6.6</span> Present the results in a summary table</h2>
 <div class="cell">
 <details><summary>Show the code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tb2</span> <span class="op">&lt;-</span> <span class="va">eyes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">dif_thickness</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -526,12 +531,12 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <span><span class="va">gt_sum4</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 
-<div id="vrljactkez" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="tvmtzxdaxk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#vrljactkez) .gt_table {
+:where(#tvmtzxdaxk) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -556,7 +561,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-left-color: #D3D3D3;
 }
 
-:where(#vrljactkez) .gt_heading {
+:where(#tvmtzxdaxk) .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -568,12 +573,12 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-right-color: #D3D3D3;
 }
 
-:where(#vrljactkez) .gt_caption {
+:where(#tvmtzxdaxk) .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-:where(#vrljactkez) .gt_title {
+:where(#tvmtzxdaxk) .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -585,7 +590,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-bottom-width: 0;
 }
 
-:where(#vrljactkez) .gt_subtitle {
+:where(#tvmtzxdaxk) .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -597,13 +602,13 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-top-width: 0;
 }
 
-:where(#vrljactkez) .gt_bottom_border {
+:where(#tvmtzxdaxk) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#vrljactkez) .gt_col_headings {
+:where(#tvmtzxdaxk) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -618,7 +623,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-right-color: #D3D3D3;
 }
 
-:where(#vrljactkez) .gt_col_heading {
+:where(#tvmtzxdaxk) .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -638,7 +643,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   overflow-x: hidden;
 }
 
-:where(#vrljactkez) .gt_column_spanner_outer {
+:where(#tvmtzxdaxk) .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -650,15 +655,15 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 4px;
 }
 
-:where(#vrljactkez) .gt_column_spanner_outer:first-child {
+:where(#tvmtzxdaxk) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#vrljactkez) .gt_column_spanner_outer:last-child {
+:where(#tvmtzxdaxk) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#vrljactkez) .gt_column_spanner {
+:where(#tvmtzxdaxk) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -670,7 +675,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   width: 100%;
 }
 
-:where(#vrljactkez) .gt_group_heading {
+:where(#tvmtzxdaxk) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -696,7 +701,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   text-align: left;
 }
 
-:where(#vrljactkez) .gt_empty_group_heading {
+:where(#tvmtzxdaxk) .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -711,15 +716,15 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   vertical-align: middle;
 }
 
-:where(#vrljactkez) .gt_from_md > :first-child {
+:where(#tvmtzxdaxk) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#vrljactkez) .gt_from_md > :last-child {
+:where(#tvmtzxdaxk) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#vrljactkez) .gt_row {
+:where(#tvmtzxdaxk) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -738,7 +743,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   overflow-x: hidden;
 }
 
-:where(#vrljactkez) .gt_stub {
+:where(#tvmtzxdaxk) .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -751,7 +756,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-:where(#vrljactkez) .gt_stub_row_group {
+:where(#tvmtzxdaxk) .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -765,11 +770,11 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   vertical-align: top;
 }
 
-:where(#vrljactkez) .gt_row_group_first td {
+:where(#tvmtzxdaxk) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#vrljactkez) .gt_summary_row {
+:where(#tvmtzxdaxk) .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -779,16 +784,16 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-:where(#vrljactkez) .gt_first_summary_row {
+:where(#tvmtzxdaxk) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#vrljactkez) .gt_first_summary_row.thick {
+:where(#tvmtzxdaxk) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#vrljactkez) .gt_last_summary_row {
+:where(#tvmtzxdaxk) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -798,7 +803,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-:where(#vrljactkez) .gt_grand_summary_row {
+:where(#tvmtzxdaxk) .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -808,7 +813,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-:where(#vrljactkez) .gt_first_grand_summary_row {
+:where(#tvmtzxdaxk) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -818,11 +823,11 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-top-color: #D3D3D3;
 }
 
-:where(#vrljactkez) .gt_striped {
+:where(#tvmtzxdaxk) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#vrljactkez) .gt_table_body {
+:where(#tvmtzxdaxk) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -831,7 +836,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-:where(#vrljactkez) .gt_footnotes {
+:where(#tvmtzxdaxk) .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -845,7 +850,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-right-color: #D3D3D3;
 }
 
-:where(#vrljactkez) .gt_footnote {
+:where(#tvmtzxdaxk) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -854,7 +859,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-:where(#vrljactkez) .gt_sourcenotes {
+:where(#tvmtzxdaxk) .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -868,7 +873,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-right-color: #D3D3D3;
 }
 
-:where(#vrljactkez) .gt_sourcenote {
+:where(#tvmtzxdaxk) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -876,64 +881,64 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-:where(#vrljactkez) .gt_left {
+:where(#tvmtzxdaxk) .gt_left {
   text-align: left;
 }
 
-:where(#vrljactkez) .gt_center {
+:where(#tvmtzxdaxk) .gt_center {
   text-align: center;
 }
 
-:where(#vrljactkez) .gt_right {
+:where(#tvmtzxdaxk) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#vrljactkez) .gt_font_normal {
+:where(#tvmtzxdaxk) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#vrljactkez) .gt_font_bold {
+:where(#tvmtzxdaxk) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#vrljactkez) .gt_font_italic {
+:where(#tvmtzxdaxk) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#vrljactkez) .gt_super {
+:where(#tvmtzxdaxk) .gt_super {
   font-size: 65%;
 }
 
-:where(#vrljactkez) .gt_footnote_marks {
+:where(#tvmtzxdaxk) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#vrljactkez) .gt_asterisk {
+:where(#tvmtzxdaxk) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#vrljactkez) .gt_indent_1 {
+:where(#tvmtzxdaxk) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#vrljactkez) .gt_indent_2 {
+:where(#tvmtzxdaxk) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#vrljactkez) .gt_indent_3 {
+:where(#tvmtzxdaxk) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#vrljactkez) .gt_indent_4 {
+:where(#tvmtzxdaxk) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#vrljactkez) .gt_indent_5 {
+:where(#tvmtzxdaxk) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1086,12 +1091,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./paired_t_test.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Paired t-test</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Paired t-test</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./anova.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">One-way ANOVA test</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">One-way ANOVA test</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1099,7 +1104,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","loop":true,"openEffect":"zoom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","loop":true,"descPosition":"bottom","closeEffect":"zoom"});</script>
 
 
 </body></html>
