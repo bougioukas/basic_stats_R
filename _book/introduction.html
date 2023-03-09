@@ -248,12 +248,12 @@ Learning objectives
 </section><section id="data-and-variables" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="data-and-variables">
 <span class="header-section-number">1.2</span> Data and Variables</h2>
 <section id="biomedical-data" class="level3"><h3 class="anchored" data-anchor-id="biomedical-data">Biomedical Data</h3>
-<p><strong>Biomedical data</strong> have unique features compared with data in other domains. The data may include administrative health data, biomarker data, biometric data (for example, from wearable technologies) and imaging, and may originate from many different sources, including Electronic Health Records (EHRs), clinical registries, biobanks, the internet and patient self-reports.</p>
+<p><strong>Biomedical data</strong> have unique features compared with data in other domains. The data may include administrative health data, biomarker data, biometric data (for example, from wearable technologies) and imaging, and may originate from many different sources, including Electronic Health Records (EHRs), surveillance systems, clinical registries, biobanks, the internet (e.g.&nbsp;social media) and patient self-reports.</p>
 <p>Biomedical data can be transformed into <strong>information</strong>. This information can become <strong>knowledge</strong> if the researchers and clinicians understand it (<a href="#fig-info">Figure&nbsp;<span>1.2</span></a>).</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-info" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/info.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="From data to knowledge."><img src="images/info.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<figure class="figure"><p><a href="images/info.png" class="lightbox" title="From data to knowledge." data-gallery="quarto-lightbox-gallery-1"><img src="images/info.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;1.2: From data to knowledge.</figcaption><p></p>
 </figure>
 </div>
@@ -266,7 +266,7 @@ Learning objectives
 <p>In this textbook we use data organized in a structured format (spreadsheets). In statistics, tabular data refers to data that are organized in a table with rows and columns. A row is a observation (or record), which corresponds to the statistical unit of the dataset. The columns are the variables (or characteristics) of interest.</p>
 <p>&nbsp;</p>
 </section><section id="variables" class="level3"><h3 class="anchored" data-anchor-id="variables">Variables</h3>
-<p>A <strong>variable</strong> is a quantity or characteristic that is <strong>free to vary</strong>, or take on different values. To gain information on a variable, it is necessary to design and conduct experiments.</p>
+<p>A <strong>variable</strong> is a quantity or characteristic that is <strong>free to vary</strong>, or take on different values. To gain information on variables and their associations, it is necessary to design and conduct scientific experiments.</p>
 <p>Researchers design experiments to test if changes to one or more variables are <strong>associated</strong> with changes to another variable of interest. For example, if researchers hypothesize that a new therapy is more effective than the usual care for migraine pain, they could design an experiment to test this hypothesis; participants should randomly assigned to one of two groups: the experimental group receiving the new treatment that is being tested, and the control group receiving an conventional treatment. In this experiment, the type of treatment each participant received (i.e., new treatment vs.&nbsp;conventional treatment) is the <strong>independent variable</strong> (IV), while the pain relief is the <strong>dependent variable</strong> (DV) or the <strong>outcome</strong> variable.</p>
 <div class="callout-tip callout callout-style-default no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -289,7 +289,7 @@ Independent Vs Dependent variables
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-types_data" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/types_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Broad classification of the different types of data with examples."><img src="images/types_data.png" class="img-fluid figure-img" style="width:90.0%"></a></p>
+<figure class="figure"><p><a href="images/types_data.png" class="lightbox" title="Broad classification of the different types of data with examples." data-gallery="quarto-lightbox-gallery-2"><img src="images/types_data.png" class="img-fluid figure-img" style="width:90.0%"></a></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;1.3: Broad classification of the different types of data with examples.</figcaption><p></p>
 </figure>
 </div>
@@ -306,7 +306,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The degree of <strong>measurement accuracy</strong> and the <strong>type of data</strong> are both important in relation to carrying out a <strong>proper statistical analysis</strong>.</p>
+<p>The degree of <strong>measurement accuracy</strong> and the <strong>type of data</strong> are both important factors in the decision to perform a <strong>statistical analysis</strong>.</p>
 </div>
 </div>
 <p>&nbsp;</p>
@@ -345,7 +345,7 @@ Collapsion of categories leads to a loss of information
 <p>&nbsp;</p>
 </section><section id="numerical-data" class="level3"><h3 class="anchored" data-anchor-id="numerical-data">Numerical Data</h3>
 <p><strong>A. Discrete Data</strong></p>
-<p>Discrete data can take only a <strong>finite number of values</strong> in a range, for example, the number of children in a family or the number of days missed from work. Other examples are often <strong>counts per unit of time</strong> such as the number of deaths in a hospital per year, the number of visits to the general practitioner in a year, or the number of attacks of asthma a person has per month. In dentistry, a common measure is the number of decayed, filled or missing teeth.</p>
+<p>Discrete data can take only a <strong>finite number of values</strong> (usually integers) in a range, for example, the number of children in a family or the number of days missed from work. Other examples are often <strong>counts per unit of time</strong> such as the number of deaths in a hospital per year, the number of visits to the general practitioner in a year, or the number of epileptic seizures a patient has per month. In dentistry, a common measure is the number of decayed, filled or missing teeth.</p>
 <div class="callout-important callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -361,7 +361,7 @@ Discrete Vs Ordinal data
 </div>
 <p>&nbsp;</p>
 <p><strong>Β. Continuous Data</strong></p>
-<p>Continuous data are numbers with units that can take any value within a given range. However, in practice, they are restricted by the accuracy of the measuring instrument. Height, weight, blood pressure, cholesterol level, body temperature are examples of variables that take continuous values.</p>
+<p>Continuous data are numbers (usually with units) that can take any value within a given range. However, in practice, they are restricted by the accuracy of the measuring instrument. Height, weight, blood pressure, cholesterol level, body temperature, body mass index (BMI) are just few examples of variables that take continuous values.</p>
 <div class="callout-important callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -372,7 +372,7 @@ Categorization of numerical data leads to a loss of information
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>For simplicity, it is often the case in medicine that continuous data are dichotomized to make binary variables. For example, the diastolic blood pressure, which is continuous, is converted into hypertension (&gt;90 mmHg) and normotension (≤90 mmHg). However, this practice leads to a <strong>loss of information</strong>.</p>
+<p>Continuous data are often categorized creating categorical variables. For example, the BMI, which is a continuous variable, is usually converted into an ordinal variable with four categories (underweight, normal, overweight and obese). However, dividing continuous variables into categories leads to a <strong>loss of information</strong>.</p>
 </div>
 </div>
 
@@ -503,7 +503,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","loop":true,"openEffect":"zoom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","selector":".lightbox","loop":true});</script>
 
 
 </body></html>
