@@ -4,9 +4,11 @@ project:
 book:
   title: "Practical Statistics in Medicine with R"
   subtitle: "1st Edition"
+  reader-mode: true
   author: 
-    - "Konstantinos I. Bougioukas, PhD"
-  date: "January 26, 2023"
+    - name: "Konstantinos I. Bougioukas, PhD"
+      orcid: "0000-0002-6533-1391"
+  date: today
   cover-image: images/cover.png
   repo-url: https://github.com/bougioukas/basic_stats_R
   chapters:
@@ -36,7 +38,9 @@ lightbox: auto
 
 format:
   html:
-    theme: cosmo
+    theme:
+      light: cosmo
+      dark: [cosmo, theme-dark.scss]
     fontsize: 1.2em
     linestretch: 1.8
     link-external-newwindow: true
