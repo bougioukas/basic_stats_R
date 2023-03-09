@@ -1,10 +1,10 @@
 # One-way ANOVA test {#sec-anova}
 
-One-way analysis of variance, usually referred to as **one-way ANOVA**, is a statistical test used when we want to compare several means. We may think of it as an extension of Student's t-test to the case of more than two samples.
+One-way analysis of variance, usually referred to as **one-way ANOVA**, is a statistical test used when we want to compare several means. We may think of it as an extension of Student's t-test to the case of more than two independent samples.
 
-Although, this test can detect a difference between several groups it does not inform about which groups are different from the others. At first sight we might clarify the question by comparing all groups in pairs with multiple t-tests. However, that procedure may lead us to the wrong conclusions (known as multiple comparisons problem). Why is this procedure inappropriate? Quite simply, because we would be wrongly testing the null hypothesis. Each comparison one conducts increases the likelihood of committing at least one Type I error within a set of comparisons (**Famillywise Type I error rate**).
+Although, this test can detect a difference between several groups it does not inform us about which groups are different from the others. At first glance, we might think to compare all groups in pairs with multiple t-tests. However, this procedure may lead to incorrect conclusions (known as multiple comparisons problem) because each comparison increases the likelihood of committing at least one Type I error within a set of comparisons (**familly-wise Type I error rate**).
 
-This is the reason why, after an ANOVA test concluding on a difference between group means, we should not just compare all possible pairs of groups with t-tests. Instead we perform statistical tests that take into account the number of planned comparisons (**post hoc tests**).
+This is the reason why, after an ANOVA test concluding on a significant difference between group means, we should not just compare all possible pairs of groups with t-tests. Instead we perform statistical tests that take into account the number of planned comparisons (**post hoc tests**) and make the necessary adjustments to ensure that Type I error is not inflated.
 
 ```{r}
 #| include: false

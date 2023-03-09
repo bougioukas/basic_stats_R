@@ -264,15 +264,46 @@ Steps of Hypothesis Testsing
 </section><section id="type-of-errors-in-hypothesis-testing" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="type-of-errors-in-hypothesis-testing">
 <span class="header-section-number">1.2</span> Type of Errors in hypothesis testing</h2>
 <p><strong>Type I error:</strong> we reject the null hypothesis when it is true (false positive), and conclude that there is an effect when, in reality, there is none. The maximum chance (probability) of making a Type I error is denoted by α (alpha). This is the significance level of the test; we reject the null hypothesis if our p-value is less than the significance level, i.e.&nbsp;if p &lt; a (<a href="#fig-type_errors">Figure&nbsp;<span>1.1</span></a>).</p>
-<p><strong>Type II error:</strong> we do not reject the null hypothesis when it is false (false negative), and conclude that there is no effect when one really exists. The chance of making a Type II error is denoted by β (beta); its compliment, (1 - β), is the power of the test. The power, therefore, is the probability of rejecting the null hypothesis when it is false; i.e.&nbsp;it is the chance (usually expressed as a percentage) of detecting, as statistically significant, a real treatment effect of a given size (<a href="#fig-type_errors">Figure&nbsp;<span>1.1</span></a>).</p>
+<p><strong>Type II error:</strong> we do not reject the null hypothesis when it is false (false negative), and conclude that there is no effect when one really exists. The chance of making a Type II error is denoted by β (beta); its compliment, (1 - β), is the power of the test. The power, therefore, is the probability of rejecting the null hypothesis when it is false; i.e.&nbsp;it is the chance (usually expressed as a percentage) of detecting, as statistically significant, a real treatment effect of a given size (<a href="#fig-type_errors">Figure&nbsp;<span>1.1</span></a>). <a href="#tbl-power">Table&nbsp;<span>1.2</span></a> presents the main factors that can influence the power in a study.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-type_errors" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/type_errors.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Types of error in hypothesis testing."><img src="images/type_errors.png" class="img-fluid figure-img" style="width:75.0%"></a></p>
+<figure class="figure"><p><a href="images/type_errors.png" class="lightbox" title="Types of error in hypothesis testing." data-gallery="quarto-lightbox-gallery-1"><img src="images/type_errors.png" class="img-fluid figure-img" style="width:75.0%"></a></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;1.1: Types of error in hypothesis testing.</figcaption><p></p>
 </figure>
 </div>
 </div>
+</div>
+<div id="tbl-power" class="anchored">
+<table class="table">
+<caption>Table&nbsp;1.2: Factors Influencing Power.</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 66%">
+</colgroup>
+<thead><tr class="header">
+<th>Factor</th>
+<th>Influence on study’s power</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><strong>Effect Size</strong></td>
+<td>As effect size increases, power tends to increase.</td>
+</tr>
+<tr class="even">
+<td><strong>Sample Size</strong></td>
+<td>As the sample size goes up, power generally goes up.</td>
+</tr>
+<tr class="odd">
+<td><strong>Standard deviation</strong></td>
+<td>As variability decreases, power tends to increase.</td>
+</tr>
+<tr class="even">
+<td><strong>Significance level α</strong></td>
+<td>As α goes up, power goes up.</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
@@ -402,7 +433,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"loop":true,"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","openEffect":"zoom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":true});</script>
 
 
 </body></html>
