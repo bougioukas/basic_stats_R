@@ -1,6 +1,6 @@
 # Preface {.unnumbered}
 
-This online textbook is based on my notes from a series of lectures given for a few years at the Aristotle University of Thessaloniki.
+This online textbook is based on my notes from a series of lectures given for a few years at the Aristotle University of Thessaloniki. 
 
 This textbook can be used as support material for lectures on basic statistics using R at any level from beginner to advanced. I have paid particular attention to the form of the book, which I think should aid understanding the most common statistical tests using base R and pipe-friendly functions, coherent with the 'tidyverse' design philosophy. It can also be used as a support for self-teaching.
 
@@ -18,3 +18,5 @@ To learn more about Quarto books visit <https://quarto.org/docs/books>.
 ## License
 
 This textbook is **free to use**, and is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivs 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) License.
+
+{{< qrcode https://bougioukas-medstats-r.netlify.app width=100 height=100 colorDark='#0011bb' >}}
