@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.251">
+<meta name="generator" content="quarto-1.2.335">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Practical Statistics in Medicine with R - 6&nbsp; Wilcoxon Signed-Rank test</title>
 <style>
@@ -250,6 +250,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
@@ -317,8 +318,8 @@ Null hypothesis and alternative hypothesis
 </div>
 <div class="cell">
 <div id="fig-weight" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-4c232011402466755861" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-4c232011402466755861">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8"],[1,2,3,4,5,6,7,8],[488,478,480,426,440,410,458,460],[484,478,492,444,436,398,464,476],[4,0,-12,-18,4,12,-6,-16]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>affected_eye<\/th>\n      <th>unaffected_eye<\/th>\n      <th>dif_thickness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;6.1: Table with data from “weight” file.</figcaption><p></p>
+<figure class="figure"><div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-373a36f76b29b736737f" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-373a36f76b29b736737f">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8"],[1,2,3,4,5,6,7,8],[488,478,480,426,440,410,458,460],[484,478,492,444,436,398,464,476],[4,0,-12,-18,4,12,-6,-16]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>affected_eye<\/th>\n      <th>unaffected_eye<\/th>\n      <th>dif_thickness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;6.1: Table with data from “weight” file.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -534,12 +535,12 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <span><span class="va">gt_sum4</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 
-<div id="mdaraegvyb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="xwxljxwtkr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#mdaraegvyb) .gt_table {
+:where(#xwxljxwtkr) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -564,7 +565,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-left-color: #D3D3D3;
 }
 
-:where(#mdaraegvyb) .gt_heading {
+:where(#xwxljxwtkr) .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -576,12 +577,12 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-right-color: #D3D3D3;
 }
 
-:where(#mdaraegvyb) .gt_caption {
+:where(#xwxljxwtkr) .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-:where(#mdaraegvyb) .gt_title {
+:where(#xwxljxwtkr) .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -593,7 +594,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-bottom-width: 0;
 }
 
-:where(#mdaraegvyb) .gt_subtitle {
+:where(#xwxljxwtkr) .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -605,13 +606,13 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-top-width: 0;
 }
 
-:where(#mdaraegvyb) .gt_bottom_border {
+:where(#xwxljxwtkr) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#mdaraegvyb) .gt_col_headings {
+:where(#xwxljxwtkr) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -626,7 +627,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-right-color: #D3D3D3;
 }
 
-:where(#mdaraegvyb) .gt_col_heading {
+:where(#xwxljxwtkr) .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -646,7 +647,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   overflow-x: hidden;
 }
 
-:where(#mdaraegvyb) .gt_column_spanner_outer {
+:where(#xwxljxwtkr) .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -658,15 +659,15 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 4px;
 }
 
-:where(#mdaraegvyb) .gt_column_spanner_outer:first-child {
+:where(#xwxljxwtkr) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#mdaraegvyb) .gt_column_spanner_outer:last-child {
+:where(#xwxljxwtkr) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#mdaraegvyb) .gt_column_spanner {
+:where(#xwxljxwtkr) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -678,7 +679,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   width: 100%;
 }
 
-:where(#mdaraegvyb) .gt_group_heading {
+:where(#xwxljxwtkr) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -704,7 +705,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   text-align: left;
 }
 
-:where(#mdaraegvyb) .gt_empty_group_heading {
+:where(#xwxljxwtkr) .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -719,15 +720,15 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   vertical-align: middle;
 }
 
-:where(#mdaraegvyb) .gt_from_md > :first-child {
+:where(#xwxljxwtkr) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#mdaraegvyb) .gt_from_md > :last-child {
+:where(#xwxljxwtkr) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#mdaraegvyb) .gt_row {
+:where(#xwxljxwtkr) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -746,7 +747,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   overflow-x: hidden;
 }
 
-:where(#mdaraegvyb) .gt_stub {
+:where(#xwxljxwtkr) .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -759,7 +760,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-:where(#mdaraegvyb) .gt_stub_row_group {
+:where(#xwxljxwtkr) .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -773,11 +774,11 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   vertical-align: top;
 }
 
-:where(#mdaraegvyb) .gt_row_group_first td {
+:where(#xwxljxwtkr) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#mdaraegvyb) .gt_summary_row {
+:where(#xwxljxwtkr) .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -787,16 +788,16 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-:where(#mdaraegvyb) .gt_first_summary_row {
+:where(#xwxljxwtkr) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#mdaraegvyb) .gt_first_summary_row.thick {
+:where(#xwxljxwtkr) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#mdaraegvyb) .gt_last_summary_row {
+:where(#xwxljxwtkr) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -806,7 +807,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-:where(#mdaraegvyb) .gt_grand_summary_row {
+:where(#xwxljxwtkr) .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -816,7 +817,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-:where(#mdaraegvyb) .gt_first_grand_summary_row {
+:where(#xwxljxwtkr) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -826,11 +827,11 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-top-color: #D3D3D3;
 }
 
-:where(#mdaraegvyb) .gt_striped {
+:where(#xwxljxwtkr) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#mdaraegvyb) .gt_table_body {
+:where(#xwxljxwtkr) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -839,7 +840,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-:where(#mdaraegvyb) .gt_footnotes {
+:where(#xwxljxwtkr) .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -853,7 +854,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-right-color: #D3D3D3;
 }
 
-:where(#mdaraegvyb) .gt_footnote {
+:where(#xwxljxwtkr) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -862,7 +863,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-:where(#mdaraegvyb) .gt_sourcenotes {
+:where(#xwxljxwtkr) .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -876,7 +877,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-right-color: #D3D3D3;
 }
 
-:where(#mdaraegvyb) .gt_sourcenote {
+:where(#xwxljxwtkr) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -884,64 +885,64 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-:where(#mdaraegvyb) .gt_left {
+:where(#xwxljxwtkr) .gt_left {
   text-align: left;
 }
 
-:where(#mdaraegvyb) .gt_center {
+:where(#xwxljxwtkr) .gt_center {
   text-align: center;
 }
 
-:where(#mdaraegvyb) .gt_right {
+:where(#xwxljxwtkr) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#mdaraegvyb) .gt_font_normal {
+:where(#xwxljxwtkr) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#mdaraegvyb) .gt_font_bold {
+:where(#xwxljxwtkr) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#mdaraegvyb) .gt_font_italic {
+:where(#xwxljxwtkr) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#mdaraegvyb) .gt_super {
+:where(#xwxljxwtkr) .gt_super {
   font-size: 65%;
 }
 
-:where(#mdaraegvyb) .gt_footnote_marks {
+:where(#xwxljxwtkr) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#mdaraegvyb) .gt_asterisk {
+:where(#xwxljxwtkr) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#mdaraegvyb) .gt_indent_1 {
+:where(#xwxljxwtkr) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#mdaraegvyb) .gt_indent_2 {
+:where(#xwxljxwtkr) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#mdaraegvyb) .gt_indent_3 {
+:where(#xwxljxwtkr) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#mdaraegvyb) .gt_indent_4 {
+:where(#xwxljxwtkr) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#mdaraegvyb) .gt_indent_5 {
+:where(#xwxljxwtkr) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1113,7 +1114,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   // Switch to dark mode if need be
   if (hasAlternateSentinel()) {
     toggleColorMode(true);
-  } 
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -1135,7 +1138,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -1171,24 +1191,42 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1196,7 +1234,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
-    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1220,7 +1258,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","loop":true});</script>
+</footer><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","loop":true,"openEffect":"zoom","closeEffect":"zoom"});</script>
 
 
 </body></html>
