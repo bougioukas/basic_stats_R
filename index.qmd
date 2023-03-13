@@ -1,12 +1,14 @@
 # Preface {.unnumbered}
 
-This online textbook is based on my notes from a series of lectures given for a few years at the Aristotle University of Thessaloniki. 
+This online textbook is based on my notes from a series of lectures given for a few years at the Aristotle University of Thessaloniki.
 
 This textbook can be used as support material for lectures on basic statistics using R at any level from beginner to advanced. I have paid particular attention to the form of the book, which I think should aid understanding the most common statistical tests using base R and pipe-friendly functions, coherent with the 'tidyverse' design philosophy. It can also be used as a support for self-teaching.
 
-::: {.callout-important appearance="simple"}
-This textbook assumes that the reader has a basic knowledge of R. If you want to familiarize yourself with this programming language, we recommend the books below:
+::: {.callout-tip}
 
+This textbook assumes that the reader has a basic knowledge of R and introductory statistics. If you want to familiarize yourself with this programming language and statistics, we recommend the books below:
+
+-   [Using R for Introductory Statistics](https://www.routledge.com/Using-R-for-Introductory-Statistics/Verzani/p/book/9781466590731)
 -   [R for Data Science](https://r4ds.had.co.nz/)
 -   [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/)
 :::

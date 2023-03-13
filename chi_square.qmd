@@ -46,7 +46,7 @@ We need to load the following packages:
 #| eval: false
 
 library(rstatix)
-
+library(ggsci)
 
 library(patchwork)
 library(here)

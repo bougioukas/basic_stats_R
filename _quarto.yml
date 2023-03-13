@@ -15,6 +15,7 @@ book:
   chapters:
     - index.qmd
     - introduction.qmd
+    - descriptive.qmd
     - inference.qmd
     - student_t_test.qmd
     - wmw_test.qmd
