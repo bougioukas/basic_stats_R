@@ -31,6 +31,7 @@ We need to load the following packages:
 
 library(rstatix)
 library(questionr)
+library(MESS)
 library(ggsci)
 library(patchwork)
 
@@ -158,7 +159,6 @@ We can see that the percentage of overweight male patients (47.6%) is higher tha
 ## Displaying Categorical Data
 
 While frequency tables are extremely useful, the best way to investigate a dataset is to plot it. For categorical variables, such as `sex` and `bmi_cat`, it is straightforward to present the number in each category, usually indicating the frequency and percentage of the total number of patients. When shown graphically this is called a **bar plot**.
-
 
 **A. Simple Bar Plot**
 
@@ -338,11 +338,9 @@ Numeric data are described with two main types of summary measures:
 
  
 
-
 **A. Summary statistics**
 
 Let's calculate the summary statistics for the `age` variable in our dataset.
-
 
 ::: {#exercise-joins .callout-tip}
 ## Summary statistics: 1 variable
@@ -381,7 +379,6 @@ arrhythmia %>%
 ```{r}
 psych::describe(arrhythmia$age)
 ```
-
 :::
 :::
 
@@ -391,8 +388,7 @@ psych::describe(arrhythmia$age)
 
 Next, we are interested in calculating the summary statistics of the `age` variable for males and females, separately.
 
-
-::: {#exercise-joins .callout-tip}
+::: callout-tip
 ## Summary statistics: 1 variable by group
 
 ::: panel-tabset
@@ -432,15 +428,24 @@ arrhythmia %>%
 ```{r}
 psych::describeBy(arrhythmia$age, group = arrhythmia$sex)
 ```
-
 :::
+:::
+
+
+
+::: {.callout-tip icon="false"}
+## Reporting summary statistics for numerical data
+
+**A. Mean (sd)** for data with **symmetric** distribution. A distribution, or dataset, is symmetric if its left and right sides are mirror images.
+
+**B. Median (Q1, Q3)** for data with **skewed** (or asymmetrical) distribution.
+
 :::
 
 
  
 
 ## Displaying Numerical Data
-
 
 **A. Histogram**
 
@@ -487,8 +492,6 @@ A histogram gives information about:
 -   Where the peak (or peaks) of the distribution is.
 -   The amount of variability in the data.
 
-
-
 ```{r}
 #| warning: false
 #| label: fig-density1
@@ -525,14 +528,11 @@ arrhythmia %>%
   annotate('text', x = 80, y = 0.038, label = 'median', color = 'grey30')
 ```
 
-
-
  
 
 **B. Box Plot**
 
 Box plots can be used for displaying location and dispersion for continuous data, particularly when comparing distributions between many groups (@fig-boxplot1). This type of graph uses boxes and lines to depict the distributions. Box limits indicate the range of the central **50%** of the data, with a horizontal line in the box corresponding to the **median**. Whiskers extend from each box to capture the **range** of the remaining data, with **dots** located outside the whiskers indicating outliers.
-
 
 ```{r}
 #| warning: false
@@ -563,11 +563,8 @@ arrhythmia %>%
         legend.position = "none")
 ```
 
-
 When the median is in the middle of the box, and the whiskers are about the same on both sides of the box, then the distribution is symmetric.
 
-An outlier is an observation that is numerically distant from the rest of the data.
-When reviewing a box plot, an outlier is defined as a data point that is located outside the whiskers of the box plot.
-
+An outlier is an observation that is numerically distant from the rest of the data. When reviewing a box plot, an outlier is defined as a data point that is located outside the whiskers of the box plot.
 
  

@@ -264,7 +264,7 @@ If the variance is different between the two groups then the degrees of freedom 
 #| code-fold: true
 #| code-summary: "Show the code"
 
-gt_sum1 <- depression %>% 
+depression %>% 
   tbl_summary(
     by = intervention, 
     statistic = HDRS ~ "{mean} ({sd})", 
@@ -276,7 +276,6 @@ gt_sum1 <- depression %>%
   add_overall() %>%
   as_gt() 
 
-gt_sum1
 ```
 
 Hence, there is not evidence that HDRS score is significantly different in paroxetine group, mean = 20.3 (sd = 3.7), as compared to placebo group, 21.5 (3.4), (mean difference= -1.16 units, 95% CI = -2.78 to 0.47, p = 0.16 \>0.05).

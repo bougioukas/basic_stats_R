@@ -1,0 +1,98 @@
+# Normal distribution {#sec-normal}
+
+There are several important probability distributions in statistics. However, the normal distribution might be the most important. This distribution is also referred to as "*Gaussian*" or "*Gauss*" distribution.
+
+```{r}
+#| include: false
+library(stevemisc)
+
+library(here)
+library(tidyverse)
+```
+
+::: {.callout-caution icon="false"}
+## Learning objectives
+
+-   Understand ...
+-   Understand ...
+:::
+
+## Packages we need
+
+We need to load the following packages:
+
+```{r}
+#| eval: false
+library(stevemisc)
+
+library(here)
+library(tidyverse)
+```
+
+## The shape of a normal distribution
+
+A normal distribution is a symmetric "bell-shaped" probability distribution where most of the observed data are clustered around a central location. Data farther from the central location occur less frequently (@fig-normal).
+
+```{r}
+#| warning: false
+#| label: fig-normal
+#| fig-height: 7.2
+#| fig-width: 12.5
+#| fig-align: "center"
+#| fig-cap: The area underneath a Normal Distribution
+
+
+x <- seq(-4, 4, length=200)                                                    # <1>
+df <- data.frame(x)                                                            # <1>
+
+ggplot(df, aes(x)) +                                                           
+  stat_function(fun = dnorm) +                                                 
+  scale_x_continuous(breaks = c(-3, -2, -1, 0, 1, 2, 3),                       # <2>
+                     labels = expression(-3*sigma, -2*sigma, -1*sigma,         # <2>
+                                         mu, 1*sigma, 2*sigma, 3*sigma)) +     # <2>
+  labs(x = "Variable",
+       y = "Probability density") +
+  theme(text = element_text(size = 20))                                    
+
+```
+
+1. Create a sequence of 200 numbers between -4 and +4.
+2. Add the standard deviation notation in x-axis.
+
+
+
+## The properties of a normal distribution
+
+```{r}
+#| warning: false
+#| label: fig-normal_auc
+#| fig-height: 7.2
+#| fig-width: 12.5
+#| fig-align: "center"
+#| fig-cap: The area underneath a Normal Distribution
+
+
+normal_dist("#522d80","#00868B") + 
+  theme_steve() + 
+  post_bg() +
+    labs(y = "Probability density",
+         x = "") +
+scale_x_continuous(breaks = c(-4, -2.58, -1.96, -1.65, -1, 
+                              0, 1, 1.65, 1.96, 2.58, 4),
+                   labels = expression(-4*sigma, -2.58*sigma, -1.96*sigma,-1.65*sigma, -1*sigma, 
+                                       mu, 1*sigma, 1.65*sigma, 1.96*sigma, 2.58*sigma, 4*sigma)) +
+  theme(axis.text = element_text(size=10))
+
+```
+
+The Normal distribution has the properties summarized as follows:
+
+-   Bell shaped and symmetrical around the mean. Shape statistics, skewness and excess kurtosis are zero.
+
+-   The peak of the curve lies above the mean.
+
+-   Any position along the horizontal axis (x-axis) can be expressed as a number of standard deviations from the mean.
+
+-   All three measures of central tendency mean, the median, and the mode will be the same.
+
+-   **The empirical rule** (also called the "68-95-99 rule"). Much of the area (68%) of the distribution is between -1 $\sigma$ below the mean and +1 $\sigma$ above the mean, the large majority (95%) between -1.96 $\sigma$ below the mean and +1.96 $\sigma$ above the mean (often used as a reference range), and almost all (99%) between -2.58 $\sigma$ below the mean and +2.58 $\sigma$ above the mean. The total area under the curve equals to 1 (or 100%).

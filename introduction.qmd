@@ -31,7 +31,6 @@ The discipline of traditional (frequentist) statistics includes two main branche
 -   **inferential statistics** that aims at generalizing conclusions made on a sample to a whole population. It includes estimation and hypothesis testing.
 
 ```{mermaid}
-%%| column: screen-inset-right
 %%| label: fig-branches
 %%| fig-width: 9
 %%| fig-cap: The discipline of statistics and its two branches, descriptive statistics and inferential statistics

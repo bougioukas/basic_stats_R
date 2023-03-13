@@ -16,6 +16,7 @@ book:
     - index.qmd
     - introduction.qmd
     - descriptive.qmd
+    - normal.qmd
     - inference.qmd
     - student_t_test.qmd
     - wmw_test.qmd
@@ -36,8 +37,8 @@ bibliography: references.bib
 
 filters:
   - lightbox
-  - code-fullscreen
 lightbox: auto
+code-annotations: hover
 
 format:
   html:
