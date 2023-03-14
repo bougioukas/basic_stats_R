@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.262">
+<meta name="generator" content="quarto-1.3.264">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -349,11 +349,11 @@ Learning objectives
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-annotation="1" data-code-lines="1,2" data-code-cell="annotated-cell-2">Create a sequence of 200 numbers between -4 and +4.</span>
+<span data-code-cell="annotated-cell-2" data-code-lines="1,2" data-code-annotation="1">Create a sequence of 200 numbers between -4 and +4.</span>
 </dd>
 <dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-annotation="2" data-code-lines="6,7,8" data-code-cell="annotated-cell-2">Add the standard deviation notation in x-axis.</span>
+<span data-code-cell="annotated-cell-2" data-code-lines="6,7,8" data-code-annotation="2">Add the standard deviation notation in x-axis.</span>
 </dd>
 </dl>
 </div>
@@ -371,15 +371,14 @@ Learning objectives
 <h2 data-number="3.3" class="anchored" data-anchor-id="the-properties-of-a-normal-distribution"><span class="header-section-number">3.3</span> The properties of a normal distribution</h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">normal_dist</span>(<span class="st">"#522d80"</span>,<span class="st">"#00868B"</span>) <span class="sc">+</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_steve</span>() <span class="sc">+</span> </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">post_bg</span>() <span class="sc">+</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Probability density"</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="sc">-</span><span class="fl">2.58</span>, <span class="sc">-</span><span class="fl">1.96</span>, <span class="sc">-</span><span class="fl">1.65</span>, <span class="sc">-</span><span class="dv">1</span>, </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                              <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">1.65</span>, <span class="fl">1.96</span>, <span class="fl">2.58</span>, <span class="dv">4</span>),</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">expression</span>(<span class="sc">-</span><span class="dv">4</span><span class="sc">*</span>sigma, <span class="sc">-</span><span class="fl">2.58</span><span class="sc">*</span>sigma, <span class="sc">-</span><span class="fl">1.96</span><span class="sc">*</span>sigma,<span class="sc">-</span><span class="fl">1.65</span><span class="sc">*</span>sigma, <span class="sc">-</span><span class="dv">1</span><span class="sc">*</span>sigma, </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                                       mu, <span class="dv">1</span><span class="sc">*</span>sigma, <span class="fl">1.65</span><span class="sc">*</span>sigma, <span class="fl">1.96</span><span class="sc">*</span>sigma, <span class="fl">2.58</span><span class="sc">*</span>sigma, <span class="dv">4</span><span class="sc">*</span>sigma)) <span class="sc">+</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Probability density"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Variable"</span>) <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="sc">-</span><span class="fl">2.58</span>, <span class="sc">-</span><span class="fl">1.96</span>, <span class="sc">-</span><span class="dv">1</span>, </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                              <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">1.96</span>, <span class="fl">2.58</span>, <span class="dv">3</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">expression</span>(<span class="sc">-</span><span class="dv">3</span><span class="sc">*</span>sigma, <span class="sc">-</span><span class="fl">2.58</span><span class="sc">*</span>sigma, <span class="sc">-</span><span class="fl">1.96</span><span class="sc">*</span>sigma, <span class="sc">-</span><span class="dv">1</span><span class="sc">*</span>sigma, </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                                       mu, <span class="dv">1</span><span class="sc">*</span>sigma, <span class="fl">1.96</span><span class="sc">*</span>sigma, <span class="fl">2.58</span><span class="sc">*</span>sigma, <span class="dv">3</span><span class="sc">*</span>sigma)) <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -394,8 +393,8 @@ Learning objectives
 <li><p>Bell shaped and symmetrical around the mean. Shape statistics, skewness and excess kurtosis are zero.</p></li>
 <li><p>The peak of the curve lies above the mean.</p></li>
 <li><p>Any position along the horizontal axis (x-axis) can be expressed as a number of standard deviations from the mean.</p></li>
-<li><p>All three measures of central tendency mean, the median, and the mode will be the same.</p></li>
-<li><p><strong>The empirical rule</strong> (also called the “68-95-99 rule”). Much of the area (68%) of the distribution is between -1 <span class="math inline">\(\sigma\)</span> below the mean and +1 <span class="math inline">\(\sigma\)</span> above the mean, the large majority (95%) between -1.96 <span class="math inline">\(\sigma\)</span> below the mean and +1.96 <span class="math inline">\(\sigma\)</span> above the mean (often used as a reference range), and almost all (99%) between -2.58 <span class="math inline">\(\sigma\)</span> below the mean and +2.58 <span class="math inline">\(\sigma\)</span> above the mean. The total area under the curve equals to 1 (or 100%).</p></li>
+<li><p>All three measures of central location mean, median, and mode are the same.</p></li>
+<li><p><strong>The empirical rule</strong> (also called the “68-95-99 rule”). Much of the area (68%) of the distribution is between -1 <span class="math inline">\(\sigma\)</span> below the mean and +1 <span class="math inline">\(\sigma\)</span> above the mean, the large majority (95%) between -1.96 <span class="math inline">\(\sigma\)</span> below the mean and +1.96 <span class="math inline">\(\sigma\)</span> above the mean (often used as a reference range), and almost all (99%) between -2.58 <span class="math inline">\(\sigma\)</span> below the mean and +2.58 <span class="math inline">\(\sigma\)</span> above the mean. The total area under the curve equals to 1 (or 100%), almost -3 <span class="math inline">\(\sigma\)</span> below the mean and +3 <span class="math inline">\(\sigma\)</span> above the mean.</p></li>
 </ul>
 
 
@@ -853,7 +852,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","selector":".lightbox","loop":true,"closeEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":true});</script>
 
 
 

@@ -274,7 +274,7 @@ depression %>%
   add_p(test = HDRS ~ "t.test", purrr::partial(style_pvalue, digits = 2),
         test.args = all_tests("t.test") ~ list(var.equal = TRUE)) %>% 
   add_overall() %>%
-  as_gt() 
+  as_flex_table() 
 
 ```
 

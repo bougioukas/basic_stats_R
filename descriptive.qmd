@@ -343,13 +343,13 @@ Numeric data are described with two main types of summary measures:
 Let's calculate the summary statistics for the `age` variable in our dataset.
 
 ::: {#exercise-joins .callout-tip}
-## Summary statistics: 1 variable
+## Summary statistics: Variable age
 
 ::: panel-tabset
 ## dplyr
 
 ```{r}
-age_summary <- arrhythmia %>%
+arrhythmia %>%
   dplyr::summarise(
     n = n(),
     min = min(age, na.rm = TRUE),
@@ -363,7 +363,6 @@ age_summary <- arrhythmia %>%
     kurtosis= EnvStats::kurtosis(age, na.rm = TRUE)
   )
 
-age_summary
 ```
 
 ## dlookr
@@ -382,6 +381,57 @@ psych::describe(arrhythmia$age)
 :::
 :::
 
+
+
+
+
+
+::: {#exercise-joins .callout-tip}
+## Summary statistics: Variable QRS
+
+::: panel-tabset
+## dplyr
+
+```{r}
+arrhythmia %>%
+  dplyr::summarise(
+    n = n(),
+    min = min(QRS, na.rm = TRUE),
+    q1 = quantile(QRS, 0.25, na.rm = TRUE),
+    median = quantile(QRS, 0.5, na.rm = TRUE),
+    q3 = quantile(QRS, 0.75, na.rm = TRUE),
+    max = max(QRS, na.rm = TRUE),
+    mean = mean(QRS, na.rm = TRUE),
+    sd = sd(QRS, na.rm = TRUE),
+    skewness = EnvStats::skewness(QRS, na.rm = TRUE),
+    kurtosis= EnvStats::kurtosis(QRS, na.rm = TRUE)
+  )
+
+```
+
+## dlookr
+
+```{r}
+arrhythmia %>% 
+  dlookr::describe(QRS) %>% 
+  select(described_variables, n, mean, sd, p25, p50, p75, skewness, kurtosis)
+```
+
+## psych
+
+```{r}
+psych::describe(arrhythmia$QRS)
+```
+:::
+:::
+
+
+
+
+
+
+
+
  
 
 **B. Summary statistics by group**
@@ -389,13 +439,13 @@ psych::describe(arrhythmia$age)
 Next, we are interested in calculating the summary statistics of the `age` variable for males and females, separately.
 
 ::: callout-tip
-## Summary statistics: 1 variable by group
+## Summary statistics: age by sex
 
 ::: panel-tabset
 ## dplyr
 
 ```{r}
-age_by_sex_summary <- arrhythmia %>%
+arrhythmia %>%
   group_by(sex) %>% 
   dplyr::summarise(
     n = n(),
@@ -411,7 +461,6 @@ age_by_sex_summary <- arrhythmia %>%
   ) %>% 
   ungroup()
 
-age_by_sex_summary
 ```
 
 ## dlookr
@@ -433,15 +482,56 @@ psych::describeBy(arrhythmia$age, group = arrhythmia$sex)
 
 
 
+::: callout-tip
+## Summary statistics: QRS by sex
+
+::: panel-tabset
+## dplyr
+
+```{r}
+arrhythmia %>%
+  group_by(sex) %>% 
+  dplyr::summarise(
+    n = n(),
+    min = min(QRS, na.rm = TRUE),
+    q1 = quantile(QRS, 0.25, na.rm = TRUE),
+    median = quantile(QRS, 0.5, na.rm = TRUE),
+    q3 = quantile(QRS, 0.75, na.rm = TRUE),
+    max = max(QRS, na.rm = TRUE),
+    mean = mean(QRS, na.rm = TRUE),
+    sd = sd(QRS, na.rm = TRUE),
+    skewness = EnvStats::skewness(QRS, na.rm = TRUE),
+    kurtosis= EnvStats::kurtosis(QRS, na.rm = TRUE)
+  ) %>% 
+  ungroup()
+
+```
+
+## dlookr
+
+```{r}
+arrhythmia %>% 
+  group_by(sex) %>% 
+  dlookr::describe(QRS) %>% 
+  select(described_variables, sex, n, mean, sd, p25, p50, p75, skewness, kurtosis)
+```
+
+## psych
+
+```{r}
+psych::describeBy(arrhythmia$QRS, group = arrhythmia$sex)
+```
+:::
+:::
+
+
 ::: {.callout-tip icon="false"}
 ## Reporting summary statistics for numerical data
 
 **A. Mean (sd)** for data with **symmetric** distribution. A distribution, or dataset, is symmetric if its left and right sides are mirror images.
 
 **B. Median (Q1, Q3)** for data with **skewed** (or asymmetrical) distribution.
-
 :::
-
 
  
 

@@ -71,17 +71,15 @@ ggplot(df, aes(x)) +
 #| fig-align: "center"
 #| fig-cap: The area underneath a Normal Distribution
 
-
 normal_dist("#522d80","#00868B") + 
-  theme_steve() + 
-  post_bg() +
     labs(y = "Probability density",
-         x = "") +
-scale_x_continuous(breaks = c(-4, -2.58, -1.96, -1.65, -1, 
-                              0, 1, 1.65, 1.96, 2.58, 4),
-                   labels = expression(-4*sigma, -2.58*sigma, -1.96*sigma,-1.65*sigma, -1*sigma, 
-                                       mu, 1*sigma, 1.65*sigma, 1.96*sigma, 2.58*sigma, 4*sigma)) +
-  theme(axis.text = element_text(size=10))
+         x = "Variable") +
+scale_x_continuous(breaks = c(-3, -2.58, -1.96, -1, 
+                              0, 1, 1.96, 2.58, 3),
+                   labels = expression(-3*sigma, -2.58*sigma, -1.96*sigma, -1*sigma, 
+                                       mu, 1*sigma, 1.96*sigma, 2.58*sigma, 3*sigma)) +
+  theme(text = element_text(size = 20), 
+        axis.text.x = element_text(size = 12))
 
 ```
 
@@ -93,6 +91,6 @@ The Normal distribution has the properties summarized as follows:
 
 -   Any position along the horizontal axis (x-axis) can be expressed as a number of standard deviations from the mean.
 
--   All three measures of central tendency mean, the median, and the mode will be the same.
+-   All three measures of central location mean, median, and mode are the same.
 
--   **The empirical rule** (also called the "68-95-99 rule"). Much of the area (68%) of the distribution is between -1 $\sigma$ below the mean and +1 $\sigma$ above the mean, the large majority (95%) between -1.96 $\sigma$ below the mean and +1.96 $\sigma$ above the mean (often used as a reference range), and almost all (99%) between -2.58 $\sigma$ below the mean and +2.58 $\sigma$ above the mean. The total area under the curve equals to 1 (or 100%).
+-   **The empirical rule** (also called the "68-95-99 rule"). Much of the area (68%) of the distribution is between -1 $\sigma$ below the mean and +1 $\sigma$ above the mean, the large majority (95%) between -1.96 $\sigma$ below the mean and +1.96 $\sigma$ above the mean (often used as a reference range), and almost all (99%) between -2.58 $\sigma$ below the mean and +2.58 $\sigma$ above the mean. The total area under the curve equals to 1 (or 100%), almost -3 $\sigma$ below the mean and +3 $\sigma$ above the mean.
