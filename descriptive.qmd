@@ -98,11 +98,13 @@ The data set *arrhythmia* has 428 patients (rows) and includes 8 variables (colu
 5.  QRS: mean duration of QRS (ms) ![](images/QRS_normal.png){width="88" height="68"}
 6.  heart_rate: heart rate (beats/min)
 
-We might have noticed that the categorical variables `sex` and `bmi_cat` are recognized of character `<chr>` type. We can use the `convert_as_factor()` function to convert the variables to factors:
+We might have noticed that the categorical variables `sex` and `bmi_cat` are recognized of character `<chr>` type. We can use the `factor()` function inside the `mutate()` to convert the variables to factors as follows:
 
 ```{r}
 arrhythmia <- arrhythmia %>% 
-  convert_as_factor(sex, bmi_cat)
+  mutate(sex = factor(sex),
+         bmi_cat = factor(bmi_cat, levels = c("underweight", "normal", 
+                                              "overweight", "obese")))
 ```
 
 Let's look at the data again with the `glipmse()` function:
@@ -137,13 +139,22 @@ freq(arrhythmia$sex, cum = T, total = T, valid = F)
 
 The first column shows the levels of `sex` variable (male, female), the second (*n*) shows the number of patients in each category (absolute frequency), the third (*%*) the percentage contribution of each category to the total (relative frequency), and the fourth (*%cum*) the commutative percentage. Of note, the percentages add up to 100%.
 
-Similarly, we can create the frequency table for the `bmi_cat` variable in a decreasing order of frequencies:
+Similarly, we can create the frequency table for the `bmi_cat` variable:
+
+```{r}
+freq(arrhythmia$bmi_cat, cum = T, total = T, valid = F)
+```
+ 
+
+We can also sort the BMI categories in a decreasing order of frequencies:
 
 ```{r}
 freq(arrhythmia$bmi_cat, cum = T, total = T, valid = F, sort = "dec")
 ```
 
 In the above table we observe that a large proportion of patients are overweight (167 out of 428, 39.0%).
+
+ 
 
 In addition to tabulating each variable separately, we might be interested in whether the distribution of patients across each sex is different for each BMI category.
 
@@ -170,13 +181,9 @@ A simple bar plot is an easy way to make comparisons across categories. @fig-sim
 #| fig-width: 6
 
 # create a data frame with ordered BMI categories and their counts
-dat1 <- arrhythmia %>% 
-  mutate(bmi_cat = factor(bmi_cat, 
-                          levels = c("underweight", "normal", 
-                                     "overweight", "obese"))) %>% 
+dat1 <- arrhythmia %>%
   count(bmi_cat) %>% 
   mutate(pct = round_percent(n, 1)/100)
-
 
 # plot the data
 ggplot(dat1, aes(x = bmi_cat, y = pct)) +
@@ -217,12 +224,8 @@ If the sample is further classified into whether the patient was male or female 
 dat2 <- arrhythmia %>%
   count(bmi_cat, sex) %>% 
   group_by(sex) %>% 
-  mutate(bmi_cat = factor(bmi_cat, 
-                     levels = c("underweight", "normal", 
-                                "overweight", "obese")),
-    pct = round_percent(n, 1)/100) %>% 
+  mutate(pct = round_percent(n, 1)/100) %>% 
   ungroup()
-
 
 ggplot(dat2) + 
   geom_col(aes(bmi_cat, pct, fill = sex), width=0.7, position = "dodge") +
@@ -283,10 +286,7 @@ Unlike a side-by-side or grouped graphs, **stacked bar plots** segment their bar
 dat3 <- arrhythmia %>% 
   group_by(sex) %>% 
   count(bmi_cat) %>% 
-  mutate(bmi_cat = factor(bmi_cat, 
-                          levels = c("underweight", "normal", 
-                                     "overweight", "obese")),
-    pct = n / sum(n)) %>% 
+  mutate(pct = n / sum(n)) %>% 
   ungroup()
 
 ggplot(dat3, aes(x = sex, y = pct, fill = forcats::fct_rev(bmi_cat)))+
@@ -316,7 +316,7 @@ One issue to consider when using stacked bar plots is the number of variable lev
 
 ## Summarizing Numerical Data
 
-Numeric data are described with two main types of summary measures:
+Summary measures are **single numerical values** that summarize a large number of values. Numeric data are described with two main types of summary measures (@tbl-measures):
 
 1.  measures of **central location** (where the center of the distribution of the values in a variable is located)
 
@@ -336,6 +336,7 @@ Numeric data are described with two main types of summary measures:
 
 : Common summary measures of central location and dispersion {#tbl-measures}
 
+
  
 
 **A. Summary statistics**
@@ -352,6 +353,7 @@ Let's calculate the summary statistics for the `age` variable in our dataset.
 arrhythmia %>%
   dplyr::summarise(
     n = n(),
+    count_na = sum(is.na(age)),
     min = min(age, na.rm = TRUE),
     q1 = quantile(age, 0.25, na.rm = TRUE),
     median = quantile(age, 0.5, na.rm = TRUE),
@@ -370,7 +372,7 @@ arrhythmia %>%
 ```{r}
 arrhythmia %>% 
   dlookr::describe(age) %>% 
-  select(described_variables, n, mean, sd, p25, p50, p75, skewness, kurtosis)
+  select(described_variables, n, na, mean, sd, p25, p50, p75, skewness, kurtosis)
 ```
 
 ## psych
@@ -381,12 +383,7 @@ psych::describe(arrhythmia$age)
 :::
 :::
 
-
-
-
-
-
-::: {#exercise-joins .callout-tip}
+::: callout-tip
 ## Summary statistics: Variable QRS
 
 ::: panel-tabset
@@ -425,13 +422,6 @@ psych::describe(arrhythmia$QRS)
 :::
 :::
 
-
-
-
-
-
-
-
  
 
 **B. Summary statistics by group**
@@ -445,10 +435,11 @@ Next, we are interested in calculating the summary statistics of the `age` varia
 ## dplyr
 
 ```{r}
-arrhythmia %>%
+summary_age_sex <- arrhythmia %>%
   group_by(sex) %>% 
   dplyr::summarise(
     n = n(),
+    count_na = sum(is.na(age)),
     min = min(age, na.rm = TRUE),
     q1 = quantile(age, 0.25, na.rm = TRUE),
     median = quantile(age, 0.5, na.rm = TRUE),
@@ -461,6 +452,8 @@ arrhythmia %>%
   ) %>% 
   ungroup()
 
+summary_age_sex
+
 ```
 
 ## dlookr
@@ -469,7 +462,7 @@ arrhythmia %>%
 arrhythmia %>% 
   group_by(sex) %>% 
   dlookr::describe(age) %>% 
-  select(described_variables, sex, n, mean, sd, p25, p50, p75, skewness, kurtosis)
+  select(described_variables, sex, n, na, mean, sd, p25, p50, p75, skewness, kurtosis)
 ```
 
 ## psych
@@ -481,6 +474,17 @@ psych::describeBy(arrhythmia$age, group = arrhythmia$sex)
 :::
 
 
+If we want to save our descriptive statistics, calculated in R, we can use the `write_xlsx()` function from {writexl} package. In the example below, we are saving the `summary_age_sex` table to a `.xlsx` file in the *data* folder of our RStudio Project:
+
+```{r}
+#| eval: false
+  
+library(writexl)
+write_xlsx(summary_age_sex, here("data", "summary_age_sex.xlsx"))
+```
+
+
+ 
 
 ::: callout-tip
 ## Summary statistics: QRS by sex
@@ -524,7 +528,6 @@ psych::describeBy(arrhythmia$QRS, group = arrhythmia$sex)
 :::
 :::
 
-
 ::: {.callout-tip icon="false"}
 ## Reporting summary statistics for numerical data
 
@@ -554,8 +557,8 @@ arrhythmia %>%
   ggplot(aes(x = age)) +
   geom_histogram(binwidth = 8, fill = "steelblue4", color = "#8fb4d9", alpha = 0.6) +
   ggtitle("Histogram of age") +
-  geom_vline(aes(xintercept = mean(age)), color = "#009e73", linetype = "dashed", size = 0.8) +
-  geom_vline(aes(xintercept = median(age)), color = "grey30", linetype = "dashed", size = 0.8) +
+  geom_vline(aes(xintercept = mean(age, na.rm = T)), color = "#009e73", linetype = "dashed", size = 0.8) +
+  geom_vline(aes(xintercept = median(age, na.rm = T)), color = "grey30", linetype = "dashed", size = 0.8) +
   theme_minimal() +
     labs(y = "Frequency") +
   theme(plot.title = element_text(size=15)) +
@@ -596,8 +599,8 @@ arrhythmia %>%
   ggplot(aes(x = age)) +
   geom_density(fill="steelblue4", color="#8fb4d9", adjust = 1.5, alpha=0.6) +
   ggtitle("Density Plot age") +
-  geom_vline(aes(xintercept = mean(age)), color = "#009e73", linetype = "dashed", size = 0.8) +
-  geom_vline(aes(xintercept = median(age)), color = "grey30", linetype = "dashed", size = 0.8) +
+  geom_vline(aes(xintercept = mean(age, na.rm = T)), color = "#009e73", linetype = "dashed", size = 0.8) +
+  geom_vline(aes(xintercept = median(age, na.rm = T)), color = "grey30", linetype = "dashed", size = 0.8) +
   theme_minimal() +
   labs(y = "Density") +
   theme(plot.title = element_text(size=15)) +

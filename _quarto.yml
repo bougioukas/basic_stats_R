@@ -45,8 +45,13 @@ format:
     theme:
       light: [cosmo, theme-light.scss]
       dark: [sketchy, theme-dark.scss]
+    grid:
+      sidebar-width: 270px
+      body-width: 810px
+      margin-width: 230px
     fontsize: 1.2em
     linestretch: 1.8
+    toc-title: "On this page"
     link-external-newwindow: true
     code-link: true
     number-depth: 2

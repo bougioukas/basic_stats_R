@@ -56,10 +56,8 @@ ggplot(df, aes(x)) +
 
 ```
 
-1. Create a sequence of 200 numbers between -4 and +4.
-2. Add the standard deviation notation in x-axis.
-
-
+1.  Create a sequence of 200 numbers between -4 and +4.
+2.  Add the standard deviation notation in x-axis.
 
 ## The properties of a normal distribution
 
@@ -94,3 +92,98 @@ The Normal distribution has the properties summarized as follows:
 -   All three measures of central location mean, median, and mode are the same.
 
 -   **The empirical rule** (also called the "68-95-99 rule"). Much of the area (68%) of the distribution is between -1 $\sigma$ below the mean and +1 $\sigma$ above the mean, the large majority (95%) between -1.96 $\sigma$ below the mean and +1.96 $\sigma$ above the mean (often used as a reference range), and almost all (99%) between -2.58 $\sigma$ below the mean and +2.58 $\sigma$ above the mean. The total area under the curve equals to 1 (or 100%), almost -3 $\sigma$ below the mean and +3 $\sigma$ above the mean.
+
+
+ 
+
+### Shape statistics and normality
+
+There are two shape statistics that can indicate deviation from normality: **skewness** and **kurtosis**.
+
+**A. Skewness**
+
+Skewness is usually described as a measure of a distribution's symmetry -- or lack of symmetry. Skewness values that are **negative** indicate a tail to the **left** (@fig-skew2 a), **zero** value indicate a **symmetric** distribution (@fig-skew2 b), while values that are **positive** indicate a tail to the **right** (@fig-skew2 c).
+
+Skewness values between −1 and +1 indicate an approximate bell-shaped curve. Values from −1 to −3 or from +1 to +3 indicate that the distribution is tending away from a bell shape with \>1 indicating moderate skewness and \>2 indicating severe skewness. Any values **above +3 or below−3** are a good indication that the variable is **not normally** distributed.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+#| label: fig-skew2
+#| fig-cap: Types of distribution according to the summetry.
+#| fig-subcap: 
+#|   - "Left skewed distribution (negatively skewed). The mean and the meadian are too left to the mode."
+#|   - "Symmetric distribution (zero skewness). The mean, median and mode are the same."
+#|   - "Right skewed distribution (positively skewed). The mean and median are to the right of the mode."
+#| layout-ncol: 3
+
+# left skewed distribution
+curve(dbeta(x, 7, 2), col="green", type="l", lwd = 2, xlab="x", ylab="Probability density", bty="n")
+segments(x0 = 0.7, x1 = 0.7, y0 = 0, y1 = 1.75, lty = 2, lwd = 2, col = "black") 
+text(0.7, 1.7, expression("mean"), font = 2, cex = 1.5, col = "black")
+segments(x0 = 0.75, x1 = 0.75, y0 = 0, y1 = 2.35, lty = 2, lwd = 2, col = "blue") 
+text(0.73, 2.5, expression("median"), font=2, cex = 1.5, col = "blue")
+segments(x0 = 0.85, x1 = 0.85, y0 = 0, y1 = 3.1, lty = 2, lwd = 2, col = "orange") 
+text(0.88, 3.15, expression("mode"), font =2, cex = 1.5, col = "orange")
+
+# symmetric distribution
+curve(dbeta(x, 7, 7), col="green", type="l", lwd = 2, xlab="x", ylab="Probability density", bty="n")
+segments(x0 = 0.48, x1 = 0.48, y0 = 0, y1 = 2.9, lty = 2, lwd = 2, col = "orange") 
+text(0.4, 2.8, expression("mode"), font =2, cex = 1.5, col = "orange")
+segments(x0 = 0.5, x1 = 0.5, y0 = 0, y1 = 3.0, lty = 2, lwd = 2, col = "black") 
+text(0.5, 2.95, expression("mean"), font = 2, cex = 1.5, col = "black")
+segments(x0 = 0.52, x1 = 0.52, y0 = 0, y1 = 2.9, lty = 2, lwd = 2, col = "blue") 
+text(0.63, 2.8, expression("median"), font=2, cex = 1.5, col = "blue")
+       
+# right skewed distribution
+curve(dbeta(x, 2, 7), col="green", type="l",lwd = 2, xlab="x", ylab="Probability density", bty="n")
+segments(x0 = 0.15, x1 = 0.15, y0 = 0, y1 = 3.1, lty = 2, lwd = 2, col = "orange") 
+text(0.22, 3.1, expression("mode"), font =2, cex = 1.5, col = "orange")
+segments(x0 = 0.25, x1 = 0.25, y0 = 0, y1 = 2.5, lty = 2, lwd = 2, col = "blue") 
+text(0.25, 2.6, expression("median"), font = 2, cex = 1.5, col = "blue")
+segments(x0 = 0.3, x1 = 0.3, y0 = 0, y1 = 1.9, lty = 2, lwd = 2, col = "black") 
+text(0.34, 2.0, expression("mean"), font=2, cex = 1.5, col = "black")
+```
+
+**B. Kurtosis**
+
+The other way that distributions can deviate from normality is **kurtosis**. The **excess kurtosis** parameter is a measure of the combined weight of the tails relative to the rest of the distribution. Kurtosis is associated indirect with the peak of the distribution (if the peak of the distribution is too high or too low compared to a "normal" distribution).
+
+Distributions with **negative** excess kurtosis are called ***platykurtic*** (@fig-kurtosis a). If the measure of excess kurtosis is **0** the distribution is **mesokurtic** (@fig-kurtosis b). Finally, distributions with **positive** excess kurtosis are called ***leptokurtic*** (@fig-kurtosis c).
+
+A kurtosis value between −1 and +1 indicates normality and a value between −1 and −3 or between +1 and +3 indicates a tendency away from normality. Values **below −3 or above +3** strongly indicate **non-normality**.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+#| label: fig-kurtosis
+#| fig-cap: Types of distribution according to the summetry.
+#| fig-subcap: 
+#|   - "Platykurtic distribution (negative excess kurtosis)."
+#|   - "Mesokurtic distribution (zero excess kurtosis)."
+#|   - "Leptokurtic distribution (positive excess kurtosis). "
+#| layout-ncol: 3
+
+x <- seq(-6, 6, length=200)
+y1 <- dnorm(x)
+y2 <- dnorm(x, sd= 2)
+y3 <- dnorm(x, sd= 0.5)
+
+# platykurtic distribution
+plot(x, y1, main = "Platykurtic distribution", type = "l", lty = 3, lwd = 2,  xlab = "", ylab = "Probability Density", col="grey10", xaxt='n', bty="n")
+axis(1, at = -4:4, lab=expression(-4*sigma, -3*sigma, -2*sigma,-1*sigma, mu, 1*sigma, 2*sigma, 3*sigma, 4*sigma))
+lines(x,y2,col="deeppink", lwd = 3)
+text(1.5, 0.3, expression(normal))
+text(3.5, 0.10, expression(platykurtic), col="deeppink")
+
+# mesokurtic distribution
+plot(x, y1, main = "Normal distribution", type = "l", lwd = 2,  xlab = "", ylab = "Probability Density", col="deeppink", xaxt='n', bty="n")
+axis(1, at = -4:4, lab=expression(-4*sigma, -3*sigma, -2*sigma,-1*sigma, mu, 1*sigma, 2*sigma, 3*sigma, 4*sigma))
+
+# leptokurtic distribution
+plot(x, y1, main = "Leptokurtic distribution", type = "l", lty = 3, lwd = 2,  xlab = "", ylab = "Probability Density", col="grey10", xaxt='n', ylim=c(0,0.8), bty="n")
+axis(1, at = -4:4, lab=expression(-4*sigma, -3*sigma, -2*sigma,-1*sigma, mu, 1*sigma, 2*sigma, 3*sigma, 4*sigma))
+lines(x,y3,col="deeppink", lwd = 3)
+text(1.7, 0.25, expression(normal))
+text(1.5, 0.7, expression(leptokurtic), col="deeppink")
+```
