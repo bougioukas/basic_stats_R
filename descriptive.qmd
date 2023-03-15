@@ -6,6 +6,8 @@
 #| include: false
 
 library(rstatix)
+library(EnvStats)
+library(scales)
 library(questionr)
 library(MESS)
 library(ggsci)
@@ -31,6 +33,8 @@ We need to load the following packages:
 #| eval: false
 
 library(rstatix)
+library(EnvStats)
+library(scales)
 library(questionr)
 library(MESS)
 library(ggsci)
@@ -145,6 +149,7 @@ Similarly, we can create the frequency table for the `bmi_cat` variable:
 ```{r}
 freq(arrhythmia$bmi_cat, cum = T, total = T, valid = F)
 ```
+
  
 
 We can also sort the BMI categories in a decreasing order of frequencies:
@@ -184,21 +189,17 @@ A simple bar plot is an easy way to make comparisons across categories. @fig-sim
 # create a data frame with ordered BMI categories and their counts
 dat1 <- arrhythmia %>%
   count(bmi_cat) %>% 
-  mutate(pct = round_percent(n, 1)/100)
+  mutate(pct = round_percent(n, 1))
 
 # plot the data
 ggplot(dat1, aes(x = bmi_cat, y = pct)) +
   geom_col(width=0.65, fill = "steelblue4") +
-  geom_text(aes(label=paste0(pct*100, "%")),
+  geom_text(aes(label=paste0(pct, "%")),
             vjust=1.6, color = "white", size = 3) +
   labs(x = "BMI category", y = "Percent",
-       subtitle = "Number of patients: 428") +
-  scale_y_continuous(labels = scales::percent) +
-  theme_minimal() +
-  theme(
-    axis.title=element_text(size = 11),
-    axis.text=element_text(size = 11)
-  )
+       caption = "Number of patients: 428") +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  theme_minimal(base_size = 12)
 ```
 
 ::: {.callout-tip icon="false"}
@@ -225,26 +226,22 @@ If the sample is further classified into whether the patient was male or female 
 dat2 <- arrhythmia %>%
   count(bmi_cat, sex) %>% 
   group_by(sex) %>% 
-  mutate(pct = round_percent(n, 1)/100) %>% 
+  mutate(pct = round_percent(n, 1)) %>% 
   ungroup()
 
 ggplot(dat2) + 
   geom_col(aes(bmi_cat, pct, fill = sex), width=0.7, position = "dodge") +
-  geom_text(aes(bmi_cat, pct, label = paste0(pct*100, "%"), 
+  geom_text(aes(bmi_cat, pct, label = paste0(pct, "%"), 
                 group = sex), color = "white", size = 3,vjust=1.2,
             position = position_dodge(width = .9)) +
-labs(x = "BMI category", y = "Percent",
-     caption = "female: n=237, male: n=191") +
-  scale_y_continuous(labels = scales::percent) +
-  ggsci::scale_fill_jco() +
-  theme_minimal() +
-  theme(
-    legend.position="none",
-    axis.title=element_text(size = 11),
-    axis.text=element_text(size = 11),
-    axis.text.x = element_text(angle = 45, hjust = 1)
-  ) +
-   facet_wrap(~sex, ncol = 2)
+  labs(x = "BMI category", y = "Percent",
+       caption = "female: n=237, male: n=191") +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  scale_fill_jco() +
+  theme_minimal(base_size = 12) +
+  theme(legend.position="none",
+        axis.text.x = element_text(angle = 45, hjust = 1)) +
+  facet_wrap(~sex, ncol = 2)
 
 ```
 
@@ -256,18 +253,14 @@ labs(x = "BMI category", y = "Percent",
 
 ggplot(dat2) + 
   geom_col(aes(bmi_cat, pct, fill = sex), width = 0.8, position = "dodge") +
-  geom_text(aes(bmi_cat, pct, label = paste0(pct*100, "%"), 
+  geom_text(aes(bmi_cat, pct, label = paste0(pct, "%"), 
                 group = sex), color = "white", size = 3,vjust=1.2,
             position = position_dodge(width = .9)) +
-labs(x = "BMI category", y = "Percent",
-     caption = "female: n=237, male: n=191") +
-  scale_y_continuous(labels = scales::percent) +
-  ggsci::scale_fill_jco() +
-  theme_minimal() +
-  theme(
-    axis.title=element_text(size = 11),
-    axis.text=element_text(size = 11)
-  )
+  labs(x = "BMI category", y = "Percent",
+       caption = "female: n=237, male: n=191") +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  scale_fill_jco() +
+  theme_minimal(base_size = 12)
 ```
 
  
@@ -287,24 +280,18 @@ Unlike a side-by-side or grouped graphs, **stacked bar plots** segment their bar
 dat3 <- arrhythmia %>% 
   group_by(sex) %>% 
   count(bmi_cat) %>% 
-  mutate(pct = n / sum(n)) %>% 
+  mutate(pct = round_percent(n, 2)) %>% 
   ungroup()
 
 ggplot(dat3, aes(x = sex, y = pct, fill = forcats::fct_rev(bmi_cat)))+
   geom_bar(stat = "identity", width = 0.8)+
-  geom_text(aes(label = paste0(round(pct*100, 1), "%"), y = pct), 
-            position = position_stack(vjust = 0.5))+
+  geom_text(aes(label = paste0(round(pct, 1), "%"), y = pct), 
+            position = position_stack(vjust = 0.5)) +
   coord_flip()+
-  ggsci::scale_fill_simpsons() +
-  scale_y_continuous(labels = scales::percent)+
+  scale_fill_simpsons() +
+  scale_y_continuous(labels = scales::percent_format(scale = 1))+
   labs(x = "Sex", y = "Percent", fill = "BMI category") +
-  theme_minimal() +
-  theme(
-    legend.title = element_text(size = 12),
-    legend.text = element_text(size = 12),
-    axis.title=element_text(size = 12),
-    axis.text=element_text(size = 12)
-  )
+  theme_minimal(base_size = 12)
 ```
 
 ::: callout-important
@@ -336,7 +323,6 @@ Summary measures are **single numerical values** that summarize a large number o
 +------------------------------+-------------------------------------------------+
 
 : Common summary measures of central location and dispersion {#tbl-measures}
-
 
  
 
@@ -394,6 +380,7 @@ psych::describe(arrhythmia$age)
 arrhythmia %>%
   dplyr::summarise(
     n = n(),
+    count_na = sum(is.na(QRS)),
     min = min(QRS, na.rm = TRUE),
     q1 = quantile(QRS, 0.25, na.rm = TRUE),
     median = quantile(QRS, 0.5, na.rm = TRUE),
@@ -412,7 +399,7 @@ arrhythmia %>%
 ```{r}
 arrhythmia %>% 
   dlookr::describe(QRS) %>% 
-  select(described_variables, n, mean, sd, p25, p50, p75, skewness, kurtosis)
+  select(described_variables, n, na, mean, sd, p25, p50, p75, skewness, kurtosis)
 ```
 
 ## psych
@@ -474,7 +461,6 @@ psych::describeBy(arrhythmia$age, group = arrhythmia$sex)
 :::
 :::
 
-
 If we want to save our descriptive statistics, calculated in R, we can use the `write_xlsx()` function from {writexl} package. In the example below, we are saving the `summary_age_sex` table to a `.xlsx` file in the *data* folder of our RStudio Project:
 
 ```{r}
@@ -483,7 +469,6 @@ If we want to save our descriptive statistics, calculated in R, we can use the `
 library(writexl)
 write_xlsx(summary_age_sex, here("data", "summary_age_sex.xlsx"))
 ```
-
 
  
 
@@ -498,6 +483,7 @@ arrhythmia %>%
   group_by(sex) %>% 
   dplyr::summarise(
     n = n(),
+    count_na = sum(is.na(QRS)),
     min = min(QRS, na.rm = TRUE),
     q1 = quantile(QRS, 0.25, na.rm = TRUE),
     median = quantile(QRS, 0.5, na.rm = TRUE),
@@ -518,7 +504,7 @@ arrhythmia %>%
 arrhythmia %>% 
   group_by(sex) %>% 
   dlookr::describe(QRS) %>% 
-  select(described_variables, sex, n, mean, sd, p25, p50, p75, skewness, kurtosis)
+  select(described_variables, sex, n, na, mean, sd, p25, p50, p75, skewness, kurtosis)
 ```
 
 ## psych
@@ -550,7 +536,7 @@ The most common way of presenting a frequency distribution of a continuous varia
 #| label: fig-histog1
 #| fig-cap: Distributions of age and QRS variables.
 #| fig-subcap: 
-#|   - "Histogram of age for the 428 patients."
+#|   - "Histogram of age for the 425 patients."
 #|   - "Histogram of QRS for the 428 patients."
 #| layout-ncol: 2
 
@@ -558,27 +544,15 @@ The most common way of presenting a frequency distribution of a continuous varia
 arrhythmia %>% 
   ggplot(aes(x = age)) +
   geom_histogram(binwidth = 8, fill = "steelblue4", color = "#8fb4d9", alpha = 0.6) +
-  ggtitle("Histogram of age") +
-  geom_vline(aes(xintercept = mean(age, na.rm = T)), color = "#009e73", linetype = "dashed", size = 0.8) +
-  geom_vline(aes(xintercept = median(age, na.rm = T)), color = "grey30", linetype = "dashed", size = 0.8) +
-  theme_minimal() +
-    labs(y = "Frequency") +
-  theme(text = element_text(size = 16)) +
-  annotate('text', x = 54, y = 105, label = 'mean', size = 5, color = '#009e73') +
-  annotate('text', x = 41, y = 105, label = 'median', size = 5, color = 'grey30')
+  theme_minimal(base_size = 16) +
+  labs(title = "Histogram: age", y = "Frequency")
 
 # Histogram of QRS
 arrhythmia %>% 
   ggplot(aes(x = QRS)) +
   geom_histogram(binwidth = 8, fill = "steelblue4", color = "#8fb4d9", alpha = 0.6) +
-  ggtitle("Histogram of QRS") +
-  geom_vline(aes(xintercept = mean(QRS)), color = "#009e73", linetype = "dashed", size = 0.8) +
-  geom_vline(aes(xintercept = median(QRS)), color = "grey30", linetype = "dashed", size = 0.8) +
-  theme_minimal() +
-    labs(y = "Frequency") +
-  theme(text = element_text(size = 16)) +
-  annotate('text', x = 96, y = 140, label = 'mean', size = 5, color = '#009e73') +
-  annotate('text', x = 78, y = 140, label = 'median', size = 5, color = 'grey30')
+  theme_minimal(base_size = 16) +
+  labs(title = "Histogram: QRS", y = "Frequency")
 ```
 
 A histogram gives information about:
@@ -592,7 +566,7 @@ A histogram gives information about:
 #| label: fig-density1
 #| fig-cap: Density plot of age and QRS variables.
 #| fig-subcap: 
-#|   - "Density plot of age for the 428 patients."
+#|   - "Density plot of age for the 425 patients."
 #|   - "Density plot of QRS for the 428 patients."
 #| layout-ncol: 2
 
@@ -601,27 +575,15 @@ A histogram gives information about:
 arrhythmia %>% 
   ggplot(aes(x = age)) +
   geom_density(fill="steelblue4", color="#8fb4d9", adjust = 1.5, alpha=0.6) +
-  ggtitle("Density Plot age") +
-  geom_vline(aes(xintercept = mean(age, na.rm = T)), color = "#009e73", linetype = "dashed", size = 0.8) +
-  geom_vline(aes(xintercept = median(age, na.rm = T)), color = "grey30", linetype = "dashed", size = 0.8) +
-  theme_minimal() +
-  labs(y = "Density") +
-  theme(text = element_text(size = 16)) +
-  annotate('text', x = 54, y = 0.026, label = 'mean', size = 5, color = '#009e73') +
-  annotate('text', x = 41, y = 0.026, label = 'median', size = 5, color = 'grey30')
+  theme_minimal(base_size = 16) +
+  labs(title = "Density Plot: age", y = "Density")
 
 # density plot of QRS
 arrhythmia %>% 
   ggplot(aes(x = QRS)) +
   geom_density(fill="steelblue4", color="#8fb4d9", adjust = 1.5, alpha=0.6) +
-  ggtitle("Density Plot QRS") +
-  geom_vline(aes(xintercept = mean(QRS)), color = "#009e73", linetype = "dashed", size = 0.8) +
-  geom_vline(aes(xintercept = median(QRS)), color = "grey30", linetype = "dashed", size = 0.8) +
-  theme_minimal() +
-  labs(y = "Density") +
-  theme(text = element_text(size = 16)) +
-  annotate('text', x = 96, y = 0.038, label = 'mean', size = 5, color = '#009e73') +
-  annotate('text', x = 78, y = 0.038, label = 'median', size = 5, color = 'grey30')
+  theme_minimal(base_size = 16) +
+  labs(title = "Density Plot: QRS", y = "Density")
 ```
 
  
@@ -635,29 +597,27 @@ Box plots can be used for displaying location and dispersion for continuous data
 #| label: fig-boxplot1
 #| fig-cap: Box plots of age and QRS variables by sex.
 #| fig-subcap: 
-#|   - "Box plot of age for the 428 patients by sex."
-#|   - "Box plot of QRS for the 428 patients by sex."
+#|   - "Box plot of age by sex (female: 235; male = 190)."
+#|   - "Box plot of QRS by sex (female: 237; male = 191)."
 #| layout-ncol: 2
 
 # box plot of age by sex
 arrhythmia %>% 
   ggplot(aes(x = sex, y = age, fill = sex)) +
   geom_boxplot(alpha = 0.6, width = 0.5) +
-  ggtitle("Grouped Box Plot age") +
-  theme_minimal() +
-  ggsci::scale_fill_jco() +
-  theme(text = element_text(size = 16), 
-        legend.position = "none")
+  theme_minimal(base_size = 16) +
+  labs(title = "Grouped Box Plot: age by sex") +
+  scale_fill_jco() +
+  theme(legend.position = "none")
 
-# # box plot of QRS by sex
+# box plot of QRS by sex
 arrhythmia %>% 
   ggplot(aes(x = sex, y = QRS, fill = sex)) +
   geom_boxplot(alpha = 0.6, width = 0.5) +
-  ggtitle("Grouped Box Plot QRS") +
-  theme_minimal() +
-  ggsci::scale_fill_jco() +
-  theme(text = element_text(size = 16), 
-        legend.position = "none")
+  theme_minimal(base_size = 16) +
+  labs(title = "Grouped Box Plot: QRS by sex") +
+  scale_fill_jco() +
+  theme(legend.position = "none")
 ```
 
 When the median is in the middle of the box, and the whiskers are about the same on both sides of the box, then the distribution is symmetric.
@@ -670,14 +630,13 @@ An outlier is an observation that is numerically distant from the rest of the da
 
 There are many variations of the box plot. For example, there is a way to combine raw data (dots), probability density, and key summary statistics such as median, and relevant intervals of a range of likely values for the population parameter, in an appealing and flexible format with minimal redundancy, using the raincloud plot (@fig-raincloud):
 
-
 ```{r}
 #| warning: false
 #| label: fig-raincloud
 #| fig-cap: A raincloud plot of age and QRS variables by sex.
 #| fig-subcap: 
-#|   - "Raincloud of age for the 428 patients by sex."
-#|   - "Raincloud of QRS for the 428 patients by sex."
+#|   - "Raincloud of age by sex (female: 235; male = 190)."
+#|   - "Raincloud of QRS by sex (female: 237; male = 191)."
 #| layout-ncol: 2
 
 # raincloud plot of age by sex
@@ -688,11 +647,10 @@ arrhythmia %>%
   stat_dotsinterval(side = "bottom", 
                     scale = 0.5, 
                     slab_size = 0.2) +
-  ggtitle("Grouped Raincloud Plots age") +
-  theme_minimal() +
-  ggsci::scale_fill_jco() +
-  theme(text = element_text(size = 16),
-        legend.position = "none")
+  theme_minimal(base_size = 16) +
+  labs(title = "Grouped Raincloud Plots: age by sex") +
+  scale_fill_jco() +
+  theme(legend.position = "none")
 
 # raincloud plot of QRS by sex
 arrhythmia %>% 
@@ -702,9 +660,8 @@ arrhythmia %>%
   stat_dotsinterval(side = "bottom", 
                     scale = 0.5, 
                     slab_size = 0.2) +
-  ggtitle("Grouped Raincloud Plots QRS") +
-  theme_minimal() +
-  ggsci::scale_fill_jco() +
-  theme(text = element_text(size = 16),
-        legend.position = "none")
+  theme_minimal(base_size = 16) +
+  labs(title = "Grouped Raincloud Plots: QRS by sex") +
+  scale_fill_jco() +
+  theme(legend.position = "none")
 ```
