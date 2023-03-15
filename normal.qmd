@@ -70,9 +70,9 @@ ggplot(df, aes(x)) +
 #| fig-cap: The area underneath a Normal Distribution
 
 normal_dist("#522d80","#00868B") + 
-    labs(y = "Probability density",
-         x = "Variable") +
-scale_x_continuous(breaks = c(-3, -2.58, -1.96, -1, 
+  labs(y = "Probability density", 
+       x = "Variable") +
+  scale_x_continuous(breaks = c(-3, -2.58, -1.96, -1, 
                               0, 1, 1.96, 2.58, 3),
                    labels = expression(-3*sigma, -2.58*sigma, -1.96*sigma, -1*sigma, 
                                        mu, 1*sigma, 1.96*sigma, 2.58*sigma, 3*sigma)) +

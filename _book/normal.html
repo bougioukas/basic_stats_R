@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.264">
+<meta name="generator" content="quarto-1.3.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -352,18 +352,18 @@ Learning objectives
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="1,2" data-code-annotation="1" data-code-cell="annotated-cell-2">Create a sequence of 200 numbers between -4 and +4.</span>
+<span data-code-cell="annotated-cell-2" data-code-annotation="1" data-code-lines="1,2">Create a sequence of 200 numbers between -4 and +4.</span>
 </dd>
 <dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="6,7,8" data-code-annotation="2" data-code-cell="annotated-cell-2">Add the standard deviation notation in x-axis.</span>
+<span data-code-cell="annotated-cell-2" data-code-annotation="2" data-code-lines="6,7,8">Add the standard deviation notation in x-axis.</span>
 </dd>
 </dl>
 </div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="normal_files/figure-html/fig-normal-1.png" class="lightbox" title="The area underneath a Normal Distribution" data-gallery="quarto-lightbox-gallery-1"><img src="normal_files/figure-html/fig-normal-1.png" class="quarto-discovered-preview-image img-fluid figure-img" width="1200"></a></p>
+<p><a href="normal_files/figure-html/fig-normal-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="The area underneath a Normal Distribution"><img src="normal_files/figure-html/fig-normal-1.png" class="quarto-discovered-preview-image img-fluid figure-img" width="1200"></a></p>
 <p></p><figcaption class="figure-caption">The area underneath a Normal Distribution</figcaption><p></p>
 </figure>
 </div>
@@ -374,9 +374,9 @@ Learning objectives
 <h2 data-number="3.3" class="anchored" data-anchor-id="the-properties-of-a-normal-distribution"><span class="header-section-number">3.3</span> The properties of a normal distribution</h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">normal_dist</span>(<span class="st">"#522d80"</span>,<span class="st">"#00868B"</span>) <span class="sc">+</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Probability density"</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Variable"</span>) <span class="sc">+</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="sc">-</span><span class="fl">2.58</span>, <span class="sc">-</span><span class="fl">1.96</span>, <span class="sc">-</span><span class="dv">1</span>, </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Probability density"</span>, </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Variable"</span>) <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="sc">-</span><span class="fl">2.58</span>, <span class="sc">-</span><span class="fl">1.96</span>, <span class="sc">-</span><span class="dv">1</span>, </span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                              <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">1.96</span>, <span class="fl">2.58</span>, <span class="dv">3</span>),</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">expression</span>(<span class="sc">-</span><span class="dv">3</span><span class="sc">*</span>sigma, <span class="sc">-</span><span class="fl">2.58</span><span class="sc">*</span>sigma, <span class="sc">-</span><span class="fl">1.96</span><span class="sc">*</span>sigma, <span class="sc">-</span><span class="dv">1</span><span class="sc">*</span>sigma, </span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                                       mu, <span class="dv">1</span><span class="sc">*</span>sigma, <span class="fl">1.96</span><span class="sc">*</span>sigma, <span class="fl">2.58</span><span class="sc">*</span>sigma, <span class="dv">3</span><span class="sc">*</span>sigma)) <span class="sc">+</span></span>
@@ -385,7 +385,7 @@ Learning objectives
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="normal_files/figure-html/fig-normal_auc-1.png" class="lightbox" title="The area underneath a Normal Distribution" data-gallery="quarto-lightbox-gallery-2"><img src="normal_files/figure-html/fig-normal_auc-1.png" class="img-fluid figure-img" width="1200"></a></p>
+<p><a href="normal_files/figure-html/fig-normal_auc-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="The area underneath a Normal Distribution"><img src="normal_files/figure-html/fig-normal_auc-1.png" class="img-fluid figure-img" width="1200"></a></p>
 <p></p><figcaption class="figure-caption">The area underneath a Normal Distribution</figcaption><p></p>
 </figure>
 </div>
@@ -441,19 +441,19 @@ Learning objectives
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="normal_files/figure-html/fig-skew2-1.png" class="lightbox" title="Left skewed distribution (negatively skewed). The mean and the meadian are too left to the mode." data-gallery="quarto-lightbox-gallery-3"><img src="normal_files/figure-html/fig-skew2-1.png" class="img-fluid figure-img" width="672"></a></p>
+<p><a href="normal_files/figure-html/fig-skew2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Left skewed distribution (negatively skewed). The mean and the meadian are too left to the mode."><img src="normal_files/figure-html/fig-skew2-1.png" class="img-fluid figure-img" width="672"></a></p>
 <p></p><figcaption class="figure-caption">Left skewed distribution (negatively skewed). The mean and the meadian are too left to the mode.</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="normal_files/figure-html/fig-skew2-2.png" class="lightbox" title="Symmetric distribution (zero skewness). The mean, median and mode are the same." data-gallery="quarto-lightbox-gallery-4"><img src="normal_files/figure-html/fig-skew2-2.png" class="img-fluid figure-img" width="672"></a></p>
+<p><a href="normal_files/figure-html/fig-skew2-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Symmetric distribution (zero skewness). The mean, median and mode are the same."><img src="normal_files/figure-html/fig-skew2-2.png" class="img-fluid figure-img" width="672"></a></p>
 <p></p><figcaption class="figure-caption">Symmetric distribution (zero skewness). The mean, median and mode are the same.</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="normal_files/figure-html/fig-skew2-3.png" class="lightbox" title="Right skewed distribution (positively skewed). The mean and median are to the right of the mode." data-gallery="quarto-lightbox-gallery-5"><img src="normal_files/figure-html/fig-skew2-3.png" class="img-fluid figure-img" width="672"></a></p>
+<p><a href="normal_files/figure-html/fig-skew2-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Right skewed distribution (positively skewed). The mean and median are to the right of the mode."><img src="normal_files/figure-html/fig-skew2-3.png" class="img-fluid figure-img" width="672"></a></p>
 <p></p><figcaption class="figure-caption">Right skewed distribution (positively skewed). The mean and median are to the right of the mode.</figcaption><p></p>
 </figure>
 </div>
@@ -497,19 +497,19 @@ Learning objectives
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="normal_files/figure-html/fig-kurtosis-1.png" class="lightbox" title="Platykurtic distribution (negative excess kurtosis)." data-gallery="quarto-lightbox-gallery-6"><img src="normal_files/figure-html/fig-kurtosis-1.png" class="img-fluid figure-img" width="672"></a></p>
+<p><a href="normal_files/figure-html/fig-kurtosis-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Platykurtic distribution (negative excess kurtosis)."><img src="normal_files/figure-html/fig-kurtosis-1.png" class="img-fluid figure-img" width="672"></a></p>
 <p></p><figcaption class="figure-caption">Platykurtic distribution (negative excess kurtosis).</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="normal_files/figure-html/fig-kurtosis-2.png" class="lightbox" title="Mesokurtic distribution (zero excess kurtosis)." data-gallery="quarto-lightbox-gallery-7"><img src="normal_files/figure-html/fig-kurtosis-2.png" class="img-fluid figure-img" width="672"></a></p>
+<p><a href="normal_files/figure-html/fig-kurtosis-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Mesokurtic distribution (zero excess kurtosis)."><img src="normal_files/figure-html/fig-kurtosis-2.png" class="img-fluid figure-img" width="672"></a></p>
 <p></p><figcaption class="figure-caption">Mesokurtic distribution (zero excess kurtosis).</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="normal_files/figure-html/fig-kurtosis-3.png" class="lightbox" title="Leptokurtic distribution (positive excess kurtosis)." data-gallery="quarto-lightbox-gallery-8"><img src="normal_files/figure-html/fig-kurtosis-3.png" class="img-fluid figure-img" width="672"></a></p>
+<p><a href="normal_files/figure-html/fig-kurtosis-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Leptokurtic distribution (positive excess kurtosis)."><img src="normal_files/figure-html/fig-kurtosis-3.png" class="img-fluid figure-img" width="672"></a></p>
 <p></p><figcaption class="figure-caption">Leptokurtic distribution (positive excess kurtosis).</figcaption><p></p>
 </figure>
 </div>
@@ -975,7 +975,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","loop":true,"openEffect":"zoom","closeEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","loop":true});</script>
 
 
 

@@ -9,6 +9,7 @@ library(rstatix)
 library(questionr)
 library(MESS)
 library(ggsci)
+library(ggdist)
 library(patchwork)
 
 library(here)
@@ -553,6 +554,7 @@ The most common way of presenting a frequency distribution of a continuous varia
 #|   - "Histogram of QRS for the 428 patients."
 #| layout-ncol: 2
 
+# Histogram of age
 arrhythmia %>% 
   ggplot(aes(x = age)) +
   geom_histogram(binwidth = 8, fill = "steelblue4", color = "#8fb4d9", alpha = 0.6) +
@@ -561,11 +563,11 @@ arrhythmia %>%
   geom_vline(aes(xintercept = median(age, na.rm = T)), color = "grey30", linetype = "dashed", size = 0.8) +
   theme_minimal() +
     labs(y = "Frequency") +
-  theme(plot.title = element_text(size=15)) +
-  annotate('text', x = 52, y = 105, label = 'mean', color = '#009e73') +
-  annotate('text', x = 43, y = 105, label = 'median', color = 'grey30')
+  theme(text = element_text(size = 16)) +
+  annotate('text', x = 54, y = 105, label = 'mean', size = 5, color = '#009e73') +
+  annotate('text', x = 41, y = 105, label = 'median', size = 5, color = 'grey30')
 
-
+# Histogram of QRS
 arrhythmia %>% 
   ggplot(aes(x = QRS)) +
   geom_histogram(binwidth = 8, fill = "steelblue4", color = "#8fb4d9", alpha = 0.6) +
@@ -574,9 +576,9 @@ arrhythmia %>%
   geom_vline(aes(xintercept = median(QRS)), color = "grey30", linetype = "dashed", size = 0.8) +
   theme_minimal() +
     labs(y = "Frequency") +
-  theme(plot.title = element_text(size=15)) +
-  annotate('text', x = 94, y = 140, label = 'mean', color = '#009e73') +
-  annotate('text', x = 80, y = 140, label = 'median', color = 'grey30')
+  theme(text = element_text(size = 16)) +
+  annotate('text', x = 96, y = 140, label = 'mean', size = 5, color = '#009e73') +
+  annotate('text', x = 78, y = 140, label = 'median', size = 5, color = 'grey30')
 ```
 
 A histogram gives information about:
@@ -595,6 +597,7 @@ A histogram gives information about:
 #| layout-ncol: 2
 
 
+# density plot of age
 arrhythmia %>% 
   ggplot(aes(x = age)) +
   geom_density(fill="steelblue4", color="#8fb4d9", adjust = 1.5, alpha=0.6) +
@@ -603,11 +606,11 @@ arrhythmia %>%
   geom_vline(aes(xintercept = median(age, na.rm = T)), color = "grey30", linetype = "dashed", size = 0.8) +
   theme_minimal() +
   labs(y = "Density") +
-  theme(plot.title = element_text(size=15)) +
-  annotate('text', x = 52, y = 0.026, label = 'mean', color = '#009e73') +
-  annotate('text', x = 43, y = 0.026, label = 'median', color = 'grey30')
+  theme(text = element_text(size = 16)) +
+  annotate('text', x = 54, y = 0.026, label = 'mean', size = 5, color = '#009e73') +
+  annotate('text', x = 41, y = 0.026, label = 'median', size = 5, color = 'grey30')
 
-
+# density plot of QRS
 arrhythmia %>% 
   ggplot(aes(x = QRS)) +
   geom_density(fill="steelblue4", color="#8fb4d9", adjust = 1.5, alpha=0.6) +
@@ -616,9 +619,9 @@ arrhythmia %>%
   geom_vline(aes(xintercept = median(QRS)), color = "grey30", linetype = "dashed", size = 0.8) +
   theme_minimal() +
   labs(y = "Density") +
-  theme(plot.title = element_text(size=15)) +
-  annotate('text', x = 94, y = 0.038, label = 'mean', color = '#009e73') +
-  annotate('text', x = 80, y = 0.038, label = 'median', color = 'grey30')
+  theme(text = element_text(size = 16)) +
+  annotate('text', x = 96, y = 0.038, label = 'mean', size = 5, color = '#009e73') +
+  annotate('text', x = 78, y = 0.038, label = 'median', size = 5, color = 'grey30')
 ```
 
  
@@ -636,23 +639,24 @@ Box plots can be used for displaying location and dispersion for continuous data
 #|   - "Box plot of QRS for the 428 patients by sex."
 #| layout-ncol: 2
 
+# box plot of age by sex
 arrhythmia %>% 
   ggplot(aes(x = sex, y = age, fill = sex)) +
-  geom_boxplot(alpha=0.6, width = 0.5) +
+  geom_boxplot(alpha = 0.6, width = 0.5) +
   ggtitle("Grouped Box Plot age") +
   theme_minimal() +
   ggsci::scale_fill_jco() +
-  theme(plot.title = element_text(size=15), 
+  theme(text = element_text(size = 16), 
         legend.position = "none")
 
-
+# # box plot of QRS by sex
 arrhythmia %>% 
   ggplot(aes(x = sex, y = QRS, fill = sex)) +
-  geom_boxplot(alpha=0.6, width = 0.5) +
+  geom_boxplot(alpha = 0.6, width = 0.5) +
   ggtitle("Grouped Box Plot QRS") +
   theme_minimal() +
   ggsci::scale_fill_jco() +
-  theme(plot.title = element_text(size=15), 
+  theme(text = element_text(size = 16), 
         legend.position = "none")
 ```
 
@@ -661,3 +665,46 @@ When the median is in the middle of the box, and the whiskers are about the same
 An outlier is an observation that is numerically distant from the rest of the data. When reviewing a box plot, an outlier is defined as a data point that is located outside the whiskers of the box plot.
 
  
+
+**C. Raincloud Plot**
+
+There are many variations of the box plot. For example, there is a way to combine raw data (dots), probability density, and key summary statistics such as median, and relevant intervals of a range of likely values for the population parameter, in an appealing and flexible format with minimal redundancy, using the raincloud plot (@fig-raincloud):
+
+
+```{r}
+#| warning: false
+#| label: fig-raincloud
+#| fig-cap: A raincloud plot of age and QRS variables by sex.
+#| fig-subcap: 
+#|   - "Raincloud of age for the 428 patients by sex."
+#|   - "Raincloud of QRS for the 428 patients by sex."
+#| layout-ncol: 2
+
+# raincloud plot of age by sex
+arrhythmia %>% 
+  ggplot(aes(x = sex, y = age, fill = sex)) +
+  stat_slab(aes(thickness = stat(pdf*n)), 
+                scale = 0.5) +
+  stat_dotsinterval(side = "bottom", 
+                    scale = 0.5, 
+                    slab_size = 0.2) +
+  ggtitle("Grouped Raincloud Plots age") +
+  theme_minimal() +
+  ggsci::scale_fill_jco() +
+  theme(text = element_text(size = 16),
+        legend.position = "none")
+
+# raincloud plot of QRS by sex
+arrhythmia %>% 
+  ggplot(aes(x = sex, y = QRS, fill = sex)) +
+  stat_slab(aes(thickness = stat(pdf*n)), 
+                scale = 0.5) +
+  stat_dotsinterval(side = "bottom", 
+                    scale = 0.5, 
+                    slab_size = 0.2) +
+  ggtitle("Grouped Raincloud Plots QRS") +
+  theme_minimal() +
+  ggsci::scale_fill_jco() +
+  theme(text = element_text(size = 16),
+        legend.position = "none")
+```
