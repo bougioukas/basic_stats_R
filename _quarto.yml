@@ -11,7 +11,6 @@ book:
   date: today
   cover-image: images/cover.png
   repo-url: https://github.com/bougioukas/basic_stats_R
-  sharing: [twitter, facebook, linkedin]
   chapters:
     - index.qmd
     - introduction.qmd
@@ -37,9 +36,17 @@ bibliography: references.bib
 reference-location: margin
 
 filters:
+  - social-share
   - lightbox
 lightbox: auto
 code-annotations: hover
+
+share:
+  permalink: "https://bougioukas-medstats-r.netlify.app/"
+  description: "Practical Statistics in Medicine with R"
+  twitter: true
+  facebook: true
+  linkedin: true
 
 format:
   html:
