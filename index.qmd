@@ -1,13 +1,14 @@
 # Preface {.unnumbered}
 
-This textbook is based on my notes from a series of lectures given for a few years at the Aristotle University of Thessaloniki.
 
+### Whom is this textbook for?
+
+This textbook is based on my notes from a series of lectures given for a few years at the Aristotle University of Thessaloniki.
 The textbook can be used as support material for practical labs on basic statistics using R at any level from beginner to advanced. It can also be used as a support for self-teaching.
 
-I have paid particular attention to the form of the book, which I think should aid understanding the most common statistical tests using Base R and pipe-friendly functions, coherent with the 'tidyverse' design philosophy. 
-The {ggplot2} package and many ggplot2 extensions are the preferred tools of choice for constructing data visualizations in our textbook. 
+I have paid particular attention to the form of the book, which I think should aid understanding the most common statistical tests using Base R and pipe-friendly functions, coherent with the 'tidyverse' design philosophy. The {ggplot2} package and many ggplot2 extensions are the preferred tools of choice for constructing data visualizations in the textbook.
 
-::: {.callout-tip}
+::: callout-tip
 This textbook assumes that the reader has a basic knowledge of R, tidyverse and introductory statistics. If you want to familiarize yourself with this programming language and statistics, we recommend the books below:
 
 -   [Using R for Introductory Statistics](https://www.routledge.com/Using-R-for-Introductory-Statistics/Verzani/p/book/9781466590731)
@@ -16,15 +17,28 @@ This textbook assumes that the reader has a basic knowledge of R, tidyverse and 
 :::
 
 
+### RStudio Projects
+
 Throughout this textbook we will use R via **RStudio**. It is also recommended to work with **RStudio Projects**. This enables to organize our files and switch between different projects without getting the data, scripts, or output files all mixed up. Everything gets read in or saved to the right directory.
 
-The proposed RStudio Project should contain at least the following subfolders:
+The proposed RStudio Project should contain at least the following subfolders (@fig-project).:
 
 -   **data:** data files of any kind, such as `.csv`, `.xlsx`, `.txt`, etc.
 -   **figures:** plots, diagrams, and other figures
 
 
-## Reproducibility and License
+```{r}
+#| label: fig-project
+#| fig-align: center
+#| out-width: "40%"
+#| echo: false
+#| fig-cap: Visualizing the folder structure in RStudio.
+#| 
+knitr::include_graphics(here::here("images", "project.png"))
+```
+
+
+### Reproducibility and License
 
 All sections of this textbook are reproducible as they were made using [Quarto](https://quarto.org/)^®^ which is an open-source scientific and technical publishing system built on [Pandoc](https://pandoc.org/).
 

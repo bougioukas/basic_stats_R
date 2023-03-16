@@ -51,7 +51,7 @@ We will use the dataset named `arrhythmia` which is a `.xlsx` file. We can read 
 ::: {.column-margin}
 **NOTE:** It is supposed that we work with RStudio Projects and the file "`arrhythmia.xlsx`" is stored in a subfolder with the name "*data*" inside the RStudio Project folder. 
 
-The function `here()` allows us to navigate throughout each of the subfolders and files within a given Project using *relative paths* such as "`data/arrhythmia.xlsx`".
+The function `here()` allows us to navigate throughout each of the subfolders and files within a given RStudio Project using *relative paths* such as "`data/arrhythmia.xlsx`".
 :::
 
 ```{r}
