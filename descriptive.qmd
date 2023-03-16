@@ -48,6 +48,12 @@ library(tidyverse)
 
 We will use the dataset named `arrhythmia` which is a `.xlsx` file. We can read the data with the following code:
 
+::: {.column-margin}
+**NOTE:** It is supposed that we work with RStudio Projects and the file "`arrhythmia.xlsx`" is stored in a subfolder with the name "*data*" inside the RStudio Project folder. 
+
+The function `here()` allows us to navigate throughout each of the subfolders and files within a given Project using *relative paths* such as "`data/arrhythmia.xlsx`".
+:::
+
 ```{r}
 #| eval: false
 #| message: false
@@ -56,8 +62,6 @@ We will use the dataset named `arrhythmia` which is a `.xlsx` file. We can read 
 library(readxl)
 arrhythmia <- read_excel(here("data", "arrhythmia.xlsx"))
 ```
-
-> NOTE: It is supposed that we work with RStudio Projects and the file "arrhythmia.xlsx" is stored in a folder with the name "data" inside the RStudio Project. The function `here()` allows us to use relative paths.
 
 ```{r}
 #| echo: false
@@ -119,16 +123,6 @@ glimpse(arrhythmia)
 ```
 
 Now, both variables, `sex` and `bmi_cat`, have become factors with levels.
-
-::: callout-tip
-## Working with RStudio Projects and relative paths
-
-It is recommended to work with **RStudio Projects**. This enables to organize our files and switch between different projects without getting the data, scripts, or output files all mixed up. Everything gets read in or saved to the right directory.
-
-Additionally, the **`here()` function** from the {here} package informs R that the file structure starts at the Project-level. This allows us to navigate throughout each of the folders and files within a given Project using **relative paths**.
-
-Finally, we suggest to **create a folder** with the name **"data"** inside the RStudio Project where we can save the datasets. So, in our case, we can build a relative path in order to read (or write) a file such as "`data/arrhythmia.xlsx`".
-:::
 
  
 
@@ -417,7 +411,7 @@ psych::describe(arrhythmia$QRS)
 Next, we are interested in calculating the summary statistics of the `age` variable for males and females, separately.
 
 ::: callout-tip
-## Summary statistics: age by sex
+## Summary statistics: age stratified by sex
 
 ::: panel-tabset
 ## dplyr
@@ -473,7 +467,7 @@ write_xlsx(summary_age_sex, here("data", "summary_age_sex.xlsx"))
  
 
 ::: callout-tip
-## Summary statistics: QRS by sex
+## Summary statistics: QRS stratified by sex
 
 ::: panel-tabset
 ## dplyr
@@ -590,18 +584,20 @@ arrhythmia %>%
 
 **B. Box Plot**
 
-Box plots can be used for displaying location and dispersion for continuous data, particularly when comparing distributions between many groups (@fig-boxplot1). This type of graph uses boxes and lines to depict the distributions. Box limits indicate the range of the central **50%** of the data, with a horizontal line in the box corresponding to the **median**. Whiskers extend from each box to capture the **range** of the remaining data, with **dots** located outside the whiskers indicating outliers.
+Box plots can be used for displaying location and dispersion for continuous data, particularly when comparing distributions between many groups (@fig-boxplot1). This type of graph uses boxes and lines to depict the distributions. Box limits indicate the range of the central **50%** of the data, with a horizontal line in the box corresponding to the **median**. Whiskers extend from each box to capture the **range** of the remaining data, with **dots** located outside the whiskers indicating outliers.^[An outlier is an observation that is distant from the rest of the data.]
+
+
 
 ```{r}
 #| warning: false
 #| label: fig-boxplot1
-#| fig-cap: Box plots of age and QRS variables by sex.
+#| fig-cap: Box plots of age and QRS variables stratified by sex.
 #| fig-subcap: 
-#|   - "Box plot of age by sex (female: 235; male = 190)."
-#|   - "Box plot of QRS by sex (female: 237; male = 191)."
+#|   - "Box plot of age stratified by sex (female: 235; male = 190)."
+#|   - "Box plot of QRS stratified by sex (female: 237; male = 191)."
 #| layout-ncol: 2
 
-# box plot of age by sex
+# box plot of age stratified by sex
 arrhythmia %>% 
   ggplot(aes(x = sex, y = age, fill = sex)) +
   geom_boxplot(alpha = 0.6, width = 0.5) +
@@ -610,7 +606,7 @@ arrhythmia %>%
   scale_fill_jco() +
   theme(legend.position = "none")
 
-# box plot of QRS by sex
+# box plot of QRS stratified by sex
 arrhythmia %>% 
   ggplot(aes(x = sex, y = QRS, fill = sex)) +
   geom_boxplot(alpha = 0.6, width = 0.5) +
@@ -620,9 +616,7 @@ arrhythmia %>%
   theme(legend.position = "none")
 ```
 
-When the median is in the middle of the box, and the whiskers are about the same on both sides of the box, then the distribution is symmetric.
 
-An outlier is an observation that is numerically distant from the rest of the data. When reviewing a box plot, an outlier is defined as a data point that is located outside the whiskers of the box plot.
 
  
 
@@ -633,13 +627,13 @@ There are many variations of the box plot. For example, there is a way to combin
 ```{r}
 #| warning: false
 #| label: fig-raincloud
-#| fig-cap: A raincloud plot of age and QRS variables by sex.
+#| fig-cap: A raincloud plot of age and QRS variables stratified by sex.
 #| fig-subcap: 
-#|   - "Raincloud of age by sex (female: 235; male = 190)."
-#|   - "Raincloud of QRS by sex (female: 237; male = 191)."
+#|   - "Raincloud of age stratified by sex (female: 235; male = 190)."
+#|   - "Raincloud of QRS stratified by sex (female: 237; male = 191)."
 #| layout-ncol: 2
 
-# raincloud plot of age by sex
+# raincloud plot of age stratified by sex
 arrhythmia %>% 
   ggplot(aes(x = sex, y = age, fill = sex)) +
   stat_slab(aes(thickness = stat(pdf*n)), 
@@ -652,7 +646,7 @@ arrhythmia %>%
   scale_fill_jco() +
   theme(legend.position = "none")
 
-# raincloud plot of QRS by sex
+# raincloud plot of QRS stratified by sex
 arrhythmia %>% 
   ggplot(aes(x = sex, y = QRS, fill = sex)) +
   stat_slab(aes(thickness = stat(pdf*n)), 

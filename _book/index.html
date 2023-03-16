@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Konstantinos I. Bougioukas, PhD">
-<meta name="dcterms.date" content="2023-03-15">
+<meta name="dcterms.date" content="2023-03-16">
 
 <title>Practical Statistics in Medicine with R</title>
 <style>
@@ -245,7 +245,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
   <ul class="collapse">
-  <li><a href="#license" id="toc-license" class="nav-link" data-scroll-target="#license">License</a></li>
+  <li><a href="#reproducibility-and-license" id="toc-reproducibility-and-license" class="nav-link" data-scroll-target="#reproducibility-and-license">Reproducibility and License</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -273,7 +273,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 15, 2023</p>
+      <p class="date">March 16, 2023</p>
     </div>
   </div>
   
@@ -290,8 +290,9 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <section id="preface" class="level1 unnumbered">
 <h1 class="unnumbered">Preface</h1>
-<p>This online textbook is based on my notes from a series of lectures given for a few years at the Aristotle University of Thessaloniki.</p>
-<p>The textbook can be used as support material for practical labs on basic statistics using R at any level from beginner to advanced. I have paid particular attention to the form of the book, which I think should aid understanding the most common statistical tests using Base R and pipe-friendly functions, coherent with the ‘tidyverse’ design philosophy. It can also be used as a support for self-teaching.</p>
+<p>This textbook is based on my notes from a series of lectures given for a few years at the Aristotle University of Thessaloniki.</p>
+<p>The textbook can be used as support material for practical labs on basic statistics using R at any level from beginner to advanced. It can also be used as a support for self-teaching.</p>
+<p>I have paid particular attention to the form of the book, which I think should aid understanding the most common statistical tests using Base R and pipe-friendly functions, coherent with the ‘tidyverse’ design philosophy. The {ggplot2} package and many ggplot2 extensions are the preferred tools of choice for constructing data visualizations in our textbook.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -302,7 +303,7 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This textbook assumes that the reader has a basic knowledge of R and introductory statistics. If you want to familiarize yourself with this programming language and statistics, we recommend the books below:</p>
+<p>This textbook assumes that the reader has a basic knowledge of R, tidyverse and introductory statistics. If you want to familiarize yourself with this programming language and statistics, we recommend the books below:</p>
 <ul>
 <li><a href="https://www.routledge.com/Using-R-for-Introductory-Statistics/Verzani/p/book/9781466590731">Using R for Introductory Statistics</a></li>
 <li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
@@ -310,14 +311,20 @@ Tip
 </ul>
 </div>
 </div>
+<p>Throughout this textbook we will use R via <strong>RStudio</strong>. It is also recommended to work with <strong>RStudio Projects</strong>. This enables to organize our files and switch between different projects without getting the data, scripts, or output files all mixed up. Everything gets read in or saved to the right directory.</p>
+<p>The proposed RStudio Project should contain at least the following subfolders:</p>
+<ul>
+<li><strong>data:</strong> data files of any kind, such as <code>.csv</code>, <code>.xlsx</code>, <code>.txt</code>, etc.</li>
+<li><strong>figures:</strong> plots, diagrams, and other figures</li>
+</ul>
+<section id="reproducibility-and-license" class="level2">
+<h2 class="anchored" data-anchor-id="reproducibility-and-license">Reproducibility and License</h2>
 <p>All sections of this textbook are reproducible as they were made using <a href="https://quarto.org/">Quarto</a><sup>®</sup> which is an open-source scientific and technical publishing system built on <a href="https://pandoc.org/">Pandoc</a>.</p>
 <p>To learn more about Quarto books visit <a href="https://quarto.org/docs/books" class="uri">https://quarto.org/docs/books</a>.</p>
-<section id="license" class="level2">
-<h2 class="anchored" data-anchor-id="license">License</h2>
 <p>This textbook is <strong>free to use</strong>, and is licensed under the <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivs 4.0</a> License.</p>
 <div id="qrcode" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qrcode", {"height":"100","colorDark":"#0011bb","text":"https://bougioukas-medstats-r.netlify.app","width":"100","colorLight":"#ffffff"});
+var qrcode = new QRCode("qrcode", {"text":"https://bougioukas-medstats-r.netlify.app","colorDark":"#0011bb","width":"100","colorLight":"#ffffff","height":"100"});
 </script>
     
 
@@ -774,7 +781,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":true,"openEffect":"zoom","descPosition":"bottom"});</script>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":true,"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom"});</script>
 
 
 

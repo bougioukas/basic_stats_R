@@ -123,7 +123,7 @@ The degree of **measurement accuracy** and the **type of data** are both importa
 
 **Nominal data** can be labeled creating distinct unordered categories. They are not measured but simply **counted**. They can be either binary such as dead/alive; cured/not cured or have **more than two categories**, for example, blood group A, B, AB, O; type I, type II or gestational diabetes; eye color (e.g., brown, blue, green, gray).
 
-::: callout-important
+::: {.callout-important}
 ## Numerical representation of categories are just codes
 
 We can denote dead/alive as 1/0 for health status and denote A/B/AB/O as 1/2/3/4 for blood type. Unlike numerical data, the numbers representing different categories **do not have mathematical meaning** (they are just codes).
@@ -135,7 +135,7 @@ We can denote dead/alive as 1/0 for health status and denote A/B/AB/O as 1/2/3/4
 
 When the categories can be ordered, the data are of ordinal type. For example, patients may classify their degree of pain as minimal, moderate, severe, or unbearable. In this case, there is a natural order of the values, since moderate pain is more intense than minimal and less than severe pain.
 
-::: callout-important
+::: {.callout-important}
 ## Collapsion of categories leads to a loss of information
 
 Ordinal data are often transformed into binary data to simplify analysis, presentation and interpretation, which may result in a **considerable loss of information**.
@@ -149,7 +149,7 @@ Ordinal data are often transformed into binary data to simplify analysis, presen
 
 Discrete data can take only a **finite number of values** (usually integers) in a range, for example, the number of children in a family or the number of days missed from work. Other examples are often **counts per unit of time** such as the number of deaths in a hospital per year, the number of visits to the general practitioner in a year, or the number of epileptic seizures a patient has per month. In dentistry, a common measure is the number of decayed, filled or missing teeth.
 
-::: callout-important
+::: {.callout-important}
 ## Discrete Vs Ordinal data
 
 In practice discrete data are often treated in statistical analyses as if they were ordinal data. Although this may be acceptable, we do not take the most out of our data.
@@ -161,8 +161,9 @@ In practice discrete data are often treated in statistical analyses as if they w
 
 Continuous data are numbers (usually with units) that can take any value within a given range. However, in practice, they are restricted by the accuracy of the measuring instrument. Height, weight, blood pressure, cholesterol level, body temperature, body mass index (BMI) are just few examples of variables that take continuous values.
 
-::: callout-important
+::: {.callout-important}
 ## Categorization of numerical data leads to a loss of information
 
 Continuous data are often categorized creating categorical variables. For example, the BMI, which is a continuous variable, is usually converted into an ordinal variable with four categories (underweight, normal, overweight and obese). However, dividing continuous variables into categories leads to a **loss of information**.
 :::
+
