@@ -10,6 +10,7 @@ book:
       orcid: "0000-0002-6533-1391"
   date: today
   cover-image: images/cover.png
+  favicon: images/cover.png
   repo-url: https://github.com/bougioukas/basic_stats_R
   chapters:
     - index.qmd
@@ -56,7 +57,7 @@ format:
     grid:
       sidebar-width: 270px
       body-width: 810px
-      margin-width: 230px
+      margin-width: 250px
     fontsize: 1.2em
     linestretch: 1.8
     toc-title: "On this page"
