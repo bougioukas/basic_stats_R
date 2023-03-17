@@ -46,12 +46,14 @@ library(tidyverse)
 
 ## Importing the data
 
-We will use the dataset named `arrhythmia` which is a `.xlsx` file. We can read the data with the following code:
+We will use the dataset named `arrhythmia` which is a `.xlsx` file. It is supposed that we work with RStudio Projects and the dataset is stored in the subfolder with the name "*data*" inside the RStudio Project folder. If this is the case, we can read the data using a *relative path* with the following code:
 
-::: {.column-margin}
-**NOTE:** It is supposed that we work with RStudio Projects and the file "`arrhythmia.xlsx`" is stored in a subfolder with the name "*data*" inside the RStudio Project folder. 
+::: column-margin
+**NOTE:** The path of a file/directory is its location/address in the file system. There are two kinds of paths: absolute path such as "`C:/My_name/../my_project/data/arrhythmia.xlsx`" and relative path such as "`data/arrhythmia.xlsx`".
 
-The function `here()` allows us to navigate throughout each of the subfolders and files within a given RStudio Project using *relative paths* such as "`data/arrhythmia.xlsx`".
+ 
+
+The function `here()` allows us to navigate throughout each of the subfolders and files within a given RStudio Project using *relative paths* .
 :::
 
 ```{r}
@@ -105,7 +107,9 @@ The data set *arrhythmia* has 428 patients (rows) and includes 8 variables (colu
 3.  height: height (cm)
 4.  weight: weight (kg)
 5.  QRS: mean duration of QRS (ms) ![](images/QRS_normal.png){width="88" height="68"}
-6.  heart_rate: heart rate (beats/min)
+6.  HR: heart rate (beats/min)
+7.  bmi
+8.  bmi_cat
 
 We might have noticed that the categorical variables `sex` and `bmi_cat` are recognized of character `<chr>` type. We can use the `factor()` function inside the `mutate()` to convert the variables to factors as follows:
 
@@ -584,9 +588,9 @@ arrhythmia %>%
 
 **B. Box Plot**
 
-Box plots can be used for displaying location and dispersion for continuous data, particularly when comparing distributions between many groups (@fig-boxplot1). This type of graph uses boxes and lines to depict the distributions. Box limits indicate the range of the central **50%** of the data, with a horizontal line in the box corresponding to the **median**. Whiskers extend from each box to capture the **range** of the remaining data, with **dots** located outside the whiskers indicating outliers.^[An outlier is an observation that is distant from the rest of the data.]
+Box plots can be used for displaying location and dispersion for continuous data, particularly when comparing distributions between many groups (@fig-boxplot1). This type of graph uses boxes and lines to depict the distributions. Box limits indicate the range of the central **50%** of the data, with a horizontal line in the box corresponding to the **median**. Whiskers extend from each box to capture the **range** of the remaining data, with **dots** located outside the whiskers indicating outliers.[^descriptive-1]
 
-
+[^descriptive-1]: An outlier is an observation that is distant from the rest of the data.
 
 ```{r}
 #| warning: false
@@ -615,8 +619,6 @@ arrhythmia %>%
   scale_fill_jco() +
   theme(legend.position = "none")
 ```
-
-
 
  
 

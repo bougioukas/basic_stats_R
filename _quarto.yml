@@ -31,7 +31,7 @@ book:
     - references.qmd
     
   page-footer: 
-    left: "Copyright 2022, Konstantinos I. Bougioukas" 
+    left: "Copyright 2023, Konstantinos I. Bougioukas" 
 
 bibliography: references.bib
 reference-location: margin
