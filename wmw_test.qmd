@@ -2,18 +2,6 @@
 
 The Wilcoxon-Mann-Whitney (WMW) test (sometimes called Mann-Whitney U test or Wilcoxon Rank Sum test) is used to compare two independent samples and is often considered the non-parametric alternative to the Student's t-test when there is violation of normality or for small sample sizes. However, if the samples are very small (both smaller than four observations) then statistical significance is impossible.
 
-```{r}
-#| include: false
-
-library(rstatix)
-library(exactRankTests)
-library(PupillometryR)
-library(gtsummary)
-
-library(here)
-library(tidyverse)
-```
-
 When we have finished this Chapter, we should be able to:
 
 ::: {.callout-caution icon="false"}
@@ -42,12 +30,13 @@ We consider the data in *thromboglobulin* dataset that contains the urinary $\be
 We need to load the following packages:
 
 ```{r}
-#| eval: false
+#| message: false
+#| warning: false
 
 library(rstatix)
+library(exactRankTests)
 library(PupillometryR)
 library(gtsummary)
-
 library(here)
 library(tidyverse)
 ```

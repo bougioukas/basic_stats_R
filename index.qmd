@@ -2,7 +2,7 @@
 
 ### Whom is this textbook for?
 
-This textbook is based on my notes from a series of lectures given for a few years at the Aristotle University of Thessaloniki. The textbook can be used as support material for practical labs on basic statistics using R at any level from beginner to advanced. It can also be used as a support for self-teaching.
+This textbook is based on my notes from a series of lectures given for a few years at the Aristotle University of Thessaloniki, Greece. The textbook can be used as support material for practical labs on basic statistics using R at any level from beginner to advanced. It can also be used as a support for self-teaching.
 
 I have paid particular attention to the form of the book, which I think should aid understanding the most common statistical tests using Base R and pipe-friendly functions, coherent with the 'tidyverse' design philosophy. The {ggplot2} package and many ggplot2 extensions are the preferred tools of choice for constructing data visualizations in the textbook.
 
@@ -14,9 +14,11 @@ This textbook assumes that the reader has a basic knowledge of R, tidyverse and 
 -   [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/)
 :::
 
-### RStudio Projects
+ 
 
-Throughout this textbook we will use R via **RStudio**. It is also recommended to work with **RStudio Projects**. This enables to organize our files and switch between different projects without getting the data, scripts, or output files all mixed up. Everything gets read in or saved to the right folder/directory.
+### R via RStudio and RStudio Projects
+
+Throughout this textbook we will use **R** via **RStudio**. Both programs can be downloaded from ![](images/posit.png){width="24" height="22"} [posit](https://posit.co/download/rstudio-desktop/). It is also recommended to work with [RStudio Projects](https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects). This enables to organize our files and switch between different projects without getting the data, scripts, or output files all mixed up. Everything gets read in or saved to the right folder/directory.
 
 For our purpose, it is sufficient to consider a simple RStudio Project folder that contains the following subfolders (@fig-project).:
 
@@ -28,17 +30,19 @@ For our purpose, it is sufficient to consider a simple RStudio Project folder th
 #| fig-align: center
 #| out-width: "40%"
 #| echo: false
-#| fig-cap: Visualizing the folder structure of a standard RStudio project.
-#| 
+#| fig-cap: Visualizing the folder structure of a minimal RStudio project.
+#| fig-subcap: The folder structure of a minimal RStudio project.
+
 knitr::include_graphics(here::here("images", "project.png"))
 ```
 
 ### Reproducibility and License
 
-All sections of this textbook are reproducible as they were made using [Quarto](https://quarto.org/)^®^ which is an open-source scientific and technical publishing system built on [Pandoc](https://pandoc.org/).
+All sections of this textbook are reproducible as they were made using
+![](images/quarto.png){width="24" height="22"} [Quarto](https://quarto.org/)^®^ which is an open-source scientific and technical publishing system built on [Pandoc](https://pandoc.org/).
 
 To learn more about Quarto books visit <https://quarto.org/docs/books>.
 
-This textbook is **free to use**, and is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivs 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) License.
+The **online version** of the textbook is **free to use**, and is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivs 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) License. ![](images/license.png){width="120" height="40"}
 
 {{< qrcode https://bougioukas-medstats-r.netlify.app width=100 height=100 colorDark='#0011bb' >}}

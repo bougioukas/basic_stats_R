@@ -2,8 +2,24 @@
 
 **Descriptive statistics** are used to describe and organize the **basic characteristics** of the data in a study. The classical descriptive statistics allow us to have a quick glance of the central tendency and the extent of dispersion of values. They are useful in understanding a **data distribution** and in comparing data distributions.
 
+When we have finished this Chapter, we should be able to:
+
+::: {.callout-caution icon="false"}
+## Learning objectives
+
+-   Summarize categorical data
+-   Visualize frequency distributions for categorical variables
+-   Summarize numerical data
+-   Visualize distributions for numeric variables
+:::
+
+## Packages we need
+
+We need to load the following packages:
+
 ```{r}
-#| include: false
+#| message: false
+#| warning: false
 
 library(rstatix)
 library(EnvStats)
@@ -13,33 +29,6 @@ library(MESS)
 library(ggsci)
 library(ggdist)
 library(patchwork)
-
-library(here)
-library(tidyverse)
-```
-
-::: {.callout-caution icon="false"}
-## Learning objectives
-
--   Understand ...
--   Understand ...
-:::
-
-## Packages we need
-
-We need to load the following packages:
-
-```{r}
-#| eval: false
-
-library(rstatix)
-library(EnvStats)
-library(scales)
-library(questionr)
-library(MESS)
-library(ggsci)
-library(patchwork)
-
 library(here)
 library(tidyverse)
 ```
@@ -57,16 +46,6 @@ The function `here()` allows us to navigate throughout each of the subfolders an
 :::
 
 ```{r}
-#| eval: false
-#| message: false
-#| warning: false
-
-library(readxl)
-arrhythmia <- read_excel(here("data", "arrhythmia.xlsx"))
-```
-
-```{r}
-#| echo: false
 #| message: false
 #| warning: false
 
@@ -588,7 +567,7 @@ arrhythmia %>%
 
 **B. Box Plot**
 
-Box plots can be used for displaying location and dispersion for continuous data, particularly when comparing distributions between many groups (@fig-boxplot1). This type of graph uses boxes and lines to depict the distributions. Box limits indicate the range of the central **50%** of the data, with a horizontal line in the box corresponding to the **median**. Whiskers extend from each box to capture the **range** of the remaining data, with **dots** located outside the whiskers indicating outliers.[^descriptive-1]
+Box plots can be used for displaying location and dispersion for continuous data, particularly when comparing distributions between many groups (@fig-boxplot1). This type of graph uses boxes and lines to depict the distributions. Box limits indicate the range of the central **50%** of the data, with a horizontal line in the box corresponding to the **median**. Whiskers extend from each box to capture the **range** of the remaining data. **Data points** that are outside the whiskers are represented as **dots** on the graph and considered potential outliers.[^descriptive-1]
 
 [^descriptive-1]: An outlier is an observation that is distant from the rest of the data.
 
@@ -597,8 +576,8 @@ Box plots can be used for displaying location and dispersion for continuous data
 #| label: fig-boxplot1
 #| fig-cap: Box plots of age and QRS variables stratified by sex.
 #| fig-subcap: 
-#|   - "Box plot of age stratified by sex (female: 235; male = 190)."
-#|   - "Box plot of QRS stratified by sex (female: 237; male = 191)."
+#|   - "(a) Box plot of age stratified by sex (female: 235; male = 190)."
+#|   - "(b) Box plot of QRS stratified by sex (female: 237; male = 191)."
 #| layout-ncol: 2
 
 # box plot of age stratified by sex
@@ -620,6 +599,8 @@ arrhythmia %>%
   theme(legend.position = "none")
 ```
 
+In @fig-boxplot1 a, box plots of age are approximately symmetric about the median for females and males. On the contrary, in @fig-boxplot1 b, both distributions of QRS data are positively skewed; the box plots show the medians closer to the lower quartiles (q25) and we observe many outliers at the upper range of the data for females and males.
+
  
 
 **C. Raincloud Plot**
@@ -631,8 +612,8 @@ There are many variations of the box plot. For example, there is a way to combin
 #| label: fig-raincloud
 #| fig-cap: A raincloud plot of age and QRS variables stratified by sex.
 #| fig-subcap: 
-#|   - "Raincloud of age stratified by sex (female: 235; male = 190)."
-#|   - "Raincloud of QRS stratified by sex (female: 237; male = 191)."
+#|   - "(a) Raincloud of age stratified by sex (female: 235; male = 190)."
+#|   - "(b) Raincloud of QRS stratified by sex (female: 237; male = 191)."
 #| layout-ncol: 2
 
 # raincloud plot of age stratified by sex

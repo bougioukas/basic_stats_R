@@ -2,19 +2,13 @@
 
 There are several important probability distributions in statistics. However, the normal distribution might be the most important. This distribution is also referred to as "*Gaussian*" or "*Gauss*" distribution.
 
-```{r}
-#| include: false
-library(stevemisc)
-
-library(here)
-library(tidyverse)
-```
+When we have finished this chapter, we should be able to:
 
 ::: {.callout-caution icon="false"}
 ## Learning objectives
 
--   Understand ...
--   Understand ...
+-   Understand the properties of normal distribution
+-   Understand measures of shape and assess normality
 :::
 
 ## Packages we need
@@ -22,9 +16,11 @@ library(tidyverse)
 We need to load the following packages:
 
 ```{r}
-#| eval: false
-library(stevemisc)
+#| message: false
+#| warning: false
 
+library(stevemisc)
+library(ggpubr)
 library(here)
 library(tidyverse)
 ```
@@ -33,16 +29,13 @@ library(tidyverse)
 
 A normal distribution is a symmetric "bell-shaped" probability distribution where most of the observed data are clustered around a central location. Data farther from the central location occur less frequently (@fig-normal).
 
-
-::: {.column-margin}
+::: column-margin
 Normal distribution, technically a probability density function, is a distribution defined by two parameters, mean $\mu$ and variance $\sigma^2$. The mean, $\mu$, is a "location parameter", which defines the central tendency. The variance, $\sigma^2$, is the "scale parameter", which defines the width and height of the distribution. It's formally given as:
 
 $$ f(x)={\frac {1}{\sigma {\sqrt {2\pi }}}}e^{-{\frac {1}{2}}\left({\frac {x-\mu }{\sigma }}\right)^{2}} $$
 
 where $\pi \approx 3.142$ and $e \approx 2.718$.
 :::
-
-
 
 ```{r}
 #| warning: false
@@ -63,7 +56,7 @@ ggplot(df, aes(x)) +
                                          mu, 1*sigma, 2*sigma, 3*sigma)) +     # <2>
   labs(x = "Variable",
        y = "Probability density") +
-  theme(text = element_text(size = 20))                                    
+  theme(text = element_text(size = 16))                                    
 
 ```
 
@@ -104,17 +97,19 @@ The Normal distribution has the properties summarized as follows:
 
 -   **The empirical rule** (also called the "68-95-99 rule"). Much of the area (68%) of the distribution is between -1 $\sigma$ below the mean and +1 $\sigma$ above the mean, the large majority (95%) between -1.96 $\sigma$ below the mean and +1.96 $\sigma$ above the mean (often used as a reference range), and almost all (99%) between -2.58 $\sigma$ below the mean and +2.58 $\sigma$ above the mean. The total area under the curve equals to 1 (or 100%), almost -3 $\sigma$ below the mean and +3 $\sigma$ above the mean.
 
- 
+## Shape statistics and normality
 
-### Shape statistics and normality
-
-There are two shape statistics that can indicate deviation from normality: **skewness** and **kurtosis**.
+There are two shape statistics that can indicate deviation from normality: **skewness** and **excess kurtosis**.
 
 **A. Skewness**
 
 Skewness is usually described as a measure of a distribution's symmetry -- or lack of symmetry. Skewness values that are **negative** indicate a tail to the **left** (@fig-skew2 a), **zero** value indicate a **symmetric** distribution (@fig-skew2 b), while values that are **positive** indicate a tail to the **right** (@fig-skew2 c).
 
-Skewness values between −1 and +1 indicate an approximate bell-shaped curve. Values from −1 to −3 or from +1 to +3 indicate that the distribution is tending away from a bell shape with \>1 indicating moderate skewness and \>2 indicating severe skewness. Any values **above +3** or **below−3** are a good indication that the variable is **not normally** distributed.
+::: callout-tip
+## Normal distribution and skewness
+
+The skewness for a normal distribution is zero. In practice, approximate bell-shaped curves have skewness values between −1 and +1. Values from −1 to −3 or from +1 to +3 indicate that the distribution is tending away from symmetry with \>1 indicating moderate skewness and \>2 indicating severe skewness. Any values **below−3** or **above +3** are a good indication that the distribution is **not symmetric**, therefore, the variable can not be normally distributed.
+:::
 
 ```{r}
 #| code-fold: true
@@ -122,9 +117,9 @@ Skewness values between −1 and +1 indicate an approximate bell-shaped curve. V
 #| label: fig-skew2
 #| fig-cap: Types of distribution according to the summetry.
 #| fig-subcap: 
-#|   - "Left skewed distribution (negatively skewed). The mean and the meadian are too left to the mode."
-#|   - "Symmetric distribution (zero skewness). The mean, median and mode are the same."
-#|   - "Right skewed distribution (positively skewed). The mean and median are to the right of the mode."
+#|   - "(a) Left skewed distribution (negatively skewed). The mean and the meadian are too left to the mode."
+#|   - "(b) Symmetric distribution (zero skewness). The mean, median and mode are the same."
+#|   - "(c) Right skewed distribution (positively skewed). The mean and median are to the right of the mode."
 #| layout-ncol: 3
 
 # create a data frame
@@ -189,13 +184,19 @@ ggplot(df1, aes(x, y3)) +
        y = "Probability density")
 ```
 
-**B. Kurtosis**
+**B. Excess kurtosis**
 
-The other way that distributions can deviate from normality is **kurtosis**. The **excess kurtosis** parameter is a measure of the combined weight of the tails relative to the rest of the distribution. Kurtosis is associated indirect with the peak of the distribution (if the peak of the distribution is too high or too low compared to a "normal" distribution).
+The other way that distributions can deviate from normality is **kurtosis**. The **excess kurtosis**[^normal-1] parameter is a measure of the combined weight of the tails relative to the rest of the distribution. Kurtosis is associated indirect with the peak of the distribution (if the peak of the distribution is too high/sharp or too low compared to a "normal" distribution).
 
-Distributions with **negative** excess kurtosis are called ***platykurtic*** (@fig-kurtosis a). If the measure of excess kurtosis is **0** the distribution is **mesokurtic** (@fig-kurtosis b). Finally, distributions with **positive** excess kurtosis are called ***leptokurtic*** (@fig-kurtosis c).
+[^normal-1]: Excess kurtosis is commonly used because for a normal distribution is equal to zero, while the kurtosis is equal to 3.
 
-A kurtosis value between −1 and +1 indicates normality and a value between −1 and −3 or between +1 and +3 indicates a tendency away from normality. Values **below −3** or **above +3** strongly indicate **non-normality**.
+Distributions with **negative** excess kurtosis are called ***platykurtic*** (@fig-kurtosis a). If the measure of excess kurtosis is **zero** the distribution is **mesokurtic** (@fig-kurtosis b). Finally, distributions with **positive** excess kurtosis are called ***leptokurtic*** (@fig-kurtosis c).
+
+::: callout-tip
+## Normal distribution and excess kurtosis
+
+The excess kurtosis for a normal distribution is zero. In practice, approximate normal distributions have excess kurtosis values between −1 and +1. Values from −1 to −3 or from +1 to +3 indicate that the distribution is tending away from a mesokurtic distribution. Any values **below −3** or **above +3** are a good indication that the distribution is **not mesokurtic**, therefore, the variable can not be normally distributed.
+:::
 
 ```{r}
 #| code-fold: true
@@ -203,9 +204,9 @@ A kurtosis value between −1 and +1 indicates normality and a value between −
 #| label: fig-kurtosis
 #| fig-cap: Types of distribution according to the summetry.
 #| fig-subcap: 
-#|   - "Platykurtic distribution (negative excess kurtosis)."
-#|   - "Mesokurtic distribution (zero excess kurtosis)."
-#|   - "Leptokurtic distribution (positive excess kurtosis). "
+#|   - "(a) Platykurtic distribution (negative excess kurtosis)."
+#|   - "(b) Mesokurtic distribution (zero excess kurtosis)."
+#|   - "(c) Leptokurtic distribution (positive excess kurtosis). "
 #| layout-ncol: 3
 
 # create a data frame
@@ -229,7 +230,8 @@ ggplot(df2, aes(x, y1)) +
 # mesokurtic distribution
 ggplot(df2, aes(x, y1)) +
   geom_line(color="deeppink", linewidth = 0.8) +
-  annotate('text', x = 1.9, y = 0.31, label = 'mesokurtic', size = 5, color = "deeppink") +
+  annotate('text', x = 3.9, y = 0.28, label = 'mesokurtic distribution', size = 5, color = "deeppink") +
+  annotate('text', x = 3.9, y = 0.31, label = 'normal is a', size = 5, color = "black") +
   theme_minimal(base_size = 16) +
   labs(title = "Mesokurtic distribution",
        x = "Variable",
@@ -246,3 +248,86 @@ ggplot(df2, aes(x, y1)) +
        x = "Variable",
        y = "Probability density")
 ```
+
+## Normal Q-Q plots
+
+The **normal Q--Q plot**, or normal quantile-quantile plot, provides an easy way to visually check whether or not a data set is normally distributed. The values in the plot are the **quantiles**[^normal-2] of the variable distribution (sample quantiles) plotted against the quantiles of a standard normal distribution (theoretical quantiles). If the points fall along a roughly **straight** line at a 45-degree angle (although the ends of the Q-Q plot often start to deviate from the straight line), then the data is normally distributed. If the variable is normally distributed, the, points fall close to a **straight** line . Any **deviations** from the straight line indicate some degree of non-normality.
+
+[^normal-2]: Quantiles are values that split sorted data or a probability distribution into equal parts. The most commonly used quantiles have special names. <br>**Quartiles** (4-quantiles): Three quartiles split the data into four parts. **Percentiles** (100-quantiles): 99 percentiles split the data into 100 parts.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(readxl)
+arrhythmia <- read_excel(here("data", "arrhythmia.xlsx"))
+```
+
+::: {#exercise-joins .callout-tip}
+## Normal q-q plots
+
+::: panel-tabset
+## Base R
+
+```{r}
+#| warning: false
+#| label: fig-qq_age2
+#| fig-height: 6.0
+#| fig-width: 8.0
+#| fig-align: "center"
+#| fig-cap: Q-Q plot of Birthweight.
+
+qqnorm(arrhythmia$age, pch = 1, frame = FALSE)
+qqline(arrhythmia$age, col = "steelblue", lwd = 2)
+```
+
+## ggpubr
+
+```{r}
+#| warning: false
+#| label: fig-qq_age
+#| fig-height: 6.0
+#| fig-width: 8.0
+#| fig-align: "center"
+#| fig-cap: Q-Q plot of Birthweight.
+
+arrhythmia %>%
+  ggqqplot("age", conf.int = F)
+```
+:::
+:::
+
+::: callout-tip
+## Normal q-q plots
+
+::: panel-tabset
+## Base R
+
+```{r}
+#| warning: false
+#| label: fig-qq_QRS2
+#| fig-height: 6.0
+#| fig-width: 8.0
+#| fig-align: "center"
+#| fig-cap: Q-Q plot of Birthweight.
+
+qqnorm(arrhythmia$QRS, pch = 1, frame = FALSE)
+qqline(arrhythmia$QRS, col = "steelblue", lwd = 2)
+```
+
+## ggpubr
+
+```{r}
+#| warning: false
+#| label: fig-qq_QRS
+#| fig-height: 6.0
+#| fig-width: 8.0
+#| fig-align: "center"
+#| fig-cap: Q-Q plot of Birthweight.
+
+arrhythmia %>%
+  ggqqplot("QRS", conf.int = F)
+```
+:::
+:::

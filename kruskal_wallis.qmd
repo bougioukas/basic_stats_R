@@ -42,12 +42,12 @@ We consider the data in *dataVO2* dataset. We wish to compare the VO2max in thre
 We need to load the following packages:
 
 ```{r}
-#| eval: false
+#| message: false
+#| warning: false
 
 library(rstatix)
 library(PupillometryR)
 library(gtsummary)
-
 library(here)
 library(tidyverse)
 ```

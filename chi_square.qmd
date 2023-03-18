@@ -43,11 +43,11 @@ Suppose we are interested in the association between tumor ulceration and death 
 We need to load the following packages:
 
 ```{r}
-#| eval: false
+#| message: false
+#| warning: false
 
 library(rstatix)
 library(ggsci)
-
 library(patchwork)
 library(here)
 library(tidyverse)

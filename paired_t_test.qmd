@@ -9,16 +9,6 @@ Examples of paired study designs are:
 3.  **matched** cases and controls
 4.  a **cross-over trial** in which each patient has two measurements on the variable, one while taking active treatment and one while taking placebo
 
-```{r}
-#| include: false
-
-library(rstatix)
-library(gtsummary)
-
-library(here)
-library(tidyverse)
-```
-
 When we have finished this Chapter, we should be able to:
 
 ::: {.callout-caution icon="false"}
@@ -45,11 +35,11 @@ The dataset *weight* contains the birth and discharge weight of 25 newborns. We 
 We need to load the following packages:
 
 ```{r}
-#| eval: false
+#| message: false
+#| warning: false
 
 library(rstatix)
 library(gtsummary)
-
 library(here)
 library(tidyverse)
 ```

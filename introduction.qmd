@@ -1,12 +1,5 @@
 # Introduction {#sec-introduction}
 
-```{r}
-#| include: false
-
-library(fontawesome)
-
-```
-
 When we have finished this chapter, we should be able to:
 
 ::: {.callout-caution icon="false"}
@@ -56,11 +49,12 @@ flowchart LR
 Biomedical data can be transformed into **information**. This information can become **knowledge** if the researchers and clinicians understand it (@fig-info).
 
 ```{r}
+#| echo: false
 #| label: fig-info
 #| fig-align: center
 #| out-width: "80%"
-#| echo: false
 #| fig-cap: From data to knowledge.
+#| fig-subcap: "From data to knowledge."
 
 knitr::include_graphics(here::here("images", "info.png"))
 ```
@@ -95,16 +89,25 @@ A **dependent** (outcome) variable is the variable being tested in a scientific 
 
 ## Types of Data
 
-Data in variables can be either **categorical** or **numerical** (otherwise known as qualitative and quantitative) in nature (@fig-types_data).
+Data in variables can be either **categorical** or **numerical** (otherwise known as qualitative and quantitative) in nature (@fig-data_types).
 
-```{r}
-#| label: fig-types_data
-#| fig-align: center
-#| out-width: "90%"
-#| echo: false
-#| fig-cap: Broad classification of the different types of data with examples.
+```{mermaid}
+%%| label: fig-data_types
+%%| fig-width: 9
+%%| fig-cap: Broad classification of the different types of data with examples.
 
-knitr::include_graphics(here::here("images", "types_data.png"))
+flowchart TB
+    A[Data in variables]---> B[Categorical data]
+    A[Data in variables]---> C[Numerical data]
+    B ---> E[Nominal<br>e.g. blood type A, B, AB, O]
+    B ---> F[Ordinal<br>e.g. degree of pain<br>minimal/moderate/<br>severe/unbearable]
+    C ---> G[Discrete<br>e.g. number of children]
+    C ---> H[Numerical<br>e.g. height, blood pressure]
+    
+   style E color:#980000, stroke:#333,stroke-width:4px
+   style F color:#980000, stroke:#333,stroke-width:4px
+   style G color:#980000, stroke:#333,stroke-width:4px
+   style H color:#980000, stroke:#333,stroke-width:4px
 ```
 
  

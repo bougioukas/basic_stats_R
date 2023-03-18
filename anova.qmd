@@ -6,17 +6,6 @@ Although, this test can detect a difference between several groups it does not i
 
 This is the reason why, after an ANOVA test concluding on a significant difference between group means, we should not just compare all possible pairs of groups with t-tests. Instead we perform statistical tests that take into account the number of planned comparisons (**post hoc tests**) and make the necessary adjustments to ensure that Type I error is not inflated.
 
-```{r}
-#| include: false
-
-library(rstatix)
-library(PupillometryR)
-library(gtsummary)
-
-library(here)
-library(tidyverse)
-```
-
 When we have finished this Chapter, we should be able to:
 
 ::: {.callout-caution icon="false"}
@@ -44,12 +33,12 @@ We consider the data in *dataDWL* dataset. In this example we explore the variat
 We need to load the following packages:
 
 ```{r}
-#| eval: false
+#| message: false
+#| warning: false
 
 library(rstatix)
 library(PupillometryR)
 library(gtsummary)
-
 library(here)
 library(tidyverse)
 ```

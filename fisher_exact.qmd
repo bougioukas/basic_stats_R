@@ -4,17 +4,6 @@ If we want to see whether there's an association between two categorical variabl
 
 Fisher came up with a method for computing the exact probability of the chi-square statistic that is accurate when sample sizes are small. This method is called **Fisher's exact test** even though it's not so much a test as a way of computing the exact probability of the chi-square statistic. This procedure is normally used on `2×2` contingency tables and with small samples. However, it can be used on larger contingency tables and with large samples, but in this case it becomes computationally intensive.
 
-```{r}
-#| include: false
-
-library(rstatix)
-library(ggsci)
-
-library(patchwork)
-library(here)
-library(tidyverse)
-```
-
 When we have finished this Chapter, we should be able to:
 
 ::: {.callout-caution icon="false"}
@@ -43,11 +32,11 @@ We consider the data in *hemophilia* dataset. In a survey there are two treatmen
 We need to load the following packages:
 
 ```{r}
-#| eval: false
+#| message: false
+#| warning: false
 
 library(rstatix)
-
-
+library(ggsci)
 library(patchwork)
 library(here)
 library(tidyverse)
