@@ -23,6 +23,7 @@ We need to load the following packages:
 
 library(rstatix)
 library(EnvStats)
+library(modeest)
 library(scales)
 library(questionr)
 library(MESS)
@@ -99,7 +100,7 @@ arrhythmia <- arrhythmia %>%
                                               "overweight", "obese")))          # <1>
 ```
 
-1. `bmi_cat` is an ordered variable so the order of the levels have to be specified explicitly in the `factor()` function.
+1.  `bmi_cat` is an ordered variable so the order of the levels has to be specified explicitly in the `factor()` function.
 
 Let's look at the data again with the `glipmse()` function:
 
@@ -312,19 +313,18 @@ Summary measures are **single numerical values** that summarize a large number o
 **A. Sample Mean or Average**
 
 ::: column-margin
-
 **Advantages of mean**
 
--  It uses all the data values in the calculation
--  It is algebraically defined and thus mathematically manageable
+-   It uses all the data values in the calculation.
+-   It is algebraically defined and thus mathematically manageable.
 
 **Disadvantages of mean**
 
--  It is highly affected by the presence of a few abnormally high or abnormally low values (outliers), so it is not an appropriate average for highly skewed (asymmetrical) distributions
--  It can not be determined easily by inspection of the data
+-   It is highly affected by the presence of a few abnormally high or abnormally low values (outliers), so it is not an appropriate average for highly skewed (asymmetrical) distributions.
+-   It can not be determined easily by inspection of the data.
 :::
 
-Let $x_1, x_2,...,x_{n-1}, x_n$ be a set of *n* measurements. The arithmetic sample mean or average, $\bar{x}$, is simply the sum of the observations divided by their number *n*, thus:
+Let $x_1, x_2,...,x_{n-1}, x_n$ be a set of *n* measurements. The arithmetic sample mean or average, $\bar{x}$, is the sum of the observations divided by their number *n*, thus:
 
 $$
 \bar{x}= \frac{x_1 + x_2 + ... + x_{n-1} + x_n}{n} = \frac{1}{n}\sum_{i=1}^{n}x_{i}
@@ -342,8 +342,7 @@ Let's calculate the sample mean of `age` variable in our dataset:
 mean(arrhythmia$age, na.rm = TRUE)                                              # <1>
 ```
 
-1. If some of the values in a vector are missing (`NA`), then the mean of the vector can not be defined. The argument `na.rm = TRUE`  removes the missing values and the mean is calculated using the remaining values.
-
+1.  If some of the values in a vector are missing (`NA`), then the mean of the vector can not be defined. The argument `na.rm = TRUE` removes the missing values and the mean is calculated using the remaining values.
 
 ## dplyr
 
@@ -354,30 +353,25 @@ arrhythmia %>%
 :::
 :::
 
-
-
 **B. Median** of the sample
 
 The **sample median**, *md*, is an alternative measure of location, which is less sensitive to outliers. The median is calculated by first sorting the observed values (i.e. arranging them in an ascending/descending order) and selecting the middle one. If the sample size *n* is **odd**, the median is the number at the middle of the ordered observations. If the sample size is **even**, the median is the average of the two middle numbers.
+
+::: column-margin
+**Advantage of sample median**
+
+-   It is not affected by outliers.
+
+**Disadvantage of sample median**
+
+-   It does not take into account the precise value of each observation and hence does not use all the information available in the data.
+:::
 
 Therefore, the sample median, *md*, of *n* observations is:
 
 -   the $\frac{n+1}{2}$th ordered value, $md=x_{\frac{n+1}{2}}$, if *n* is odd.
 
 -   the average of the $\frac{n}{2}$th and $\frac{n+1}{2}$th ordered values, $md=\frac{1}{2}(x_{\frac{n}{2}}+x_{\frac{n+1}{2}})$, if *n* is even.
-
-
-::: column-margin
-
-**Advantage of sample median**
-
-It is not affected by outliers.
-
-**Disadvantage of sample median**
-
-It does not take into account the precise value of each observation and hence does not use all the information available in the data.
-:::
-
 
 ::: callout-tip
 ## Sample median of age
@@ -397,6 +391,104 @@ arrhythmia %>%
 ```
 :::
 :::
+
+**C. Mode** of the sample
+
+A third measure of location is the **mode**. This is the value that occurs **most frequently** in a set of data values. Note that some dataset do not have a mode because each value occurs only once.
+
+::: column-margin
+**NOTE:** When a distribution has to modes (peaks) is called *Bimodal* distribution. This can be caused by mixing two populations together. For example, height might appear to have a bimodal distribution if men and women are included in the study.
+:::
+
+Base R does not provide a function for calculating the mode of a numeric variable. However, we can download the package called {modeest} and use the `mlv()` function specifying the method as `"mfv"`. This method returns the most frequent value(s):
+
+```{r}
+mlv(arrhythmia$age, method = "mfv", na.rm = TRUE)
+```
+
+### Measures of Dispersion
+
+**A. Sample Variance**
+
+Sample variance, $s^2$, is a measure of spread of the data. It is calculated by taking the sum of the squared deviations from the sample mean and dividing by $n-1$:
+
+$$variance = s^2 = \frac{\sum\limits_{i=1}^n (x -\bar{x})^2}{n-1}$$
+
+::: callout-tip
+## Sample variance of age
+
+::: panel-tabset
+## Base R
+
+```{r}
+var(arrhythmia$age, na.rm = TRUE)
+```
+
+## dplyr
+
+```{r}
+arrhythmia %>% 
+  dplyr::summarise(variance = var(age, na.rm = TRUE))
+```
+:::
+:::
+
+The variance is expressed in square units, so it is not suitable measure for describing variability of data.
+
+**B. Standard deviation of the sample**
+
+Standard deviation of a data set is the square root of the calculated sample variance:
+
+$$sd= \sqrt{s^2} = \sqrt\frac{\sum_{i=1}^{n}(x_{i}-\bar{x})^2}{n-1}$$
+
+::: callout-tip
+## Standard deviation of age
+
+::: panel-tabset
+## Base R
+
+```{r}
+sd(arrhythmia$age, na.rm = TRUE)
+```
+
+## dplyr
+
+```{r}
+arrhythmia %>% 
+  dplyr::summarise(standard_deviation = sd(age, na.rm = TRUE))
+```
+:::
+:::
+
+Standard deviation is expressed in the same units as the original values.
+
+
+
+**C. Range** of the sample
+
+The Range is the difference between the minimum (lowest) and maximum (highest) values.One of the greatest disadvantages of using range as a method of dispersion is that range is sensitive to outliers in the data. 
+
+
+```{r}
+range(arrhythmia$age, na.rm = TRUE)
+```
+
+
+```{r}
+diff(range(arrhythmia$age, na.rm = TRUE))
+```
+
+**D. Inter-quartile range** of the sample
+
+```{r}
+IQR(arrhythmia$age, na.rm = TRUE)
+```
+
+```{r}
+quantile(arrhythmia$age, prob=c(0.25, 0.75), na.rm = T, type=1)
+```
+
+
 
 
 
