@@ -85,19 +85,21 @@ The data set *arrhythmia* has 428 patients (rows) and includes 8 variables (colu
 2.  sex: sex (male, female)
 3.  height: height (cm)
 4.  weight: weight (kg)
-5.  QRS: mean duration of QRS (ms) ![](images/QRS_normal.png){width="88" height="68"}
+5.  QRS: mean duration of QRS (ms) ![](images/QRS_normal.png){width="86" height="50"}
 6.  HR: heart rate (beats/min)
 7.  bmi
-8.  bmi_cat
+8.  bmi_cat (4 levels: underweight, normal, overweight, obese)
 
 We might have noticed that the categorical variables `sex` and `bmi_cat` are recognized of character `<chr>` type. We can use the `factor()` function inside the `mutate()` to convert the variables to factors as follows:
 
 ```{r}
 arrhythmia <- arrhythmia %>% 
   mutate(sex = factor(sex),
-         bmi_cat = factor(bmi_cat, levels = c("underweight", "normal", 
-                                              "overweight", "obese")))
+         bmi_cat = factor(bmi_cat, levels = c("underweight", "normal",          # <1>
+                                              "overweight", "obese")))          # <1>
 ```
+
+1. `bmi_cat` is an ordered variable so the order of the levels have to be specified explicitly in the `factor()` function.
 
 Let's look at the data again with the `glipmse()` function:
 
@@ -303,11 +305,104 @@ Summary measures are **single numerical values** that summarize a large number o
 
  
 
-**A. Summary statistics**
+## Summary statistics
+
+### Measures of central location
+
+**A. Sample Mean or Average**
+
+::: column-margin
+
+**Advantages of mean**
+
+-  It uses all the data values in the calculation
+-  It is algebraically defined and thus mathematically manageable
+
+**Disadvantages of mean**
+
+-  It is highly affected by the presence of a few abnormally high or abnormally low values (outliers), so it is not an appropriate average for highly skewed (asymmetrical) distributions
+-  It can not be determined easily by inspection of the data
+:::
+
+Let $x_1, x_2,...,x_{n-1}, x_n$ be a set of *n* measurements. The arithmetic sample mean or average, $\bar{x}$, is simply the sum of the observations divided by their number *n*, thus:
+
+$$
+\bar{x}= \frac{x_1 + x_2 + ... + x_{n-1} + x_n}{n} = \frac{1}{n}\sum_{i=1}^{n}x_{i}
+$$ where $x_{i}$ represents the individual sample values and ${\sum_{i=1}^{n}x_{i}}$ their sum.
+
+Let's calculate the sample mean of `age` variable in our dataset:
+
+::: {#exercise-joins .callout-tip}
+## Sample mean of age
+
+::: panel-tabset
+## Base R
+
+```{r}
+mean(arrhythmia$age, na.rm = TRUE)                                              # <1>
+```
+
+1. If some of the values in a vector are missing (`NA`), then the mean of the vector can not be defined. The argument `na.rm = TRUE`  removes the missing values and the mean is calculated using the remaining values.
+
+
+## dplyr
+
+```{r}
+arrhythmia %>% 
+  dplyr::summarise(mean = mean(age, na.rm = TRUE))
+```
+:::
+:::
+
+
+
+**B. Median** of the sample
+
+The **sample median**, *md*, is an alternative measure of location, which is less sensitive to outliers. The median is calculated by first sorting the observed values (i.e. arranging them in an ascending/descending order) and selecting the middle one. If the sample size *n* is **odd**, the median is the number at the middle of the ordered observations. If the sample size is **even**, the median is the average of the two middle numbers.
+
+Therefore, the sample median, *md*, of *n* observations is:
+
+-   the $\frac{n+1}{2}$th ordered value, $md=x_{\frac{n+1}{2}}$, if *n* is odd.
+
+-   the average of the $\frac{n}{2}$th and $\frac{n+1}{2}$th ordered values, $md=\frac{1}{2}(x_{\frac{n}{2}}+x_{\frac{n+1}{2}})$, if *n* is even.
+
+
+::: column-margin
+
+**Advantage of sample median**
+
+It is not affected by outliers.
+
+**Disadvantage of sample median**
+
+It does not take into account the precise value of each observation and hence does not use all the information available in the data.
+:::
+
+
+::: callout-tip
+## Sample median of age
+
+::: panel-tabset
+## Base R
+
+```{r}
+median(arrhythmia$age, na.rm = TRUE)
+```
+
+## dplyr
+
+```{r}
+arrhythmia %>% 
+  dplyr::summarise(median = median(age, na.rm = TRUE))
+```
+:::
+:::
+
+
 
 Let's calculate the summary statistics for the `age` variable in our dataset.
 
-::: {#exercise-joins .callout-tip}
+::: callout-tip
 ## Summary statistics: Variable age
 
 ::: panel-tabset
@@ -569,7 +664,7 @@ arrhythmia %>%
 
 Box plots can be used for displaying location and dispersion for continuous data, particularly when comparing distributions between many groups (@fig-boxplot1). This type of graph uses boxes and lines to depict the distributions. Box limits indicate the range of the central **50%** of the data, with a horizontal line in the box corresponding to the **median**. Whiskers extend from each box to capture the **range** of the remaining data. **Data points** that are outside the whiskers are represented as **dots** on the graph and considered potential outliers.[^descriptive-1]
 
-[^descriptive-1]: An outlier is an observation that is distant from the rest of the data.
+[^descriptive-1]: An outlier is an observation that is significantly distant from the main body the data. We say any value outside of the following interval is an outlier: $$(Q_1 - 1.5 \times IQR, \ Q_3 + 1.5 \times IQR)$$
 
 ```{r}
 #| warning: false
