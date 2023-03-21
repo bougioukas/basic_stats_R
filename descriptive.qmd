@@ -1,6 +1,6 @@
 # Descriptive statistics {#sec-descriptive}
 
-**Descriptive statistics** are used to describe and organize the **basic characteristics** of the data in a study. The classical descriptive statistics allow us to have a quick glance of the central tendency and the extent of dispersion of values. They are useful in understanding a **data distribution** and in comparing data distributions.
+**Descriptive statistics** are used to describe and organize the **basic characteristics** of the data in a study. The classical descriptive statistics allow us to have a quick glance of the central tendency and the extent of dispersion of values. They are useful in understanding the **data distributions** and comparing them.
 
 When we have finished this Chapter, we should be able to:
 
@@ -122,7 +122,7 @@ We can generate a frequency table for the `sex` variable using the `freq()` func
 freq(arrhythmia$sex, cum = T, total = T, valid = F)
 ```
 
-The first column shows the levels of `sex` variable (male, female), the second (*n*) shows the number of patients in each category (absolute frequency), the third (*%*) the percentage contribution of each category to the total (relative frequency), and the fourth (*%cum*) the commutative percentage. Of note, the percentages add up to 100%.
+The table shows the number of patients (*n*) in each category (absolute frequency), the percentage (*%*) contribution of each category to the total (relative frequency), and the commutative percentage (*%cum*). Of note, the percentages add up to 100%.
 
 Similarly, we can create the frequency table for the `bmi_cat` variable:
 
@@ -194,7 +194,7 @@ ggplot(dat1, aes(x = bmi_cat, y = pct)) +
 
 **B. Side-by-side and Grouped Bar Plots**
 
-If the sample is further classified into whether the patient was male or female then it becomes impossible to present the data as a single bar plot. We could present the data as a side by side bar plot (@fig-sidebar1) but is preferable to present the data in one graph with the same scales and axes to make the visual comparisons easier (grouped bar plot) (@fig-sidebar2).
+If the data are further classified into whether the patient was male or female then it becomes impossible to present this information to a single bar plot. In this case, we can present the data as a side-by-side bar plot (@fig-sidebar1) or, even better, as a grouped bar plot to make the visual comparisons easier (@fig-sidebar2).
 
 ```{r}
 #| label: fig-sidebar1
@@ -247,12 +247,12 @@ ggplot(dat2) +
 
 **C. Stacked Bar Plot**
 
-Unlike a side-by-side or grouped graphs, **stacked bar plots** segment their bars. A **100% Stack Bar Plot** shows the percentage-of-the-whole of each group. This makes it easier to see if relative differences exist between quantities in each group (@fig-stacked).
+Unlike side-by-side or grouped bar plots, **stacked bar plots** segment their bars. A **100% Stack Bar Plot** shows the percentage-of-the-whole of each group. This makes it easier to see if relative differences exist between quantities in each group (@fig-stacked).
 
 ```{r}
 #| warning: false
 #| label: fig-stacked
-#| fig-cap: A horizontal 100% stacked bar plot showing the distribution of BMI by sex.
+#| fig-cap: A horizontal 100% stacked bar plot showing the distribution of BMI stratified by sex.
 #| fig-width: 8
 #| fig-height: 2.2
 
@@ -462,17 +462,13 @@ arrhythmia %>%
 
 Standard deviation is expressed in the same units as the original values.
 
-
-
 **C. Range** of the sample
 
-The Range is the difference between the minimum (lowest) and maximum (highest) values.One of the greatest disadvantages of using range as a method of dispersion is that range is sensitive to outliers in the data. 
-
+The Range is the difference between the minimum (lowest) and maximum (highest) values.One of the greatest disadvantages of using range as a method of dispersion is that range is sensitive to outliers in the data.
 
 ```{r}
 range(arrhythmia$age, na.rm = TRUE)
 ```
-
 
 ```{r}
 diff(range(arrhythmia$age, na.rm = TRUE))
@@ -487,10 +483,6 @@ IQR(arrhythmia$age, na.rm = TRUE)
 ```{r}
 quantile(arrhythmia$age, prob=c(0.25, 0.75), na.rm = T, type=1)
 ```
-
-
-
-
 
 Let's calculate the summary statistics for the `age` variable in our dataset.
 

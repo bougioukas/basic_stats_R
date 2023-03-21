@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.276">
+<meta name="generator" content="quarto-1.3.280">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Practical Statistics in Medicine with R - 8&nbsp; Wilcoxon Signed-Rank test</title>
 <style>
@@ -330,8 +330,8 @@ Null hypothesis and alternative hypothesis
 </div>
 <div class="cell">
 <div id="fig-weight" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-9afcdc040698ffac4ce1" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-9afcdc040698ffac4ce1">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8"],[1,2,3,4,5,6,7,8],[488,478,480,426,440,410,458,460],[484,478,492,444,436,398,464,476],[4,0,-12,-18,4,12,-6,-16]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>affected_eye<\/th>\n      <th>unaffected_eye<\/th>\n      <th>dif_thickness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;8.1: Table with data from “weight” file.</figcaption><p></p>
+<figure class="figure"><div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d8c176dfbe3d1725453b" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-d8c176dfbe3d1725453b">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8"],[1,2,3,4,5,6,7,8],[488,478,480,426,440,410,458,460],[484,478,492,444,436,398,464,476],[4,0,-12,-18,4,12,-6,-16]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>affected_eye<\/th>\n      <th>unaffected_eye<\/th>\n      <th>dif_thickness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;8.1: Table with data from “weight” file.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -365,7 +365,7 @@ $ dif_thickness  &lt;dbl&gt; 4, 0, -12, -18, 4, 12, -6, -16</code></pre>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.title.position <span class="op">=</span> <span class="st">"plot"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><a href="wilcoxon_test_files/figure-html/fig-hist2-1.png" class="lightbox" title="Density plot of the thickness differences." data-gallery="quarto-lightbox-gallery-1"><img src="wilcoxon_test_files/figure-html/fig-hist2-1.png" class="quarto-discovered-preview-image img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="wilcoxon_test_files/figure-html/fig-hist2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Density plot of the thickness differences."><img src="wilcoxon_test_files/figure-html/fig-hist2-1.png" class="quarto-discovered-preview-image img-fluid figure-img" width="672"></a></p>
 <p></p><figcaption class="figure-caption">Density plot of the thickness differences.</figcaption><p></p>
 </figure>
 </div>
@@ -547,12 +547,12 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <span><span class="va">gt_sum4</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 
-<div id="egymmbfuxs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ybwxffnemg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#egymmbfuxs .gt_table {
+#ybwxffnemg .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -577,7 +577,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#egymmbfuxs .gt_heading {
+#ybwxffnemg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -589,12 +589,12 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#egymmbfuxs .gt_caption {
+#ybwxffnemg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#egymmbfuxs .gt_title {
+#ybwxffnemg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -606,7 +606,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-bottom-width: 0;
 }
 
-#egymmbfuxs .gt_subtitle {
+#ybwxffnemg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -618,13 +618,13 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-top-width: 0;
 }
 
-#egymmbfuxs .gt_bottom_border {
+#ybwxffnemg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#egymmbfuxs .gt_col_headings {
+#ybwxffnemg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -639,7 +639,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#egymmbfuxs .gt_col_heading {
+#ybwxffnemg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -659,7 +659,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   overflow-x: hidden;
 }
 
-#egymmbfuxs .gt_column_spanner_outer {
+#ybwxffnemg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -671,15 +671,15 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 4px;
 }
 
-#egymmbfuxs .gt_column_spanner_outer:first-child {
+#ybwxffnemg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#egymmbfuxs .gt_column_spanner_outer:last-child {
+#ybwxffnemg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#egymmbfuxs .gt_column_spanner {
+#ybwxffnemg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -691,7 +691,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   width: 100%;
 }
 
-#egymmbfuxs .gt_group_heading {
+#ybwxffnemg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -717,7 +717,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   text-align: left;
 }
 
-#egymmbfuxs .gt_empty_group_heading {
+#ybwxffnemg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -732,15 +732,15 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   vertical-align: middle;
 }
 
-#egymmbfuxs .gt_from_md > :first-child {
+#ybwxffnemg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#egymmbfuxs .gt_from_md > :last-child {
+#ybwxffnemg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#egymmbfuxs .gt_row {
+#ybwxffnemg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -759,7 +759,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   overflow-x: hidden;
 }
 
-#egymmbfuxs .gt_stub {
+#ybwxffnemg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -772,7 +772,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-#egymmbfuxs .gt_stub_row_group {
+#ybwxffnemg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -786,11 +786,11 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   vertical-align: top;
 }
 
-#egymmbfuxs .gt_row_group_first td {
+#ybwxffnemg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#egymmbfuxs .gt_summary_row {
+#ybwxffnemg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -800,16 +800,16 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-#egymmbfuxs .gt_first_summary_row {
+#ybwxffnemg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#egymmbfuxs .gt_first_summary_row.thick {
+#ybwxffnemg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#egymmbfuxs .gt_last_summary_row {
+#ybwxffnemg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -819,7 +819,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#egymmbfuxs .gt_grand_summary_row {
+#ybwxffnemg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -829,7 +829,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-#egymmbfuxs .gt_first_grand_summary_row {
+#ybwxffnemg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -839,11 +839,11 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#egymmbfuxs .gt_striped {
+#ybwxffnemg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#egymmbfuxs .gt_table_body {
+#ybwxffnemg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -852,7 +852,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#egymmbfuxs .gt_footnotes {
+#ybwxffnemg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -866,7 +866,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#egymmbfuxs .gt_footnote {
+#ybwxffnemg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -875,7 +875,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-#egymmbfuxs .gt_sourcenotes {
+#ybwxffnemg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -889,7 +889,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#egymmbfuxs .gt_sourcenote {
+#ybwxffnemg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -897,64 +897,64 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
   padding-right: 5px;
 }
 
-#egymmbfuxs .gt_left {
+#ybwxffnemg .gt_left {
   text-align: left;
 }
 
-#egymmbfuxs .gt_center {
+#ybwxffnemg .gt_center {
   text-align: center;
 }
 
-#egymmbfuxs .gt_right {
+#ybwxffnemg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#egymmbfuxs .gt_font_normal {
+#ybwxffnemg .gt_font_normal {
   font-weight: normal;
 }
 
-#egymmbfuxs .gt_font_bold {
+#ybwxffnemg .gt_font_bold {
   font-weight: bold;
 }
 
-#egymmbfuxs .gt_font_italic {
+#ybwxffnemg .gt_font_italic {
   font-style: italic;
 }
 
-#egymmbfuxs .gt_super {
+#ybwxffnemg .gt_super {
   font-size: 65%;
 }
 
-#egymmbfuxs .gt_footnote_marks {
+#ybwxffnemg .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#egymmbfuxs .gt_asterisk {
+#ybwxffnemg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#egymmbfuxs .gt_indent_1 {
+#ybwxffnemg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#egymmbfuxs .gt_indent_2 {
+#ybwxffnemg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#egymmbfuxs .gt_indent_3 {
+#ybwxffnemg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#egymmbfuxs .gt_indent_4 {
+#ybwxffnemg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#egymmbfuxs .gt_indent_5 {
+#ybwxffnemg .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1444,7 +1444,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </footer><div class="page-columns page-rows-contents page-layout-article"><div class="social-share">
 <a href="https://twitter.com/share?url=https://bougioukas-medstats-r.netlify.app/&amp;text=Practical%20Statistics%20in%20Medicine%20with%20R" target="_blank" class="twitter"><i class="fab fa-twitter fa-fw fa-lg"></i></a><a href="https://www.linkedin.com/shareArticle?url=https://bougioukas-medstats-r.netlify.app/&amp;title=Practical%20Statistics%20in%20Medicine%20with%20R" target="_blank" class="linkedin"><i class="fa-brands fa-linkedin-in fa-fw fa-lg"></i></a><a href="https://www.facebook.com/sharer.php?u=https://bougioukas-medstats-r.netlify.app/" target="_blank" class="facebook"><i class="fab fa-facebook-f fa-fw fa-lg"></i></a>
 </div></div>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":true,"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":true,"openEffect":"zoom","descPosition":"bottom"});</script>
 
 
 </body></html>

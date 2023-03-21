@@ -38,8 +38,7 @@ knitr::include_graphics(here::here("images", "project.png"))
 
 ### Reproducibility and License
 
-All sections of this textbook are reproducible as they were made using
-![](images/quarto.png){width="24" height="22"} [Quarto](https://quarto.org/)^®^ which is an open-source scientific and technical publishing system built on [Pandoc](https://pandoc.org/).
+All sections of this textbook are reproducible as they were made using ![](images/quarto.png){width="24" height="22"} [Quarto](https://quarto.org/)^®^ which is an open-source scientific and technical publishing system built on [Pandoc](https://pandoc.org/).
 
 To learn more about Quarto books visit <https://quarto.org/docs/books>.
 

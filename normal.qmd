@@ -251,7 +251,7 @@ ggplot(df2, aes(x, y1)) +
 
 ## Normal Q-Q plots
 
-The **normal Q--Q plot**, or normal quantile-quantile plot, provides an easy way to visually check whether or not a data set is normally distributed. The values in the plot are the **quantiles**[^normal-2] of the variable distribution (sample quantiles) plotted against the quantiles of a standard normal distribution (theoretical quantiles). If the points fall along a roughly **straight** line at a 45-degree angle, then the data is normally distributed. If the variable is normally distributed, the, points fall close to a **straight** line (although the ends of the Q-Q plot often start to deviate from the straight line). Any **deviations** from the straight line indicate some degree of non-normality.
+The **normal Q--Q plot**, or normal quantile-quantile plot, provides an easy way to visually check whether or not a data set is normally distributed. The values in the plot are the **quantiles**[^normal-2] of the variable distribution (sample quantiles) plotted against the quantiles of a standard normal distribution (theoretical quantiles). If the points fall close to a **straight** line at a 45-degree angle, then the data are normally distributed (although the ends of the Q-Q plot often deviate from the straight line).
 
 [^normal-2]: Quantiles are values that split sorted data or a probability distribution into equal parts. The most commonly used quantiles have special names. <br>**Quartiles**: Three quartiles (Q1, median, Q3) split the data into four parts. **Percentiles**: 99 percentiles split the data into 100 parts.
 
