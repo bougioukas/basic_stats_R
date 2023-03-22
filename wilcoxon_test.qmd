@@ -66,7 +66,8 @@ eyes <- eyes %>%
 
 DT::datatable(
   eyes, extensions = 'Buttons', options = list(
-    dom = 'tip'
+    dom = 'tip',
+    columnDefs = list(list(className = 'dt-center', targets = "_all"))
   )
 )
 
@@ -122,7 +123,8 @@ summary_eyes <- eyes %>%
   dplyr::summarise(across(
     .cols = c(dif_thickness, affected_eye, unaffected_eye), 
     .fns = list(
-    n = ~n(),
+      n = ~n(),
+      na = ~sum(is.na(.)),
       min = ~min(., na.rm = TRUE),
       q1 = ~quantile(., 0.25, na.rm = TRUE),
       median = ~quantile(., 0.5, na.rm = TRUE),
@@ -139,7 +141,7 @@ summary_eyes <- eyes %>%
 # present the results
 summary_eyes <- summary_eyes %>% 
   mutate(across(everything(), round, 2)) %>%   # round to 3 decimal places
-  pivot_longer(1:30, names_to = "Stats", values_to = "Values")  # long format
+  pivot_longer(1:33, names_to = "Stats", values_to = "Values")  # long format
 
 summary_eyes
 
@@ -150,7 +152,7 @@ summary_eyes
 ```{r}
 eyes %>% 
   dlookr::describe(dif_thickness, affected_eye, unaffected_eye) %>% 
-  select(described_variables, n, mean, sd, p25, p50, p75, skewness, kurtosis) %>% 
+  select(described_variables, n, na, mean, sd, p25, p50, p75, skewness, kurtosis) %>% 
   ungroup()
 ```
 :::

@@ -2,17 +2,6 @@
 
 The Kruskal-Wallis test is a rank-based non-parametric alternative to the one-way ANOVA and an extension of the Wilcoxon-Mann-Whitney test to allow the comparison of more than two independent groups. It's usually recommended when the assumptions of one-way ANOVA test are not met (non-normal distributions) or with small samples.
 
-```{r}
-#| include: false
-
-library(rstatix)
-library(PupillometryR)
-library(gtsummary)
-
-library(here)
-library(tidyverse)
-```
-
 When we have finished this Chapter, we should be able to:
 
 ::: {.callout-caution icon="false"}
@@ -135,6 +124,7 @@ VO2_summary <- dataVO2 %>%
   group_by(sport) %>%
   dplyr::summarise(
     n = n(),
+    na = sum(is.na(VO2max)),
     min = min(VO2max, na.rm = TRUE),
     q1 = quantile(VO2max, 0.25, na.rm = TRUE),
     median = quantile(VO2max, 0.5, na.rm = TRUE),
@@ -156,7 +146,7 @@ VO2_summary
 dataVO2 %>% 
   group_by(sport) %>% 
   dlookr::describe(VO2max) %>% 
-  select(described_variables,  sport, n, mean, sd, p25, p50, p75, skewness, kurtosis) %>% 
+  select(described_variables,  sport, n, na, mean, sd, p25, p50, p75, skewness, kurtosis) %>% 
   ungroup()
 ```
 :::

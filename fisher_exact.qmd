@@ -60,7 +60,8 @@ hemophilia <- read_excel(here("data", "hemophilia.xlsx"))
 
 DT::datatable(
   hemophilia, extensions = 'Buttons', options = list(
-    dom = 'tip'
+    dom = 'tip',
+    columnDefs = list(list(className = 'dt-center', targets = "_all"))
   )
 )
 

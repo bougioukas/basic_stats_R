@@ -2,17 +2,6 @@
 
 If we want to see whether there's an association between two categorical variables we can use the Pearson's chi-square test, often called chi-square test of independence. This is an extremely elegant statistic based on the simple idea of comparing the frequencies we observe in certain categories to the frequencies we might expect to get in those categories by chance.
 
-```{r}
-#| include: false
-
-library(rstatix)
-library(ggsci)
-
-library(patchwork)
-library(here)
-library(tidyverse)
-```
-
 When we have finished this Chapter, we should be able to:
 
 ::: {.callout-caution icon="false"}

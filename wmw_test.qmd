@@ -61,7 +61,8 @@ tg <- read_excel(here("data", "thromboglobulin.xlsx"))
 
 DT::datatable(
   tg, extensions = 'Buttons', options = list(
-    dom = 'tip'
+    dom = 'tip',
+    columnDefs = list(list(className = 'dt-center', targets = "_all"))
   )
 )
 
@@ -110,7 +111,6 @@ ggplot(tg, aes(x=status, y=b_TG)) +
 
 The above figure shows that the data in both groups are positively skewed and they have similar shaped distributions.
 
-
 ```{r}
 #| warning: false
 #| label: fig-qq_tg
@@ -121,7 +121,6 @@ tg %>%
   scale_color_jco() +
   facet_wrap(~ status)
 ```
-
 
  
 
@@ -164,7 +163,7 @@ tg_summary
 tg %>% 
   group_by(status) %>% 
   dlookr::describe(b_TG) %>% 
-  select(described_variables,  status, n, mean, sd, p25, p50, p75, skewness, kurtosis) %>% 
+  select(described_variables,  status, n, na, mean, sd, p25, p50, p75, skewness, kurtosis) %>% 
   ungroup()
 ```
 :::

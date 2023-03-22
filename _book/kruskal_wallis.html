@@ -325,8 +325,8 @@ Null hypothesis and alternative hypothesis
 </div>
 <div class="cell">
 <div id="fig-dataVO2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-52db8d3bee7e1edb17cc" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-52db8d3bee7e1edb17cc">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"],["runners","runners","runners","runners","runners","runners","runners","runners","runners","runners","rowers","rowers","rowers","rowers","rowers","rowers","rowers","rowers","rowers","rowers","triathletes","triathletes","triathletes","triathletes","triathletes","triathletes","triathletes","triathletes","triathletes","triathletes"],[73.8,79.9,75.5,72.5,82.2,78.3,77.9,76.5,72.3,80.2,71.1,67.9,67.1,73.8,74.7,74.4,69.9,67.1,67.8,69.2,76.6,63.9,64.3,72.6,67.8,63.2,65.8,63.4,65,67]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>sport<\/th>\n      <th>VO2max<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-center","targets":"_all"},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;10.1: Table with data from “dataVO2” file.</figcaption><p></p>
+<figure class="figure"><div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-48130156c50f9a5ad4c8" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-48130156c50f9a5ad4c8">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"],["runners","runners","runners","runners","runners","runners","runners","runners","runners","runners","rowers","rowers","rowers","rowers","rowers","rowers","rowers","rowers","rowers","rowers","triathletes","triathletes","triathletes","triathletes","triathletes","triathletes","triathletes","triathletes","triathletes","triathletes"],[73.8,79.9,75.5,72.5,82.2,78.3,77.9,76.5,72.3,80.2,71.1,67.9,67.1,73.8,74.7,74.4,69.9,67.1,67.8,69.2,76.6,63.9,64.3,72.6,67.8,63.2,65.8,63.4,65,67]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>sport<\/th>\n      <th>VO2max<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-center","targets":"_all"},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;10.1: Table with data from “dataVO2” file.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -402,6 +402,7 @@ Summary statistics by group
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sport</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
 <span>    n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">VO2max</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>    min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">VO2max</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>    q1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">VO2max</span>, <span class="fl">0.25</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>    median <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">VO2max</span>, <span class="fl">0.5</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
@@ -416,12 +417,13 @@ Summary statistics by group
 <span></span>
 <span><span class="va">VO2_summary</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 11
-  sport           n   min    q1 median    q3   max  mean    sd skewness kurtosis
-  &lt;fct&gt;       &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1 rowers         10  67.1  67.8   69.6  73.1  74.7  70.3  3.04  0.502      -1.53
-2 runners        10  72.3  74.2   77.2  79.5  82.2  76.9  3.39 -0.00950    -1.16
-3 triathletes    10  63.2  64     65.4  67.6  76.6  67.0  4.40  1.51        1.60</code></pre>
+<pre><code># A tibble: 3 × 12
+  sport      n    na   min    q1 median    q3   max  mean    sd skewness kurto…¹
+  &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+1 rowers    10     0  67.1  67.8   69.6  73.1  74.7  70.3  3.04  0.502     -1.53
+2 runne…    10     0  72.3  74.2   77.2  79.5  82.2  76.9  3.39 -0.00950   -1.16
+3 triat…    10     0  63.2  64     65.4  67.6  76.6  67.0  4.40  1.51       1.60
+# … with abbreviated variable name ¹​kurtosis</code></pre>
 </div>
 </div>
 </div>
@@ -430,16 +432,16 @@ Summary statistics by group
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dataVO2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sport</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">dlookr</span><span class="fu">::</span><span class="fu"><a href="https://choonghyunryu.github.io/dlookr/reference/describe.data.frame.html">describe</a></span><span class="op">(</span><span class="va">VO2max</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">described_variables</span>,  <span class="va">sport</span>, <span class="va">n</span>, <span class="va">mean</span>, <span class="va">sd</span>, <span class="va">p25</span>, <span class="va">p50</span>, <span class="va">p75</span>, <span class="va">skewness</span>, <span class="va">kurtosis</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">described_variables</span>,  <span class="va">sport</span>, <span class="va">n</span>, <span class="va">na</span>, <span class="va">mean</span>, <span class="va">sd</span>, <span class="va">p25</span>, <span class="va">p50</span>, <span class="va">p75</span>, <span class="va">skewness</span>, <span class="va">kurtosis</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 10
-  described_variables sport     n  mean    sd   p25   p50   p75 skewness kurto…¹
-  &lt;chr&gt;               &lt;fct&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-1 VO2max              rowe…    10  70.3  3.04  67.8  69.6  73.1  0.502     -1.53
-2 VO2max              runn…    10  76.9  3.39  74.2  77.2  79.5 -0.00950   -1.16
-3 VO2max              tria…    10  67.0  4.40  64    65.4  67.6  1.51       1.60
-# … with abbreviated variable name ¹​kurtosis</code></pre>
+<pre><code># A tibble: 3 × 11
+  described_v…¹ sport     n    na  mean    sd   p25   p50   p75 skewness kurto…²
+  &lt;chr&gt;         &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+1 VO2max        rowe…    10     0  70.3  3.04  67.8  69.6  73.1  0.502     -1.53
+2 VO2max        runn…    10     0  76.9  3.39  74.2  77.2  79.5 -0.00950   -1.16
+3 VO2max        tria…    10     0  67.0  4.40  64    65.4  67.6  1.51       1.60
+# … with abbreviated variable names ¹​described_variables, ²​kurtosis</code></pre>
 </div>
 </div>
 </div>

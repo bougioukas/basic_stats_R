@@ -59,7 +59,8 @@ asthma <- read_excel(here("data", "asthma.xlsx"))
 
 DT::datatable(
   asthma, extensions = 'Buttons', options = list(
-    dom = 'tip'
+    dom = 'tip',
+    columnDefs = list(list(className = 'dt-center', targets = "_all"))
   )
 )
 

@@ -133,6 +133,7 @@ DWL_summary <- dataDWL %>%
   group_by(Diet) %>%
   dplyr::summarise(
     n = n(),
+    na = sum(is.na(WeightLoss)),
     min = min(WeightLoss, na.rm = TRUE),
     q1 = quantile(WeightLoss, 0.25, na.rm = TRUE),
     median = quantile(WeightLoss, 0.5, na.rm = TRUE),
