@@ -37,6 +37,8 @@ library(rstatix)
 library(exactRankTests)
 library(PupillometryR)
 library(gtsummary)
+library(ggpubr)
+library(ggsci)
 library(here)
 library(tidyverse)
 ```
@@ -108,11 +110,24 @@ ggplot(tg, aes(x=status, y=b_TG)) +
 
 The above figure shows that the data in both groups are positively skewed and they have similar shaped distributions.
 
+
+```{r}
+#| warning: false
+#| label: fig-qq_tg
+#| fig-cap: Normality Q-Q plot for HDRS for paroxetine and placebo.
+
+tg %>%
+  ggqqplot("b_TG", color = "status", conf.int = F) +
+  scale_color_jco() +
+  facet_wrap(~ status)
+```
+
+
  
 
 **Summary statistics**
 
-The `g_TG` summary statistics for each group are:
+The `b_TG` summary statistics for each group are:
 
 ::: {#exercise-joins .callout-tip}
 ## Summary statistics by group
@@ -126,6 +141,7 @@ tg_summary <- tg %>%
   group_by(status) %>%
   dplyr::summarise(
     n = n(),
+    na = sum(is.na(b_TG)),
     min = min(b_TG, na.rm = TRUE),
     q1 = quantile(b_TG, 0.25, na.rm = TRUE),
     median = quantile(b_TG, 0.5, na.rm = TRUE),

@@ -542,7 +542,7 @@ psych::describe(arrhythmia$age)
 arrhythmia %>%
   dplyr::summarise(
     n = n(),
-    count_na = sum(is.na(QRS)),
+    na = sum(is.na(QRS)),
     min = min(QRS, na.rm = TRUE),
     q1 = quantile(QRS, 0.25, na.rm = TRUE),
     median = quantile(QRS, 0.5, na.rm = TRUE),
@@ -589,7 +589,7 @@ summary_age_sex <- arrhythmia %>%
   group_by(sex) %>% 
   dplyr::summarise(
     n = n(),
-    count_na = sum(is.na(age)),
+    na = sum(is.na(age)),
     min = min(age, na.rm = TRUE),
     q1 = quantile(age, 0.25, na.rm = TRUE),
     median = quantile(age, 0.5, na.rm = TRUE),
@@ -645,7 +645,7 @@ arrhythmia %>%
   group_by(sex) %>% 
   dplyr::summarise(
     n = n(),
-    count_na = sum(is.na(QRS)),
+    na = sum(is.na(QRS)),
     min = min(QRS, na.rm = TRUE),
     q1 = quantile(QRS, 0.25, na.rm = TRUE),
     median = quantile(QRS, 0.5, na.rm = TRUE),
