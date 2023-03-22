@@ -437,9 +437,9 @@ The variance is expressed in square units, so it is not suitable measure for des
 
 **B. Standard deviation of the sample**
 
-Standard deviation of a data set is the square root of the calculated sample variance:
+Standard deviation (denoted as *sd* or *s*) of a data set is the square root of the sample variance:
 
-$$sd= \sqrt{s^2} = \sqrt\frac{\sum_{i=1}^{n}(x_{i}-\bar{x})^2}{n-1}$$
+$$sd= s = \sqrt{s^2} = \sqrt\frac{\sum_{i=1}^{n}(x_{i}-\bar{x})^2}{n-1}$$
 
 ::: callout-tip
 ## Standard deviation of age
@@ -464,11 +464,17 @@ Standard deviation is expressed in the same units as the original values.
 
 **C. Range** of the sample
 
-The Range is the difference between the minimum (lowest) and maximum (highest) values.One of the greatest disadvantages of using range as a method of dispersion is that range is sensitive to outliers in the data.
+The Range is the difference between the minimum (lowest) and maximum (highest) values. In R, the `range()` function returns a vector containing the minimum and maximum values:
+
+::: column-margin
+One disadvantage of using range as a measure of dispersion is its sensitivity to outliers.
+:::
 
 ```{r}
 range(arrhythmia$age, na.rm = TRUE)
 ```
+
+The difference between the two values, 83 - 18, is:
 
 ```{r}
 diff(range(arrhythmia$age, na.rm = TRUE))
@@ -755,8 +761,8 @@ Box plots can be used for displaying location and dispersion for continuous data
 #| label: fig-boxplot1
 #| fig-cap: Box plots of age and QRS variables stratified by sex.
 #| fig-subcap: 
-#|   - "(a) Box plot of age stratified by sex (female: 235; male = 190)."
-#|   - "(b) Box plot of QRS stratified by sex (female: 237; male = 191)."
+#|   - "Box plot of age stratified by sex (female: 235; male = 190)."
+#|   - "Box plot of QRS stratified by sex (female: 237; male = 191)."
 #| layout-ncol: 2
 
 # box plot of age stratified by sex
@@ -791,8 +797,8 @@ There are many variations of the box plot. For example, there is a way to combin
 #| label: fig-raincloud
 #| fig-cap: A raincloud plot of age and QRS variables stratified by sex.
 #| fig-subcap: 
-#|   - "(a) Raincloud of age stratified by sex (female: 235; male = 190)."
-#|   - "(b) Raincloud of QRS stratified by sex (female: 237; male = 191)."
+#|   - "Raincloud of age stratified by sex (female: 235; male = 190)."
+#|   - "Raincloud of QRS stratified by sex (female: 237; male = 191)."
 #| layout-ncol: 2
 
 # raincloud plot of age stratified by sex

@@ -214,6 +214,24 @@ Since the p-value = 0.676 \>0.05, the null hypothesis that the variances of HDRs
 
 We will perform a pooled variance t-test (Student's t-test) to test the null hypothesis that the mean HDRS score is the same for both groups (paroxetine and placebo).
 
+
+
+::: column-margin
+
+The formula of the test is given by the t-statistic as follows:
+
+$$t = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{p} \cdot \sqrt{\frac{1}{n_{1}} + \frac{1}{n_{2}}}}$$ 
+
+where $s_{p}$ is an estimate of the pooled standard deviation of the two groups which is calculated by the following equation:
+
+$$s_{p} = \sqrt{\frac{(n_{1}-1)s_{1}^2 + (n_{2}-1)s_{2}^2}{n_{1}+ n_{2}-2}}$$
+
+:::
+
+
+
+
+
 ::: {#exercise-joins .callout-tip}
 ## Student's t-test
 

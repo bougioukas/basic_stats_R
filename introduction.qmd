@@ -54,7 +54,6 @@ Biomedical data can be transformed into **information**. This information can be
 #| fig-align: center
 #| out-width: "80%"
 #| fig-cap: From data to knowledge.
-#| fig-subcap: "From data to knowledge."
 
 knitr::include_graphics(here::here("images", "info.png"))
 ```

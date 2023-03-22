@@ -39,7 +39,6 @@ reference-location: margin
 filters:
   - social-share
   - lightbox
-lightbox: auto
 code-annotations: hover
 
 share:

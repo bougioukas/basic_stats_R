@@ -117,9 +117,9 @@ The skewness for a normal distribution is zero. In practice, approximate bell-sh
 #| label: fig-skew2
 #| fig-cap: Types of distribution according to the summetry.
 #| fig-subcap: 
-#|   - "(a) Left skewed distribution (negatively skewed). The mean and the meadian are too left to the mode."
-#|   - "(b) Symmetric distribution (zero skewness). The mean, median and mode are the same."
-#|   - "(c) Right skewed distribution (positively skewed). The mean and median are to the right of the mode."
+#|   - "Left skewed distribution (negatively skewed). The mean and the meadian are too left to the mode."
+#|   - "Symmetric distribution (zero skewness). The mean, median and mode are the same."
+#|   - "Right skewed distribution (positively skewed). The mean and median are to the right of the mode."
 #| layout-ncol: 3
 
 # create a data frame
@@ -134,14 +134,14 @@ ggplot(df1, aes(x, y1)) +
   geom_line(color="green", linewidth = 1.0) +
   geom_segment(aes(x = 0.7, y = 0, xend = 0.7,  yend = 1.98),
                color = "black", linetype = "dashed", linewidth = 0.8) +
-  annotate('text', x = 0.67, y = 2.1, label = 'mean', size = 5, color = "black") +
+  annotate('text', x = 0.67, y = 2.1, label = 'mean', size = 8, color = "black") +
   geom_segment(aes(x = 0.78, y = 0, xend = 0.78,  yend = 2.78), 
                color = "blue", linetype = "dashed", linewidth = 0.8) +
-  annotate('text', x = 0.75, y = 2.9, label = 'median', size = 5, color = "blue") +
+  annotate('text', x = 0.75, y = 2.9, label = 'median', size = 8, color = "blue") +
   geom_segment(aes(x = 0.86, y = 0, xend = 0.86,  yend = 3.17), 
                color = "orange", linetype = "dashed", linewidth = 0.8) +
-  annotate('text', x = 0.81, y = 3.13, label = 'mode', size = 5, color = "orange") +
-  theme_minimal(base_size = 16) +
+  annotate('text', x = 0.81, y = 3.13, label = 'mode', size = 8, color = "orange") +
+  theme_minimal(base_size = 18) +
   coord_cartesian(expand = FALSE, xlim = c(0, NA), ylim = c(0, NA)) +
   labs(title = "Left skewed distribution",
        x = "Variable",
@@ -152,14 +152,14 @@ ggplot(df1, aes(x, y2)) +
   geom_line(color="green", linewidth = 1.0) +
   geom_segment(aes(x = 0.49, y = 0, xend = 0.49,  yend = 2.89), 
                color = "orange", linetype = "dashed", linewidth = 0.8) +
-  annotate('text', x = 0.40, y = 2.85, label = 'mode', size = 5, color = "orange") +
+  annotate('text', x = 0.5, y = 2.46, label = 'mode', size = 8, color = "orange") +
   geom_segment(aes(x = 0.5, y = 0, xend = 0.5,  yend = 2.9), 
                color = "black", linetype = "dashed", linewidth = 0.8) +
-  annotate('text', x = 0.5, y = 2.92, label = 'mean', size = 5, color = "black") +
+  annotate('text', x = 0.5, y = 2.90, label = 'mean', size = 8, color = "black") +
   geom_segment(aes(x = 0.51, y = 0, xend = 0.51,  yend = 2.89), 
                color = "blue", linetype = "dashed", linewidth = 0.8) +
-  annotate('text', x = 0.62, y = 2.85, label = 'median', size = 5, color = "blue") +
-  theme_minimal(base_size = 16) +
+  annotate('text', x = 0.5, y = 2.66, label = 'median', size = 8, color = "blue") +
+  theme_minimal(base_size = 18) +
   coord_cartesian(expand = FALSE, xlim = c(0, NA), ylim = c(0, NA)) +
   labs(title = "Symmetric distribution",
        x = "Variable",
@@ -170,14 +170,14 @@ ggplot(df1, aes(x, y3)) +
   geom_line(color="green", linewidth = 1.0) +
   geom_segment(aes(x = 0.15, y = 0, xend = 0.15,  yend = 3.17), 
                color = "orange", linetype = "dashed", linewidth = 0.8) +
-  annotate('text', x = 0.22, y = 3.15, label = 'mode', size = 5, color = "orange") +
+  annotate('text', x = 0.22, y = 3.10, label = 'mode', size = 8, color = "orange") +
   geom_segment(aes(x = 0.25, y = 0, xend = 0.25,  yend = 2.5), 
                color = "blue", linetype = "dashed", linewidth = 0.8) +
-  annotate('text', x = 0.3, y = 2.55, label = 'median', size = 5, color = "blue") +
+  annotate('text', x = 0.3, y = 2.55, label = 'median', size = 8, color = "blue") +
   geom_segment(aes(x = 0.3, y = 0, xend = 0.3,  yend = 1.9), 
                color = "black", linetype = "dashed", linewidth = 0.8) +
-  annotate('text', x = 0.34, y = 1.96, label = 'mean', size = 5, color = "black") +
-  theme_minimal(base_size = 16) +
+  annotate('text', x = 0.34, y = 1.96, label = 'mean', size = 8, color = "black") +
+  theme_minimal(base_size = 18) +
   coord_cartesian(expand = FALSE, xlim = c(0, NA), ylim = c(0, NA)) +
   labs(title = "Right skewed distribution",
        x = "Variable",
@@ -204,9 +204,9 @@ The excess kurtosis for a normal distribution is zero. In practice, approximate 
 #| label: fig-kurtosis
 #| fig-cap: Types of distribution according to the summetry.
 #| fig-subcap: 
-#|   - "(a) Platykurtic distribution (negative excess kurtosis)."
-#|   - "(b) Mesokurtic distribution (zero excess kurtosis)."
-#|   - "(c) Leptokurtic distribution (positive excess kurtosis). "
+#|   - "Platykurtic distribution (negative excess kurtosis)."
+#|   - "Mesokurtic distribution (zero excess kurtosis)."
+#|   - "Leptokurtic distribution (positive excess kurtosis). "
 #| layout-ncol: 3
 
 # create a data frame
@@ -220,9 +220,9 @@ df2 <- data.frame(x, y1, y2, y3)
 ggplot(df2, aes(x, y1)) +
   geom_line(color="black", linewidth = 0.8, linetype = "dashed") +
   geom_line(aes(x, y2), color="deeppink", linewidth = 0.8) +
-  annotate('text', x = 1.5, y = 0.3, label = 'normal', size = 5, color = "black") +
-  annotate('text', x = 3.5, y = 0.1, label = 'platykurtic', size = 5, color = "deeppink") +
-  theme_minimal(base_size = 16) +
+  annotate('text', x = 2.0, y = 0.3, label = 'normal', size = 7, color = "black") +
+  annotate('text', x = 4.2, y = 0.1, label = 'platykurtic', size = 8, color = "deeppink") +
+  theme_minimal(base_size = 18) +
   labs(title = "Platykurtic distribution",
        x = "Variable",
        y = "Probability density")
@@ -230,9 +230,9 @@ ggplot(df2, aes(x, y1)) +
 # mesokurtic distribution
 ggplot(df2, aes(x, y1)) +
   geom_line(color="deeppink", linewidth = 0.8) +
-  annotate('text', x = 3.9, y = 0.28, label = 'mesokurtic distribution', size = 5, color = "deeppink") +
-  annotate('text', x = 3.9, y = 0.31, label = 'normal is a', size = 5, color = "black") +
-  theme_minimal(base_size = 16) +
+  annotate('text', x = 0, y = 0.20, label = 'normal is a', size = 7, color = "black") +
+  theme_minimal(base_size = 18) +
+  annotate('text', x = 0, y = 0.15, label = 'mesokurtic distribution', size = 7, color = "deeppink") +
   labs(title = "Mesokurtic distribution",
        x = "Variable",
        y = "Probability density")
@@ -241,9 +241,9 @@ ggplot(df2, aes(x, y1)) +
 ggplot(df2, aes(x, y1)) +
   geom_line(color="black", linewidth = 0.8, linetype = "dashed") +
   geom_line(aes(x, y3), color="deeppink", linewidth = 0.8) +
-  annotate('text', x = 1.7, y = 0.25, label = 'normal', size = 5, color = "black") +
-  annotate('text', x = 1.3, y = 0.75, label = 'leptokurtic', size = 5, color = "deeppink") +
-  theme_minimal(base_size = 16) +
+  annotate('text', x = 2.1, y = 0.25, label = 'normal', size = 7, color = "black") +
+  annotate('text', x = 1.9, y = 0.75, label = 'leptokurtic', size = 8, color = "deeppink") +
+  theme_minimal(base_size = 18) +
   labs(title = "Leptokurtic distribution",
        x = "Variable",
        y = "Probability density")

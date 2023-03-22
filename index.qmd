@@ -30,8 +30,7 @@ For our purpose, it is sufficient to consider a simple RStudio Project folder th
 #| fig-align: center
 #| out-width: "40%"
 #| echo: false
-#| fig-cap: Visualizing the folder structure of a minimal RStudio project.
-#| fig-subcap: The folder structure of a minimal RStudio project.
+#| fig-cap: The folder structure of a minimal RStudio project.
 
 knitr::include_graphics(here::here("images", "project.png"))
 ```
