@@ -24,7 +24,7 @@ The dataset *eyes* contains thickness of the cornea (in microns) in patients wit
 -   $H_1$: The distribution of the differences in thickness of the cornea is not symmetrical about zero
 :::
 
-**NOTE:** If we are testing the null hypothesis that the **median** of the paired rank differences is zero, then the paired rank differences must all come from a symmetrical distribution. Note that we do not have to assume that the distributions of the original populations are symmetrical - two very positively skewed distributions that differ only by location will produce a set of paired rank differences that are symmetrical.
+**NOTE:** If we are testing the null hypothesis that the **median** of the paired rank differences is zero, then the paired rank differences must all come from a symmetrical distribution. Note that we do not have to assume that the distributions of the original populations are symmetrical.
 
 ## Packages we need
 
@@ -184,7 +184,7 @@ The differences between the two measurements can be tested using a rank test suc
 ```{r}
 #| warning: false
 
-wilcox.test(eyes$dif_thickness)
+wilcox.test(eyes$dif_thickness, conf.int = T)
 ```
 
 ## Base R (2nd way)
@@ -192,7 +192,7 @@ wilcox.test(eyes$dif_thickness)
 ```{r}
 #| warning: false
 
-wilcox.test(eyes$affected_eye, eyes$unaffected_eye, paired = TRUE)
+wilcox.test(eyes$affected_eye, eyes$unaffected_eye, conf.int = T, paired = TRUE)
 ```
 
 ## rstatix
@@ -225,4 +225,4 @@ tb2 %>%
                  estimate_fun = thickness ~ function(x) style_sigfig(x, digits = 3))
 ```
 
-There is not evidence from this small study with patients of glaucoma that the thickness of the cornea in affected eyes, median = 459 $\mu{m}$ (IQR: 436.5, 478.5), differs from unaffected eyes 470 $\mu{m}$ (442, 479.5) (p=0.30 \>0.05).
+There is not evidence from this small study with patients of glaucoma that the thickness of the cornea in affected eyes, median = 459 $\mu{m}$ (IQR: 436.5, 478.5), differs from unaffected eyes 470 $\mu{m}$ (442, 479.5). The result (pseudomedian = -6, 95% CI: -16 to 8) is not significant (p=0.30 \>0.05).

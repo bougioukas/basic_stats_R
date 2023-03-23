@@ -119,7 +119,8 @@ The above figure shows that the data in both groups are positively skewed and th
 tg %>%
   ggqqplot("b_TG", color = "status", conf.int = F) +
   scale_color_jco() +
-  facet_wrap(~ status)
+  facet_wrap(~ status) + 
+  theme(legend.position = "none")
 ```
 
  
@@ -190,7 +191,7 @@ We can see that the data for the non-diabetic group is not normally distributed 
 
 ## Run the Wilcoxon-Mann-Whitney test
 
-The difference in medians between the two groups can be tested using a rank test such as Wilcoxon-Mann-Whitney (WMW):
+The difference in location between the two distributions can be tested using a rank test such as Wilcoxon-Mann-Whitney (WMW):
 
 ::: {#exercise-joins .callout-tip}
 ## Wilcoxon-Mann-Whitney test
@@ -221,7 +222,10 @@ tg %>%
 :::
 :::
 
-Based on the p \<0.001, we reject the null hypothesis, the result (difference in medians = 18.95, 95% CI: 13.7 to 24) is significant.
+Based on the p \<0.001, we reject the null hypothesis, the result (the median of the difference[^wmw-1] = 18.95, 95% CI: 13.7 to 24) is significant.
+
+[^wmw-1]: **Note:** the estimator for the difference in location parameters does not estimate the difference in medians (a common misconception) but rather the median of the difference between the two samples.
+
 
  
 
@@ -233,7 +237,7 @@ The median (or another percentile) can be used as a summary measure. The choice 
 #| code-fold: true
 #| code-summary: "Show the code"
 
-gt_sum2 <- tg %>% 
+tg %>% 
   tbl_summary(
     by = status, 
     statistic = b_TG ~ "{median} ({p25}, {p75})", 
@@ -241,10 +245,7 @@ gt_sum2 <- tg %>%
     label = list(b_TG ~ "b_TG \n(pg/ml)"), 
     missing = c("no")) %>% 
   add_p(test = b_TG ~ "wilcox.test") %>% 
-  add_overall() %>%
-  as_gt() 
-
-gt_sum2
+  add_n()
 ```
 
-Hence, the urinary $\beta$ thromboglobulin excretion is significantly higher in diabetic group, median = 29.2 (IQR: 27.1, 34.8) pg/ml, as compared to non-diabetic group, 10.9 (8.3, 14.8) pg/ml, (p \<0.001).
+Hence, there is evidence that the urinary $\beta$ thromboglobulin excretion is higher in diabetic group, median = 29.2 (IQR: 27.1, 34.8) pg/ml, as compared to non-diabetic group, 10.9 (8.3, 14.8) pg/ml. The median of the difference (18.95, 95% CI: 13.7 to 24) is significant (p \<0.001).
