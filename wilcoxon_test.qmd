@@ -49,7 +49,7 @@ We import the data *eyes* in R:
 #| warning: false
 
 library(readxl)
-eyes <- read_excel(here("data", "eyes1.xlsx"))
+eyes <- read_excel(here("data", "eyes.xlsx"))
 ```
 
 We calculate the differences using the function `mutate()`:
@@ -160,9 +160,9 @@ eyes %>%
 
 The differences seems to come from a population with a symmetrical distribution and the skewness is close to zero (0.03). However, the (excess) kurtosis equals to -1.37 (platykurtic) and the sample size is small. Therefore, the data may not follow the normal distribution.
 
-**Normality test** 
+**Normality test**
 
-We can use Shapiro-Wilk test to check for normality of the differences. 
+We can use Shapiro-Wilk test to check for normality of the differences.
 
 ```{r}
  eyes %>%
@@ -171,12 +171,11 @@ We can use Shapiro-Wilk test to check for normality of the differences.
 
 The Shapiro-Wilk test suggests that the weight differences are normally distributed (p=0.65 \> 0.05). However, here, normality test is not helpful because of the small sample (the test is under-powered).
 
-
 ## Run the Wilcoxon Signed-Rank test
 
 The differences between the two measurements can be tested using a rank test such as Wilcoxon Signed-Rank test.
 
-::: {#exercise-joins .callout-tip}
+::: callout-tip
 ## Wilcoxon Signed-Rank test
 
 ::: panel-tabset
@@ -218,14 +217,12 @@ tb2 <- eyes %>%
   select(-dif_thickness) %>% 
   pivot_longer(!id, names_to = "groups", values_to = "thickness")
 
-gt_sum4 <- tb2 %>% 
-tbl_summary(by = groups, include = -id,
+tb2 %>% 
+  tbl_summary(by = groups, include = -id,
             label = list(thickness ~ "thickness (microns)"),
             digits = list(everything() ~ 1)) %>%
-  add_p(test = thickness ~ "paired.wilcox.test", group = id) %>% 
-  as_gt()
-  
-gt_sum4 
+  add_p(test = thickness ~ "paired.wilcox.test", group = id,
+                 estimate_fun = thickness ~ function(x) style_sigfig(x, digits = 3))
 ```
 
-There is not evidence from this small study with patients of glaucoma that the thickness of the cornea in affected eyes, median = 459 $\mu{m}$ (IQR: 436.5, 478.5) $\mu{m}$, differs from unaffected eyes 470 $\mu{m}$ (442, 479.5) (p=0.30 \>0.05).
+There is not evidence from this small study with patients of glaucoma that the thickness of the cornea in affected eyes, median = 459 $\mu{m}$ (IQR: 436.5, 478.5), differs from unaffected eyes 470 $\mu{m}$ (442, 479.5) (p=0.30 \>0.05).

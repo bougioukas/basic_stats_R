@@ -234,7 +234,7 @@ tb1 %>%
 
 ```
 
-There was a significant reduction in weight (mean change = 39.6 g, sd = 32.3[^paired_t_test-1]) after the discharge (p-value \<0.001 that is lower than 0.05; reject $H_0$). Note that the 95% confidence interval (26.3 to 52.9) doesn't include the null hypothesized value of zero. However, is this reduction of clinical importance?
+There was a significant reduction in weight (mean change = 39.6 g, sd = 32.3[^paired_t_test-1]) after the discharge (p-value \<0.001 that is lower than 0.05; reject $H_0$). Note that the 95% confidence interval (26.3 to 53.0) doesn't include the null hypothesized value of zero. However, is this reduction of clinical importance?
 
 
 [^paired_t_test-1]: sd for the change is useful information for meta-analytic techniques (see [Cochrane Handbook for Systematic Reviews of Interventions](https://training.cochrane.org/handbook/archive/v6.1/chapter-06))
