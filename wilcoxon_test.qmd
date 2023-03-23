@@ -49,7 +49,7 @@ We import the data *eyes* in R:
 #| warning: false
 
 library(readxl)
-eyes <- read_excel(here("data", "eyes.xlsx"))
+eyes <- read_excel(here("data", "eyes1.xlsx"))
 ```
 
 We calculate the differences using the function `mutate()`:
@@ -160,14 +160,17 @@ eyes %>%
 
 The differences seems to come from a population with a symmetrical distribution and the skewness is close to zero (0.03). However, the (excess) kurtosis equals to -1.37 (platykurtic) and the sample size is small. Therefore, the data may not follow the normal distribution.
 
-**Normality test** We can use Shapiro-Wilk test to check for normality of the differences. However, here, normality test is not helpful because of the small sample (the test is under-powered).
+**Normality test** 
+
+We can use Shapiro-Wilk test to check for normality of the differences. 
 
 ```{r}
  eyes %>%
     shapiro_test(dif_thickness)
 ```
 
-The Shapiro-Wilk test suggests that the weight differences are normally distributed (p=0.65 \> 0.05).
+The Shapiro-Wilk test suggests that the weight differences are normally distributed (p=0.65 \> 0.05). However, here, normality test is not helpful because of the small sample (the test is under-powered).
+
 
 ## Run the Wilcoxon Signed-Rank test
 

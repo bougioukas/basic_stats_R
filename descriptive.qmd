@@ -502,7 +502,7 @@ Let's calculate the summary statistics for the `age` variable in our dataset.
 arrhythmia %>%
   dplyr::summarise(
     n = n(),
-    count_na = sum(is.na(age)),
+    na = sum(is.na(age)),
     min = min(age, na.rm = TRUE),
     q1 = quantile(age, 0.25, na.rm = TRUE),
     median = quantile(age, 0.5, na.rm = TRUE),

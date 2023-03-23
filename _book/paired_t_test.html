@@ -100,7 +100,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/dt-ext-buttons-1.12.1/js/dataTables.buttons.min.js"></script><script src="site_libs/dt-ext-buttons-1.12.1/js/buttons.html5.min.js"></script><script src="site_libs/dt-ext-buttons-1.12.1/js/buttons.colVis.min.js"></script><script src="site_libs/dt-ext-buttons-1.12.1/js/buttons.print.min.js"></script><link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
@@ -251,7 +251,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title"><span id="sec-paired_t_test" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Paired t-test</span></span></h1>
 </div>
 
@@ -336,8 +336,8 @@ Null hypothesis and alternative hypothesis
 </div>
 <div class="cell">
 <div id="fig-weight" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-8b89cf46866ecd43dfb9" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-8b89cf46866ecd43dfb9">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25"],[3250,2680,2960,3420,3210,2740,3250,3170,2970,3100,3087,2687,2860,3430,3210,3150,2680,2960,3440,3210,3150,2687,2960,3422,3210],[3220,2640,2940,3350,3140,2730,3220,3150,2890,2997,3003,2645,2875,3400,3220,3100,2660,2910,3400,3140,3115,2644,2880,3393,3240],[30,40,20,70,70,10,30,20,80,103,84,42,-15,30,-10,50,20,50,40,70,35,43,80,29,-30]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>birth_weight<\/th>\n      <th>discharge_weight<\/th>\n      <th>dif_weight<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-center","targets":"_all"},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;7.1: Table with data from “weight” file.</figcaption><p></p>
+<figure class="figure"><div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-91b2f9b98e5819ddd96b" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-91b2f9b98e5819ddd96b">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25"],[3250,2680,2960,3420,3210,2740,3250,3170,2970,3100,3087,2687,2860,3430,3210,3150,2680,2960,3440,3210,3150,2687,2960,3422,3210],[3220,2640,2940,3350,3140,2730,3220,3150,2890,2997,3003,2645,2875,3400,3220,3100,2660,2910,3400,3140,3115,2644,2880,3393,3240],[30,40,20,70,70,10,30,20,80,103,84,42,-15,30,-10,50,20,50,40,70,35,43,80,29,-30]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>birth_weight<\/th>\n      <th>discharge_weight<\/th>\n      <th>dif_weight<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-center","targets":"_all"},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;7.1: Table with data from “weight” file.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -566,7 +566,7 @@ mean difference
 </div>
 </div>
 </div>
-</section><section id="present-the-results-in-a-summary-table" class="level2" data-number="7.7"><h2 data-number="7.7" class="anchored" data-anchor-id="present-the-results-in-a-summary-table">
+</section><section id="present-the-results-in-a-summary-table" class="level2 page-columns page-full" data-number="7.7"><h2 data-number="7.7" class="anchored" data-anchor-id="present-the-results-in-a-summary-table">
 <span class="header-section-number">7.7</span> Present the results in a summary table</h2>
 <div class="cell">
 <details><summary>Show the code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tb1</span> <span class="op">&lt;-</span> <span class="va">weight</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -574,24 +574,20 @@ mean difference
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">dif_weight</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="op">!</span><span class="va">id</span>, names_to <span class="op">=</span> <span class="st">"group"</span>, values_to <span class="op">=</span> <span class="st">"weights"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">gt_sum3</span> <span class="op">&lt;-</span> <span class="va">tb1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="va">group</span>, include <span class="op">=</span> <span class="op">-</span><span class="va">id</span>,</span>
+<span><span class="va">tb1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="va">group</span>, include <span class="op">=</span> <span class="op">-</span><span class="va">id</span>,</span>
 <span>            label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">weights</span> <span class="op">~</span> <span class="st">"weights (grams)"</span><span class="op">)</span>,</span>
 <span>            statistic <span class="op">=</span>  <span class="va">weights</span> <span class="op">~</span> <span class="st">"{mean} ({sd})"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="co">#add_difference(test = weights ~ "paired.t.test", group = id) %&gt;%</span></span>
-<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_p.html">add_p</a></span><span class="op">(</span>test <span class="op">=</span> <span class="va">weights</span> <span class="op">~</span> <span class="st">"paired.t.test"</span>, group <span class="op">=</span> <span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="co">#modify_spanning_header(all_stat_cols() ~ "**Weight**") %&gt;% </span></span>
-<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/as_gt.html">as_gt</a></span><span class="op">(</span><span class="op">)</span></span>
-<span>  </span>
-<span><span class="va">gt_sum3</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_difference.html">add_difference</a></span><span class="op">(</span>test <span class="op">=</span> <span class="va">weights</span> <span class="op">~</span> <span class="st">"paired.t.test"</span>, group <span class="op">=</span> <span class="va">id</span>,</span>
+<span>                 estimate_fun <span class="op">=</span> <span class="va">weights</span> <span class="op">~</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/style_sigfig.html">style_sigfig</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 
-<div id="ljpggondzc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="rszzoyzzln" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ljpggondzc .gt_table {
+#rszzoyzzln .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -616,7 +612,7 @@ mean difference
   border-left-color: #D3D3D3;
 }
 
-#ljpggondzc .gt_heading {
+#rszzoyzzln .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -628,12 +624,12 @@ mean difference
   border-right-color: #D3D3D3;
 }
 
-#ljpggondzc .gt_caption {
+#rszzoyzzln .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ljpggondzc .gt_title {
+#rszzoyzzln .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -645,7 +641,7 @@ mean difference
   border-bottom-width: 0;
 }
 
-#ljpggondzc .gt_subtitle {
+#rszzoyzzln .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -657,13 +653,13 @@ mean difference
   border-top-width: 0;
 }
 
-#ljpggondzc .gt_bottom_border {
+#rszzoyzzln .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ljpggondzc .gt_col_headings {
+#rszzoyzzln .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -678,7 +674,7 @@ mean difference
   border-right-color: #D3D3D3;
 }
 
-#ljpggondzc .gt_col_heading {
+#rszzoyzzln .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -698,7 +694,7 @@ mean difference
   overflow-x: hidden;
 }
 
-#ljpggondzc .gt_column_spanner_outer {
+#rszzoyzzln .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -710,15 +706,15 @@ mean difference
   padding-right: 4px;
 }
 
-#ljpggondzc .gt_column_spanner_outer:first-child {
+#rszzoyzzln .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ljpggondzc .gt_column_spanner_outer:last-child {
+#rszzoyzzln .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ljpggondzc .gt_column_spanner {
+#rszzoyzzln .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -730,7 +726,7 @@ mean difference
   width: 100%;
 }
 
-#ljpggondzc .gt_group_heading {
+#rszzoyzzln .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -756,7 +752,7 @@ mean difference
   text-align: left;
 }
 
-#ljpggondzc .gt_empty_group_heading {
+#rszzoyzzln .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -771,15 +767,15 @@ mean difference
   vertical-align: middle;
 }
 
-#ljpggondzc .gt_from_md > :first-child {
+#rszzoyzzln .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ljpggondzc .gt_from_md > :last-child {
+#rszzoyzzln .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ljpggondzc .gt_row {
+#rszzoyzzln .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -798,7 +794,7 @@ mean difference
   overflow-x: hidden;
 }
 
-#ljpggondzc .gt_stub {
+#rszzoyzzln .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -811,7 +807,7 @@ mean difference
   padding-right: 5px;
 }
 
-#ljpggondzc .gt_stub_row_group {
+#rszzoyzzln .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -825,11 +821,11 @@ mean difference
   vertical-align: top;
 }
 
-#ljpggondzc .gt_row_group_first td {
+#rszzoyzzln .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ljpggondzc .gt_summary_row {
+#rszzoyzzln .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -839,16 +835,16 @@ mean difference
   padding-right: 5px;
 }
 
-#ljpggondzc .gt_first_summary_row {
+#rszzoyzzln .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ljpggondzc .gt_first_summary_row.thick {
+#rszzoyzzln .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ljpggondzc .gt_last_summary_row {
+#rszzoyzzln .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -858,7 +854,7 @@ mean difference
   border-bottom-color: #D3D3D3;
 }
 
-#ljpggondzc .gt_grand_summary_row {
+#rszzoyzzln .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -868,7 +864,7 @@ mean difference
   padding-right: 5px;
 }
 
-#ljpggondzc .gt_first_grand_summary_row {
+#rszzoyzzln .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -878,11 +874,11 @@ mean difference
   border-top-color: #D3D3D3;
 }
 
-#ljpggondzc .gt_striped {
+#rszzoyzzln .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ljpggondzc .gt_table_body {
+#rszzoyzzln .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -891,7 +887,7 @@ mean difference
   border-bottom-color: #D3D3D3;
 }
 
-#ljpggondzc .gt_footnotes {
+#rszzoyzzln .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -905,7 +901,7 @@ mean difference
   border-right-color: #D3D3D3;
 }
 
-#ljpggondzc .gt_footnote {
+#rszzoyzzln .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -914,7 +910,7 @@ mean difference
   padding-right: 5px;
 }
 
-#ljpggondzc .gt_sourcenotes {
+#rszzoyzzln .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -928,7 +924,7 @@ mean difference
   border-right-color: #D3D3D3;
 }
 
-#ljpggondzc .gt_sourcenote {
+#rszzoyzzln .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -936,64 +932,64 @@ mean difference
   padding-right: 5px;
 }
 
-#ljpggondzc .gt_left {
+#rszzoyzzln .gt_left {
   text-align: left;
 }
 
-#ljpggondzc .gt_center {
+#rszzoyzzln .gt_center {
   text-align: center;
 }
 
-#ljpggondzc .gt_right {
+#rszzoyzzln .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ljpggondzc .gt_font_normal {
+#rszzoyzzln .gt_font_normal {
   font-weight: normal;
 }
 
-#ljpggondzc .gt_font_bold {
+#rszzoyzzln .gt_font_bold {
   font-weight: bold;
 }
 
-#ljpggondzc .gt_font_italic {
+#rszzoyzzln .gt_font_italic {
   font-style: italic;
 }
 
-#ljpggondzc .gt_super {
+#rszzoyzzln .gt_super {
   font-size: 65%;
 }
 
-#ljpggondzc .gt_footnote_marks {
+#rszzoyzzln .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#ljpggondzc .gt_asterisk {
+#rszzoyzzln .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ljpggondzc .gt_indent_1 {
+#rszzoyzzln .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ljpggondzc .gt_indent_2 {
+#rszzoyzzln .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ljpggondzc .gt_indent_3 {
+#rszzoyzzln .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ljpggondzc .gt_indent_4 {
+#rszzoyzzln .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ljpggondzc .gt_indent_5 {
+#rszzoyzzln .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1006,6 +1002,12 @@ mean difference
 <th id="<strong>discharge_weight</strong>, N = 25<sup class=&quot;gt_footnote_marks&quot;>1</sup>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
 <strong>discharge_weight</strong>, N = 25<sup>1</sup>
 </th>
+<th id="<strong>Difference</strong><sup class=&quot;gt_footnote_marks&quot;>2</sup>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>Difference</strong><sup>2</sup>
+</th>
+<th id="<strong>95% CI</strong><sup class=&quot;gt_footnote_marks&quot;>2,3</sup>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>95% CI</strong><sup>2,3</sup>
+</th>
 <th id="<strong>p-value</strong><sup class=&quot;gt_footnote_marks&quot;>2</sup>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
 <strong>p-value</strong><sup>2</sup>
 </th>
@@ -1014,23 +1016,29 @@ mean difference
 <td class="gt_row gt_left" headers="label">weights (grams)</td>
 <td class="gt_row gt_center" headers="stat_1">3,076 (248)</td>
 <td class="gt_row gt_center" headers="stat_2">3,036 (248)</td>
+<td class="gt_row gt_center" headers="estimate">39.6</td>
+<td class="gt_row gt_center" headers="ci">26.3, 53.0</td>
 <td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
 </tr></tbody>
 <tfoot class="gt_footnotes">
 <tr class="even">
-<td colspan="4" class="gt_footnote">
+<td colspan="6" class="gt_footnote">
 <sup>1</sup> Mean (SD)</td>
 </tr>
 <tr class="odd">
-<td colspan="4" class="gt_footnote">
+<td colspan="6" class="gt_footnote">
 <sup>2</sup> Paired t-test</td>
+</tr>
+<tr class="even">
+<td colspan="6" class="gt_footnote">
+<sup>3</sup> CI = Confidence Interval</td>
 </tr>
 </tfoot>
 </table>
 </div>
 </div>
 </div>
-<p>There was a significant reduction in weight (39.6 g) after the discharge (p-value &lt;0.001 that is lower than 0.05; reject <span class="math inline">\(H_0\)</span>). Note that the 95% confidence interval (26.3 to 52.9) doesn’t include the null hypothesized value of 0. However, is this reduction of clinical importance?</p>
+<div class="page-columns page-full"><p>There was a significant reduction in weight (mean change = 39.6 g, sd = 32.3<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>) after the discharge (p-value &lt;0.001 that is lower than 0.05; reject <span class="math inline">\(H_0\)</span>). Note that the 95% confidence interval (26.3 to 52.9) doesn’t include the null hypothesized value of zero. However, is this reduction of clinical importance?</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;sd for the change is useful information for meta-analytic techniques (see <a href="https://training.cochrane.org/handbook/archive/v6.1/chapter-06">Cochrane Handbook for Systematic Reviews of Interventions</a>)</p></li></div></div>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">

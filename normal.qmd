@@ -253,7 +253,7 @@ ggplot(df2, aes(x, y1)) +
 
 The **normal Q--Q plot**, or normal quantile-quantile plot, provides an easy way to visually check whether or not a data set is normally distributed. The values in the plot are the **quantiles**[^normal-2] of the variable distribution (sample quantiles) plotted against the quantiles of a standard normal distribution (theoretical quantiles). If the points fall close to a **straight** line at a 45-degree angle, then the data are normally distributed (although the ends of the Q-Q plot often deviate from the straight line).
 
-[^normal-2]: Quantiles are values that split sorted data or a probability distribution into equal parts. The most commonly used quantiles have special names. <br>**Quartiles**: Three quartiles (Q1, median, Q3) split the data into four parts. **Percentiles**: 99 percentiles split the data into 100 parts.
+[^normal-2]: Quantiles are values that split sorted data or a probability distribution into equal parts. The most commonly used quantiles have special names. <br>**Quartiles**: Three quartiles (Q1, median, Q3) split the data into four parts. <br>**Percentiles**: 99 percentiles split the data into 100 parts.
 
 ```{r}
 #| echo: false
@@ -265,18 +265,18 @@ arrhythmia <- read_excel(here("data", "arrhythmia.xlsx"))
 ```
 
 ::: {#exercise-joins .callout-tip}
-## Normal q-q plots
+## Normal q-q plot of age
 
 ::: panel-tabset
 ## Base R
 
 ```{r}
 #| warning: false
-#| label: fig-qq_age2
+#| label: fig-qq_age1
 #| fig-height: 6.0
 #| fig-width: 8.0
 #| fig-align: "center"
-#| fig-cap: Q-Q plot of Birthweight.
+#| fig-cap: Q-Q plot of age.
 
 qqnorm(arrhythmia$age, pch = 1, frame = FALSE)
 qqline(arrhythmia$age, col = "steelblue", lwd = 2)
@@ -286,11 +286,11 @@ qqline(arrhythmia$age, col = "steelblue", lwd = 2)
 
 ```{r}
 #| warning: false
-#| label: fig-qq_age
+#| label: fig-qq_age2
 #| fig-height: 6.0
 #| fig-width: 8.0
 #| fig-align: "center"
-#| fig-cap: Q-Q plot of Birthweight.
+#| fig-cap: Q-Q plot of age.
 
 arrhythmia %>%
   ggqqplot("age", conf.int = F)
@@ -299,18 +299,18 @@ arrhythmia %>%
 :::
 
 ::: callout-tip
-## Normal q-q plots
+## Normal q-q plot of QRS
 
 ::: panel-tabset
 ## Base R
 
 ```{r}
 #| warning: false
-#| label: fig-qq_QRS2
+#| label: fig-qq_QRS1
 #| fig-height: 6.0
 #| fig-width: 8.0
 #| fig-align: "center"
-#| fig-cap: Q-Q plot of Birthweight.
+#| fig-cap: Normal Q-Q plot of QRS.
 
 qqnorm(arrhythmia$QRS, pch = 1, frame = FALSE)
 qqline(arrhythmia$QRS, col = "steelblue", lwd = 2)
@@ -320,11 +320,11 @@ qqline(arrhythmia$QRS, col = "steelblue", lwd = 2)
 
 ```{r}
 #| warning: false
-#| label: fig-qq_QRS
+#| label: fig-qq_QRS2
 #| fig-height: 6.0
 #| fig-width: 8.0
 #| fig-align: "center"
-#| fig-cap: Q-Q plot of Birthweight.
+#| fig-cap: Normal Q-Q plot of QRS.
 
 arrhythmia %>%
   ggqqplot("QRS", conf.int = F)

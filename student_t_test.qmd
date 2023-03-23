@@ -126,7 +126,8 @@ The above figure shows that the data are close to symmetry and the assumption of
 depression %>%
   ggqqplot("HDRS", color = "intervention", conf.int = F) +
   scale_color_jco() +
-  facet_wrap(~ intervention)
+  facet_wrap(~ intervention) + 
+  theme(legend.position = "none")
 ```
 
  

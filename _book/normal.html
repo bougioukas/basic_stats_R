@@ -589,14 +589,14 @@ Normal distribution and excess kurtosis
 </section>
 <section id="normal-q-q-plots" class="level2 page-columns page-full" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="normal-q-q-plots"><span class="header-section-number">3.5</span> Normal Q-Q plots</h2>
-<div class="page-columns page-full"><p>The <strong>normal Q–Q plot</strong>, or normal quantile-quantile plot, provides an easy way to visually check whether or not a data set is normally distributed. The values in the plot are the <strong>quantiles</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> of the variable distribution (sample quantiles) plotted against the quantiles of a standard normal distribution (theoretical quantiles). If the points fall close to a <strong>straight</strong> line at a 45-degree angle, then the data are normally distributed (although the ends of the Q-Q plot often deviate from the straight line).</p><div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;Quantiles are values that split sorted data or a probability distribution into equal parts. The most commonly used quantiles have special names. <br><strong>Quartiles</strong>: Three quartiles (Q1, median, Q3) split the data into four parts. <strong>Percentiles</strong>: 99 percentiles split the data into 100 parts.</p></li></div></div>
+<div class="page-columns page-full"><p>The <strong>normal Q–Q plot</strong>, or normal quantile-quantile plot, provides an easy way to visually check whether or not a data set is normally distributed. The values in the plot are the <strong>quantiles</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> of the variable distribution (sample quantiles) plotted against the quantiles of a standard normal distribution (theoretical quantiles). If the points fall close to a <strong>straight</strong> line at a 45-degree angle, then the data are normally distributed (although the ends of the Q-Q plot often deviate from the straight line).</p><div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;Quantiles are values that split sorted data or a probability distribution into equal parts. The most commonly used quantiles have special names. <br><strong>Quartiles</strong>: Three quartiles (Q1, median, Q3) split the data into four parts. <br><strong>Percentiles</strong>: 99 percentiles split the data into 100 parts.</p></li></div></div>
 <div id="exercise-joins" class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Normal q-q plots
+Normal q-q plot of age
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -608,10 +608,10 @@ Normal q-q plots
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(arrhythmia<span class="sc">$</span>age, <span class="at">pch =</span> <span class="dv">1</span>, <span class="at">frame =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(arrhythmia<span class="sc">$</span>age, <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-qq_age2" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-qq_age1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="normal_files/figure-html/fig-qq_age2-1.png" class="img-fluid figure-img" width="768"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.5: Q-Q plot of Birthweight.</figcaption><p></p>
+<p><img src="normal_files/figure-html/fig-qq_age1-1.png" class="img-fluid figure-img" width="768"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.5: Q-Q plot of age.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -622,10 +622,10 @@ Normal q-q plots
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>arrhythmia <span class="sc">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggqqplot</span>(<span class="st">"age"</span>, <span class="at">conf.int =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-qq_age" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-qq_age2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="normal_files/figure-html/fig-qq_age-1.png" class="img-fluid figure-img" width="768"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.6: Q-Q plot of Birthweight.</figcaption><p></p>
+<p><img src="normal_files/figure-html/fig-qq_age2-1.png" class="img-fluid figure-img" width="768"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.6: Q-Q plot of age.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -641,7 +641,7 @@ Normal q-q plots
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Normal q-q plots
+Normal q-q plot of QRS
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -653,10 +653,10 @@ Normal q-q plots
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(arrhythmia<span class="sc">$</span>QRS, <span class="at">pch =</span> <span class="dv">1</span>, <span class="at">frame =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(arrhythmia<span class="sc">$</span>QRS, <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-qq_QRS2" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-qq_QRS1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="normal_files/figure-html/fig-qq_QRS2-1.png" class="img-fluid figure-img" width="768"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.7: Q-Q plot of Birthweight.</figcaption><p></p>
+<p><img src="normal_files/figure-html/fig-qq_QRS1-1.png" class="img-fluid figure-img" width="768"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.7: Normal Q-Q plot of QRS.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -667,10 +667,10 @@ Normal q-q plots
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>arrhythmia <span class="sc">%&gt;%</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggqqplot</span>(<span class="st">"QRS"</span>, <span class="at">conf.int =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-qq_QRS" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-qq_QRS2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="normal_files/figure-html/fig-qq_QRS-1.png" class="img-fluid figure-img" width="768"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.8: Q-Q plot of Birthweight.</figcaption><p></p>
+<p><img src="normal_files/figure-html/fig-qq_QRS2-1.png" class="img-fluid figure-img" width="768"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.8: Normal Q-Q plot of QRS.</figcaption><p></p>
 </figure>
 </div>
 </div>

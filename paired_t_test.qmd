@@ -225,17 +225,16 @@ tb1 <- weight %>%
   select(-dif_weight) %>% 
   pivot_longer(!id, names_to = "group", values_to = "weights")
 
-gt_sum3 <- tb1 %>% 
-tbl_summary(by = group, include = -id,
+tb1 %>% 
+  tbl_summary(by = group, include = -id,
             label = list(weights ~ "weights (grams)"),
             statistic =  weights ~ "{mean} ({sd})") %>%
-  #add_difference(test = weights ~ "paired.t.test", group = id) %>%
-  add_p(test = weights ~ "paired.t.test", group = id) %>% 
-  #modify_spanning_header(all_stat_cols() ~ "**Weight**") %>% 
-  as_gt()
-  
-gt_sum3 
+  add_difference(test = weights ~ "paired.t.test", group = id,
+                 estimate_fun = weights ~ function(x) style_sigfig(x, digits = 3))
 
 ```
 
-There was a significant reduction in weight (39.6 g) after the discharge (p-value \<0.001 that is lower than 0.05; reject $H_0$). Note that the 95% confidence interval (26.3 to 52.9) doesn't include the null hypothesized value of 0. However, is this reduction of clinical importance?
+There was a significant reduction in weight (mean change = 39.6 g, sd = 32.3[^paired_t_test-1]) after the discharge (p-value \<0.001 that is lower than 0.05; reject $H_0$). Note that the 95% confidence interval (26.3 to 52.9) doesn't include the null hypothesized value of zero. However, is this reduction of clinical importance?
+
+
+[^paired_t_test-1]: sd for the change is useful information for meta-analytic techniques (see [Cochrane Handbook for Systematic Reviews of Interventions](https://training.cochrane.org/handbook/archive/v6.1/chapter-06))
