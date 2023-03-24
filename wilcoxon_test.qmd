@@ -62,7 +62,7 @@ eyes <- eyes %>%
 ```{r}
 #| echo: false
 #| label: fig-weight
-#| fig-cap: Table with data from "weight" file.
+#| fig-cap: Table with data from "eyes" file.
 
 DT::datatable(
   eyes, extensions = 'Buttons', options = list(
@@ -214,6 +214,7 @@ The result is not significant (p = 0.31 \> 0.05). However, we can't be certain t
 #| warning: false
 
 tb2 <- eyes %>%
+  mutate(id = row_number()) %>% 
   select(-dif_thickness) %>% 
   pivot_longer(!id, names_to = "groups", values_to = "thickness")
 

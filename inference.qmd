@@ -33,8 +33,9 @@ Using the known distribution of the test statistic and according to the result o
 -   If p − value \< α, reject the null hypothesis, $H_{0}$.
 -   If p − value ≥ α, do not reject the null hypothesis, $H_{0}$.
 
-The @tbl-p demonstrates how to interpret the strength of the evidence. However, always keep in mind the size of the study being considered.
+The @tbl-panel demonstrates how to interpret the strength of the evidence. However, always keep in mind the size of the study being considered.
 
+::: {#tbl-panel}
 | p-value              | Interpretation                         |
 |----------------------|----------------------------------------|
 | $p \geq{0.10}$       | No evidence to reject $H_{0}$          |
@@ -43,32 +44,42 @@ The @tbl-p demonstrates how to interpret the strength of the evidence. However, 
 | $0.001\leq p < 0.01$ | Strong evidence to reject $H_{0}$      |
 | $p < 0.001$          | Very strong evidence to reject $H_{0}$ |
 
-: Strength of the evidence against $H_{0}$. {#tbl-p}
+: Strength of the evidence against $H_{0}$.
+:::
 
 **Step 5:** Interpret the results.
 :::
+
+ 
+
 
 ## Type of Errors in hypothesis testing
 
 **Type I error:** we reject the null hypothesis when it is true (false positive), and conclude that there is an effect when, in reality, there is none. The maximum chance (probability) of making a Type I error is denoted by α (alpha). This is the significance level of the test; we reject the null hypothesis if our p-value is less than the significance level, i.e. if p \< a (@fig-type_errors).
 
-**Type II error:** we do not reject the null hypothesis when it is false (false negative), and conclude that there is no effect when one really exists. The chance of making a Type II error is denoted by β (beta); its compliment, (1 - β), is the power of the test. The power, therefore, is the probability of rejecting the null hypothesis when it is false; i.e. it is the chance (usually expressed as a percentage) of detecting, as statistically significant, a real treatment effect of a given size (@fig-type_errors). @tbl-power presents the main factors that can influence the power in a study.
+**Type II error:** we do not reject the null hypothesis when it is false (false negative), and conclude that there is no effect when one really exists. The chance of making a Type II error is denoted by β (beta); its compliment, (1 - β), is the power of the test. (@tbl-type_errors). 
 
-```{r}
-#| label: fig-type_errors
-#| fig-align: center
-#| out-width: "75%"
-#| echo: false
-#| fig-cap: Types of error in hypothesis testing.
+|                                         |                         | In population $H_0$ is            |                                                      |
+|------------------|----------------------|----------------------------|----------------------------|
+|                                         |                         | **True**                          | **False**                                            |
+| **Decision based on**<br>**the sample** | **Do Not Reject** $H_0$ | Correct decision:<br>$1 - \alpha$ | Type II error ($\beta$)                              |
+|                                         | **Reject** $H_0$        | Type I error ($\alpha$)           | Correct decision:<br>$1 - \beta$ (power of the test) |
 
-knitr::include_graphics(here::here("images", "type_errors.png"))
-```
 
-| Factor                   | Influence on study's power                                                                                                                                                                                |
-|-------------------------|-----------------------------------------------|
-| **Effect Size**   <br> (e.g., mean difference, risk ratio)       | As effect size increases, power tends to increase (a larger effect size is easier to be detected by the statistical test, leading to a greater probability of a statistically significant result).        |
-| **Sample Size**          | As the sample size goes up, power generally goes up (this factor is the most easily manipulated by researchers).                                                                                          |
-| **Standard deviation**   | As variability decreases, power tends to increase (variability can be reduced by controlling extraneous variables such as inclusion and exclusion criteria defining the sample in a study).               |
-| **Significance level α** | As α goes up, power goes up (it would be easier to find statistical significance with a larger α, e.g. α=0.1, compared to a smaller α, e.g. α=0.05). |
+: Types of error in hypothesis testing. {#tbl-type_errors}
+
+ 
+
+
+The power ($1 - \beta$), therefore, is the probability of (correctly) rejecting the null hypothesis when it is false; i.e. it is the chance (usually expressed as a percentage) of detecting, as statistically significant, a real treatment effect of a given size. @tbl-power presents the main factors that can influence the power in a study.
+
+
+
+| Factor                                                   | Influence on study's power                                                                                                                                                                         |
+|--------------------------|----------------------------------------------|
+| **Effect Size** <br> (e.g., mean difference, risk ratio) | As effect size increases, power tends to increase (a larger effect size is easier to be detected by the statistical test, leading to a greater probability of a statistically significant result). |
+| **Sample Size**                                          | As the sample size goes up, power generally goes up (this factor is the most easily manipulated by researchers).                                                                                   |
+| **Standard deviation**                                   | As variability decreases, power tends to increase (variability can be reduced by controlling extraneous variables such as inclusion and exclusion criteria defining the sample in a study).        |
+| **Significance level α**                                 | As α goes up, power goes up (it would be easier to find statistical significance with a larger α, e.g. α=0.1, compared to a smaller α, e.g. α=0.05).                                               |
 
 : Factors Influencing Power. {#tbl-power}
