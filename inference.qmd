@@ -53,11 +53,13 @@ The @tbl-panel demonstrates how to interpret the strength of the evidence. Howev
  
 
 
-## Type of Errors in hypothesis testing
+## Type of Errors in Hypothesis Testing
 
-**Type I error:** we reject the null hypothesis when it is true (false positive), and conclude that there is an effect when, in reality, there is none. The maximum chance (probability) of making a Type I error is denoted by α (alpha). This is the significance level of the test; we reject the null hypothesis if our p-value is less than the significance level, i.e. if p \< a (@fig-type_errors).
+In the framework of hypothesis testing there are two types of errors: **Type I error** and **type II error** (@tbl-type_errors). 
 
-**Type II error:** we do not reject the null hypothesis when it is false (false negative), and conclude that there is no effect when one really exists. The chance of making a Type II error is denoted by β (beta); its compliment, (1 - β), is the power of the test. (@tbl-type_errors). 
+**Type I error:** we reject the null hypothesis when it is true (false positive), and conclude that there is an effect when, in reality, there is none. The maximum chance (probability) of making a Type I error is denoted by α (alpha). This is the significance level of the test; we reject the null hypothesis if our p-value is less than the significance level, i.e. if p \< a.
+
+**Type II error:** we do not reject the null hypothesis when it is false (false negative), and conclude that there is no effect when one really exists. The chance of making a Type II error is denoted by β (beta); its compliment, (1 - β), is the power of the test. 
 
 |                                         |                         | In population $H_0$ is            |                                                      |
 |------------------|----------------------|----------------------------|----------------------------|

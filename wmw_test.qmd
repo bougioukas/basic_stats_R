@@ -23,7 +23,9 @@ We consider the data in *thromboglobulin* dataset that contains the urinary $\be
 -   $H_1$: the distribution of urinary $\beta$ thromboglobulin is different in the two groups
 :::
 
-**NOTE:** The null hypothesis is that the observations from one group do not tend to have a higher or lower ranking than observations from the other group. This test **does not** test the medians of the data as is commonly thought, it tests the **whole distribution**. In practice, however, we use the medians to present the results. Statistical speaking, if the distributions of the two groups have **similar shapes**, the Wilcoxon-Mann-Whitney test can be used to determine whether there are differences in the **medians** between the two groups.
+::: column-margin
+**NOTE:** The null hypothesis is that the observations from one group do not tend to have higher or lower ranks than observations from the other group. This test does not compare the medians of the data as is commonly thought, it tests the whole distribution. However, if the distributions of the two groups have similar shapes and spreads (i.e., differing only in location), the WMW test can address (in most cases) whether there are differences in the medians between the two groups.(ref.)
+:::
 
 ## Packages we need
 
@@ -38,7 +40,10 @@ library(exactRankTests)
 library(PupillometryR)
 library(gtsummary)
 library(ggpubr)
+library(sjstats)
+library(sjPlot)
 library(ggsci)
+library(report)
 library(here)
 library(tidyverse)
 ```
@@ -94,7 +99,7 @@ We can visualize the distribution of `b_TG` for the two groups:
 
 ```{r}
 #| warning: false
-#| label: fig-violin_plot2
+#| label: fig-raincloud_tg
 #| fig-cap: Rain cloud plot.
 
 set.seed(123)
@@ -191,7 +196,7 @@ We can see that the data for the non-diabetic group is not normally distributed 
 
 ## Run the Wilcoxon-Mann-Whitney test
 
-The difference in location between the two distributions can be tested using a rank test such as Wilcoxon-Mann-Whitney (WMW):
+The difference in location between two distributions with similar shapes (@fig-raincloud_tg) can be tested using the Wilcoxon-Mann-Whitney (WMW) test:
 
 ::: {#exercise-joins .callout-tip}
 ## Wilcoxon-Mann-Whitney test
@@ -203,7 +208,7 @@ The difference in location between the two distributions can be tested using a r
 wilcox.test(b_TG ~ status, conf.int = T, data = tg)
 ```
 
-**Historical Note:** As you can see, in R the Mann-Whitney statistic (symbolized as W) is calculated with the `wilcox.test()` function and it is called Wilcoxon rank-sum test. What is the reason for this? Henry Mann and Donald Whitney (1947) reported in their article that the test was first proposed by Frank Wilcoxon (1945) and they gave their version for the test. So the right would be to call this test Wilcoxon-Mann-Whitney (WMW) test.
+**Historical Note:** As you can see, in R the Mann-Whitney test is calculated with the `wilcox.test()` function and it is called Wilcoxon rank-sum test. What is the reason for this? Henry Mann and Donald Whitney (1947) reported in their article that the test was first proposed by Frank Wilcoxon (1945) and they gave their version for the test. So the right would be to call this test Wilcoxon-Mann-Whitney (WMW) test.
 
 ## exactRankTests
 
@@ -222,16 +227,22 @@ tg %>%
 :::
 :::
 
-Based on the p \<0.001, we reject the null hypothesis, the result (the median of the difference[^wmw-1] = 18.95, 95% CI: 13.7 to 24) is significant.
+The result (the median of the difference[^wmw_test-1] = 18.95, 95%CI: 13.7 to 24) is significant (p \<0.001) and we reject the null hypothesis. 
 
-[^wmw-1]: **Note:** the estimator for the difference in location parameters does not estimate the difference in medians (a common misconception) but rather the median of the difference between the two samples.
+[^wmw_test-1]: **Note:** the estimator for the difference in location parameters does not estimate the difference in medians (a common misconception) but rather the median of the difference between the two samples.
 
+
+In general, however, WMW test is regarded as a test of comparing the difference in ranks between the two groups as follows: 
+
+```{r}
+mwu(tg, b_TG, status, out = "browser")
+```
 
  
 
 **Present the results in a summary table**
 
-The median (or another percentile) can be used as a summary measure. The choice is guided by the shape of the distributions.
+It is common practice to report the median (IQR) for each group in summary tables. 
 
 ```{r}
 #| code-fold: true
@@ -248,4 +259,11 @@ tg %>%
   add_n()
 ```
 
-Hence, there is evidence that the urinary $\beta$ thromboglobulin excretion is higher in diabetic group, median = 29.2 (IQR: 27.1, 34.8) pg/ml, as compared to non-diabetic group, 10.9 (8.3, 14.8) pg/ml. The median of the difference (18.95, 95% CI: 13.7 to 24) is significant (p \<0.001).
+Hence, there is evidence that the urinary $\beta$ thromboglobulin excretion is higher in diabetic group, median = 29.2 (IQR: 27.1, 34.8) pg/ml, as compared to non-diabetic group, 10.9 (8.3, 14.8) pg/ml. The WMW test suggests that there is a significant difference in mean ranks between the two groups (17.67 Vs 7.33, p \<0.001).
+
+
+There is also a specific package with the name {report} that may be useful in reporting the results of WMW test:
+```{r}
+report_results <- wilcox.test(tg$b_TG ~ tg$status) 
+report(report_results)
+```

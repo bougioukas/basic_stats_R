@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.287">
+<meta name="generator" content="quarto-1.3.290">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Practical Statistics in Medicine with R - 6&nbsp; Wilcoxon-Mann-Whitney (Mann-Whitney U) test</title>
 <style>
@@ -93,7 +93,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script><script src="site_libs/htmlwidgets-1.6.1/htmlwidgets.js"></script><link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+}</script><script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="site_libs/datatables-binding-0.27/datatables.js"></script><script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><link href="site_libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="site_libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="site_libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script><link href="site_libs/dt-ext-buttons-1.12.1/css/buttons.dataTables.min.css" rel="stylesheet">
@@ -282,7 +282,7 @@ Learning objectives
 </ul>
 </div>
 </div>
-<section id="research-question-and-hypothesis-testing" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="research-question-and-hypothesis-testing">
+<section id="research-question-and-hypothesis-testing" class="level2 page-columns page-full" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="research-question-and-hypothesis-testing">
 <span class="header-section-number">6.1</span> Research question and Hypothesis Testing</h2>
 <p>We consider the data in <em>thromboglobulin</em> dataset that contains the urinary <span class="math inline">\(\beta\)</span> thromboglobulin excretion (pg/ml) measured in 12 non-diabetic patients and 12 diabetic patients. The researchers used <span class="math inline">\(\alpha\)</span> = 0.05 significance level to test if the distribution of urinary <span class="math inline">\(\beta\)</span> thromboglobulin (b_TG) differs in the two groups.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
@@ -303,8 +303,10 @@ Null hypothesis and alternative hypothesis
 </ul>
 </div>
 </div>
-<p><strong>NOTE:</strong> The null hypothesis is that the observations from one group do not tend to have a higher or lower ranking than observations from the other group. This test <strong>does not</strong> test the medians of the data as is commonly thought, it tests the <strong>whole distribution</strong>. In practice, however, we use the medians to present the results. Statistical speaking, if the distributions of the two groups have <strong>similar shapes</strong>, the Wilcoxon-Mann-Whitney test can be used to determine whether there are differences in the <strong>medians</strong> between the two groups.</p>
-</section><section id="packages-we-need" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="packages-we-need">
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>NOTE:</strong> The null hypothesis is that the observations from one group do not tend to have higher or lower ranks than observations from the other group. This test does not compare the medians of the data as is commonly thought, it tests the whole distribution. However, if the distributions of the two groups have similar shapes and spreads (i.e., differing only in location), the WMW test can address (in most cases) whether there are differences in the medians between the two groups.(ref.)</p>
+</div></div></section><section id="packages-we-need" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="packages-we-need">
 <span class="header-section-number">6.2</span> Packages we need</h2>
 <p>We need to load the following packages:</p>
 <div class="cell">
@@ -313,7 +315,10 @@ Null hypothesis and alternative hypothesis
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">PupillometryR</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddsjoberg/gtsummary">gtsummary</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://strengejacke.github.io/sjstats/">sjstats</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://strengejacke.github.io/sjPlot/">sjPlot</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://nanx.me/ggsci/">ggsci</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/">report</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -326,8 +331,8 @@ Null hypothesis and alternative hypothesis
 </div>
 <div class="cell">
 <div id="fig-depression" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-619808e4516f5f123302" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-619808e4516f5f123302">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],["non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","non-diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic"],[4.1,6.3,7.8,8.5,8.9,10.4,11.5,12,13.8,17.6,24.3,37.2,27.5,28.1,26.1,23.8,25,29.8,33.9,37.7,31.3,43.2,28.7,46.2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>status<\/th>\n      <th>b_TG<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-center","targets":"_all"},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;6.1: Table with data from “depression” file.</figcaption><p></p>
+<figure class="figure"><div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-5118fa0bed58f048a8e2" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-5118fa0bed58f048a8e2">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],["non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic"],[4.1,6.3,7.8,8.5,8.9,10.4,11.5,12,13.8,17.6,24.3,37.2,27.5,28.1,26.1,23.8,25,29.8,33.9,37.7,31.3,43.2,28.7,46.2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>status<\/th>\n      <th>b_TG<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-center","targets":"_all"},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;6.1: Table with data from “depression” file.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -337,7 +342,7 @@ Null hypothesis and alternative hypothesis
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 24
 Columns: 2
-$ status &lt;chr&gt; "non-diabetic", "non-diabetic", "non-diabetic", "non-diabetic",…
+$ status &lt;chr&gt; "non_diabetic", "non_diabetic", "non_diabetic", "non_diabetic",…
 $ b_TG   &lt;dbl&gt; 4.1, 6.3, 7.8, 8.5, 8.9, 10.4, 11.5, 12.0, 13.8, 17.6, 24.3, 37…</code></pre>
 </div>
 </div>
@@ -349,7 +354,7 @@ $ b_TG   &lt;dbl&gt; 4.1, 6.3, 7.8, 8.5, 8.9, 10.4, 11.5, 12.0, 13.8, 17.6, 24.3
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 24
 Columns: 2
-$ status &lt;fct&gt; non-diabetic, non-diabetic, non-diabetic, non-diabetic, non-dia…
+$ status &lt;fct&gt; non_diabetic, non_diabetic, non_diabetic, non_diabetic, non_dia…
 $ b_TG   &lt;dbl&gt; 4.1, 6.3, 7.8, 8.5, 8.9, 10.4, 11.5, 12.0, 13.8, 17.6, 24.3, 37…</code></pre>
 </div>
 </div>
@@ -371,8 +376,8 @@ $ b_TG   &lt;dbl&gt; 4.1, 6.3, 7.8, 8.5, 8.9, 10.4, 11.5, 12.0, 13.8, 17.6, 24.3
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"none"</span>, </span>
 <span>        axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">14</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-violin_plot2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="wmw_test_files/figure-html/fig-violin_plot2-1.png" class="quarto-discovered-preview-image img-fluid figure-img" width="672"></p>
+<div id="fig-raincloud_tg" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="wmw_test_files/figure-html/fig-raincloud_tg-1.png" class="quarto-discovered-preview-image img-fluid figure-img" width="672"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;6.2: Rain cloud plot.</figcaption><p></p>
 </figure>
 </div>
@@ -434,11 +439,11 @@ Summary statistics by group
 <span><span class="va">tg_summary</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 12
-  status      n    na   min    q1 median    q3   max  mean    sd skewn…¹ kurto…²
-  &lt;fct&gt;   &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1 diabet…    12     0  23.8 27.2    29.2  34.8  46.2  31.8  7.17    1.05   0.107
-2 non-di…    12     0   4.1  8.32   11.0  14.8  37.2  13.5  9.19    1.81   3.47 
-# … with abbreviated variable names ¹​skewness, ²​kurtosis</code></pre>
+  status           n    na   min    q1 median    q3   max  mean    sd skewness
+  &lt;fct&gt;        &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+1 diabetic        12     0  23.8 27.2    29.2  34.8  46.2  31.8  7.17     1.05
+2 non_diabetic    12     0   4.1  8.32   11.0  14.8  37.2  13.5  9.19     1.81
+# ℹ 1 more variable: kurtosis &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </div>
@@ -451,11 +456,11 @@ Summary statistics by group
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 11
-  described_v…¹ status     n    na  mean    sd   p25   p50   p75 skewn…² kurto…³
-  &lt;chr&gt;         &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1 b_TG          diabe…    12     0  31.8  7.17 27.2   29.2  34.8    1.05   0.107
-2 b_TG          non-d…    12     0  13.5  9.19  8.32  11.0  14.8    1.81   3.47 
-# … with abbreviated variable names ¹​described_variables, ²​skewness, ³​kurtosis</code></pre>
+  described_variables status      n    na  mean    sd   p25   p50   p75 skewness
+  &lt;chr&gt;               &lt;fct&gt;   &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+1 b_TG                diabet…    12     0  31.8  7.17 27.2   29.2  34.8     1.05
+2 b_TG                non_di…    12     0  13.5  9.19  8.32  11.0  14.8     1.81
+# ℹ 1 more variable: kurtosis &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </div>
@@ -477,14 +482,14 @@ Summary statistics by group
   status       variable statistic      p
   &lt;fct&gt;        &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;
 1 diabetic     b_TG         0.886 0.105 
-2 non-diabetic b_TG         0.817 0.0148</code></pre>
+2 non_diabetic b_TG         0.817 0.0148</code></pre>
 </div>
 </div>
 <p>We can see that the data for the non-diabetic group is not normally distributed (p=0.015 &lt;0.05) according to the Shapiro-Wilk test.</p>
 <p>&nbsp;</p>
 </section><section id="run-the-wilcoxon-mann-whitney-test" class="level2 page-columns page-full" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="run-the-wilcoxon-mann-whitney-test">
 <span class="header-section-number">6.5</span> Run the Wilcoxon-Mann-Whitney test</h2>
-<p>The difference in location between the two distributions can be tested using a rank test such as Wilcoxon-Mann-Whitney (WMW):</p>
+<p>The difference in location between two distributions with similar shapes (<a href="#fig-raincloud_tg">Figure&nbsp;<span>6.2</span></a>) can be tested using the Wilcoxon-Mann-Whitney (WMW) test:</p>
 <div id="exercise-joins" class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -519,7 +524,7 @@ difference in location
                  18.95 </code></pre>
 </div>
 </div>
-<p><strong>Historical Note:</strong> As you can see, in R the Mann-Whitney statistic (symbolized as W) is calculated with the <code><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test()</a></code> function and it is called Wilcoxon rank-sum test. What is the reason for this? Henry Mann and Donald Whitney (1947) reported in their article that the test was first proposed by Frank Wilcoxon (1945) and they gave their version for the test. So the right would be to call this test Wilcoxon-Mann-Whitney (WMW) test.</p>
+<p><strong>Historical Note:</strong> As you can see, in R the Mann-Whitney test is calculated with the <code><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test()</a></code> function and it is called Wilcoxon rank-sum test. What is the reason for this? Henry Mann and Donald Whitney (1947) reported in their article that the test was first proposed by Frank Wilcoxon (1945) and they gave their version for the test. So the right would be to call this test Wilcoxon-Mann-Whitney (WMW) test.</p>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <p>Although a small number of ties should not have a serious impact on our results, in case of ties we can use the <code><a href="https://rdrr.io/pkg/exactRankTests/man/wilcox.exact.html">wilcox.exact()</a></code> function from the package {exactRankTests}:</p>
@@ -546,11 +551,10 @@ difference in location
 <span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">wilcox_test</a></span><span class="op">(</span><span class="va">b_TG</span> <span class="op">~</span> <span class="va">status</span>, detailed <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 12
-  estim…¹ .y.   group1 group2    n1    n2 stati…²       p conf.…³ conf.…⁴ method
-*   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; 
-1    19.0 b_TG  diabe… non-d…    12    12     134 1.03e-4    13.7      24 Wilco…
-# … with 1 more variable: alternative &lt;chr&gt;, and abbreviated variable names
-#   ¹​estimate, ²​statistic, ³​conf.low, ⁴​conf.high</code></pre>
+  estimate .y.   group1  group2    n1    n2 statistic       p conf.low conf.high
+*    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1     19.0 b_TG  diabet… non_d…    12    12       134 1.03e-4     13.7        24
+# ℹ 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
 </div>
 </div>
 </div>
@@ -558,12 +562,56 @@ difference in location
 </div>
 </div>
 </div>
-<div class="page-columns page-full"><p>Based on the p &lt;0.001, we reject the null hypothesis, the result (the median of the difference<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> = 18.95, 95% CI: 13.7 to 24) is significant.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;<strong>Note:</strong> the estimator for the difference in location parameters does not estimate the difference in medians (a common misconception) but rather the median of the difference between the two samples.</p></li></div></div>
+<div class="page-columns page-full"><p>The result (the median of the difference<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> = 18.95, 95%CI: 13.7 to 24) is significant (p &lt;0.001) and we reject the null hypothesis.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;<strong>Note:</strong> the estimator for the difference in location parameters does not estimate the difference in medians (a common misconception) but rather the median of the difference between the two samples.</p></li></div></div>
+<p>In general, however, WMW test is regarded as a test of comparing the difference in ranks between the two groups as follows:</p>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://strengejacke.github.io/sjstats/reference/mwu.html">mwu</a></span><span class="op">(</span><span class="va">tg</span>, <span class="va">b_TG</span>, <span class="va">status</span>, out <span class="op">=</span> <span class="st">"browser"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Mann-Whitney U-Test</caption>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: italic; font-weight: normal; padding: 0.2cm; border-bottom: 1px solid black;">Groups</td>
+<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: italic; font-weight: normal; padding: 0.2cm; border-bottom: 1px solid black;">N</td>
+<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: italic; font-weight: normal; padding: 0.2cm; border-bottom: 1px solid black;">Mean Rank</td>
+<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: italic; font-weight: normal; padding: 0.2cm; border-bottom: 1px solid black;">Mann-Whitney U</td>
+<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: italic; font-weight: normal; padding: 0.2cm; border-bottom: 1px solid black;">Wilcoxon W</td>
+<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: italic; font-weight: normal; padding: 0.2cm; border-bottom: 1px solid black;">Z</td>
+<td data-quarto-table-cell-role="th">Effect Size</td>
+<td data-quarto-table-cell-role="th">p-value</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; border-bottom: 1px solid;">diabetic<br>
+non_diabetic</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; border-bottom: 1px solid;">12<br>
+12</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; border-bottom: 1px solid;">17.67<br>
+7.33</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; border-bottom: 1px solid;">212</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; border-bottom: 1px solid;">134</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; border-bottom: 1px solid;">3.580</td>
+<td>0.731</td>
+<td>0.000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>&nbsp;</p>
 <p><strong>Present the results in a summary table</strong></p>
-<p>The median (or another percentile) can be used as a summary measure. The choice is guided by the shape of the distributions.</p>
+<p>It is common practice to report the median (IQR) for each group in summary tables.</p>
 <div class="cell">
-<details><summary>Show the code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span></span>
 <span>    by <span class="op">=</span> <span class="va">status</span>, </span>
 <span>    statistic <span class="op">=</span> <span class="va">b_TG</span> <span class="op">~</span> <span class="st">"{median} ({p25}, {p75})"</span>, </span>
@@ -992,8 +1040,8 @@ difference in location
 <th id="<strong>diabetic</strong>, N = 12<sup class=&quot;gt_footnote_marks&quot;>1</sup>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
 <strong>diabetic</strong>, N = 12<sup>1</sup>
 </th>
-<th id="<strong>non-diabetic</strong>, N = 12<sup class=&quot;gt_footnote_marks&quot;>1</sup>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
-<strong>non-diabetic</strong>, N = 12<sup>1</sup>
+<th id="<strong>non_diabetic</strong>, N = 12<sup class=&quot;gt_footnote_marks&quot;>1</sup>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>non_diabetic</strong>, N = 12<sup>1</sup>
 </th>
 <th id="<strong>p-value</strong><sup class=&quot;gt_footnote_marks&quot;>2</sup>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
 <strong>p-value</strong><sup>2</sup>
@@ -1020,7 +1068,20 @@ difference in location
 </div>
 </div>
 </div>
-<p>Hence, there is evidence that the urinary <span class="math inline">\(\beta\)</span> thromboglobulin excretion is higher in diabetic group, median = 29.2 (IQR: 27.1, 34.8) pg/ml, as compared to non-diabetic group, 10.9 (8.3, 14.8) pg/ml. The median of the difference (18.95, 95% CI: 13.7 to 24) is significant (p &lt;0.001).</p>
+<p>Hence, there is evidence that the urinary <span class="math inline">\(\beta\)</span> thromboglobulin excretion is higher in diabetic group, median = 29.2 (IQR: 27.1, 34.8) pg/ml, as compared to non-diabetic group, 10.9 (8.3, 14.8) pg/ml. The WMW test suggests that there is a significant difference in mean ranks between the two groups (17.67 Vs 7.33, p &lt;0.001).</p>
+<p>There is also a specific package with the name {report} that may be useful in reporting the results of WMW test:</p>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">report_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">tg</span><span class="op">$</span><span class="va">b_TG</span> <span class="op">~</span> <span class="va">tg</span><span class="op">$</span><span class="va">status</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="va">report_results</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Effect sizes were labelled following Funder's (2019) recommendations.
+
+The Wilcoxon rank sum exact test testing the difference in ranks between
+tg$b_TG and tg$status suggests that the effect is positive, statistically
+significant, and very large (W = 134.00, p &lt; .001; r (rank biserial) = 0.86,
+95% CI [0.68, 0.94])</code></pre>
+</div>
+</div>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">

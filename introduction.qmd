@@ -48,15 +48,9 @@ flowchart LR
 
 Biomedical data can be transformed into **information**. This information can become **knowledge** if the researchers and clinicians understand it (@fig-info).
 
-```{r}
-#| echo: false
-#| label: fig-info
-#| fig-align: center
-#| out-width: "80%"
-#| fig-cap: From data to knowledge.
+![From data to knowledge.](images/info.png){#fig-info width=80%}
 
-knitr::include_graphics(here::here("images", "info.png"))
-```
+
 
 There are three main data structures: structured data, unstructured data, and semi-structured data.
 

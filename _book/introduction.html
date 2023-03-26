@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.287">
+<meta name="generator" content="quarto-1.3.290">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
 <title>Practical Statistics in Medicine with R - 1&nbsp; Introduction</title>
 <style>
 code{white-space: pre-wrap;}
@@ -18,6 +21,7 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 </style>
+
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -41,7 +45,8 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/social-share-0.1.0/social-share.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/social-share-0.1.0/all.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/quarto-contrib/social-share-0.1.0/all.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -59,12 +64,20 @@ ul.task-list li input[type="checkbox"] {
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script><script src="site_libs/quarto-diagram/mermaid.min.js"></script><script src="site_libs/quarto-diagram/mermaid-init.js"></script><link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+}</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
 </head>
+
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -75,9 +88,13 @@ ul.task-list li input[type="checkbox"] {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Practical Statistics in Medicine with R</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -98,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
@@ -195,32 +212,34 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
     </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
-<li><a href="#the-discipline-of-statistics" id="toc-the-discipline-of-statistics" class="nav-link active" data-scroll-target="#the-discipline-of-statistics"><span class="header-section-number">1.1</span> The discipline of statistics</a></li>
-  <li>
-<a href="#data-and-variables" id="toc-data-and-variables" class="nav-link" data-scroll-target="#data-and-variables"><span class="header-section-number">1.2</span> Data and Variables</a>
+  <li><a href="#the-discipline-of-statistics" id="toc-the-discipline-of-statistics" class="nav-link active" data-scroll-target="#the-discipline-of-statistics"><span class="header-section-number">1.1</span> The discipline of statistics</a></li>
+  <li><a href="#data-and-variables" id="toc-data-and-variables" class="nav-link" data-scroll-target="#data-and-variables"><span class="header-section-number">1.2</span> Data and Variables</a>
   <ul class="collapse">
-<li><a href="#biomedical-data" id="toc-biomedical-data" class="nav-link" data-scroll-target="#biomedical-data">Biomedical Data</a></li>
+  <li><a href="#biomedical-data" id="toc-biomedical-data" class="nav-link" data-scroll-target="#biomedical-data">Biomedical Data</a></li>
   <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">Variables</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#types-of-data" id="toc-types-of-data" class="nav-link" data-scroll-target="#types-of-data"><span class="header-section-number">1.3</span> Types of Data</a>
+  </ul></li>
+  <li><a href="#types-of-data" id="toc-types-of-data" class="nav-link" data-scroll-target="#types-of-data"><span class="header-section-number">1.3</span> Types of Data</a>
   <ul class="collapse">
-<li><a href="#categorical-data" id="toc-categorical-data" class="nav-link" data-scroll-target="#categorical-data">Categorical Data</a></li>
+  <li><a href="#categorical-data" id="toc-categorical-data" class="nav-link" data-scroll-target="#categorical-data">Categorical Data</a></li>
   <li><a href="#numerical-data" id="toc-numerical-data" class="nav-link" data-scroll-target="#numerical-data">Numerical Data</a></li>
+  </ul></li>
   </ul>
-</li>
-  </ul></nav>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
 <h1 class="title"><span id="sec-introduction" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></h1>
 </div>
 
@@ -234,7 +253,9 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
-</header><p>When we have finished this chapter, we should be able to:</p>
+</header>
+
+<p>When we have finished this chapter, we should be able to:</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -254,8 +275,8 @@ Learning objectives
 </div>
 </div>
 <p>&nbsp;</p>
-<section id="the-discipline-of-statistics" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="the-discipline-of-statistics">
-<span class="header-section-number">1.1</span> The discipline of statistics</h2>
+<section id="the-discipline-of-statistics" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="the-discipline-of-statistics"><span class="header-section-number">1.1</span> The discipline of statistics</h2>
 <p>Statistics is an empirical or practical method for collecting, organizing, summarizing, and presenting data, and for making inferences about the population from which the data are drawn.</p>
 <p>The discipline of traditional (frequentist) statistics includes two main branches (<a href="#fig-branches">Figure&nbsp;<span>1.1</span></a>):</p>
 <ul>
@@ -265,7 +286,8 @@ Learning objectives
 <div class="cell" data-fig-width="9">
 <div class="cell-output-display">
 <div id="fig-branches" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><div>
+<figure class="figure">
+<div>
 <pre class="mermaid mermaid-js" data-label="fig-branches">flowchart LR
   
     A[Traditional &lt;br/&gt; Statistics]--- B[Descriptive statistics]
@@ -283,19 +305,18 @@ Learning objectives
 </div>
 </div>
 </div>
-</section><section id="data-and-variables" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="data-and-variables">
-<span class="header-section-number">1.2</span> Data and Variables</h2>
-<section id="biomedical-data" class="level3"><h3 class="anchored" data-anchor-id="biomedical-data">Biomedical Data</h3>
+</section>
+<section id="data-and-variables" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="data-and-variables"><span class="header-section-number">1.2</span> Data and Variables</h2>
+<section id="biomedical-data" class="level3">
+<h3 class="anchored" data-anchor-id="biomedical-data">Biomedical Data</h3>
 <p><strong>Biomedical data</strong> have unique features compared with data in other domains. The data may include administrative health data, biomarker data, biometric data (for example, from wearable technologies) and imaging, and may originate from many different sources, including Electronic Health Records (EHRs), surveillance systems, clinical registries, biobanks, the internet (e.g.&nbsp;social media) and patient self-reports.</p>
 <p>Biomedical data can be transformed into <strong>information</strong>. This information can become <strong>knowledge</strong> if the researchers and clinicians understand it (<a href="#fig-info">Figure&nbsp;<span>1.2</span></a>).</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
 <div id="fig-info" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/info.png" class="quarto-discovered-preview-image img-fluid figure-img" style="width:80.0%"></p>
+<figure class="figure">
+<p><img src="images/info.png" class="quarto-discovered-preview-image img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;1.2: From data to knowledge.</figcaption><p></p>
 </figure>
-</div>
-</div>
 </div>
 <p>There are three main data structures: structured data, unstructured data, and semi-structured data.</p>
 <p><strong>Structured data</strong> is generally tabular data that is represented by columns and rows in a database.</p>
@@ -303,7 +324,9 @@ Learning objectives
 <p><strong>Unstructured data</strong> usually open text (such as social media posts), images, videos, etc., that have no predetermined organization or design.</p>
 <p>In this textbook we use data organized in a structured format (spreadsheets). In statistics, tabular data refers to data that are organized in a table with rows and columns. A row is a observation (or record), which corresponds to the statistical unit of the dataset. The columns are the variables (or characteristics) of interest.</p>
 <p>&nbsp;</p>
-</section><section id="variables" class="level3"><h3 class="anchored" data-anchor-id="variables">Variables</h3>
+</section>
+<section id="variables" class="level3">
+<h3 class="anchored" data-anchor-id="variables">Variables</h3>
 <p>A <strong>variable</strong> is a quantity or characteristic that is <strong>free to vary</strong>, or take on different values. To gain information on variables and their associations, it is necessary to design and conduct scientific experiments.</p>
 <p>Researchers design experiments to test if changes to one or more variables are <strong>associated</strong> with changes to another variable of interest. For example, if researchers hypothesize that a new therapy is more effective than the usual care for migraine pain, they could design an experiment to test this hypothesis; participants should randomly assigned to one of two groups: the experimental group receiving the new treatment that is being tested, and the control group receiving an conventional treatment. In this experiment, the type of treatment each participant received (i.e., new treatment vs.&nbsp;conventional treatment) is the <strong>independent variable</strong> (IV), while the pain relief is the <strong>dependent variable</strong> (DV) or the <strong>outcome</strong> variable.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
@@ -321,13 +344,16 @@ Independent Vs Dependent variables
 </div>
 </div>
 <p>&nbsp;</p>
-</section></section><section id="types-of-data" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="types-of-data">
-<span class="header-section-number">1.3</span> Types of Data</h2>
+</section>
+</section>
+<section id="types-of-data" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="types-of-data"><span class="header-section-number">1.3</span> Types of Data</h2>
 <p>Data in variables can be either <strong>categorical</strong> or <strong>numerical</strong> (otherwise known as qualitative and quantitative) in nature (<a href="#fig-data_types">Figure&nbsp;<span>1.3</span></a>).</p>
 <div class="cell" data-fig-width="9">
 <div class="cell-output-display">
 <div id="fig-data_types" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><div>
+<figure class="figure">
+<div>
 <pre class="mermaid mermaid-js" data-label="fig-data_types">flowchart TB
     A[Data in variables]---&gt; B[Categorical data]
     A[Data in variables]---&gt; C[Numerical data]
@@ -362,7 +388,8 @@ Note
 </div>
 </div>
 <p>&nbsp;</p>
-<section id="categorical-data" class="level3"><h3 class="anchored" data-anchor-id="categorical-data">Categorical Data</h3>
+<section id="categorical-data" class="level3">
+<h3 class="anchored" data-anchor-id="categorical-data">Categorical Data</h3>
 <p><strong>A. Nominal Data</strong></p>
 <p><strong>Nominal data</strong> can be labeled creating distinct unordered categories. They are not measured but simply <strong>counted</strong>. They can be either binary such as dead/alive; cured/not cured or have <strong>more than two categories</strong>, for example, blood group A, B, AB, O; type I, type II or gestational diabetes; eye color (e.g., brown, blue, green, gray).</p>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -395,7 +422,9 @@ Collapsion of categories leads to a loss of information
 </div>
 </div>
 <p>&nbsp;</p>
-</section><section id="numerical-data" class="level3"><h3 class="anchored" data-anchor-id="numerical-data">Numerical Data</h3>
+</section>
+<section id="numerical-data" class="level3">
+<h3 class="anchored" data-anchor-id="numerical-data">Numerical Data</h3>
 <p><strong>A. Discrete Data</strong></p>
 <p>Discrete data can take only a <strong>finite number of values</strong> (usually integers) in a range, for example, the number of children in a family or the number of days missed from work. Other examples are often <strong>counts per unit of time</strong> such as the number of deaths in a hospital per year, the number of visits to the general practitioner in a year, or the number of epileptic seizures a patient has per month. In dentistry, a common measure is the number of decayed, filled or missing teeth.</p>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -429,7 +458,11 @@ Categorization of numerical data leads to a loss of information
 </div>
 
 
-</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -855,7 +888,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
 });
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
       <a href="./index.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
       </a>          
@@ -867,7 +902,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">Copyright 2023, Konstantinos I. Bougioukas</div>   
     <div class="nav-footer-center">
       &nbsp;
@@ -876,9 +912,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       &nbsp;
     </div>
   </div>
-</footer><div class="page-columns page-rows-contents page-layout-article"><div class="social-share">
-<a href="https://twitter.com/share?url=https://bougioukas-medstats-r.netlify.app/&amp;text=Practical%20Statistics%20in%20Medicine%20with%20R" target="_blank" class="twitter"><i class="fab fa-twitter fa-fw fa-lg"></i></a><a href="https://www.linkedin.com/shareArticle?url=https://bougioukas-medstats-r.netlify.app/&amp;title=Practical%20Statistics%20in%20Medicine%20with%20R" target="_blank" class="linkedin"><i class="fa-brands fa-linkedin-in fa-fw fa-lg"></i></a><a href="https://www.facebook.com/sharer.php?u=https://bougioukas-medstats-r.netlify.app/" target="_blank" class="facebook"><i class="fab fa-facebook-f fa-fw fa-lg"></i></a>
-</div></div>
+</footer>
+<div class="page-columns page-rows-contents page-layout-article"><div class="social-share"><a href="https://twitter.com/share?url=https://bougioukas-medstats-r.netlify.app/&amp;text=Practical Statistics in Medicine with R" target="_blank" class="twitter"><i class="fab fa-twitter fa-fw fa-lg"></i></a><a href="https://www.linkedin.com/shareArticle?url=https://bougioukas-medstats-r.netlify.app/&amp;title=Practical Statistics in Medicine with R" target="_blank" class="linkedin"><i class="fa-brands fa-linkedin-in fa-fw fa-lg"></i></a><a href="https://www.facebook.com/sharer.php?u=https://bougioukas-medstats-r.netlify.app/" target="_blank" class="facebook"><i class="fab fa-facebook-f fa-fw fa-lg"></i></a></div></div>
 
 
 

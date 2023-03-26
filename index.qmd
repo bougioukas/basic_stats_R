@@ -25,15 +25,7 @@ For our purpose, it is sufficient to consider a simple RStudio Project folder th
 -   **data:** data files of any kind, such as `.csv`, `.xlsx`, `.txt`, etc.
 -   **figures:** plots, diagrams, and other graphs
 
-```{r}
-#| label: fig-project
-#| fig-align: center
-#| out-width: "40%"
-#| echo: false
-#| fig-cap: The folder structure of a minimal RStudio project.
-
-knitr::include_graphics(here::here("images", "project.png"))
-```
+![The folder structure of a minimal RStudio project.](images/project.png){#fig-project width="40%"}
 
 ### Reproducibility and License
 

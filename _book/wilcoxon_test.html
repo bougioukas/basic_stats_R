@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.287">
+<meta name="generator" content="quarto-1.3.290">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Practical Statistics in Medicine with R - 8&nbsp; Wilcoxon Signed-Rank test</title>
 <style>
@@ -93,7 +93,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script><script src="site_libs/htmlwidgets-1.6.1/htmlwidgets.js"></script><link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+}</script><script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="site_libs/datatables-binding-0.27/datatables.js"></script><script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><link href="site_libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="site_libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="site_libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script><link href="site_libs/dt-ext-buttons-1.12.1/css/buttons.dataTables.min.css" rel="stylesheet">
@@ -327,8 +327,8 @@ Null hypothesis and alternative hypothesis
 </div>
 <div class="cell">
 <div id="fig-weight" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-9fd29e5adfc4dbcf67b5" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-9fd29e5adfc4dbcf67b5">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8"],[488,478,480,426,440,410,458,460],[484,478,492,444,436,398,464,476],[4,0,-12,-18,4,12,-6,-16]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>affected_eye<\/th>\n      <th>unaffected_eye<\/th>\n      <th>dif_thickness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-center","targets":"_all"},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;8.1: Table with data from “eyes” file.</figcaption><p></p>
+<figure class="figure"><div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-51a762c5772e6c73fc19" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-51a762c5772e6c73fc19">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8"],[488,478,480,426,440,410,458,460],[484,478,492,444,436,398,464,476],[4,0,-12,-18,4,12,-6,-16]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>affected_eye<\/th>\n      <th>unaffected_eye<\/th>\n      <th>dif_thickness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-center","targets":"_all"},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;8.1: Table with data from “eyes” file.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -427,7 +427,7 @@ Summary statistics
  8 dif_thickness_mean      -4   
  9 dif_thickness_sd        10.7 
 10 dif_thickness_skewness   0.03
-# … with 23 more rows</code></pre>
+# ℹ 23 more rows</code></pre>
 </div>
 </div>
 </div>
@@ -439,12 +439,12 @@ Summary statistics
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 10
-  described_variables     n    na  mean    sd   p25   p50   p75 skewness kurto…¹
-  &lt;chr&gt;               &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-1 dif_thickness           8     0    -4  10.7  -13     -3    4    0.0295  -1.37 
-2 affected_eye            8     0   455  27.7  436.   459  478.  -0.493   -0.985
-3 unaffected_eye          8     0   459  31.3  442    470  480.  -1.11     0.794
-# … with abbreviated variable name ¹​kurtosis</code></pre>
+  described_variables     n    na  mean    sd   p25   p50   p75 skewness
+  &lt;chr&gt;               &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+1 dif_thickness           8     0    -4  10.7  -13     -3    4    0.0295
+2 affected_eye            8     0   455  27.7  436.   459  478.  -0.493 
+3 unaffected_eye          8     0   459  31.3  442    470  480.  -1.11  
+# ℹ 1 more variable: kurtosis &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </div>
@@ -555,12 +555,12 @@ sample estimates:
 <span>                 estimate_fun <span class="op">=</span> <span class="va">thickness</span> <span class="op">~</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/style_sigfig.html">style_sigfig</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 
-<div id="sephvomchw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="rhcfxomtza" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#sephvomchw .gt_table {
+#rhcfxomtza .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -585,7 +585,7 @@ sample estimates:
   border-left-color: #D3D3D3;
 }
 
-#sephvomchw .gt_heading {
+#rhcfxomtza .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -597,12 +597,12 @@ sample estimates:
   border-right-color: #D3D3D3;
 }
 
-#sephvomchw .gt_caption {
+#rhcfxomtza .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#sephvomchw .gt_title {
+#rhcfxomtza .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -614,7 +614,7 @@ sample estimates:
   border-bottom-width: 0;
 }
 
-#sephvomchw .gt_subtitle {
+#rhcfxomtza .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -626,13 +626,13 @@ sample estimates:
   border-top-width: 0;
 }
 
-#sephvomchw .gt_bottom_border {
+#rhcfxomtza .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#sephvomchw .gt_col_headings {
+#rhcfxomtza .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -647,7 +647,7 @@ sample estimates:
   border-right-color: #D3D3D3;
 }
 
-#sephvomchw .gt_col_heading {
+#rhcfxomtza .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -667,7 +667,7 @@ sample estimates:
   overflow-x: hidden;
 }
 
-#sephvomchw .gt_column_spanner_outer {
+#rhcfxomtza .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -679,15 +679,15 @@ sample estimates:
   padding-right: 4px;
 }
 
-#sephvomchw .gt_column_spanner_outer:first-child {
+#rhcfxomtza .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#sephvomchw .gt_column_spanner_outer:last-child {
+#rhcfxomtza .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#sephvomchw .gt_column_spanner {
+#rhcfxomtza .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -699,7 +699,7 @@ sample estimates:
   width: 100%;
 }
 
-#sephvomchw .gt_group_heading {
+#rhcfxomtza .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -725,7 +725,7 @@ sample estimates:
   text-align: left;
 }
 
-#sephvomchw .gt_empty_group_heading {
+#rhcfxomtza .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -740,15 +740,15 @@ sample estimates:
   vertical-align: middle;
 }
 
-#sephvomchw .gt_from_md > :first-child {
+#rhcfxomtza .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#sephvomchw .gt_from_md > :last-child {
+#rhcfxomtza .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#sephvomchw .gt_row {
+#rhcfxomtza .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -767,7 +767,7 @@ sample estimates:
   overflow-x: hidden;
 }
 
-#sephvomchw .gt_stub {
+#rhcfxomtza .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -780,7 +780,7 @@ sample estimates:
   padding-right: 5px;
 }
 
-#sephvomchw .gt_stub_row_group {
+#rhcfxomtza .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -794,11 +794,11 @@ sample estimates:
   vertical-align: top;
 }
 
-#sephvomchw .gt_row_group_first td {
+#rhcfxomtza .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#sephvomchw .gt_summary_row {
+#rhcfxomtza .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -808,16 +808,16 @@ sample estimates:
   padding-right: 5px;
 }
 
-#sephvomchw .gt_first_summary_row {
+#rhcfxomtza .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#sephvomchw .gt_first_summary_row.thick {
+#rhcfxomtza .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#sephvomchw .gt_last_summary_row {
+#rhcfxomtza .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -827,7 +827,7 @@ sample estimates:
   border-bottom-color: #D3D3D3;
 }
 
-#sephvomchw .gt_grand_summary_row {
+#rhcfxomtza .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -837,7 +837,7 @@ sample estimates:
   padding-right: 5px;
 }
 
-#sephvomchw .gt_first_grand_summary_row {
+#rhcfxomtza .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -847,11 +847,11 @@ sample estimates:
   border-top-color: #D3D3D3;
 }
 
-#sephvomchw .gt_striped {
+#rhcfxomtza .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#sephvomchw .gt_table_body {
+#rhcfxomtza .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -860,7 +860,7 @@ sample estimates:
   border-bottom-color: #D3D3D3;
 }
 
-#sephvomchw .gt_footnotes {
+#rhcfxomtza .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -874,7 +874,7 @@ sample estimates:
   border-right-color: #D3D3D3;
 }
 
-#sephvomchw .gt_footnote {
+#rhcfxomtza .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -883,7 +883,7 @@ sample estimates:
   padding-right: 5px;
 }
 
-#sephvomchw .gt_sourcenotes {
+#rhcfxomtza .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -897,7 +897,7 @@ sample estimates:
   border-right-color: #D3D3D3;
 }
 
-#sephvomchw .gt_sourcenote {
+#rhcfxomtza .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -905,64 +905,64 @@ sample estimates:
   padding-right: 5px;
 }
 
-#sephvomchw .gt_left {
+#rhcfxomtza .gt_left {
   text-align: left;
 }
 
-#sephvomchw .gt_center {
+#rhcfxomtza .gt_center {
   text-align: center;
 }
 
-#sephvomchw .gt_right {
+#rhcfxomtza .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#sephvomchw .gt_font_normal {
+#rhcfxomtza .gt_font_normal {
   font-weight: normal;
 }
 
-#sephvomchw .gt_font_bold {
+#rhcfxomtza .gt_font_bold {
   font-weight: bold;
 }
 
-#sephvomchw .gt_font_italic {
+#rhcfxomtza .gt_font_italic {
   font-style: italic;
 }
 
-#sephvomchw .gt_super {
+#rhcfxomtza .gt_super {
   font-size: 65%;
 }
 
-#sephvomchw .gt_footnote_marks {
+#rhcfxomtza .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#sephvomchw .gt_asterisk {
+#rhcfxomtza .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#sephvomchw .gt_indent_1 {
+#rhcfxomtza .gt_indent_1 {
   text-indent: 5px;
 }
 
-#sephvomchw .gt_indent_2 {
+#rhcfxomtza .gt_indent_2 {
   text-indent: 10px;
 }
 
-#sephvomchw .gt_indent_3 {
+#rhcfxomtza .gt_indent_3 {
   text-indent: 15px;
 }
 
-#sephvomchw .gt_indent_4 {
+#rhcfxomtza .gt_indent_4 {
   text-indent: 20px;
 }
 
-#sephvomchw .gt_indent_5 {
+#rhcfxomtza .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
