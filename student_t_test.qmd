@@ -37,7 +37,10 @@ library(rstatix)
 library(PupillometryR)
 library(gtsummary)
 library(ggpubr)
+library(sjstats)
+library(sjPlot)
 library(ggsci)
+library(report)
 library(here)
 library(tidyverse)
 ```
@@ -276,7 +279,12 @@ Note that the paroxetine group ($n_1=33$) has df (degrees of freedom) = 33-1 = 3
 
  
 
-**Present the results in a summary table**
+## Present the results
+
+
+**Summary table**
+
+It is common practice to report the mean (sd) for each group in summary tables.
 
 ```{r}
 #| code-fold: true
@@ -295,4 +303,24 @@ depression %>%
   add_n()
 ```
 
-Hence, there is not evidence that HDRS score is significantly different in paroxetine group, mean = 20.3 (sd = 3.7), as compared to placebo group, 21.5 (3.4), (mean difference= -1.2 units, 95% CI = -2.8 to 0.47, p = 0.16 \>0.05).
+
+
+**Report the results**
+
+There is also a specific package with the name {report} that may be useful in reporting the results of the t-test:
+
+```{r}
+report_results <- t.test(depression$HDRS ~ depression$intervention, var.equal = T) 
+report(report_results)
+```
+
+ 
+We can use the above information to write up a final report:
+
+::: callout-tip
+## Final report
+
+There is not evidence that HDRS score is significantly different in paroxetine group, mean = 20.3 (sd = 3.7), as compared to placebo group, 21.5 (3.4), (mean difference= -1.2 units, 95% CI = -2.8 to 0.47, p = 0.16 \>0.05).
+
+:::
+

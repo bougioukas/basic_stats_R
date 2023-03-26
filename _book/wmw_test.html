@@ -246,6 +246,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#preraring-the-data" id="toc-preraring-the-data" class="nav-link" data-scroll-target="#preraring-the-data"><span class="header-section-number">6.3</span> Preraring the data</a></li>
   <li><a href="#explore-the-characteristics-of-distribution-for-each-group-and-check-for-normality" id="toc-explore-the-characteristics-of-distribution-for-each-group-and-check-for-normality" class="nav-link" data-scroll-target="#explore-the-characteristics-of-distribution-for-each-group-and-check-for-normality"><span class="header-section-number">6.4</span> Explore the characteristics of distribution for each group and check for normality</a></li>
   <li><a href="#run-the-wilcoxon-mann-whitney-test" id="toc-run-the-wilcoxon-mann-whitney-test" class="nav-link" data-scroll-target="#run-the-wilcoxon-mann-whitney-test"><span class="header-section-number">6.5</span> Run the Wilcoxon-Mann-Whitney test</a></li>
+  <li><a href="#present-the-results" id="toc-present-the-results" class="nav-link" data-scroll-target="#present-the-results"><span class="header-section-number">6.6</span> Present the results</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -331,8 +332,8 @@ Null hypothesis and alternative hypothesis
 </div>
 <div class="cell">
 <div id="fig-depression" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-5118fa0bed58f048a8e2" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-5118fa0bed58f048a8e2">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],["non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic"],[4.1,6.3,7.8,8.5,8.9,10.4,11.5,12,13.8,17.6,24.3,37.2,27.5,28.1,26.1,23.8,25,29.8,33.9,37.7,31.3,43.2,28.7,46.2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>status<\/th>\n      <th>b_TG<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-center","targets":"_all"},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;6.1: Table with data from “depression” file.</figcaption><p></p>
+<figure class="figure"><div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-5ce2dcd9be22b4f244f4" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-5ce2dcd9be22b4f244f4">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],["non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","non_diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic","diabetic"],[4.1,6.3,7.8,8.5,8.9,10.4,11.5,12,13.8,17.6,24.3,37.2,27.5,28.1,26.1,23.8,25,29.8,33.9,37.7,31.3,43.2,28.7,46.2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>status<\/th>\n      <th>b_TG<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-center","targets":"_all"},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;6.1: Table with data from “depression” file.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -490,7 +491,7 @@ Summary statistics by group
 </section><section id="run-the-wilcoxon-mann-whitney-test" class="level2 page-columns page-full" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="run-the-wilcoxon-mann-whitney-test">
 <span class="header-section-number">6.5</span> Run the Wilcoxon-Mann-Whitney test</h2>
 <p>The difference in location between two distributions with similar shapes (<a href="#fig-raincloud_tg">Figure&nbsp;<span>6.2</span></a>) can be tested using the Wilcoxon-Mann-Whitney (WMW) test:</p>
-<div id="exercise-joins" class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -608,7 +609,9 @@ non_diabetic</td>
 </div>
 </div>
 <p>&nbsp;</p>
-<p><strong>Present the results in a summary table</strong></p>
+</section><section id="present-the-results" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="present-the-results">
+<span class="header-section-number">6.6</span> Present the results</h2>
+<p><strong>Summary table</strong></p>
 <p>It is common practice to report the median (IQR) for each group in summary tables.</p>
 <div class="cell">
 <details><summary>Show the code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -1068,7 +1071,7 @@ non_diabetic</td>
 </div>
 </div>
 </div>
-<p>Hence, there is evidence that the urinary <span class="math inline">\(\beta\)</span> thromboglobulin excretion is higher in diabetic group, median = 29.2 (IQR: 27.1, 34.8) pg/ml, as compared to non-diabetic group, 10.9 (8.3, 14.8) pg/ml. The WMW test suggests that there is a significant difference in mean ranks between the two groups (17.67 Vs 7.33, p &lt;0.001).</p>
+<p><strong>Report the results</strong></p>
 <p>There is also a specific package with the name {report} that may be useful in reporting the results of WMW test:</p>
 <div class="cell">
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">report_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">tg</span><span class="op">$</span><span class="va">b_TG</span> <span class="op">~</span> <span class="va">tg</span><span class="op">$</span><span class="va">status</span><span class="op">)</span> </span>
@@ -1080,6 +1083,21 @@ The Wilcoxon rank sum exact test testing the difference in ranks between
 tg$b_TG and tg$status suggests that the effect is positive, statistically
 significant, and very large (W = 134.00, p &lt; .001; r (rank biserial) = 0.86,
 95% CI [0.68, 0.94])</code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>We can use the information to write up a final report:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Final report
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There is evidence that the urinary <span class="math inline">\(\beta\)</span> thromboglobulin excretion is higher in diabetic group, median = 29.2 (IQR: 27.1, 34.8) pg/ml, as compared to non-diabetic group, 10.9 (8.3, 14.8) pg/ml. The WMW test suggests that there is a significant difference in mean ranks between the two groups (17.67 Vs 7.33, p &lt;0.001).</p>
 </div>
 </div>
 

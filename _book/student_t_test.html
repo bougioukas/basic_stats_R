@@ -274,6 +274,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#preraring-the-data" id="toc-preraring-the-data" class="nav-link" data-scroll-target="#preraring-the-data"><span class="header-section-number">5.3</span> Preraring the data</a></li>
   <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">5.4</span> Assumptions</a></li>
   <li><a href="#run-the-t-test" id="toc-run-the-t-test" class="nav-link" data-scroll-target="#run-the-t-test"><span class="header-section-number">5.5</span> Run the t-test</a></li>
+  <li><a href="#present-the-results" id="toc-present-the-results" class="nav-link" data-scroll-target="#present-the-results"><span class="header-section-number">5.6</span> Present the results</a></li>
   </ul>
 </nav>
     </div>
@@ -345,9 +346,12 @@ Null hypothesis and alternative hypothesis
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(PupillometryR)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggsci)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjstats)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggsci)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(report)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="preraring-the-data" class="level2" data-number="5.3">
@@ -361,8 +365,8 @@ Null hypothesis and alternative hypothesis
 <div id="fig-depression" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-bb56a5cdfce3e56d8164" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-bb56a5cdfce3e56d8164">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76"],["placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine"],[19,21,28,22,22,28,23,17,19,20,26,23,23,22,19,28,23,14,24,20,17,21,18,19,19,15,25,22,17,26,23,20,25,25,25,24,24,21,20,20,19,21,17,18,19,26,21,21,27,22,15,18,19,25,22,22,21,18,27,22,13,23,19,16,20,16,18,18,14,24,21,16,25,22,19,24]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>intervention<\/th>\n      <th>HDRS<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-center","targets":"_all"},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-8d9ae732ba0fdcd31b8f" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-8d9ae732ba0fdcd31b8f">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76"],["placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","placebo","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine","paroxetine"],[19,21,28,22,22,28,23,17,19,20,26,23,23,22,19,28,23,14,24,20,17,21,18,19,19,15,25,22,17,26,23,20,25,25,25,24,24,21,20,20,19,21,17,18,19,26,21,21,27,22,15,18,19,25,22,22,21,18,27,22,13,23,19,16,20,16,18,18,14,24,21,16,25,22,19,24]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>intervention<\/th>\n      <th>HDRS<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-center","targets":"_all"},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <p></p><figcaption class="figure-caption">Figure&nbsp;5.1: Table with data from “depression” file.</figcaption><p></p>
 </figure>
 </div>
@@ -621,7 +625,7 @@ Student’s t-test
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="1" data-code-annotation="1">If we reject the null hypothesis of Levene’s test, we have to type <strong><code>var.equal = F</code></strong> (or type nothing as this is the default), so the Welch’s t-test is applied.</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-1" data-code-lines="1">If we reject the null hypothesis of Levene’s test, we have to type <strong><code>var.equal = F</code></strong> (or type nothing as this is the default), so the Welch’s t-test is applied.</span>
 </dd>
 </dl>
 </div>
@@ -664,7 +668,11 @@ mean in group paroxetine    mean in group placebo
 <div class="no-row-height column-margin column-container"><div class="">
 <p><strong>NOTE:</strong> The Student t-test does not have any restrictions on <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> —<strong>they can be equal or unequal</strong>. However, equal samples are preferred because this maximizes the power to detect a specified difference.</p>
 </div></div><p>&nbsp;</p>
-<p><strong>Present the results in a summary table</strong></p>
+</section>
+<section id="present-the-results" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="present-the-results"><span class="header-section-number">5.6</span> Present the results</h2>
+<p><strong>Summary table</strong></p>
+<p>It is common practice to report the mean (sd) for each group in summary tables.</p>
 <div class="cell">
 <details>
 <summary>Show the code</summary>
@@ -1133,7 +1141,35 @@ mean in group paroxetine    mean in group placebo
 </div>
 </div>
 </div>
-<p>Hence, there is not evidence that HDRS score is significantly different in paroxetine group, mean = 20.3 (sd = 3.7), as compared to placebo group, 21.5 (3.4), (mean difference= -1.2 units, 95% CI = -2.8 to 0.47, p = 0.16 &gt;0.05).</p>
+<p><strong>Report the results</strong></p>
+<p>There is also a specific package with the name {report} that may be useful in reporting the results of the t-test:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>report_results <span class="ot">&lt;-</span> <span class="fu">t.test</span>(depression<span class="sc">$</span>HDRS <span class="sc">~</span> depression<span class="sc">$</span>intervention, <span class="at">var.equal =</span> T) </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">report</span>(report_results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Effect sizes were labelled following Cohen's (1988) recommendations.
+
+The Two Sample t-test testing the difference of depression$HDRS by
+depression$intervention (mean in group paroxetine = 20.33, mean in group
+placebo = 21.49) suggests that the effect is negative, statistically not
+significant, and small (difference = -1.16, 95% CI [-2.78, 0.47], t(74) =
+-1.42, p = 0.160; Cohen's d = -0.33, 95% CI [-0.78, 0.13])</code></pre>
+</div>
+</div>
+<p>&nbsp; We can use the above information to write up a final report:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Final report
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There is not evidence that HDRS score is significantly different in paroxetine group, mean = 20.3 (sd = 3.7), as compared to placebo group, 21.5 (3.4), (mean difference= -1.2 units, 95% CI = -2.8 to 0.47, p = 0.16 &gt;0.05).</p>
+</div>
+</div>
 
 
 </section>

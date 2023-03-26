@@ -198,7 +198,7 @@ We can see that the data for the non-diabetic group is not normally distributed 
 
 The difference in location between two distributions with similar shapes (@fig-raincloud_tg) can be tested using the Wilcoxon-Mann-Whitney (WMW) test:
 
-::: {#exercise-joins .callout-tip}
+::: callout-tip
 ## Wilcoxon-Mann-Whitney test
 
 ::: panel-tabset
@@ -227,12 +227,11 @@ tg %>%
 :::
 :::
 
-The result (the median of the difference[^wmw_test-1] = 18.95, 95%CI: 13.7 to 24) is significant (p \<0.001) and we reject the null hypothesis. 
+The result (the median of the difference[^wmw_test-1] = 18.95, 95%CI: 13.7 to 24) is significant (p \<0.001) and we reject the null hypothesis.
 
 [^wmw_test-1]: **Note:** the estimator for the difference in location parameters does not estimate the difference in medians (a common misconception) but rather the median of the difference between the two samples.
 
-
-In general, however, WMW test is regarded as a test of comparing the difference in ranks between the two groups as follows: 
+In general, however, WMW test is regarded as a test of comparing the difference in ranks between the two groups as follows:
 
 ```{r}
 mwu(tg, b_TG, status, out = "browser")
@@ -240,9 +239,11 @@ mwu(tg, b_TG, status, out = "browser")
 
  
 
-**Present the results in a summary table**
+## Present the results
 
-It is common practice to report the median (IQR) for each group in summary tables. 
+**Summary table**
+
+It is common practice to report the median (IQR) for each group in summary tables.
 
 ```{r}
 #| code-fold: true
@@ -259,11 +260,21 @@ tg %>%
   add_n()
 ```
 
-Hence, there is evidence that the urinary $\beta$ thromboglobulin excretion is higher in diabetic group, median = 29.2 (IQR: 27.1, 34.8) pg/ml, as compared to non-diabetic group, 10.9 (8.3, 14.8) pg/ml. The WMW test suggests that there is a significant difference in mean ranks between the two groups (17.67 Vs 7.33, p \<0.001).
-
+**Report the results**
 
 There is also a specific package with the name {report} that may be useful in reporting the results of WMW test:
+
 ```{r}
 report_results <- wilcox.test(tg$b_TG ~ tg$status) 
 report(report_results)
 ```
+
+ 
+
+We can use the information to write up a final report:
+
+::: callout-tip
+## Final report
+
+There is evidence that the urinary $\beta$ thromboglobulin excretion is higher in diabetic group, median = 29.2 (IQR: 27.1, 34.8) pg/ml, as compared to non-diabetic group, 10.9 (8.3, 14.8) pg/ml. The WMW test suggests that there is a significant difference in mean ranks between the two groups (17.67 Vs 7.33, p \<0.001).
+:::
