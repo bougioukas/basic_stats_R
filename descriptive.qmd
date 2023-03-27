@@ -689,33 +689,40 @@ psych::describeBy(arrhythmia$QRS, group = arrhythmia$sex)
 
 ## Displaying Numerical Data
 
-**A. Histogram**
+**A. Histogram / Density plot**
 
-The most common way of presenting a frequency distribution of a continuous variable is a histogram. Histograms (@fig-histog1) depict the distribution of the data as a series of bars without space between them. Each bar typically covers a range of numeric values called a bin or class; a bar's height indicates the frequency of observations with a value within the corresponding bin.
+The most common way of presenting a frequency distribution of a continuous variable is a histogram. Histograms (@fig-histog1) depict the distribution of the data as a series of bars without space between them. Each bar typically covers a range of numeric values called a bin; a bar's height indicates the frequency of observations with a value within the corresponding bin.
 
 ```{r}
 #| warning: false
 #| label: fig-histog1
-#| fig-cap: Distributions of age and QRS variables.
+#| fig-width: 6
+#| fig-cap: Distributions of (a) age and (b) QRS variables.
 #| fig-subcap: 
 #|   - "Histogram of age for the 425 patients."
 #|   - "Histogram of QRS for the 428 patients."
-#| layout-ncol: 2
+#| layout-ncol: 1
 
 # Histogram of age
 arrhythmia %>% 
   ggplot(aes(x = age)) +
-  geom_histogram(binwidth = 8, fill = "steelblue4", color = "#8fb4d9", alpha = 0.6) +
-  theme_minimal(base_size = 16) +
+  geom_histogram(binwidth = 8, fill = "steelblue4",        # <1>
+                 color = "#8fb4d9", alpha = 0.6) +  
+  theme_minimal(base_size = 14) +
   labs(title = "Histogram: age", y = "Frequency")
 
 # Histogram of QRS
 arrhythmia %>% 
   ggplot(aes(x = QRS)) +
-  geom_histogram(binwidth = 8, fill = "steelblue4", color = "#8fb4d9", alpha = 0.6) +
-  theme_minimal(base_size = 16) +
+  geom_histogram(binwidth = 8, fill = "steelblue4",      
+                 color = "#8fb4d9", alpha = 0.6) +
+  theme_minimal(base_size = 14) +
   labs(title = "Histogram: QRS", y = "Frequency")
 ```
+
+
+1. The exact visual appearance depends on the choice of the `binwidth` argument. Try different bin widths to verify that the resulting histogram represents the underlying data accurately. 
+
 
 A histogram gives information about:
 
@@ -723,28 +730,31 @@ A histogram gives information about:
 -   Where the peak (or peaks) of the distribution is.
 -   The amount of variability in the data.
 
+
+**Density plot** is also used to present the distribution of a continuous variable and it is a variation of the histogram allowing for smoother distributions^[Density curves are usually scaled such that the area under the curve equals one.] (@fig-density1). In this case, `geom_density()` function is used for displaying density plot.
+
 ```{r}
 #| warning: false
 #| label: fig-density1
-#| fig-cap: Density plot of age and QRS variables.
+#| fig-width: 6
+#| fig-cap: Density plot of (a) age and (b) QRS variables.
 #| fig-subcap: 
 #|   - "Density plot of age for the 425 patients."
 #|   - "Density plot of QRS for the 428 patients."
-#| layout-ncol: 2
-
+#| layout-ncol: 1
 
 # density plot of age
 arrhythmia %>% 
   ggplot(aes(x = age)) +
   geom_density(fill="steelblue4", color="#8fb4d9", adjust = 1.5, alpha=0.6) +
-  theme_minimal(base_size = 16) +
+  theme_minimal(base_size = 14) +
   labs(title = "Density Plot: age", y = "Density")
 
 # density plot of QRS
 arrhythmia %>% 
   ggplot(aes(x = QRS)) +
   geom_density(fill="steelblue4", color="#8fb4d9", adjust = 1.5, alpha=0.6) +
-  theme_minimal(base_size = 16) +
+  theme_minimal(base_size = 14) +
   labs(title = "Density Plot: QRS", y = "Density")
 ```
 
@@ -759,17 +769,18 @@ Box plots can be used for displaying location and dispersion for continuous data
 ```{r}
 #| warning: false
 #| label: fig-boxplot1
-#| fig-cap: Box plots of age and QRS variables stratified by sex.
+#| fig-width: 6
+#| fig-cap: Box plots of (a) age and (b) QRS variables stratified by sex.
 #| fig-subcap: 
 #|   - "Box plot of age stratified by sex (female: 235; male = 190)."
 #|   - "Box plot of QRS stratified by sex (female: 237; male = 191)."
-#| layout-ncol: 2
+#| layout-ncol: 1
 
 # box plot of age stratified by sex
 arrhythmia %>% 
   ggplot(aes(x = sex, y = age, fill = sex)) +
   geom_boxplot(alpha = 0.6, width = 0.5) +
-  theme_minimal(base_size = 16) +
+  theme_minimal(base_size = 14) +
   labs(title = "Grouped Box Plot: age by sex") +
   scale_fill_jco() +
   theme(legend.position = "none")
@@ -778,7 +789,7 @@ arrhythmia %>%
 arrhythmia %>% 
   ggplot(aes(x = sex, y = QRS, fill = sex)) +
   geom_boxplot(alpha = 0.6, width = 0.5) +
-  theme_minimal(base_size = 16) +
+  theme_minimal(base_size = 14) +
   labs(title = "Grouped Box Plot: QRS by sex") +
   scale_fill_jco() +
   theme(legend.position = "none")
@@ -795,11 +806,12 @@ There are many variations of the box plot. For example, there is a way to combin
 ```{r}
 #| warning: false
 #| label: fig-raincloud
-#| fig-cap: A raincloud plot of age and QRS variables stratified by sex.
+#| fig-width: 6
+#| fig-cap: A raincloud plot of (a) age and (b) QRS variables stratified by sex.
 #| fig-subcap: 
 #|   - "Raincloud of age stratified by sex (female: 235; male = 190)."
 #|   - "Raincloud of QRS stratified by sex (female: 237; male = 191)."
-#| layout-ncol: 2
+#| layout-ncol: 1
 
 # raincloud plot of age stratified by sex
 arrhythmia %>% 
@@ -809,7 +821,7 @@ arrhythmia %>%
   stat_dotsinterval(side = "bottom", 
                     scale = 0.5, 
                     slab_size = 0.2) +
-  theme_minimal(base_size = 16) +
+  theme_minimal(base_size = 14) +
   labs(title = "Grouped Raincloud Plots: age by sex") +
   scale_fill_jco() +
   theme(legend.position = "none")
@@ -822,7 +834,7 @@ arrhythmia %>%
   stat_dotsinterval(side = "bottom", 
                     scale = 0.5, 
                     slab_size = 0.2) +
-  theme_minimal(base_size = 16) +
+  theme_minimal(base_size = 14) +
   labs(title = "Grouped Raincloud Plots: QRS by sex") +
   scale_fill_jco() +
   theme(legend.position = "none")
