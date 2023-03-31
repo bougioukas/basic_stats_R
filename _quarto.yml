@@ -28,6 +28,7 @@ book:
     - chi_square.qmd
     - fisher_exact.qmd
     - mcnemar.qmd
+    - roc.qmd
     - references.qmd
     
   page-footer: 

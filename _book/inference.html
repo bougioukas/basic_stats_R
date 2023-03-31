@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.290">
+<meta name="generator" content="quarto-1.3.301">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -206,6 +206,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./roc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Receiver Operating Characteristic (ROC) curve</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -293,38 +299,45 @@ Steps of Hypothesis Testsing
 <li>If p − value ≥ α, do not reject the null hypothesis, <span class="math inline">\(H_{0}\)</span>.</li>
 </ul>
 <p>The <a href="#tbl-panel">Table&nbsp;<span>4.1</span></a> demonstrates how to interpret the strength of the evidence. However, always keep in mind the size of the study being considered.</p>
-<div id="tbl-panel" class="anchored">
+<div id="tbl-panel" class="tbl-parent quarto-layout-panel anchored">
+<div class="panel-caption table-caption">
+<p>Table&nbsp;4.1: <strong>?(caption)</strong></p>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div id="tbl-panel-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-panel" style="flex-basis: 100.0%;justify-content: center;">
 <table class="table">
-<caption>Table&nbsp;4.1: Strength of the evidence against <span class="math inline">\(H_{0}\)</span>.</caption>
+<caption>(a) Strength of the evidence against <span class="math inline">\(H_{0}\)</span>.</caption>
 <thead>
 <tr class="header">
-<th>p-value</th>
-<th>Interpretation</th>
+<th style="text-align: left;">p-value</th>
+<th style="text-align: left;">Interpretation</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><span class="math inline">\(p \geq{0.10}\)</span></td>
-<td>No evidence to reject <span class="math inline">\(H_{0}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(p \geq{0.10}\)</span></td>
+<td style="text-align: left;">No evidence to reject <span class="math inline">\(H_{0}\)</span></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(0.05\leq p &lt; 0.10\)</span></td>
-<td>Weak evidence to reject <span class="math inline">\(H_{0}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(0.05\leq p &lt; 0.10\)</span></td>
+<td style="text-align: left;">Weak evidence to reject <span class="math inline">\(H_{0}\)</span></td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(0.01\leq p &lt; 0.05\)</span></td>
-<td>Evidence to reject <span class="math inline">\(H_{0}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(0.01\leq p &lt; 0.05\)</span></td>
+<td style="text-align: left;">Evidence to reject <span class="math inline">\(H_{0}\)</span></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(0.001\leq p &lt; 0.01\)</span></td>
-<td>Strong evidence to reject <span class="math inline">\(H_{0}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(0.001\leq p &lt; 0.01\)</span></td>
+<td style="text-align: left;">Strong evidence to reject <span class="math inline">\(H_{0}\)</span></td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(p &lt; 0.001\)</span></td>
-<td>Very strong evidence to reject <span class="math inline">\(H_{0}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(p &lt; 0.001\)</span></td>
+<td style="text-align: left;">Very strong evidence to reject <span class="math inline">\(H_{0}\)</span></td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
 </div>
 <p><strong>Step 5:</strong> Interpret the results.</p>
 </div>

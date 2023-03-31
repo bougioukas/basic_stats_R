@@ -720,9 +720,7 @@ arrhythmia %>%
   labs(title = "Histogram: QRS", y = "Frequency")
 ```
 
-
-1. The exact visual appearance depends on the choice of the `binwidth` argument. Try different bin widths to verify that the resulting histogram represents the underlying data accurately. 
-
+1.  The exact visual appearance depends on the choice of the `binwidth` argument. Try different bin widths to verify that the resulting histogram represents the underlying data accurately.
 
 A histogram gives information about:
 
@@ -730,8 +728,9 @@ A histogram gives information about:
 -   Where the peak (or peaks) of the distribution is.
 -   The amount of variability in the data.
 
+**Density plot** is also used to present the distribution of a continuous variable and it is considered a variation of the histogram allowing for smoother distributions[^descriptive-1] (@fig-density1). In this case, `geom_density()` function is used for displaying the distribution.
 
-**Density plot** is also used to present the distribution of a continuous variable and it is a variation of the histogram allowing for smoother distributions^[Density curves are usually scaled such that the area under the curve equals one.] (@fig-density1). In this case, `geom_density()` function is used for displaying density plot.
+[^descriptive-1]: Density curves are usually scaled such that the area under the curve equals one.
 
 ```{r}
 #| warning: false
@@ -746,14 +745,16 @@ A histogram gives information about:
 # density plot of age
 arrhythmia %>% 
   ggplot(aes(x = age)) +
-  geom_density(fill="steelblue4", color="#8fb4d9", adjust = 1.5, alpha=0.6) +
+  geom_density(fill="steelblue4", color="#8fb4d9", 
+               adjust = 1.5, alpha=0.6) +
   theme_minimal(base_size = 14) +
   labs(title = "Density Plot: age", y = "Density")
 
 # density plot of QRS
 arrhythmia %>% 
   ggplot(aes(x = QRS)) +
-  geom_density(fill="steelblue4", color="#8fb4d9", adjust = 1.5, alpha=0.6) +
+  geom_density(fill="steelblue4", color="#8fb4d9", 
+               adjust = 1.5, alpha=0.6) +
   theme_minimal(base_size = 14) +
   labs(title = "Density Plot: QRS", y = "Density")
 ```
@@ -762,15 +763,15 @@ arrhythmia %>%
 
 **B. Box Plot**
 
-Box plots can be used for displaying location and dispersion for continuous data, particularly when comparing distributions between many groups (@fig-boxplot1). This type of graph uses boxes and lines to depict the distributions. Box limits indicate the range of the central **50%** of the data, with a horizontal line in the box corresponding to the **median**. Whiskers extend from each box to capture the **range** of the remaining data. **Data points** that are outside the whiskers are represented as **dots** on the graph and considered potential outliers.[^descriptive-1]
+Box plots can be used for displaying location and dispersion for continuous data, particularly when comparing distributions between many groups (@fig-boxplot1). This type of graph uses boxes and lines to depict the distributions. Box limits indicate the range of the central **50%** of the data, with a horizontal line in the box corresponding to the **median**. Whiskers extend from each box to capture the **range** of the remaining data. **Data points** that are outside the whiskers are represented as **dots** on the graph and considered potential outliers.[^descriptive-2]
 
-[^descriptive-1]: An outlier is an observation that is significantly distant from the main body the data. We say any value outside of the following interval is an outlier: $$(Q_1 - 1.5 \times IQR, \ Q_3 + 1.5 \times IQR)$$
+[^descriptive-2]: An outlier is an observation that is significantly distant from the main body the data. We say any value outside of the following interval is an outlier: $$(Q_1 - 1.5 \times IQR, \ Q_3 + 1.5 \times IQR)$$
 
 ```{r}
 #| warning: false
 #| label: fig-boxplot1
 #| fig-width: 6
-#| fig-cap: Box plots of (a) age and (b) QRS variables stratified by sex.
+#| fig-cap: Box plot of (a) age and (b) QRS variables stratified by sex.
 #| fig-subcap: 
 #|   - "Box plot of age stratified by sex (female: 235; male = 190)."
 #|   - "Box plot of QRS stratified by sex (female: 237; male = 191)."
@@ -807,7 +808,7 @@ There are many variations of the box plot. For example, there is a way to combin
 #| warning: false
 #| label: fig-raincloud
 #| fig-width: 6
-#| fig-cap: A raincloud plot of (a) age and (b) QRS variables stratified by sex.
+#| fig-cap: Raincloud plot of (a) age and (b) QRS variables stratified by sex.
 #| fig-subcap: 
 #|   - "Raincloud of age stratified by sex (female: 235; male = 190)."
 #|   - "Raincloud of QRS stratified by sex (female: 237; male = 191)."

@@ -1,0 +1,290 @@
+# Receiver Operating Characteristic (ROC) curve {#sec-roc}
+
+When a diagnostic test result is measured in a **continuous scale**, sensitivity and specificity vary with different cut-off points (thresholds). Therefore, a **convenient** cut-off point must be selected in order to calculate the measures of diagnostic accuracy of the test. **Receiver operating characteristic** (ROC) curve analysis can be used to help with this decision.
+
+When we have finished this Chapter, we should be able to:
+
+::: {.callout-caution icon="false"}
+## Learning objectives
+
+-   Evaluate a diagnostic test
+-   Compare different diagnostic tests
+-   Interpret the results
+:::
+
+## Research question
+
+We want to compare two screening questionnaires for chronic obstructive pulmonary disease (COPD) among smokers aged \>45 years in the primary care setting:
+
+-   *International Primary Care Airways Group (IPAG)* questionnaire
+-   *COPD Population Screener (COPDPS)* questionnaire
+
+The diagnosis of COPD was based on spirometric criterion (FEV 1 /FVC \<0.7 following bronchodilation), clinical status (medical history, symptoms and physical examination), and exclusion of other diseases.
+
+The Delong test was used for comparing 2 areas under the curve (AUCs)
+
+## Packages we need
+
+We need to load the following packages:
+
+```{r}
+#| message: false
+#| warning: false
+
+library(pROC)
+library(OptimalCutpoints)
+library(plotROC)
+library(rstatix)
+library(ggsci)
+library(here)
+library(tidyverse)
+```
+
+## Preraring the data
+
+We import the data *copd* in R:
+
+```{r}
+#| warning: false
+
+library(readxl)
+dat <- read_excel(here("data", "copd.xlsx"))
+dat <- as.data.frame(dat)
+
+# we need to create a roc object for each questionnaire
+roc1 <- roc(dat$diagnosis, dat$IPAG)
+roc2 <- roc(dat$diagnosis, dat$COPDPS)
+```
+
+```{r}
+#| echo: false
+#| label: fig-depression
+#| fig-cap: Table with data from "depression" file.
+
+DT::datatable(
+  dat, extensions = 'Buttons', options = list(
+    dom = 'tip',
+    columnDefs = list(list(className = 'dt-center', targets = "_all"))
+  )
+)
+
+```
+
+We inspect the data and the type of variables:
+
+```{r}
+glimpse(dat)
+```
+
+## Accuracy measures
+
+The **Youden index** is often used to find the optimal cut-off point for sensitivity and specificity.
+
+### *IPAG* questionnaire
+
+::: callout-tip
+## Optimal cut-point based on Youden Index: IPAG questionnaire
+
+::: panel-tabset
+## OptimalCutpoints
+
+```{r}
+
+IPAG_Youden <- optimal.cutpoints(X = "IPAG", status = "diagnosis",
+                                 tag.healthy = 0, 
+                                 methods = c("Youden"), 
+                                 data = dat)
+
+summary_IPAG_Youden <- summary(IPAG_Youden)
+summary_IPAG_Youden
+
+```
+
+## pROC
+
+```{r}
+#| warning: false
+
+coords(roc1, "best", ret = c("threshold", "sensitivity", 
+                             "specificity", "ppv", "npv", 
+                             "accuracy"), best.method="youden")
+```
+:::
+:::
+
+We can extract the values of sensitivity and specificity from the accuracy measures table of IPAG as follows:
+
+```{r}
+# extract the sensitivity
+se_IPAG_Youden <- summary_IPAG_Youden$Youden$Global$optimal.cutoff$Se
+se_IPAG_Youden[1,1]
+
+# extract the specificity
+sp_IPAG_Youden <- summary_IPAG_Youden$Youden$Global$optimal.cutoff$Sp
+sp_IPAG_Youden[1,1]
+
+```
+
+### *COPDPS* questionnaire
+
+::: callout-tip
+## Optimal cut-point based on Youden Index: COPDPS questionnaire
+
+::: panel-tabset
+## OptimalCutpoints
+
+```{r}
+
+COPDPS_Youden <- optimal.cutpoints(X = "COPDPS", status = "diagnosis",
+                                 tag.healthy = 0, 
+                                 methods = c("Youden"), 
+                                 data = dat)
+
+summary_COPDPS_Youden <- summary(COPDPS_Youden)
+summary_COPDPS_Youden
+```
+
+## pROC
+
+```{r}
+#| warning: false
+
+coords(roc2, "best", ret = c("threshold", "sensitivity", 
+                             "specificity", "ppv", "npv", 
+                             "accuracy"), best.method="youden")
+```
+:::
+:::
+
+Similarly, we can extract the values of sensitivity and specificity from the accuracy measures table of COPDPS as follows:
+
+```{r}
+
+# extract the sensitivity
+se_COPDPS_Youden <- summary_COPDPS_Youden$Youden$Global$optimal.cutoff$Se
+se_COPDPS_Youden[1,1]
+
+# extract the specificity
+sp_COPDPS_Youden <- summary_COPDPS_Youden$Youden$Global$optimal.cutoff$Sp
+sp_COPDPS_Youden[1,1]
+```
+
+## ROC curve
+
+We can plot the sensitivity on the y-axis and 1-specificity (false positives) values on the x-axis for all possible cut-off points of the index test.
+
+```{r}
+#| warning: false
+#| label: fig-roc
+#| fig-width: 7
+#| fig-cap: The ROC curve of IPAG questionnaire.
+
+# get the AUC IPAG and the 95% confidence interval of this area
+auc <- auc(roc1)
+ci <- ci.auc(roc1)
+ci_l <- round(ci[1], 3)
+ci_u <- round(ci[3], 3)
+
+
+# create the plot
+g <- ggplot(dat, aes(d = diagnosis, m = IPAG)) + 
+  geom_roc(n.cuts = 0, color = "#0071BF") +
+  theme(text = element_text(size = 14)) +
+  geom_abline(intercept = 0, slope = 1, linetype = 'dashed') +
+  geom_point(aes(x = 1-sp_IPAG_Youden, y = se_IPAG_Youden), color = "black") +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  labs(x = "1 - Specificity", y = "Sensitivity")
+
+# add annotations to the plot
+g + annotate("text", x=0.70, y=0.30, 
+           label=paste("AUC IPAG = ", round(auc(roc1), 3), 
+                       " (95% CI = ", round(ci[1], 3), " - ", round(ci[3], 3), ")")) +
+  annotate("text", x=0.09, y=0.69, 
+           label=paste("Se =", round(se_IPAG_Youden, 3))) +
+  annotate("text", x=0.09, y=0.66, 
+           label=paste("1-Sp =", 1-round(sp_IPAG_Youden, 3)))
+```
+
+
+
+## Compare IPAG and COPDPS questionnaires
+
+### Graphically comparison with ROC curves
+
+```{r}
+#| warning: false
+#| label: fig-rocs
+#| fig-width: 7
+#| fig-cap: Comparison between IPAG and COPDPS ROC curves.
+
+
+# get the AUC for IPAG and the 95% confidence interval of this area
+auc1 <- auc(roc1)
+ci1 <- ci.auc(roc1)
+ci_l1 <- round(ci1[1], 3)
+ci_u1 <- round(ci1[3], 3)
+
+
+# get the AUC for COPDSPS and the 95% confidence interval of this area
+auc2 <- auc(roc2)
+ci2 <- ci.auc(roc2)
+ci_l2 <- round(ci2[1], 3)
+ci_u2 <- round(ci2[3], 3)
+
+
+
+# prepare the data
+longdata <- melt_roc(dat, "diagnosis", c("IPAG", "COPDPS"))
+
+longdata$name = factor(longdata$name, levels = c("IPAG", "COPDPS"))
+
+# create the plot
+g <- ggplot(longdata, aes(d = D, m = M, color = name)) + 
+  geom_roc(n.cuts = 0) +
+  theme(text = element_text(size = 14),
+        legend.position="top") +
+  geom_abline(intercept = 0, slope = 1, linetype = 'dashed') +
+  geom_point(aes(x = 1-sp_IPAG_Youden, y = se_IPAG_Youden), color = "black") +
+  geom_point(aes(x = 1-sp_COPDPS_Youden, y = se_COPDPS_Youden), colour = "black") +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  scale_color_jco() +
+  labs(x = "1 - Specificity", y = "Sensitivity", colour="Questionnaire")
+
+# add annotations to the plot
+g + annotate("text", x=0.70, y=0.35, 
+           label=paste("AUC IPAG = ", round(auc(roc1), 3), 
+                       " (95% CI = ", round(ci1[1], 3), " - ", round(ci1[3], 3), ")")) +
+  annotate("text", x=0.70, y=0.25, 
+           label= paste("AUC COPDPS = ", round(auc(roc2), 3), 
+                        " (95% CI = ", round(ci2[1], 3), " - ", round(ci2[3], 3), ")")) +
+  annotate("text", x=0.09, y=0.69, 
+           label=paste("Se =", round(se_IPAG_Youden, 3))) +
+  annotate("text", x=0.09, y=0.66, 
+           label=paste("1-Sp =", 1-round(sp_IPAG_Youden, 3))) +
+  annotate("text", x=0.19, y=0.58, 
+           label=paste("Se =", round(se_COPDPS_Youden, 3))) +
+  annotate("text", x=0.19, y=0.54, 
+           label=paste("1-Sp =", 1-round(sp_COPDPS_Youden, 3)))
+```
+
+### Compare AUCs: DeLong' s test
+
+::: {.callout-note icon="false"}
+## Null hypothesis and alternative hypothesis
+
+-   $H_0$: there is no difference between two AUCs
+-   $H_1$: there is difference between two AUCs
+:::
+
+```{r}
+#| warning: false
+
+roc.test(roc1, roc2, method=c("delong"))
+
+```
+
+The sensitivity versus 1-specificity values are usually plotted, with the area under the curve often being used as a measure of discriminatory performance.
+
+The area under the ROC curve, also called the c-statistic, thus reflects the performance of the The area under the receiver operating characteristics curve (AUC of ROC) is a widely used measure of discrimination in
