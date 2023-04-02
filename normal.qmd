@@ -46,22 +46,21 @@ where $\pi \approx 3.142$ and $e \approx 2.718$.
 #| fig-cap: The area underneath a Normal Distribution
 
 
-x <- seq(-4, 4, length=200)                                                    # <1>
-df <- data.frame(x)                                                            # <1>
+x <- seq(-4, 4, length=200)                                                    
+df <- data.frame(x)                                                            
 
 ggplot(df, aes(x)) +                                                           
   stat_function(fun = dnorm) +                                                 
-  scale_x_continuous(breaks = c(-3, -2, -1, 0, 1, 2, 3),                       # <2>
-                     labels = expression(-3*sigma, -2*sigma, -1*sigma,         # <2>
-                                         mu, 1*sigma, 2*sigma, 3*sigma)) +     # <2>
+  scale_x_continuous(breaks = c(-3, -2, -1, 0, 1, 2, 3),                       
+                     labels = expression(-3*sigma, -2*sigma, -1*sigma,         
+                                         mu, 1*sigma, 2*sigma, 3*sigma)) +     
   labs(x = "Variable",
        y = "Probability density") +
   theme(text = element_text(size = 16))                                    
 
 ```
 
-1.  Create a sequence of 200 numbers between -4 and +4.
-2.  Add the standard deviation notation in x-axis.
+
 
 ## The properties of a normal distribution
 
