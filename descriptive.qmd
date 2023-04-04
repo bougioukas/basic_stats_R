@@ -29,6 +29,7 @@ library(questionr)
 library(MESS)
 library(ggsci)
 library(ggdist)
+library(ggrain)
 library(patchwork)
 library(here)
 library(tidyverse)
@@ -804,6 +805,10 @@ In @fig-boxplot1 a, box plots of age are approximately symmetric about the media
 
 There are many variations of the box plot. For example, there is a way to combine raw data (dots), probability density, and key summary statistics such as median, and relevant intervals of a range of likely values for the population parameter, in an appealing and flexible format with minimal redundancy, using the raincloud plot (@fig-raincloud):
 
+
+::: panel-tabset
+## ggdist
+
 ```{r}
 #| warning: false
 #| label: fig-raincloud
@@ -840,3 +845,38 @@ arrhythmia %>%
   scale_fill_jco() +
   theme(legend.position = "none")
 ```
+
+
+## ggrain
+
+```{r}
+#| warning: false
+#| label: fig-raincloud2
+#| fig-width: 6
+#| fig-cap: Raincloud plot of (a) age and (b) QRS variables stratified by sex.
+#| fig-subcap: 
+#|   - "Raincloud of age stratified by sex (female: 235; male = 190)."
+#|   - "Raincloud of QRS stratified by sex (female: 237; male = 191)."
+#| layout-ncol: 1
+
+ggplot(arrhythmia, aes(sex, age, fill = sex)) +
+  geom_rain(likert= TRUE,
+            point.args = list(alpha = .3)) +
+  theme_minimal(base_size = 14) +
+  labs(title = "Grouped Raincloud Plots: age by sex") +
+  scale_fill_jco() +
+  theme(legend.position = "none")
+
+
+ggplot(arrhythmia, aes(sex, QRS, fill = sex)) +
+  geom_rain(likert= TRUE,
+            point.args = list(alpha = .3)) +
+  theme_minimal(base_size = 14) +
+  labs(title = "Grouped Raincloud Plots: QRS by sex") +
+  scale_fill_jco() +
+  theme(legend.position = "none")
+```
+
+:::
+
+
