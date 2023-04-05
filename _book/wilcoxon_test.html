@@ -68,12 +68,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/social-share-0.1.0/social-share.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/social-share-0.1.0/all.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -119,14 +117,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Practical Statistics in Medicine with R</a> 
-        <div class="sidebar-tools-main tools-wide">
+        <div class="sidebar-tools-main">
     <a href="https://github.com/bougioukas/basic_stats_R" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
-  <div class="quarto-reader-toggle-btn">
-  <i class="bi"></i>
-  </div>
-</a>
 </div>
     </div>
       </div>
@@ -333,8 +325,8 @@ Null hypothesis and alternative hypothesis
 </div>
 <div class="cell">
 <div id="fig-weight" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-8194b802a1fb17db3bbc" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-8194b802a1fb17db3bbc">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8"],[488,478,480,426,440,410,458,460],[484,478,492,444,436,398,464,476],[4,0,-12,-18,4,12,-6,-16]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>affected_eye<\/th>\n      <th>unaffected_eye<\/th>\n      <th>dif_thickness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-center","targets":"_all"},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;8.1: Table with data from “eyes” file.</figcaption><p></p>
+<figure class="figure"><div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-9ece469c2d71189d0801" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-9ece469c2d71189d0801">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8"],[488,478,480,426,440,410,458,460],[484,478,492,444,436,398,464,476],[4,0,-12,-18,4,12,-6,-16]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>affected_eye<\/th>\n      <th>unaffected_eye<\/th>\n      <th>dif_thickness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","columnDefs":[{"className":"dt-center","targets":"_all"},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p></p><figcaption class="figure-caption">Figure&nbsp;8.1: Table with data from “eyes” file.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -561,12 +553,12 @@ sample estimates:
 <span>                 estimate_fun <span class="op">=</span> <span class="va">thickness</span> <span class="op">~</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/style_sigfig.html">style_sigfig</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 
-<div id="buycbxsvxd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ognryibkmg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#buycbxsvxd .gt_table {
+#ognryibkmg .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -591,7 +583,7 @@ sample estimates:
   border-left-color: #D3D3D3;
 }
 
-#buycbxsvxd .gt_heading {
+#ognryibkmg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -603,12 +595,12 @@ sample estimates:
   border-right-color: #D3D3D3;
 }
 
-#buycbxsvxd .gt_caption {
+#ognryibkmg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#buycbxsvxd .gt_title {
+#ognryibkmg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -620,7 +612,7 @@ sample estimates:
   border-bottom-width: 0;
 }
 
-#buycbxsvxd .gt_subtitle {
+#ognryibkmg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -632,13 +624,13 @@ sample estimates:
   border-top-width: 0;
 }
 
-#buycbxsvxd .gt_bottom_border {
+#ognryibkmg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#buycbxsvxd .gt_col_headings {
+#ognryibkmg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -653,7 +645,7 @@ sample estimates:
   border-right-color: #D3D3D3;
 }
 
-#buycbxsvxd .gt_col_heading {
+#ognryibkmg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -673,7 +665,7 @@ sample estimates:
   overflow-x: hidden;
 }
 
-#buycbxsvxd .gt_column_spanner_outer {
+#ognryibkmg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -685,15 +677,15 @@ sample estimates:
   padding-right: 4px;
 }
 
-#buycbxsvxd .gt_column_spanner_outer:first-child {
+#ognryibkmg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#buycbxsvxd .gt_column_spanner_outer:last-child {
+#ognryibkmg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#buycbxsvxd .gt_column_spanner {
+#ognryibkmg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -705,7 +697,7 @@ sample estimates:
   width: 100%;
 }
 
-#buycbxsvxd .gt_group_heading {
+#ognryibkmg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -731,7 +723,7 @@ sample estimates:
   text-align: left;
 }
 
-#buycbxsvxd .gt_empty_group_heading {
+#ognryibkmg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -746,15 +738,15 @@ sample estimates:
   vertical-align: middle;
 }
 
-#buycbxsvxd .gt_from_md > :first-child {
+#ognryibkmg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#buycbxsvxd .gt_from_md > :last-child {
+#ognryibkmg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#buycbxsvxd .gt_row {
+#ognryibkmg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -773,7 +765,7 @@ sample estimates:
   overflow-x: hidden;
 }
 
-#buycbxsvxd .gt_stub {
+#ognryibkmg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -786,7 +778,7 @@ sample estimates:
   padding-right: 5px;
 }
 
-#buycbxsvxd .gt_stub_row_group {
+#ognryibkmg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -800,11 +792,11 @@ sample estimates:
   vertical-align: top;
 }
 
-#buycbxsvxd .gt_row_group_first td {
+#ognryibkmg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#buycbxsvxd .gt_summary_row {
+#ognryibkmg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -814,16 +806,16 @@ sample estimates:
   padding-right: 5px;
 }
 
-#buycbxsvxd .gt_first_summary_row {
+#ognryibkmg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#buycbxsvxd .gt_first_summary_row.thick {
+#ognryibkmg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#buycbxsvxd .gt_last_summary_row {
+#ognryibkmg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -833,7 +825,7 @@ sample estimates:
   border-bottom-color: #D3D3D3;
 }
 
-#buycbxsvxd .gt_grand_summary_row {
+#ognryibkmg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -843,7 +835,7 @@ sample estimates:
   padding-right: 5px;
 }
 
-#buycbxsvxd .gt_first_grand_summary_row {
+#ognryibkmg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -853,11 +845,11 @@ sample estimates:
   border-top-color: #D3D3D3;
 }
 
-#buycbxsvxd .gt_striped {
+#ognryibkmg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#buycbxsvxd .gt_table_body {
+#ognryibkmg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -866,7 +858,7 @@ sample estimates:
   border-bottom-color: #D3D3D3;
 }
 
-#buycbxsvxd .gt_footnotes {
+#ognryibkmg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -880,7 +872,7 @@ sample estimates:
   border-right-color: #D3D3D3;
 }
 
-#buycbxsvxd .gt_footnote {
+#ognryibkmg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -889,7 +881,7 @@ sample estimates:
   padding-right: 5px;
 }
 
-#buycbxsvxd .gt_sourcenotes {
+#ognryibkmg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -903,7 +895,7 @@ sample estimates:
   border-right-color: #D3D3D3;
 }
 
-#buycbxsvxd .gt_sourcenote {
+#ognryibkmg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -911,64 +903,64 @@ sample estimates:
   padding-right: 5px;
 }
 
-#buycbxsvxd .gt_left {
+#ognryibkmg .gt_left {
   text-align: left;
 }
 
-#buycbxsvxd .gt_center {
+#ognryibkmg .gt_center {
   text-align: center;
 }
 
-#buycbxsvxd .gt_right {
+#ognryibkmg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#buycbxsvxd .gt_font_normal {
+#ognryibkmg .gt_font_normal {
   font-weight: normal;
 }
 
-#buycbxsvxd .gt_font_bold {
+#ognryibkmg .gt_font_bold {
   font-weight: bold;
 }
 
-#buycbxsvxd .gt_font_italic {
+#ognryibkmg .gt_font_italic {
   font-style: italic;
 }
 
-#buycbxsvxd .gt_super {
+#ognryibkmg .gt_super {
   font-size: 65%;
 }
 
-#buycbxsvxd .gt_footnote_marks {
+#ognryibkmg .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#buycbxsvxd .gt_asterisk {
+#ognryibkmg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#buycbxsvxd .gt_indent_1 {
+#ognryibkmg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#buycbxsvxd .gt_indent_2 {
+#ognryibkmg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#buycbxsvxd .gt_indent_3 {
+#ognryibkmg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#buycbxsvxd .gt_indent_4 {
+#ognryibkmg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#buycbxsvxd .gt_indent_5 {
+#ognryibkmg .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1028,121 +1020,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
-      }
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  let localAlternateSentinel = 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

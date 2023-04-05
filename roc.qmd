@@ -29,16 +29,18 @@ We need to load the following packages:
 
 ```{r}
 #| message: false
-#| warning: false
 
 library(pROC)
-library(OptimalCutpoints)
 library(plotROC)
 library(epiR)
 library(ggsci)
 library(here)
 library(tidyverse)
 ```
+
+
+>**Other relative packages:** OptimalCutpoints, cutpointr
+
 
 ## Preraring the data
 
@@ -104,10 +106,7 @@ roc2 <- roc(dat$diagnosis, dat$COPDPS)
 -   For confirmative diagnosis purposes, for example, when a chemotherapy is to initiated once the diagnosis is established, the cut-off point can be selected to favor a higher specificity. Thus, a positive test result indicates the presence of disease (SpPin; specificity, positive, "rule in" the disease).
 :::
 
-
 Additionally, for a given diagnostic test, we can consider all cut-off points that give a unique pair of values for sensitivity and specificity. We can plot in a graph, which is known as a **ROC curve**, the sensitivity on the y-axis and 1-specificity (false positives) values on the x-axis for all these possible cut-off points of the diagnostic test. Then, the **area under the ROC curve** (AUC of ROC), also called the c-statistic, can be calculated which is a widely used measure of overall performance.
-
-
 
 ### IPAG questionnaire
 
@@ -194,7 +193,7 @@ g1 + annotate("text", x=0.70, y=0.30,
            label=paste("1-Sp =", 1-sp_IPAG))
 ```
 
-The AUC of IPAG questionnaire equals to 0.799 (95% CI: 0.769 - 0.829) which indicates a reasonable diagnostic test. 
+The AUC of IPAG questionnaire equals to 0.799 (95% CI: 0.769 - 0.829) which indicates a reasonable diagnostic test.
 
  
 
@@ -246,8 +245,6 @@ The results using the cut-off point of 5 give Se = 0.577 (0.496 - 0.617) and Sp 
 
 Similarly, let's get sensitivity and specificity if a cutoff point of 5 is used for the COPDPS questionnaire and calculate the AUC (95% CI) of ROC to provide additional information in the plot:
 
-
-
 ```{r}
 #| warning: false
 
@@ -296,7 +293,6 @@ g2 + annotate("text", x=0.70, y=0.25,
 
 The AUC of COPDPS questionnaire equals to 0.791 (95% CI: 0.760 - 0.821) which is close to the value 0.799 of AUC of IPAG questionnaire.
 
-
 ## Comparing ROC Curves
 
 **A. Graphical comparison of ROC curves**
@@ -333,10 +329,7 @@ g + annotate("text", x=0.70, y=0.35, color = "#0071BF",
                         " (95% CI = ", ci_l2, " - ", ci_u2, ")"))
 ```
 
-The AUC values obtained from the ROC curve were 0.799 (95% CI: 0.769 - 0.829) for the IPAG questionnaire and 0.791 (95% CI: 0.760 - 0.821) for the COPDPS questionnaire.  Therefore, the two questionnaires have similar overall performance in the present sample.
-
-
-
+The AUC values obtained from the ROC curve were 0.799 (95% CI: 0.769 - 0.829) for the IPAG questionnaire and 0.791 (95% CI: 0.760 - 0.821) for the COPDPS questionnaire. Therefore, the two questionnaires have similar overall performance in the present sample.
 
  
 
@@ -358,6 +351,4 @@ roc.test(roc1, roc2, method=c("delong"))
 
 ```
 
-
-There was no significant difference in the AUC values with the two questionnaires (p = 0.45).
-
+There was no significant difference in the AUC values with the two questionnaires (p = 0.45 \< 0.05).

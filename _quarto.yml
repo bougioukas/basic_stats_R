@@ -4,7 +4,6 @@ project:
 book:
   title: "Practical Statistics in Medicine with R"
   subtitle: "1st Edition"
-  reader-mode: true
   author: 
     - name: "Konstantinos I. Bougioukas, PhD"
       orcid: "0000-0002-6533-1391"
@@ -53,7 +52,6 @@ format:
   html:
     theme:
       light: [cosmo, theme-light.scss]
-      dark: [sketchy, theme-dark.scss]
     grid:
       sidebar-width: 270px
       body-width: 810px
