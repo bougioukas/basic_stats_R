@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Konstantinos I. Bougioukas, PhD">
-<meta name="dcterms.date" content="2023-10-05">
 
-<title>Practical Statistics in Medicine with R</title>
+<title>Practical Statistics in Medicine with R - 4&nbsp; Foundations for statistical inference</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./introduction.html" rel="next">
+<link href="./student_t_test.html" rel="next">
+<link href="./normal.html" rel="prev">
 <link href="./images/cover.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -45,7 +44,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/social-share-0.1.0/social-share.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/social-share-0.1.0/all.css" rel="stylesheet">
-<script src="site_libs/quarto-contrib/qrcodejs-v1.0.0/qrcode.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -72,6 +70,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -84,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./inference.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Foundations for statistical inference</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -114,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -138,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./inference.html" class="sidebar-item-text sidebar-link">
+  <a href="./inference.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Foundations for statistical inference</span></span></a>
   </div>
 </li>
@@ -224,12 +224,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
-  <ul class="collapse">
-  <li><a href="#whom-is-this-textbook-for" id="toc-whom-is-this-textbook-for" class="nav-link" data-scroll-target="#whom-is-this-textbook-for">Whom is this textbook for?</a></li>
-  <li><a href="#r-via-rstudio-and-rstudio-projects" id="toc-r-via-rstudio-and-rstudio-projects" class="nav-link" data-scroll-target="#r-via-rstudio-and-rstudio-projects">R via RStudio and RStudio Projects</a></li>
-  <li><a href="#reproducibility-and-license" id="toc-reproducibility-and-license" class="nav-link" data-scroll-target="#reproducibility-and-license">Reproducibility and License</a></li>
-  </ul></li>
+  <li><a href="#hypothesis-testsing" id="toc-hypothesis-testsing" class="nav-link active" data-scroll-target="#hypothesis-testsing"><span class="header-section-number">4.1</span> Hypothesis Testsing</a></li>
+  <li><a href="#type-of-errors-in-hypothesis-testing" id="toc-type-of-errors-in-hypothesis-testing" class="nav-link" data-scroll-target="#type-of-errors-in-hypothesis-testing"><span class="header-section-number">4.2</span> Type of Errors in Hypothesis Testing</a></li>
   </ul>
 </nav>
     </div>
@@ -238,27 +234,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Practical Statistics in Medicine with R</h1>
-<p class="subtitle lead">1st Edition</p>
+<h1 class="title"><span id="sec-inference" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Foundations for statistical inference</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Konstantinos I. Bougioukas, PhD <a href="https://orcid.org/0000-0002-6533-1391" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">October 5, 2023</p>
-    </div>
-  </div>
   
     
   </div>
@@ -267,61 +250,173 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1><p><img src="images/cover.png" title="Practical Statistics in Medicine with R" class="quarto-cover-image img-fluid"></p>
-<section id="whom-is-this-textbook-for" class="level3">
-<h3 class="anchored" data-anchor-id="whom-is-this-textbook-for">Whom is this textbook for?</h3>
-<p>This textbook is based on my notes from a series of lectures given for a few years at the Aristotle University of Thessaloniki, Greece. The textbook can be used as support material for practical labs on basic statistics using R at any level from beginner to advanced. It can also be used as a support for self-teaching.</p>
-<p>I have paid particular attention to the form of the book, which I think should aid understanding the most common statistical tests using Base R and pipe-friendly functions, coherent with the ‘tidyverse’ design philosophy. The {ggplot2} package and many ggplot2 extensions are the preferred tools of choice for constructing data visualizations in the textbook.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon"></i>
+<i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+Learning objectives
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This textbook assumes that the reader has a basic knowledge of R, tidyverse and introductory statistics. If you want to familiarize yourself with this programming language and statistics, we recommend the books below:</p>
 <ul>
-<li><a href="https://www.routledge.com/Using-R-for-Introductory-Statistics/Verzani/p/book/9781466590731">Using R for Introductory Statistics</a></li>
-<li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
-<li><a href="https://ggplot2-book.org/">ggplot2: Elegant Graphics for Data Analysis</a></li>
+<li>Understand the hypothesis testing</li>
+<li>Understand the type of errors</li>
 </ul>
+</div>
+</div>
+<section id="hypothesis-testsing" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="hypothesis-testsing"><span class="header-section-number">4.1</span> Hypothesis Testsing</h2>
+<p>Hypothesis testing is a method of deciding whether the data are consistent with the null hypothesis. The calculation of the p-value is an important part of the procedure. Given a study with a single outcome measure and a statistical test, hypothesis testing can be summarized in five steps.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Steps of Hypothesis Testsing
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Step 1:</strong> State the null hypothesis, <span class="math inline">\(H_{0}\)</span>, and alternative hypothesis, <span class="math inline">\(H_{1}\)</span>, based on the research question.</p>
+<blockquote class="blockquote">
+<p>NOTE: We decide a non-directional <span class="math inline">\(H_{1}\)</span> (also known as two-sided hypothesis) whether we test for effects in both directions (most common), otherwise a directional (also known as one-sided) hypothesis.</p>
+</blockquote>
+<p><strong>Step 2:</strong> Set the level of significance, α (usually 0.05).</p>
+<p><strong>Step 3:</strong> Identify the appropriate test statistic and check the assumptions. Calculate the test statistic using the data.</p>
+<blockquote class="blockquote">
+<p>NOTE: There are two basic types of statistical tests and they are described as parametric and non-parametric. The parametric tests (e.g., t-test, ANOVA), make certain assumptions about the distribution of the unknown parameter of interest and thus the test statistic is valid under these assumptions. For non-parametric tests (e.g., Mann-Whitney U test, Kruskal-Wallis test), there are no such assumptions. Most nonparametric tests use some way of ranking the measurements. Non-parametric tests are about 95% as powerful as parametric tests.</p>
+</blockquote>
+<p><strong>Step 4:</strong> Decide whether or not the result is statistically significant.</p>
+<blockquote class="blockquote">
+<p>The p-value is the <strong>probability of obtaining the observed results, or something more extreme, if the null hypothesis is true</strong>.</p>
+</blockquote>
+<p>Using the known distribution of the test statistic and according to the result of our statistical test, we calculate the corresponding p-value. Then we compare the p-value to the significance level α:</p>
+<ul>
+<li>If p − value &lt; α, reject the null hypothesis, <span class="math inline">\(H_{0}\)</span>.</li>
+<li>If p − value ≥ α, do not reject the null hypothesis, <span class="math inline">\(H_{0}\)</span>.</li>
+</ul>
+<p>The <a href="#tbl-panel" class="quarto-xref">Table&nbsp;<span>4.1</span></a> demonstrates how to interpret the strength of the evidence. However, always keep in mind the size of the study being considered.</p>
+<div id="tbl-panel" class="anchored">
+<table class="table">
+<caption>Table&nbsp;4.1: Strength of the evidence against <span class="math inline">\(H_{0}\)</span>.</caption>
+<thead>
+<tr class="header">
+<th>p-value</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(p \geq{0.10}\)</span></td>
+<td>No evidence to reject <span class="math inline">\(H_{0}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(0.05\leq p &lt; 0.10\)</span></td>
+<td>Weak evidence to reject <span class="math inline">\(H_{0}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(0.01\leq p &lt; 0.05\)</span></td>
+<td>Evidence to reject <span class="math inline">\(H_{0}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(0.001\leq p &lt; 0.01\)</span></td>
+<td>Strong evidence to reject <span class="math inline">\(H_{0}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(p &lt; 0.001\)</span></td>
+<td>Very strong evidence to reject <span class="math inline">\(H_{0}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Step 5:</strong> Interpret the results.</p>
 </div>
 </div>
 <p>&nbsp;</p>
 </section>
-<section id="r-via-rstudio-and-rstudio-projects" class="level3">
-<h3 class="anchored" data-anchor-id="r-via-rstudio-and-rstudio-projects">R via RStudio and RStudio Projects</h3>
-<p>Throughout this textbook we will use <strong>R</strong> via <strong>RStudio</strong>. Both programs can be downloaded from <img src="images/posit.png" width="24" height="22"> <a href="https://posit.co/download/rstudio-desktop/">posit</a>. It is also recommended to work with <a href="https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects">RStudio Projects</a>. This enables to organize our files and switch between different projects without getting the data, scripts, or output files all mixed up. Everything gets read in or saved to the right folder/directory.</p>
-<p>For our purpose, it is sufficient to consider a simple RStudio Project folder that contains the following subfolders (<a href="#fig-project" class="quarto-xref">Figure&nbsp;<span>1</span></a>).:</p>
-<ul>
-<li><strong>data:</strong> data files of any kind, such as <code>.csv</code>, <code>.xlsx</code>, <code>.txt</code>, etc.</li>
-<li><strong>figures:</strong> plots, diagrams, and other graphs</li>
-</ul>
-<div id="fig-project" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="images/project.png" class="img-fluid figure-img" style="width:40.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: The folder structure of a minimal RStudio project.</figcaption>
-</figure>
+<section id="type-of-errors-in-hypothesis-testing" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="type-of-errors-in-hypothesis-testing"><span class="header-section-number">4.2</span> Type of Errors in Hypothesis Testing</h2>
+<p>In the framework of hypothesis testing there are two types of errors: <strong>Type I error</strong> and <strong>type II error</strong> (<a href="#tbl-type_errors" class="quarto-xref">Table&nbsp;<span>4.2</span></a>).</p>
+<p><strong>Type I error:</strong> we reject the null hypothesis when it is true (false positive), and conclude that there is an effect when, in reality, there is none. The maximum chance (probability) of making a Type I error is denoted by α (alpha). This is the significance level of the test; we reject the null hypothesis if our p-value is less than the significance level, i.e.&nbsp;if p &lt; a.</p>
+<p><strong>Type II error:</strong> we do not reject the null hypothesis when it is false (false negative), and conclude that there is no effect when one really exists. The chance of making a Type II error is denoted by β (beta); its compliment, (1 - β), is the power of the test.</p>
+<div id="tbl-type_errors" class="anchored">
+<table class="table">
+<caption>Table&nbsp;4.2: Types of error in hypothesis testing.</caption>
+<colgroup>
+<col style="width: 18%">
+<col style="width: 22%">
+<col style="width: 29%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th>In population <span class="math inline">\(H_0\)</span> is</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td><strong>True</strong></td>
+<td><strong>False</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Decision based on</strong><br><strong>the sample</strong></td>
+<td><strong>Do Not Reject</strong> <span class="math inline">\(H_0\)</span></td>
+<td>Correct decision:<br><span class="math inline">\(1 - \alpha\)</span></td>
+<td>Type II error (<span class="math inline">\(\beta\)</span>)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><strong>Reject</strong> <span class="math inline">\(H_0\)</span></td>
+<td>Type I error (<span class="math inline">\(\alpha\)</span>)</td>
+<td>Correct decision:<br><span class="math inline">\(1 - \beta\)</span> (power of the test)</td>
+</tr>
+</tbody>
+</table>
 </div>
-</section>
-<section id="reproducibility-and-license" class="level3">
-<h3 class="anchored" data-anchor-id="reproducibility-and-license">Reproducibility and License</h3>
-<p>All sections of this textbook are reproducible as they were made using <img src="images/quarto.png" width="24" height="22"> <a href="https://quarto.org/">Quarto</a><sup>®</sup> which is an open-source scientific and technical publishing system built on <a href="https://pandoc.org/">Pandoc</a>.</p>
-<p>To learn more about Quarto books visit <a href="https://quarto.org/docs/books" class="uri">https://quarto.org/docs/books</a>.</p>
-<p>The <strong>online version</strong> of the textbook is <strong>free to use</strong>, and is licensed under the <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivs 4.0</a> License. <img src="images/license.png" width="120" height="40"></p>
-<div id="qrcode" class="qrcode"></div>
-<script type="text/javascript">
-var qrcode = new QRCode("qrcode", {"colorLight":"#ffffff","text":"https://bougioukas-medstats-r.netlify.app","colorDark":"#0011bb","width":"100","height":"100"});
-</script>
-    
+<p>&nbsp;</p>
+<p>The power (<span class="math inline">\(1 - \beta\)</span>), therefore, is the probability of (correctly) rejecting the null hypothesis when it is false; i.e.&nbsp;it is the chance (usually expressed as a percentage) of detecting, as statistically significant, a real treatment effect of a given size. <a href="#tbl-power" class="quarto-xref">Table&nbsp;<span>4.3</span></a> presents the main factors that can influence the power in a study.</p>
+<div id="tbl-power" class="anchored">
+<table class="table">
+<caption>Table&nbsp;4.3: Factors Influencing Power.</caption>
+<colgroup>
+<col style="width: 36%">
+<col style="width: 63%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Factor</th>
+<th>Influence on study’s power</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Effect Size</strong> <br> (e.g., mean difference, risk ratio)</td>
+<td>As effect size increases, power tends to increase (a larger effect size is easier to be detected by the statistical test, leading to a greater probability of a statistically significant result).</td>
+</tr>
+<tr class="even">
+<td><strong>Sample Size</strong></td>
+<td>As the sample size goes up, power generally goes up (this factor is the most easily manipulated by researchers).</td>
+</tr>
+<tr class="odd">
+<td><strong>Standard deviation</strong></td>
+<td>As variability decreases, power tends to increase (variability can be reduced by controlling extraneous variables such as inclusion and exclusion criteria defining the sample in a study).</td>
+</tr>
+<tr class="even">
+<td><strong>Significance level α</strong></td>
+<td>As α goes up, power goes up (it would be easier to find statistical significance with a larger α, e.g.&nbsp;α=0.1, compared to a smaller α, e.g.&nbsp;α=0.05).</td>
+</tr>
+</tbody>
+</table>
+</div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -724,10 +819,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./normal.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Normal distribution</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./introduction.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./student_t_test.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Two-sample t-test (Student’s t-test)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

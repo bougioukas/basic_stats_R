@@ -13,21 +13,21 @@ book:
   repo-url: https://github.com/bougioukas/basic_stats_R
   chapters:
     - index.qmd
-    #- introduction.qmd
-    #- descriptive.qmd
-    #- normal.qmd
-    #- inference.qmd
-    #- student_t_test.qmd
-    #- wmw_test.qmd
-    #- paired_t_test.qmd
-    #- wilcoxon_test.qmd
-    #- anova.qmd
-    #- kruskal_wallis.qmd
-    #- correlation.qmd
-    #- chi_square.qmd
-    #- fisher_exact.qmd
-    #- mcnemar.qmd
-    #- roc.qmd
+    - introduction.qmd
+    - descriptive.qmd
+    - normal.qmd
+    - inference.qmd
+    - student_t_test.qmd
+    - wmw_test.qmd
+    - paired_t_test.qmd
+    - wilcoxon_test.qmd
+    - anova.qmd
+    - kruskal_wallis.qmd
+    - correlation.qmd
+    - chi_square.qmd
+    - fisher_exact.qmd
+    - mcnemar.qmd
+    - roc.qmd
     - references.qmd
     
   page-footer: 

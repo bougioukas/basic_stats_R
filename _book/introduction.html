@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Konstantinos I. Bougioukas, PhD">
-<meta name="dcterms.date" content="2023-10-05">
 
-<title>Practical Statistics in Medicine with R</title>
+<title>Practical Statistics in Medicine with R - 1&nbsp; Introduction</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./introduction.html" rel="next">
+<link href="./descriptive.html" rel="next">
+<link href="./index.html" rel="prev">
 <link href="./images/cover.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -45,7 +44,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/social-share-0.1.0/social-share.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/social-share-0.1.0/all.css" rel="stylesheet">
-<script src="site_libs/quarto-contrib/qrcodejs-v1.0.0/qrcode.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -71,6 +69,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -84,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -114,13 +115,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./introduction.html" class="sidebar-item-text sidebar-link">
+  <a href="./introduction.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
@@ -224,11 +225,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
+  <li><a href="#the-discipline-of-statistics" id="toc-the-discipline-of-statistics" class="nav-link active" data-scroll-target="#the-discipline-of-statistics"><span class="header-section-number">1.1</span> The discipline of statistics</a></li>
+  <li><a href="#data-and-variables" id="toc-data-and-variables" class="nav-link" data-scroll-target="#data-and-variables"><span class="header-section-number">1.2</span> Data and Variables</a>
   <ul class="collapse">
-  <li><a href="#whom-is-this-textbook-for" id="toc-whom-is-this-textbook-for" class="nav-link" data-scroll-target="#whom-is-this-textbook-for">Whom is this textbook for?</a></li>
-  <li><a href="#r-via-rstudio-and-rstudio-projects" id="toc-r-via-rstudio-and-rstudio-projects" class="nav-link" data-scroll-target="#r-via-rstudio-and-rstudio-projects">R via RStudio and RStudio Projects</a></li>
-  <li><a href="#reproducibility-and-license" id="toc-reproducibility-and-license" class="nav-link" data-scroll-target="#reproducibility-and-license">Reproducibility and License</a></li>
+  <li><a href="#biomedical-data" id="toc-biomedical-data" class="nav-link" data-scroll-target="#biomedical-data">Biomedical Data</a></li>
+  <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">Variables</a></li>
+  </ul></li>
+  <li><a href="#types-of-data" id="toc-types-of-data" class="nav-link" data-scroll-target="#types-of-data"><span class="header-section-number">1.3</span> Types of Data</a>
+  <ul class="collapse">
+  <li><a href="#categorical-data" id="toc-categorical-data" class="nav-link" data-scroll-target="#categorical-data">Categorical Data</a></li>
+  <li><a href="#numerical-data" id="toc-numerical-data" class="nav-link" data-scroll-target="#numerical-data">Numerical Data</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -238,27 +244,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Practical Statistics in Medicine with R</h1>
-<p class="subtitle lead">1st Edition</p>
+<h1 class="title"><span id="sec-introduction" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Konstantinos I. Bougioukas, PhD <a href="https://orcid.org/0000-0002-6533-1391" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">October 5, 2023</p>
-    </div>
-  </div>
   
     
   </div>
@@ -267,58 +260,207 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1><p><img src="images/cover.png" title="Practical Statistics in Medicine with R" class="quarto-cover-image img-fluid"></p>
-<section id="whom-is-this-textbook-for" class="level3">
-<h3 class="anchored" data-anchor-id="whom-is-this-textbook-for">Whom is this textbook for?</h3>
-<p>This textbook is based on my notes from a series of lectures given for a few years at the Aristotle University of Thessaloniki, Greece. The textbook can be used as support material for practical labs on basic statistics using R at any level from beginner to advanced. It can also be used as a support for self-teaching.</p>
-<p>I have paid particular attention to the form of the book, which I think should aid understanding the most common statistical tests using Base R and pipe-friendly functions, coherent with the ‘tidyverse’ design philosophy. The {ggplot2} package and many ggplot2 extensions are the preferred tools of choice for constructing data visualizations in the textbook.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
+<p>When we have finished this chapter, we should be able to:</p>
+<div class="callout callout-style-default callout-caution no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Learning objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Distinguish descriptive from inferential statistics.</li>
+<li>Explain the difference between qualitative and quantitative data.</li>
+<li>Understand the difference between dependent and independent variables.</li>
+<li>Identify the type of any given variable.</li>
+</ul>
+</div>
+</div>
+<p>&nbsp;</p>
+<section id="the-discipline-of-statistics" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="the-discipline-of-statistics"><span class="header-section-number">1.1</span> The discipline of statistics</h2>
+<p>Statistics is an empirical or practical method for collecting, organizing, summarizing, and presenting data, and for making inferences about the population from which the data are drawn.</p>
+<p>The discipline of traditional (frequentist) statistics includes two main branches (<a href="#fig-branches" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>):</p>
+<ul>
+<li><p><strong>descriptive statistics</strong> that includes measures of frequency and measures of location and dispersion. It also includes a description of the general shape of the distribution of the data.</p></li>
+<li><p><strong>inferential statistics</strong> that aims at generalizing conclusions made on a sample to a whole population. It includes estimation and hypothesis testing.</p></li>
+</ul>
+<div class="cell" data-fig-width="9">
+<div class="cell-output-display">
+<div id="fig-branches" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-branches">flowchart LR
+  
+    A[Traditional &lt;br/&gt; Statistics]--- B[Descriptive statistics]
+    A --- C[Inferential statistics]
+    B --- D[Measures of frequency: &lt;br/&gt; e.g., frequency, percentage.]
+    B --- E[Measures of location &lt;br/&gt; and dispersion: &lt;br/&gt; e.g., mean, standard deviation.]
+    C --- H[Estimation]
+    C --- I[Hypothesis Testing]
+    style A color:#980000, stroke:#333,stroke-width:4px
+    
+</pre>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;1.1: The discipline of statistics and its two branches, descriptive statistics and inferential statistics</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="data-and-variables" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="data-and-variables"><span class="header-section-number">1.2</span> Data and Variables</h2>
+<section id="biomedical-data" class="level3">
+<h3 class="anchored" data-anchor-id="biomedical-data">Biomedical Data</h3>
+<p><strong>Biomedical data</strong> have unique features compared with data in other domains. The data may include administrative health data, biomarker data, biometric data (for example, from wearable technologies) and imaging, and may originate from many different sources, including Electronic Health Records (EHRs), surveillance systems, clinical registries, biobanks, the internet (e.g.&nbsp;social media) and patient self-reports.</p>
+<p>Biomedical data can be transformed into <strong>information</strong>. This information can become <strong>knowledge</strong> if the researchers and clinicians understand it (<a href="#fig-info" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>).</p>
+<div id="fig-info" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/info.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;1.2: From data to knowledge.</figcaption>
+</figure>
+</div>
+<p>There are three main data structures: structured data, unstructured data, and semi-structured data.</p>
+<p><strong>Structured data</strong> is generally tabular data that is represented by columns and rows in a database.</p>
+<p><strong>Semi-Structured data</strong> is a form of structured data that does not obey the tabular structure, yet does have some structural properties. Emails, for example, are semi-structured by sender, recipient,subject, date, time etc. and they are also organized into folders, like Inbox, Sent, Trash, etc.</p>
+<p><strong>Unstructured data</strong> usually open text (such as social media posts), images, videos, etc., that have no predetermined organization or design.</p>
+<p>In this textbook we use data organized in a structured format (spreadsheets). In statistics, tabular data refers to data that are organized in a table with rows and columns. A row is a observation (or record), which corresponds to the statistical unit of the dataset. The columns are the variables (or characteristics) of interest.</p>
+<p>&nbsp;</p>
+</section>
+<section id="variables" class="level3">
+<h3 class="anchored" data-anchor-id="variables">Variables</h3>
+<p>A <strong>variable</strong> is a quantity or characteristic that is <strong>free to vary</strong>, or take on different values. To gain information on variables and their associations, it is necessary to design and conduct scientific experiments.</p>
+<p>Researchers design experiments to test if changes to one or more variables are <strong>associated</strong> with changes to another variable of interest. For example, if researchers hypothesize that a new therapy is more effective than the usual care for migraine pain, they could design an experiment to test this hypothesis; participants should randomly assigned to one of two groups: the experimental group receiving the new treatment that is being tested, and the control group receiving an conventional treatment. In this experiment, the type of treatment each participant received (i.e., new treatment vs.&nbsp;conventional treatment) is the <strong>independent variable</strong> (IV), while the pain relief is the <strong>dependent variable</strong> (DV) or the <strong>outcome</strong> variable.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Independent Vs Dependent variables
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An <strong>independent</strong> variable is the variable that is changed or controlled in a scientific experiment to test the effects on another variable.</p>
+<p>A <strong>dependent</strong> (outcome) variable is the variable being tested in a scientific experiment and is affected by the independent variable(s) of interest.</p>
+</div>
+</div>
+<p>&nbsp;</p>
+</section>
+</section>
+<section id="types-of-data" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="types-of-data"><span class="header-section-number">1.3</span> Types of Data</h2>
+<p>Data in variables can be either <strong>categorical</strong> or <strong>numerical</strong> (otherwise known as qualitative and quantitative) in nature (<a href="#fig-data_types" class="quarto-xref">Figure&nbsp;<span>1.3</span></a>).</p>
+<div class="cell" data-fig-width="9">
+<div class="cell-output-display">
+<div id="fig-data_types" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-data_types">flowchart TB
+    A[Data in variables]---&gt; B[Categorical data]
+    A[Data in variables]---&gt; C[Numerical data]
+    B ---&gt; E[Nominal&lt;br&gt;e.g. blood type A, B, AB, O]
+    B ---&gt; F[Ordinal&lt;br&gt;e.g. degree of pain&lt;br&gt;minimal/moderate/&lt;br&gt;severe/unbearable]
+    C ---&gt; G[Discrete&lt;br&gt;e.g. number of children]
+    C ---&gt; H[Numerical&lt;br&gt;e.g. height, blood pressure]
+    
+   style E color:#980000, stroke:#333,stroke-width:4px
+   style F color:#980000, stroke:#333,stroke-width:4px
+   style G color:#980000, stroke:#333,stroke-width:4px
+   style H color:#980000, stroke:#333,stroke-width:4px
+</pre>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;1.3: Broad classification of the different types of data with examples.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The degree of <strong>measurement accuracy</strong> and the <strong>type of data</strong> are both important factors in the decision to perform a <strong>statistical analysis</strong>.</p>
+</div>
+</div>
+<p>&nbsp;</p>
+<section id="categorical-data" class="level3">
+<h3 class="anchored" data-anchor-id="categorical-data">Categorical Data</h3>
+<p><strong>A. Nominal Data</strong></p>
+<p><strong>Nominal data</strong> can be labeled creating distinct unordered categories. They are not measured but simply <strong>counted</strong>. They can be either binary such as dead/alive; cured/not cured or have <strong>more than two categories</strong>, for example, blood group A, B, AB, O; type I, type II or gestational diabetes; eye color (e.g., brown, blue, green, gray).</p>
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+Numerical representation of categories are just codes
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This textbook assumes that the reader has a basic knowledge of R, tidyverse and introductory statistics. If you want to familiarize yourself with this programming language and statistics, we recommend the books below:</p>
-<ul>
-<li><a href="https://www.routledge.com/Using-R-for-Introductory-Statistics/Verzani/p/book/9781466590731">Using R for Introductory Statistics</a></li>
-<li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
-<li><a href="https://ggplot2-book.org/">ggplot2: Elegant Graphics for Data Analysis</a></li>
-</ul>
+<p>We can denote dead/alive as 1/0 for health status and denote A/B/AB/O as 1/2/3/4 for blood type. Unlike numerical data, the numbers representing different categories <strong>do not have mathematical meaning</strong> (they are just codes).</p>
+</div>
+</div>
+<p>&nbsp;</p>
+<p><strong>Β. Ordinal Data</strong></p>
+<p>When the categories can be ordered, the data are of ordinal type. For example, patients may classify their degree of pain as minimal, moderate, severe, or unbearable. In this case, there is a natural order of the values, since moderate pain is more intense than minimal and less than severe pain.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Collapsion of categories leads to a loss of information
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ordinal data are often transformed into binary data to simplify analysis, presentation and interpretation, which may result in a <strong>considerable loss of information</strong>.</p>
 </div>
 </div>
 <p>&nbsp;</p>
 </section>
-<section id="r-via-rstudio-and-rstudio-projects" class="level3">
-<h3 class="anchored" data-anchor-id="r-via-rstudio-and-rstudio-projects">R via RStudio and RStudio Projects</h3>
-<p>Throughout this textbook we will use <strong>R</strong> via <strong>RStudio</strong>. Both programs can be downloaded from <img src="images/posit.png" width="24" height="22"> <a href="https://posit.co/download/rstudio-desktop/">posit</a>. It is also recommended to work with <a href="https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects">RStudio Projects</a>. This enables to organize our files and switch between different projects without getting the data, scripts, or output files all mixed up. Everything gets read in or saved to the right folder/directory.</p>
-<p>For our purpose, it is sufficient to consider a simple RStudio Project folder that contains the following subfolders (<a href="#fig-project" class="quarto-xref">Figure&nbsp;<span>1</span></a>).:</p>
-<ul>
-<li><strong>data:</strong> data files of any kind, such as <code>.csv</code>, <code>.xlsx</code>, <code>.txt</code>, etc.</li>
-<li><strong>figures:</strong> plots, diagrams, and other graphs</li>
-</ul>
-<div id="fig-project" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="images/project.png" class="img-fluid figure-img" style="width:40.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: The folder structure of a minimal RStudio project.</figcaption>
-</figure>
+<section id="numerical-data" class="level3">
+<h3 class="anchored" data-anchor-id="numerical-data">Numerical Data</h3>
+<p><strong>A. Discrete Data</strong></p>
+<p>Discrete data can take only a <strong>finite number of values</strong> (usually integers) in a range, for example, the number of children in a family or the number of days missed from work. Other examples are often <strong>counts per unit of time</strong> such as the number of deaths in a hospital per year, the number of visits to the general practitioner in a year, or the number of epileptic seizures a patient has per month. In dentistry, a common measure is the number of decayed, filled or missing teeth.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-</section>
-<section id="reproducibility-and-license" class="level3">
-<h3 class="anchored" data-anchor-id="reproducibility-and-license">Reproducibility and License</h3>
-<p>All sections of this textbook are reproducible as they were made using <img src="images/quarto.png" width="24" height="22"> <a href="https://quarto.org/">Quarto</a><sup>®</sup> which is an open-source scientific and technical publishing system built on <a href="https://pandoc.org/">Pandoc</a>.</p>
-<p>To learn more about Quarto books visit <a href="https://quarto.org/docs/books" class="uri">https://quarto.org/docs/books</a>.</p>
-<p>The <strong>online version</strong> of the textbook is <strong>free to use</strong>, and is licensed under the <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivs 4.0</a> License. <img src="images/license.png" width="120" height="40"></p>
-<div id="qrcode" class="qrcode"></div>
-<script type="text/javascript">
-var qrcode = new QRCode("qrcode", {"colorLight":"#ffffff","text":"https://bougioukas-medstats-r.netlify.app","colorDark":"#0011bb","width":"100","height":"100"});
-</script>
-    
+<div class="callout-title-container flex-fill">
+Discrete Vs Ordinal data
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In practice discrete data are often treated in statistical analyses as if they were ordinal data. Although this may be acceptable, we do not take the most out of our data.</p>
+</div>
+</div>
+<p>&nbsp;</p>
+<p><strong>Β. Continuous Data</strong></p>
+<p>Continuous data are numbers (usually with units) that can take any value within a given range. However, in practice, they are restricted by the accuracy of the measuring instrument. Height, weight, blood pressure, cholesterol level, body temperature, body mass index (BMI) are just few examples of variables that take continuous values.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Categorization of numerical data leads to a loss of information
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Continuous data are often categorized creating categorical variables. For example, the BMI, which is a continuous variable, is usually converted into an ordinal variable with four categories (underweight, normal, overweight and obese). However, dividing continuous variables into categories leads to a <strong>loss of information</strong>.</p>
+</div>
+</div>
 
 
 </section>
@@ -724,10 +866,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./introduction.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./descriptive.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
